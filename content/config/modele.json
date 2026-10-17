@@ -1,0 +1,159 @@
+{
+  "_doc": "Pour chaque indicateur : normalisation (ce qui vaut 0 et 100 dans la jauge), bornes réalistes [min, max] et évolution naturelle annuelle. Voir README, section « Modèle ». Les clés commençant par _ sont ignorées.",
+
+  "croissance_pib": { "normalisation": { "type": "lineaire", "zero": -1, "cent": 3 }, "min": -8, "max": 6,
+    "dynamique": { "cible": { "constante": 1.1, "vitesse": 0.5, "termes": [
+      { "source": "taux_10_ans", "coef": -0.15, "ref": 4.8 },
+      { "source": "investissement_entreprises", "coef": 0.1, "ref": 22.2 },
+      { "source": "productivite_horaire", "coef": 0.03, "ref": 113 } ] } } },
+  "chomage": { "normalisation": { "type": "lineaire", "zero": 13, "cent": 4 }, "min": 3, "max": 20,
+    "dynamique": { "cible": { "constante": 8.1, "vitesse": 0.3, "termes": [ { "source": "croissance_pib", "coef": -0.8, "ref": 1.1 } ] } } },
+  "taux_emploi": { "normalisation": { "type": "lineaire", "zero": 62, "cent": 78 }, "min": 55, "max": 82,
+    "dynamique": { "cible": { "constante": 69.4, "vitesse": 0.3, "termes": [
+      { "source": "chomage", "coef": -0.6, "ref": 8.3 },
+      { "source": "ratio_cotisants_retraites", "coef": 3, "ref": 1.8 } ] } } },
+  "inflation": { "normalisation": { "type": "cible", "cible": 2, "ecart": 5 }, "min": -2, "max": 15,
+    "dynamique": { "cible": { "constante": 1.8, "vitesse": 0.5 } } },
+  "investissement_entreprises": { "normalisation": { "type": "lineaire", "zero": 17, "cent": 27 }, "min": 14, "max": 30,
+    "dynamique": { "cible": { "constante": 22.0, "vitesse": 0.25, "termes": [ { "source": "taux_10_ans", "coef": -0.3, "ref": 4.8 } ] } } },
+  "productivite_horaire": { "normalisation": { "type": "lineaire", "zero": 95, "cent": 130 }, "min": 85, "max": 140,
+    "dynamique": { "derive": -0.15, "variation": [
+      { "source": "investissement_entreprises", "coef": 0.1, "ref": 22.2 },
+      { "source": "pisa_maths", "coef": 0.006, "ref": 474 } ] } },
+  "solde_commercial": { "normalisation": { "type": "lineaire", "zero": -140, "cent": 10 }, "min": -200, "max": 60,
+    "dynamique": { "cible": { "constante": -72, "vitesse": 0.25, "termes": [
+      { "source": "part_industrie_va", "coef": 8, "ref": 10 },
+      { "source": "independance_energetique", "coef": 0.8, "ref": 61 },
+      { "source": "croissance_pib", "coef": -3, "ref": 1.1 } ] } } },
+
+  "dette_publique": { "normalisation": { "type": "lineaire", "zero": 190, "cent": 60 }, "min": 40, "max": 220,
+    "dynamique": { "variation": [
+      { "source": "deficit_public", "coef": 1 },
+      { "source": "dette_publique", "source2": "croissance_pib", "coef": -0.01 },
+      { "source": "dette_publique", "source2": "inflation", "coef": -0.01 } ] } },
+  "deficit_public": { "normalisation": { "type": "lineaire", "zero": 10, "cent": 0 }, "min": -3, "max": 15,
+    "dynamique": { "cible": { "constante": 2.2, "vitesse": 1, "termes": [
+      { "source": "charge_interets", "coef": 1 },
+      { "source": "dette_publique", "coef": -0.06, "ref": 115.6 },
+      { "source": "croissance_pib", "coef": -0.5, "ref": 1.1 },
+      { "source": "part_65_plus", "coef": 0.2, "ref": 22.2 } ] } } },
+  "charge_interets": { "normalisation": { "type": "lineaire", "zero": 6, "cent": 0.5 }, "min": 0, "max": 10,
+    "dynamique": { "variation": [
+      { "source": "dette_publique", "source2": "taux_10_ans", "coef": 0.0005 },
+      { "source": "charge_interets", "coef": -0.08 } ] } },
+  "depenses_publiques": { "normalisation": { "type": "lineaire", "zero": 65, "cent": 48 }, "min": 45, "max": 70,
+    "dynamique": { "cible": { "constante": 57.2, "vitesse": 0.3, "termes": [
+      { "source": "part_65_plus", "coef": 0.4, "ref": 22.2 },
+      { "source": "charge_interets", "coef": 1, "ref": 2.2 },
+      { "source": "croissance_pib", "coef": -0.3, "ref": 1.1 } ] } } },
+  "prelevements_obligatoires": { "normalisation": { "type": "cible", "cible": 42, "ecart": 10 }, "min": 35, "max": 52,
+    "dynamique": { "cible": { "constante": 43.6, "vitesse": 0.3 } } },
+  "taux_10_ans": { "normalisation": { "type": "lineaire", "zero": 7, "cent": 1.5 }, "min": 0, "max": 12,
+    "dynamique": { "cible": { "constante": 4.2, "vitesse": 0.3, "termes": [
+      { "source": "dette_publique", "coef": 0.01, "ref": 115.6 },
+      { "source": "deficit_public", "coef": 0.1, "ref": 5.1 },
+      { "source": "inflation", "coef": 0.5, "ref": 0.9 } ] } } },
+
+  "confiance_institutions": { "normalisation": { "type": "lineaire", "zero": 10, "cent": 50 }, "min": 5, "max": 70,
+    "dynamique": { "cible": { "constante": 25, "vitesse": 0.25, "termes": [
+      { "source": "chomage", "coef": -1, "ref": 8.3 },
+      { "source": "taux_pauvrete", "coef": -0.8, "ref": 15.4 },
+      { "source": "inflation", "coef": -0.5, "ref": 2 } ] } } },
+  "participation_elections": { "normalisation": { "type": "lineaire", "zero": 45, "cent": 85 }, "min": 35, "max": 90,
+    "dynamique": { "cible": { "constante": 64, "vitesse": 0.15, "termes": [ { "source": "confiance_institutions", "coef": 0.3, "ref": 25 } ] } } },
+  "jours_greve": { "normalisation": { "type": "lineaire", "zero": 300, "cent": 20 }, "min": 5, "max": 600,
+    "dynamique": { "cible": { "constante": 90, "vitesse": 0.5, "termes": [
+      { "source": "confiance_institutions", "coef": -3, "ref": 25 },
+      { "source": "inflation", "coef": 10, "ref": 2 } ] } } },
+  "sentiment_insecurite": { "normalisation": { "type": "lineaire", "zero": 35, "cent": 10 }, "min": 5, "max": 50,
+    "dynamique": { "cible": { "constante": 22, "vitesse": 0.2, "termes": [
+      { "source": "violences_physiques", "coef": 2, "ref": 4.7 },
+      { "source": "chomage_jeunes", "coef": 0.2, "ref": 21.6 } ] } } },
+  "violences_physiques": { "normalisation": { "type": "lineaire", "zero": 8, "cent": 2 }, "min": 1, "max": 12,
+    "dynamique": { "derive": 0.04, "cible": { "constante": 4.7, "vitesse": 0.05, "termes": [ { "source": "taux_pauvrete", "coef": 0.1, "ref": 15.4 } ] } } },
+  "satisfaction_vie": { "normalisation": { "type": "lineaire", "zero": 6, "cent": 8 }, "min": 4, "max": 9,
+    "dynamique": { "cible": { "constante": 7.2, "vitesse": 0.3, "termes": [
+      { "source": "chomage", "coef": -0.05, "ref": 8.3 },
+      { "source": "taux_pauvrete", "coef": -0.04, "ref": 15.4 },
+      { "source": "esperance_vie_bonne_sante", "coef": 0.03, "ref": 63.9 } ] } } },
+
+  "emissions_ges": { "normalisation": { "type": "lineaire", "zero": 550, "cent": 80 }, "min": 50, "max": 600,
+    "dynamique": { "derive": 2.5, "variation": [
+      { "source": "croissance_pib", "coef": 1.5, "ref": 1.1 },
+      { "source": "part_renouvelables", "coef": -0.15, "ref": 23 } ] } },
+  "part_renouvelables": { "normalisation": { "type": "lineaire", "zero": 10, "cent": 60 }, "min": 5, "max": 90,
+    "dynamique": { "derive": 0.2 } },
+  "artificialisation": { "normalisation": { "type": "lineaire", "zero": 30000, "cent": 0 }, "min": 0, "max": 40000,
+    "dynamique": { "cible": { "constante": 18500, "vitesse": 0.3 } } },
+  "qualite_air": { "normalisation": { "type": "lineaire", "zero": 15, "cent": 5 }, "min": 3, "max": 25,
+    "dynamique": { "derive": -0.03 } },
+  "conso_energie_finale": { "normalisation": { "type": "lineaire", "zero": 1800, "cent": 1000 }, "min": 800, "max": 2000,
+    "dynamique": { "derive": -1, "variation": [ { "source": "croissance_pib", "coef": 5, "ref": 1.1 } ] } },
+  "biodiversite_oiseaux": { "normalisation": { "type": "lineaire", "zero": 40, "cent": 100 }, "min": 20, "max": 120,
+    "dynamique": { "derive": -0.4, "variation": [ { "source": "artificialisation", "coef": -0.00005, "ref": 19263 } ] } },
+
+  "depenses_sante": { "normalisation": { "type": "lineaire", "zero": 9, "cent": 14 }, "min": 8, "max": 16,
+    "dynamique": { "cible": { "constante": 11.4, "vitesse": 0.2, "termes": [ { "source": "part_65_plus", "coef": 0.12, "ref": 22.2 } ] } } },
+  "desert_medical": { "normalisation": { "type": "lineaire", "zero": 55, "cent": 10 }, "min": 5, "max": 70,
+    "dynamique": { "derive": 0.3, "variation": [ { "source": "depenses_sante", "coef": -0.3, "ref": 11.4 } ] } },
+  "pisa_maths": { "normalisation": { "type": "lineaire", "zero": 440, "cent": 520 }, "min": 420, "max": 540,
+    "dynamique": { "derive": -0.3, "variation": [ { "source": "eleves_par_classe", "coef": -0.4, "ref": 21.5 } ] } },
+  "eleves_par_classe": { "normalisation": { "type": "lineaire", "zero": 28, "cent": 16 }, "min": 14, "max": 32,
+    "dynamique": { "cible": { "constante": 21.5, "vitesse": 0.2, "termes": [ { "source": "fecondite", "coef": 4, "ref": 1.56 } ] } } },
+  "delai_jugement": { "normalisation": { "type": "lineaire", "zero": 24, "cent": 6 }, "min": 4, "max": 36,
+    "dynamique": { "derive": 0.1 } },
+  "esperance_vie_bonne_sante": { "normalisation": { "type": "lineaire", "zero": 58, "cent": 70 }, "min": 55, "max": 75,
+    "dynamique": { "derive": 0.04, "variation": [
+      { "source": "qualite_air", "coef": -0.02, "ref": 9 },
+      { "source": "desert_medical", "coef": -0.005, "ref": 36.7 } ] } },
+
+  "taux_pauvrete": { "normalisation": { "type": "lineaire", "zero": 20, "cent": 8 }, "min": 6, "max": 30,
+    "dynamique": { "cible": { "constante": 15.3, "vitesse": 0.3, "termes": [
+      { "source": "chomage", "coef": 0.35, "ref": 8.3 },
+      { "source": "inflation", "coef": 0.1, "ref": 2 } ] } } },
+  "rapport_interdecile": { "normalisation": { "type": "lineaire", "zero": 4.5, "cent": 2.5 }, "min": 2, "max": 6,
+    "dynamique": { "cible": { "constante": 3.48, "vitesse": 0.2, "termes": [ { "source": "chomage", "coef": 0.03, "ref": 8.3 } ] } } },
+  "chomage_jeunes": { "normalisation": { "type": "lineaire", "zero": 35, "cent": 8 }, "min": 5, "max": 45,
+    "dynamique": { "cible": { "constante": 21.6, "vitesse": 0.5, "termes": [ { "source": "chomage", "coef": 2.2, "ref": 8.3 } ] } } },
+  "neet": { "normalisation": { "type": "lineaire", "zero": 20, "cent": 6 }, "min": 4, "max": 25,
+    "dynamique": { "cible": { "constante": 12, "vitesse": 0.3, "termes": [ { "source": "chomage_jeunes", "coef": 0.25, "ref": 21.6 } ] } } },
+  "taux_effort_logement": { "normalisation": { "type": "lineaire", "zero": 40, "cent": 18 }, "min": 12, "max": 50,
+    "dynamique": { "derive": 0.15, "variation": [ { "source": "taux_10_ans", "coef": 0.1, "ref": 4.8 } ] } },
+  "ecart_salaire_hf": { "normalisation": { "type": "lineaire", "zero": 25, "cent": 0 }, "min": 0, "max": 30,
+    "dynamique": { "derive": -0.15 } },
+
+  "fecondite": { "normalisation": { "type": "lineaire", "zero": 1.1, "cent": 2.1 }, "min": 0.9, "max": 2.5,
+    "dynamique": { "cible": { "constante": 1.48, "vitesse": 0.15, "termes": [
+      { "source": "taux_effort_logement", "coef": -0.01, "ref": 28 },
+      { "source": "chomage_jeunes", "coef": -0.005, "ref": 21.6 } ] } } },
+  "solde_migratoire": { "normalisation": { "type": "lineaire", "zero": 0, "cent": 300 }, "min": -100, "max": 500,
+    "dynamique": { "cible": { "constante": 160, "vitesse": 0.3, "termes": [ { "source": "chomage", "coef": -6, "ref": 8.3 } ] } } },
+  "ratio_cotisants_retraites": { "normalisation": { "type": "lineaire", "zero": 1.2, "cent": 2.4 }, "min": 0.9, "max": 3,
+    "dynamique": { "derive": -0.01, "variation": [
+      { "source": "solde_migratoire", "coef": 0.00004, "ref": 176 },
+      { "source": "fecondite", "coef": 0.01, "ref": 1.56 },
+      { "source": "taux_emploi", "coef": 0.001, "ref": 69 } ] } },
+  "age_median": { "normalisation": { "type": "lineaire", "zero": 50, "cent": 38 }, "min": 36, "max": 52,
+    "dynamique": { "derive": 0.1, "variation": [
+      { "source": "solde_migratoire", "coef": -0.0005, "ref": 176 },
+      { "source": "fecondite", "coef": -0.2, "ref": 1.56 } ] } },
+  "esperance_vie": { "normalisation": { "type": "lineaire", "zero": 78, "cent": 88 }, "min": 75, "max": 92,
+    "dynamique": { "derive": 0.12, "variation": [ { "source": "qualite_air", "coef": -0.01, "ref": 9 } ] } },
+  "part_65_plus": { "normalisation": { "type": "lineaire", "zero": 30, "cent": 16 }, "min": 12, "max": 35,
+    "dynamique": { "derive": 0.22, "variation": [
+      { "source": "solde_migratoire", "coef": -0.001, "ref": 176 },
+      { "source": "fecondite", "coef": -0.3, "ref": 1.56 } ] } },
+
+  "independance_energetique": { "normalisation": { "type": "lineaire", "zero": 40, "cent": 85 }, "min": 20, "max": 100,
+    "dynamique": { "derive": 0.15, "variation": [ { "source": "part_renouvelables", "coef": 0.02, "ref": 23 } ] } },
+  "autonomie_alimentaire": { "normalisation": { "type": "lineaire", "zero": 60, "cent": 95 }, "min": 40, "max": 100,
+    "dynamique": { "derive": -0.2, "variation": [ { "source": "artificialisation", "coef": -0.00002, "ref": 19263 } ] } },
+  "part_industrie_va": { "normalisation": { "type": "lineaire", "zero": 6, "cent": 15 }, "min": 5, "max": 20,
+    "dynamique": { "derive": -0.03, "variation": [ { "source": "investissement_entreprises", "coef": 0.02, "ref": 22.2 } ] } },
+  "budget_defense": { "normalisation": { "type": "lineaire", "zero": 1.2, "cent": 3.5 }, "min": 1, "max": 5,
+    "dynamique": { "cible": { "constante": 2.2, "vitesse": 0.2 } } },
+  "dependance_numerique": { "normalisation": { "type": "lineaire", "zero": 100, "cent": 40 }, "min": 30, "max": 100,
+    "dynamique": { "derive": 0.2 } },
+  "part_dette_non_residents": { "normalisation": { "type": "lineaire", "zero": 70, "cent": 30 }, "min": 20, "max": 80,
+    "dynamique": { "cible": { "constante": 54, "vitesse": 0.1, "termes": [ { "source": "dette_publique", "coef": 0.05, "ref": 115.6 } ] } } }
+}

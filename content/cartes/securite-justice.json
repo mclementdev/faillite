@@ -1,0 +1,375 @@
+[
+  {
+    "id": "secu-police",
+    "theme": "securite_justice",
+    "type": "unique",
+    "titre": "Plus de policiers dans la rue ?",
+    "contexte": "Le sentiment d'insécurité progresse depuis 2023. Les syndicats de police réclament des effectifs, les magistrats des moyens.",
+    "options": [
+      {
+        "id": "effectifs",
+        "titre": "10 000 policiers et gendarmes de plus",
+        "explication": "Plus de présence sur le terrain : le sentiment d'insécurité recule, mais les tribunaux reçoivent plus d'affaires.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.07,
+            "type": "durable",
+            "hypothese": "Environ 2 Md€ par an (salaires, équipement)."
+          },
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Présence policière visible, effet sur le ressenti plus que sur les faits."
+          },
+          {
+            "cible": "violences_physiques",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effet dissuasif modeste."
+          },
+          {
+            "cible": "delai_jugement",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Plus d'interpellations, autant de juges : les délais s'allongent."
+          }
+        ]
+      },
+      {
+        "id": "proximite",
+        "titre": "Police de proximité et médiateurs",
+        "explication": "Des agents qui connaissent le quartier et des médiateurs : effet plus lent, relations apaisées.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.04,
+            "type": "durable",
+            "hypothese": "Environ 1 Md€ par an."
+          },
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Effet progressif sur le climat local."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Amélioration des relations police-population."
+          }
+        ]
+      },
+      {
+        "id": "videosurveillance",
+        "titre": "Vidéosurveillance généralisée",
+        "explication": "Caméras intelligentes dans les espaces publics : rassurant pour beaucoup, efficacité discutée et libertés en question.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.02,
+            "type": "durable",
+            "duree": 5,
+            "hypothese": "Équipement financé avec les collectivités."
+          },
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Effet rassurant sur une partie de la population."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Logiciels souvent fournis par des acteurs non européens."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.5,
+            "type": "estompe",
+            "hypothese": "Inquiétudes sur les libertés publiques."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le sentiment d'insécurité et la délinquance mesurée n'évoluent pas toujours dans le même sens : on peut agir sur l'un sans l'autre."
+  },
+  {
+    "id": "secu-justice",
+    "theme": "securite_justice",
+    "type": "unique",
+    "titre": "Une justice trop lente",
+    "contexte": "Il faut plus d'un an pour un jugement civil en appel. La France compte moins de juges par habitant que la moyenne européenne.",
+    "options": [
+      {
+        "id": "magistrats",
+        "titre": "Recruter 1 500 magistrats",
+        "explication": "Doubler les recrutements pendant cinq ans : les délais baissent, mais il faut trois ans pour former un juge.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Magistrats, greffiers et locaux : environ 1 Md€ par an."
+          },
+          {
+            "cible": "delai_jugement",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Effectifs en hausse d'environ 15 % après formation."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.4,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Une justice plus rapide inspire davantage confiance."
+          }
+        ]
+      },
+      {
+        "id": "amiable",
+        "titre": "Médiation obligatoire",
+        "explication": "Avant d'aller au tribunal, il faut tenter un accord : désengorgement rapide, mais certains renoncent à faire valoir leurs droits.",
+        "effets": [
+          {
+            "cible": "delai_jugement",
+            "valeur": -1.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Une partie des litiges civils est réglée sans juge."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": 0.01,
+            "type": "durable",
+            "hypothese": "Les plus modestes sont plus souvent perdants dans les accords amiables."
+          }
+        ]
+      },
+      {
+        "id": "numerique",
+        "titre": "Justice numérique",
+        "explication": "Procédures en ligne et outils d'aide à la décision : gains de temps, dépendance aux outils et risques d'erreurs.",
+        "effets": [
+          {
+            "cible": "delai_jugement",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Dématérialisation des procédures simples."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Solutions logicielles en partie étrangères."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.02,
+            "type": "durable",
+            "duree": 5,
+            "hypothese": "Investissement informatique."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les délais de justice dépendent surtout des moyens humains : un magistrat formé met plusieurs années à arriver en juridiction."
+  },
+  {
+    "id": "secu-peines",
+    "theme": "securite_justice",
+    "type": "unique",
+    "titre": "Prisons pleines : construire ou punir autrement ?",
+    "contexte": "Les prisons comptent plus de détenus que de places. Les peines de moins de six mois sont fréquentes.",
+    "options": [
+      {
+        "id": "construire",
+        "titre": "Construire 15 000 places",
+        "explication": "Fin de la surpopulation et exécution des peines : un chantier long et coûteux.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.07,
+            "type": "durable",
+            "duree": 10,
+            "hypothese": "Environ 5 Md€ d'investissement plus le fonctionnement."
+          },
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Les peines prononcées sont exécutées."
+          },
+          {
+            "cible": "artificialisation",
+            "valeur": 100,
+            "type": "durable",
+            "duree": 6,
+            "hypothese": "Emprise des nouveaux établissements."
+          }
+        ]
+      },
+      {
+        "id": "alternatives",
+        "titre": "Peines alternatives",
+        "explication": "Travail d'intérêt général, bracelet, sursis probatoire : moins cher et moins de récidive selon plusieurs études, perçu comme laxiste.",
+        "effets": [
+          {
+            "cible": "violences_physiques",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "La récidive est plus faible après une peine alternative qu'après une courte peine de prison."
+          },
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "hypothese": "Perception de moindre fermeté."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.01,
+            "type": "durable",
+            "hypothese": "Une peine alternative coûte moins qu'une journée de détention."
+          }
+        ]
+      },
+      {
+        "id": "peines-planchers",
+        "titre": "Peines minimales obligatoires",
+        "explication": "Une peine plancher pour les récidivistes : message de fermeté, prisons encore plus pleines.",
+        "effets": [
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -1.5,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Effet rassurant d'un message de fermeté."
+          },
+          {
+            "cible": "delai_jugement",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Plus d'appels et de procédures contestées."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.02,
+            "type": "durable",
+            "hypothese": "Coût de la détention supplémentaire."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La fermeté et l'efficacité contre la récidive ne se mesurent pas de la même façon : l'une se voit vite, l'autre en années."
+  },
+  {
+    "id": "secu-cannabis",
+    "theme": "securite_justice",
+    "type": "unique",
+    "titre": "Cannabis : interdire, tolérer ou encadrer ?",
+    "contexte": "La France compte parmi les plus gros consommateurs d'Europe malgré une loi très répressive. Les trafics alimentent des violences.",
+    "options": [
+      {
+        "id": "legaliser",
+        "titre": "Vente encadrée par l'État",
+        "explication": "Comme le tabac : des recettes fiscales et moins de trafic, mais un risque de banalisation chez les jeunes.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Recettes fiscales et économies de procédures, de l'ordre de 1 à 2 Md€."
+          },
+          {
+            "cible": "violences_physiques",
+            "valeur": -0.15,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Une partie des règlements de comptes liés au trafic disparaît."
+          },
+          {
+            "cible": "delai_jugement",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Moins d'affaires de stupéfiants."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 6,
+            "hypothese": "Possible hausse de consommation, débattue."
+          }
+        ]
+      },
+      {
+        "id": "amende",
+        "titre": "Amende forfaitaire renforcée",
+        "explication": "Plus de contrôles et des amendes immédiates : simple à appliquer, sans toucher aux réseaux.",
+        "effets": [
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "hypothese": "Visibilité de l'action publique."
+          },
+          {
+            "cible": "delai_jugement",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Procédure simplifiée sans juge."
+          }
+        ]
+      },
+      {
+        "id": "guerre-reseaux",
+        "titre": "Offensive contre les réseaux",
+        "explication": "Enquêteurs spécialisés et saisies des avoirs : coups durs aux trafiquants, effets lents et violences de représailles.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Moyens d'enquête supplémentaires."
+          },
+          {
+            "cible": "violences_physiques",
+            "valeur": 0.2,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Guerres de territoire quand des réseaux sont démantelés."
+          },
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Points de deal fermés durablement."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les pays qui ont légalisé observent des effets contrastés : moins de pénal, mais une consommation qui ne baisse pas toujours."
+  }
+]

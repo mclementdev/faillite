@@ -1,0 +1,681 @@
+[
+  {
+    "id": "eco-taxe-carbone",
+    "theme": "transition_ecologique",
+    "type": "curseur",
+    "titre": "Quel prix pour une tonne de CO₂ ?",
+    "titreCourt": "Taxe carbone",
+    "contexte": "La taxe carbone est gelée à 44,6 € la tonne depuis 2018, après les Gilets jaunes. Elle renchérit l'essence, le gaz et le fioul.",
+    "curseur": {
+      "min": 0,
+      "max": 150,
+      "pas": 25,
+      "unite": "€/t"
+    },
+    "options": [
+      {
+        "id": "0",
+        "valeur": 0,
+        "titre": "0 €/t",
+        "explication": "On supprime la taxe : le plein coûte moins cher, l'État perd des recettes et les émissions baissent moins vite.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "La composante carbone rapporte environ 7 à 8 Md€ par an."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": 6,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Effet prix inverse : un peu plus de consommation de carburants fossiles."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Mesure de pouvoir d'achat appréciée."
+          },
+          {
+            "cible": "inflation",
+            "valeur": -0.2,
+            "type": "immediat",
+            "hypothese": "Baisse ponctuelle du prix des énergies fossiles."
+          }
+        ]
+      },
+      {
+        "id": "75",
+        "valeur": 75,
+        "titre": "75 €/t",
+        "explication": "Hausse progressive avec un chèque pour les ménages modestes : signal clair, coût maîtrisé.",
+        "effets": [
+          {
+            "cible": "emissions_ges",
+            "valeur": -7,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Élasticité-prix modérée : quelques Mt évitées par an à moyen terme."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "Recettes supplémentaires, en partie reversées en chèque."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.3,
+            "type": "immediat",
+            "hypothese": "Hausse du prix des énergies fossiles."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 20,
+            "type": "estompe",
+            "hypothese": "Contestation, atténuée par la redistribution."
+          }
+        ]
+      },
+      {
+        "id": "150",
+        "valeur": 150,
+        "titre": "150 €/t",
+        "explication": "Un prix au niveau des recommandations des économistes du climat : les émissions chutent, la colère gronde dans les zones rurales.",
+        "effets": [
+          {
+            "cible": "emissions_ges",
+            "valeur": -18,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effet marqué sur le chauffage, les transports et l'industrie à horizon de quelques années."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.3,
+            "type": "durable",
+            "hypothese": "Recettes importantes, dont une partie est redistribuée."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.7,
+            "type": "immediat",
+            "hypothese": "Hausse sensible des prix de l'énergie fossile."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 90,
+            "type": "estompe",
+            "duree": 4,
+            "hypothese": "Risque de mouvement social comparable à 2018."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -3,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Sentiment d'injustice territoriale."
+          },
+          {
+            "cible": "part_renouvelables",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Les alternatives renouvelables deviennent plus rentables."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Un prix du carbone oriente les choix sans les interdire. Son acceptabilité dépend de ce que l'État fait des recettes."
+  },
+  {
+    "id": "eco-renovation",
+    "theme": "transition_ecologique",
+    "type": "unique",
+    "titre": "5 millions de passoires thermiques : on rénove comment ?",
+    "contexte": "Le bâtiment représente près d'un sixième des émissions. Les logements mal isolés coûtent cher à chauffer.",
+    "options": [
+      {
+        "id": "obligation",
+        "titre": "Interdire la location des passoires",
+        "explication": "Les propriétaires doivent rénover avant de louer : efficace, mais certains retirent leur logement du marché.",
+        "effets": [
+          {
+            "cible": "emissions_ges",
+            "valeur": -5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Rénovation accélérée de plusieurs centaines de milliers de logements."
+          },
+          {
+            "cible": "conso_energie_finale",
+            "valeur": -20,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Gains d'énergie sur le chauffage."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 1,
+            "duree": 5,
+            "hypothese": "Offre locative réduite temporairement : les loyers montent."
+          }
+        ]
+      },
+      {
+        "id": "aides-massives",
+        "titre": "Aides massives à la rénovation",
+        "explication": "L'État paie jusqu'à 90 % des travaux pour les ménages modestes : rapide et populaire, très coûteux.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.3,
+            "type": "durable",
+            "duree": 8,
+            "hypothese": "Environ 9 Md€ par an pendant 8 ans."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -6,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Rénovations performantes subventionnées."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.15,
+            "type": "estompe",
+            "duree": 6,
+            "hypothese": "Emplois dans le bâtiment, non délocalisables."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Factures de chauffage en baisse pour les ménages modestes."
+          }
+        ]
+      },
+      {
+        "id": "pret-taux-zero",
+        "titre": "Prêt à taux zéro remboursé par les économies",
+        "explication": "Pas de subvention : un prêt que les économies d'énergie remboursent. Peu coûteux, mais les ménages hésitent à s'endetter.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Coût limité aux intérêts pris en charge."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -5.0,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Adoption plus lente que les aides directes."
+          },
+          {
+            "cible": "conso_energie_finale",
+            "valeur": -20.0,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Gains d'énergie modestes."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La rénovation coûte cher au départ et rapporte pendant des décennies : c'est un cas typique d'effet différé."
+  },
+  {
+    "id": "eco-sols",
+    "theme": "transition_ecologique",
+    "type": "unique",
+    "titre": "Faut-il arrêter de bétonner les champs ?",
+    "contexte": "Environ 20 000 hectares d'espaces naturels ou agricoles sont artificialisés chaque année, surtout pour le logement.",
+    "options": [
+      {
+        "id": "zan-strict",
+        "titre": "Zéro artificialisation nette dès 2035",
+        "explication": "Chaque hectare bétonné doit être compensé : la nature est protégée, mais construire devient plus difficile et plus cher.",
+        "effets": [
+          {
+            "cible": "artificialisation",
+            "valeur": -9000,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Division par deux du rythme d'artificialisation, conforme à l'objectif de la loi Climat."
+          },
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Moins de destruction d'habitats agricoles et naturels."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Le foncier rare renchérit le logement neuf."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.05,
+            "type": "durable",
+            "hypothese": "Moins de construction neuve en extension urbaine : le BTP ralentit."
+          },
+          {
+            "cible": "chomage",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins d'emplois dans la construction neuve."
+          }
+        ]
+      },
+      {
+        "id": "assouplir",
+        "titre": "Assouplir pour construire",
+        "explication": "On laisse les communes construire plus librement : des logements et des zones d'activité, au prix des terres agricoles.",
+        "effets": [
+          {
+            "cible": "artificialisation",
+            "valeur": 5000,
+            "type": "durable",
+            "hypothese": "Retour à un rythme de 25 000 ha/an environ."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.8,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Plus de foncier disponible, prix un peu moins tendus."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.1,
+            "type": "estompe",
+            "hypothese": "Activité du BTP."
+          },
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Perte de terres cultivables."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Emplois dans la construction."
+          }
+        ]
+      },
+      {
+        "id": "friches",
+        "titre": "Priorité aux friches",
+        "explication": "Un fonds pour dépolluer et reconstruire sur d'anciens sites industriels : coûteux, mais ni champs ni forêts sacrifiés.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "duree": 8,
+            "hypothese": "Fonds de 1,5 Md€ par an."
+          },
+          {
+            "cible": "artificialisation",
+            "valeur": -3000,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Une partie des projets se reporte sur les friches."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Nouveaux logements en ville."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les sols artificialisés ne redeviennent presque jamais naturels : c'est une décision quasi irréversible."
+  },
+  {
+    "id": "eco-agriculture",
+    "theme": "transition_ecologique",
+    "type": "unique",
+    "titre": "Pesticides : les agriculteurs entre deux feux",
+    "contexte": "La France est l'un des premiers consommateurs de pesticides d'Europe. Les agriculteurs craignent une concurrence déloyale.",
+    "options": [
+      {
+        "id": "interdire",
+        "titre": "Sortie progressive des pesticides",
+        "explication": "Interdiction des plus dangereux d'ici 5 ans : la biodiversité respire, certains rendements baissent.",
+        "effets": [
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": 3,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Les oiseaux des milieux agricoles sont les plus touchés par les pesticides."
+          },
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Baisse de rendement sur certaines cultures (fruits, betterave)."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 20,
+            "type": "estompe",
+            "hypothese": "Mobilisations agricoles."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 8,
+            "hypothese": "Moindre exposition des riverains et des agriculteurs."
+          }
+        ]
+      },
+      {
+        "id": "accompagner",
+        "titre": "Payer les agriculteurs pour changer",
+        "explication": "Des aides pour chaque hectare converti : la transition se fait sans casse, mais elle coûte au budget.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Environ 3 Md€ par an de paiements environnementaux."
+          },
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Conversion plus lente mais volontaire."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Moins d'engrais azotés."
+          }
+        ]
+      },
+      {
+        "id": "clause-miroir",
+        "titre": "Fermer la porte aux importations non conformes",
+        "explication": "Les produits importés doivent respecter nos normes : nos agriculteurs sont protégés, nos partenaires commerciaux protestent.",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "La production française regagne des parts de marché."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.2,
+            "type": "immediat",
+            "hypothese": "Moins de concurrence, prix alimentaires un peu plus élevés."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Mesures de rétorsion sur certaines exportations."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Protéger l'environnement chez soi peut déplacer la production ailleurs : c'est le débat sur les « clauses miroirs »."
+  },
+  {
+    "id": "eco-transports",
+    "theme": "transition_ecologique",
+    "type": "cumulable",
+    "titre": "Plan transports : deux priorités pour la décennie",
+    "contexte": "Les transports sont le premier secteur émetteur (un tiers des émissions). Choisissez deux chantiers.",
+    "options": [
+      {
+        "id": "rail",
+        "titre": "Trains du quotidien",
+        "explication": "Rouvrir des lignes et augmenter les fréquences : efficace en ville et en périurbain, très cher.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "duree": 10,
+            "hypothese": "Plan de 50 Md€ sur 10 ans, en partie financé par l'État."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -4,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Report modal de la voiture vers le train, effet lent."
+          },
+          {
+            "cible": "qualite_air",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Moins de trafic routier."
+          }
+        ]
+      },
+      {
+        "id": "voiture-electrique",
+        "titre": "Leasing de voitures électriques",
+        "explication": "Une voiture électrique à 100 € par mois pour les ménages modestes : rapide, mais les voitures viennent souvent de l'étranger.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.08,
+            "type": "durable",
+            "duree": 6,
+            "hypothese": "Environ 2,5 Md€ par an."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -7.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Renouvellement accéléré du parc."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": -5.0,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Une grande partie des véhicules électriques sont importés."
+          },
+          {
+            "cible": "independance_energetique",
+            "valeur": 2.0,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Moins de pétrole importé."
+          }
+        ]
+      },
+      {
+        "id": "velo",
+        "titre": "Vélo et covoiturage",
+        "explication": "Pistes cyclables et voies réservées : bon marché et rapide, mais limité aux trajets courts.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.02,
+            "type": "durable",
+            "duree": 5,
+            "hypothese": "Plan de 0,5 Md€ par an."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -2.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Report modal sur les trajets de moins de 5 km."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.25,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Activité physique accrue."
+          }
+        ]
+      },
+      {
+        "id": "autoroutes",
+        "titre": "Désenclaver par la route",
+        "explication": "Achever les routes promises aux territoires isolés : bon pour l'activité locale, mauvais pour le climat.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.05,
+            "type": "durable",
+            "duree": 6,
+            "hypothese": "Meilleure accessibilité des zones enclavées."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Trafic induit par les nouvelles routes."
+          },
+          {
+            "cible": "artificialisation",
+            "valeur": 800,
+            "type": "durable",
+            "duree": 6,
+            "hypothese": "Emprise des chantiers routiers."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Promesse tenue envers les territoires ruraux."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les infrastructures de transport mettent des années à sortir de terre, mais structurent les déplacements pour des décennies."
+  },
+  {
+    "id": "eco-vitesse",
+    "theme": "transition_ecologique",
+    "type": "curseur",
+    "titre": "Quelle vitesse maximale sur autoroute ?",
+    "titreCourt": "Vitesse sur autoroute",
+    "contexte": "La Convention citoyenne pour le climat proposait de passer de 130 à 110 km/h. Les transports sont le premier secteur émetteur de gaz à effet de serre en France, environ un tiers du total.",
+    "curseur": {
+      "min": 110,
+      "max": 130,
+      "pas": 10,
+      "unite": "km/h"
+    },
+    "options": [
+      {
+        "id": "110",
+        "valeur": 110,
+        "titre": "110 km/h",
+        "explication": "Moins de carburant brûlé et moins d'accidents graves, mais des trajets plus longs et beaucoup de mécontents.",
+        "effets": [
+          {
+            "cible": "emissions_ges",
+            "valeur": -3,
+            "type": "durable",
+            "hypothese": "Consommation des voitures en baisse d'environ 20 % sur autoroute."
+          },
+          {
+            "cible": "conso_energie_finale",
+            "valeur": -10,
+            "type": "durable",
+            "hypothese": "Moins de carburant consommé."
+          },
+          {
+            "cible": "qualite_air",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "Moins de particules et d'oxydes d'azote près des axes."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -2,
+            "type": "estompe",
+            "hypothese": "Mesure très impopulaire chez les automobilistes."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 20,
+            "type": "estompe",
+            "hypothese": "Manifestations d'automobilistes et de routiers."
+          }
+        ]
+      },
+      {
+        "id": "120",
+        "valeur": 120,
+        "titre": "120 km/h",
+        "explication": "Un compromis : une partie des gains écologiques, moins de colère.",
+        "effets": [
+          {
+            "cible": "emissions_ges",
+            "valeur": -1.5,
+            "type": "durable",
+            "hypothese": "Baisse plus modérée de la consommation."
+          },
+          {
+            "cible": "conso_energie_finale",
+            "valeur": -5,
+            "type": "durable",
+            "hypothese": "Moins de carburant consommé."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.8,
+            "type": "estompe",
+            "hypothese": "Mesure contestée mais moins symbolique."
+          }
+        ]
+      },
+      {
+        "id": "130",
+        "valeur": 130,
+        "titre": "130 km/h",
+        "explication": "On ne change rien : liberté de rouler comme aujourd'hui, pas de gain sur les émissions.",
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0,
+            "type": "immediat",
+            "hypothese": "Statu quo : aucun changement de comportement."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La consommation d'une voiture augmente fortement avec la vitesse : à 110 km/h au lieu de 130, elle baisse d'environ 20 %. L'Espagne et plusieurs pays européens limitent déjà à 120 km/h."
+  }
+]

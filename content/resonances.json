@@ -1,0 +1,42 @@
+[
+  {
+    "id": "baisse-impots-sans-economies",
+    "titre": "Baisse d'impôts sans économies : la dette grimpe",
+    "explication": "Vous avez baissé des impôts sans réduire les dépenses : les marchés s'inquiètent et la charge de la dette augmente.",
+    "si": [ { "carte": "fiscalite-impot-revenu", "options": ["baisse-classes-moyennes"] } ],
+    "sauf": [ { "carte": "dette-economies", "options": ["rabot", "niches", "point-indice"] } ],
+    "apres": 3,
+    "effets": [
+      { "cible": "taux_10_ans", "valeur": 0.3, "type": "durable", "hypothese": "Une baisse d'impôts non financée accroît la prime de risque exigée." },
+      { "cible": "deficit_public", "valeur": 0.2, "type": "durable", "hypothese": "La moindre recette n'est pas compensée par le surcroît d'activité." }
+    ]
+  },
+  {
+    "id": "renovation-et-formation",
+    "titre": "Rénovation et formation : le bâtiment embauche",
+    "explication": "Le grand plan de rénovation trouve les artisans formés dont il a besoin : les chantiers avancent plus vite.",
+    "si": [
+      { "carte": "eco-renovation", "options": ["aides-massives", "obligation"] },
+      { "carte": "emploi-assurance-chomage", "options": ["formation"] }
+    ],
+    "apres": 0,
+    "effets": [
+      { "cible": "chomage", "valeur": -0.2, "type": "differe", "delai": 1, "hypothese": "Les chômeurs formés aux métiers du bâtiment trouvent rapidement un emploi." },
+      { "cible": "emissions_ges", "valeur": -3, "type": "differe", "delai": 2, "hypothese": "Les rénovations sont réalisées plus vite faute de goulot de main-d'œuvre." }
+    ]
+  },
+  {
+    "id": "nucleaire-et-industrie",
+    "titre": "Électricité abondante et relocalisation : l'industrie revient",
+    "explication": "Une électricité décarbonée et bon marché rend vos usines relocalisées très compétitives.",
+    "si": [
+      { "carte": "energie-nucleaire", "options": ["quatorze", "six"] },
+      { "carte": "souv-relocalisation", "options": ["batteries", "semi-conducteurs"] }
+    ],
+    "apres": 2,
+    "effets": [
+      { "cible": "part_industrie_va", "valeur": 0.4, "type": "differe", "delai": 3, "hypothese": "Le prix de l'électricité est un facteur clé des implantations industrielles électro-intensives." },
+      { "cible": "solde_commercial", "valeur": 3, "type": "differe", "delai": 4, "hypothese": "Exportations industrielles supplémentaires." }
+    ]
+  }
+]

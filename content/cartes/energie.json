@@ -1,0 +1,119 @@
+[
+  {
+    "id": "energie-prix",
+    "theme": "energie",
+    "type": "unique",
+    "titre": "Les prix de l'énergie flambent : que fait-on ?",
+    "contexte": "Une crise internationale fait bondir le prix du gaz et de l'électricité. Les factures des ménages s'envolent cet hiver.",
+    "options": [
+      {
+        "id": "bouclier", "titre": "Bouclier tarifaire",
+        "explication": "L'État plafonne les prix pour tout le monde : les ménages sont protégés, mais la facture retombe sur le budget.",
+        "effets": [
+          { "cible": "deficit_public", "valeur": 1.0, "type": "immediat", "hypothese": "Le bouclier de 2022-2023 a coûté plusieurs dizaines de milliards d'euros ; ici environ 1 point de PIB sur un an." },
+          { "cible": "inflation", "valeur": -1.0, "type": "immediat", "hypothese": "Le plafonnement a réduit l'inflation française d'environ 1 à 2 points en 2022." },
+          { "cible": "taux_pauvrete", "valeur": -0.2, "type": "immediat", "hypothese": "Les ménages modestes évitent la précarité énergétique cette année." },
+          { "cible": "confiance_institutions", "valeur": 1.5, "type": "estompe", "hypothese": "Mesure protectrice et visible." }
+        ]
+      },
+      {
+        "id": "cheque", "titre": "Chèque énergie ciblé",
+        "explication": "Une aide réservée aux ménages modestes : coûte moins cher, mais les classes moyennes paient plein pot et le font savoir.",
+        "effets": [
+          { "cible": "deficit_public", "valeur": 0.3, "type": "immediat", "hypothese": "Aide ciblée sur les 30 % de ménages les plus modestes, environ 0,3 point de PIB." },
+          { "cible": "taux_pauvrete", "valeur": -0.3, "type": "immediat", "hypothese": "L'aide est concentrée sur les ménages sous ou près du seuil de pauvreté." },
+          { "cible": "inflation", "valeur": 0.3, "type": "immediat", "hypothese": "Les prix ne sont pas plafonnés : l'inflation mesurée reste élevée." },
+          { "cible": "jours_greve", "valeur": 25, "type": "immediat", "hypothese": "Mécontentement des ménages non aidés." }
+        ]
+      },
+      {
+        "id": "renovation", "titre": "Plan de rénovation des logements",
+        "explication": "On isole massivement : rien ne change cet hiver, mais la consommation baisse durablement et le bâtiment embauche.",
+        "effets": [
+          { "cible": "deficit_public", "valeur": 0.25, "type": "durable", "duree": 5, "hypothese": "Plan de 7 à 8 Md€ par an pendant 5 ans." },
+          { "cible": "conso_energie_finale", "valeur": -25, "type": "differe", "delai": 3, "hypothese": "Moins de chauffage dans les logements rénovés." },
+          { "cible": "emissions_ges", "valeur": -5, "type": "differe", "delai": 3, "hypothese": "Moins de gaz et de fioul brûlés." },
+          { "cible": "chomage", "valeur": -0.1, "type": "estompe", "duree": 5, "hypothese": "Emplois dans le bâtiment." },
+          { "cible": "jours_greve", "valeur": 30, "type": "immediat", "hypothese": "Rien n'est fait pour la facture de cet hiver." }
+        ]
+      }
+    ],
+    "notePedagogique": "Une aide d'urgence protège vite mais coûte cher et n'agit qu'un an. Une politique structurelle agit lentement mais durablement."
+  },
+  {
+    "id": "energie-nucleaire",
+    "theme": "energie",
+    "type": "unique",
+    "titre": "Combien de nouveaux réacteurs nucléaires ?",
+    "contexte": "Les réacteurs actuels vieillissent. Un nouveau réacteur met plus de 10 ans à être construit.",
+    "options": [
+      {
+        "id": "quatorze", "titre": "14 réacteurs",
+        "explication": "Un programme massif : électricité décarbonée et souveraine pour la fin du siècle, mais un chantier très coûteux et long.",
+        "effets": [
+          { "cible": "deficit_public", "valeur": 0.2, "type": "durable", "duree": 15, "hypothese": "Financement public partiel d'un programme estimé à plus de 100 Md€." },
+          { "cible": "independance_energetique", "valeur": 6, "type": "differe", "delai": 12, "hypothese": "Remplacement et extension du parc ; effets après la mise en service." },
+          { "cible": "emissions_ges", "valeur": -10, "type": "differe", "delai": 12, "hypothese": "Électrification des usages permise par une production abondante." },
+          { "cible": "part_industrie_va", "valeur": 0.3, "type": "differe", "delai": 3, "hypothese": "Filière industrielle nucléaire relancée." }
+        ]
+      },
+      {
+        "id": "six", "titre": "6 réacteurs",
+        "explication": "On remplace une partie du parc et on complète par des renouvelables : compromis coût-délai.",
+        "effets": [
+          { "cible": "deficit_public", "valeur": 0.1, "type": "durable", "duree": 12, "hypothese": "Programme d'environ 50 Md€." },
+          { "cible": "independance_energetique", "valeur": 3, "type": "differe", "delai": 12, "hypothese": "Maintien de la capacité nucléaire actuelle." },
+          { "cible": "emissions_ges", "valeur": -4, "type": "differe", "delai": 12, "hypothese": "Électricité décarbonée supplémentaire." }
+        ]
+      },
+      {
+        "id": "zero", "titre": "Aucun : tout renouvelable",
+        "explication": "On mise sur l'éolien, le solaire et le stockage : plus rapide à installer, mais il faut gérer l'intermittence.",
+        "effets": [
+          { "cible": "part_renouvelables", "valeur": 6, "type": "differe", "delai": 4, "hypothese": "Investissements redirigés vers les renouvelables." },
+          { "cible": "independance_energetique", "valeur": -4, "type": "differe", "delai": 12, "hypothese": "Fermetures de réacteurs non remplacées, appel au gaz importé en période de pointe." },
+          { "cible": "artificialisation", "valeur": 800, "type": "differe", "delai": 3, "hypothese": "Parcs solaires au sol." },
+          { "cible": "deficit_public", "valeur": 0.05, "type": "durable", "duree": 10, "hypothese": "Soutien public aux renouvelables et aux réseaux." }
+        ]
+      }
+    ],
+    "notePedagogique": "En énergie, les décisions d'aujourd'hui produisent leurs effets dans 10 à 15 ans : le choix est fait par une génération pour la suivante."
+  },
+  {
+    "id": "energie-renouvelables",
+    "theme": "energie",
+    "type": "unique",
+    "titre": "Éoliennes et panneaux solaires : où les installer ?",
+    "contexte": "La France est en retard sur ses objectifs de renouvelables. Les projets se heurtent souvent aux riverains.",
+    "options": [
+      {
+        "id": "eolien-mer", "titre": "Éolien en mer",
+        "explication": "De grands parcs au large : production importante et peu de riverains, mais des pêcheurs mécontents et des coûts élevés.",
+        "effets": [
+          { "cible": "part_renouvelables", "valeur": 3, "type": "differe", "delai": 6, "hypothese": "Plusieurs GW installés en mer à horizon 6-8 ans." },
+          { "cible": "deficit_public", "valeur": 0.05, "type": "durable", "duree": 10, "hypothese": "Soutien au tarif de rachat." },
+          { "cible": "part_industrie_va", "valeur": 0.1, "type": "differe", "delai": 4, "hypothese": "Usines de turbines et de fondations en France." }
+        ]
+      },
+      {
+        "id": "solaire-toits", "titre": "Solaire obligatoire sur les toits",
+        "explication": "Parkings, hangars et bâtiments neufs doivent se couvrir de panneaux : rapide, sans artificialisation, mais les panneaux sont importés.",
+        "effets": [
+          { "cible": "part_renouvelables", "valeur": 2.5, "type": "differe", "delai": 2, "hypothese": "Gisement important sur les toitures et parkings." },
+          { "cible": "solde_commercial", "valeur": -1.5, "type": "differe", "delai": 1, "hypothese": "La quasi-totalité des panneaux vient d'Asie." },
+          { "cible": "investissement_entreprises", "valeur": -0.1, "type": "estompe", "hypothese": "Coût imposé aux propriétaires de bâtiments." }
+        ]
+      },
+      {
+        "id": "partage-local", "titre": "Projets citoyens et revenus partagés",
+        "explication": "Les communes et habitants touchent une part des revenus : moins d'oppositions, des projets plus petits.",
+        "effets": [
+          { "cible": "part_renouvelables", "valeur": 1.5, "type": "differe", "delai": 3, "hypothese": "Projets plus acceptés mais plus modestes." },
+          { "cible": "confiance_institutions", "valeur": 1, "type": "differe", "delai": 2, "hypothese": "Les habitants sont associés aux décisions." },
+          { "cible": "satisfaction_vie", "valeur": 0.03, "type": "differe", "delai": 3, "hypothese": "Revenus locaux pour les communes rurales." }
+        ]
+      }
+    ],
+    "notePedagogique": "L'acceptabilité locale est souvent le premier frein au développement des renouvelables, avant le coût."
+  }
+]

@@ -1,0 +1,512 @@
+[
+  {
+    "id": "fiscalite-impot-revenu",
+    "theme": "fiscalite",
+    "type": "unique",
+    "titre": "L'impôt sur le revenu : on change le barème ?",
+    "contexte": "Moins d'un foyer sur deux paie l'impôt sur le revenu. Il rapporte environ 90 Md€ par an.",
+    "options": [
+      {
+        "id": "baisse-classes-moyennes",
+        "titre": "Baisse pour les classes moyennes",
+        "explication": "Les tranches intermédiaires baissent : plus de pouvoir d'achat pour des millions de foyers, moins de recettes.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.3,
+            "type": "durable",
+            "hypothese": "Une baisse de 10 Md€ représente environ 0,3 point de PIB."
+          },
+          {
+            "cible": "prelevements_obligatoires",
+            "valeur": -0.3,
+            "type": "durable",
+            "hypothese": "Recettes fiscales en baisse d'autant."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.15,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Le surcroît de revenu est en partie consommé (multiplicateur modéré)."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1.5,
+            "type": "estompe",
+            "hypothese": "Mesure visible et populaire."
+          }
+        ]
+      },
+      {
+        "id": "tranche-haute",
+        "titre": "Nouvelle tranche à 50 %",
+        "explication": "Les revenus les plus élevés paient davantage : les recettes progressent, mais certains contribuables optimisent ou partent.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "Assiette étroite : quelques milliards de recettes, rognés par l'optimisation."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": -0.03,
+            "type": "durable",
+            "hypothese": "Le revenu disponible des plus aisés baisse légèrement."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Une partie des hauts revenus finance l'investissement ou crée des entreprises."
+          },
+          {
+            "cible": "solde_migratoire",
+            "valeur": -3,
+            "type": "durable",
+            "hypothese": "Quelques milliers de départs de contribuables aisés et de leurs familles, ordre de grandeur discuté."
+          }
+        ]
+      },
+      {
+        "id": "prelevement-unique",
+        "titre": "Fusion avec la CSG",
+        "explication": "Un seul impôt, prélevé dès le premier euro mais à taux faible : plus simple et plus lisible, des perdants parmi les ménages modestes.",
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Un impôt plus lisible améliore le consentement à l'impôt."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "Les ménages non imposables aujourd'hui contribuent un peu plus."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de niches et de coûts de gestion."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 20,
+            "type": "immediat",
+            "hypothese": "Réforme d'ampleur qui inquiète l'année de sa mise en place."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Un impôt progressif redistribue davantage ; un impôt large à taux faible est plus simple et plus stable. Chaque barème fait des gagnants et des perdants."
+  },
+  {
+    "id": "fiscalite-patrimoine",
+    "theme": "fiscalite",
+    "type": "unique",
+    "titre": "Faut-il taxer davantage le patrimoine ?",
+    "contexte": "Les 10 % les plus aisés détiennent près de la moitié du patrimoine. Les héritages représentent une part croissante des fortunes.",
+    "options": [
+      {
+        "id": "impot-fortune",
+        "titre": "Impôt sur les grandes fortunes",
+        "explication": "Un impôt annuel sur les patrimoines de plus de 10 M€ : symbole fort, rendement incertain.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "Rendement de 2 à 5 Md€ selon les exonérations, ordre de grandeur des anciens ISF."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": -0.02,
+            "type": "durable",
+            "hypothese": "Effet modeste sur les revenus disponibles."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1.5,
+            "type": "estompe",
+            "hypothese": "Sentiment de justice fiscale pour une partie de l'opinion."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Une partie du patrimoine taxé est investie dans des entreprises."
+          }
+        ]
+      },
+      {
+        "id": "successions",
+        "titre": "Hausse des droits de succession",
+        "explication": "Les gros héritages sont plus taxés, les petits allégés : rapporte peu au début, réduit les inégalités sur une génération.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.15,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les successions montent avec le vieillissement : quelques milliards supplémentaires."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": -0.04,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Effet de long terme sur la concentration des patrimoines."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Les droits de succession sont très impopulaires, même chez ceux qu'ils ne concernent pas."
+          }
+        ]
+      },
+      {
+        "id": "baisse-capital",
+        "titre": "Alléger la fiscalité du capital",
+        "explication": "On baisse la taxe sur les dividendes pour attirer l'épargne vers les entreprises : plus d'investissement, inégalités en hausse.",
+        "effets": [
+          {
+            "cible": "investissement_entreprises",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Coût du capital plus faible : l'investissement privé progresse un peu."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Moins-value fiscale de 4 à 5 Md€."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Les revenus du capital sont concentrés en haut de la distribution."
+          },
+          {
+            "cible": "solde_migratoire",
+            "valeur": 2,
+            "type": "durable",
+            "hypothese": "Quelques retours d'expatriés fortunés et de dirigeants."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La taxation du patrimoine oppose deux objectifs : réduire les inégalités et encourager l'investissement. Son rendement dépend beaucoup des exonérations."
+  },
+  {
+    "id": "fiscalite-tva",
+    "theme": "fiscalite",
+    "type": "unique",
+    "titre": "TVA sociale : faire payer les importations ?",
+    "contexte": "Une partie des cotisations sur les salaires pourrait être remplacée par de la TVA, qui touche aussi les produits importés.",
+    "options": [
+      {
+        "id": "tva-sociale",
+        "titre": "Bascule cotisations → TVA",
+        "explication": "Le travail coûte moins cher et les importations plus cher : bon pour l'emploi, mais les prix augmentent pour tous.",
+        "effets": [
+          {
+            "cible": "chomage",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Baisse du coût du travail d'environ 2 % : quelques dizaines de milliers d'emplois."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 1.0,
+            "type": "immediat",
+            "hypothese": "Une hausse de 2 points de TVA se répercute en partie sur les prix la première année."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": 4,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Effet de « dévaluation fiscale » : produits français plus compétitifs."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "La TVA pèse davantage sur les ménages modestes, qui consomment tout leur revenu."
+          }
+        ]
+      },
+      {
+        "id": "tva-reduite",
+        "titre": "TVA réduite sur l'alimentation",
+        "explication": "On baisse la TVA sur les produits de base : soulagement immédiat au supermarché, perte de recettes.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.25,
+            "type": "durable",
+            "hypothese": "La TVA sur l'alimentaire rapporte environ 15 Md€ : la réduire coûte plusieurs milliards."
+          },
+          {
+            "cible": "inflation",
+            "valeur": -0.4,
+            "type": "immediat",
+            "hypothese": "Baisse ponctuelle du niveau des prix alimentaires, en partie captée par les marges."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.2,
+            "type": "durable",
+            "hypothese": "L'alimentation pèse lourd dans le budget des ménages modestes."
+          }
+        ]
+      },
+      {
+        "id": "tva-verte",
+        "titre": "TVA modulée selon l'empreinte carbone",
+        "explication": "Les produits peu émetteurs ont une TVA plus basse, les plus polluants une TVA plus haute : neutre pour le budget, complexe à gérer.",
+        "effets": [
+          {
+            "cible": "emissions_ges",
+            "valeur": -4,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effet prix modeste sur la consommation des produits les plus émetteurs."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.2,
+            "type": "immediat",
+            "hypothese": "Réorganisation des prix, légère hausse moyenne."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.5,
+            "type": "estompe",
+            "hypothese": "Dispositif jugé compliqué."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La TVA est l'impôt qui rapporte le plus. Elle frappe aussi les importations, mais pèse proportionnellement plus sur les ménages modestes."
+  },
+  {
+    "id": "fiscalite-production",
+    "theme": "fiscalite",
+    "type": "unique",
+    "titre": "Les impôts de production pèsent sur les usines",
+    "contexte": "Ces impôts sont payés avant même que l'entreprise fasse du bénéfice. Ils sont plus élevés en France que chez ses voisins.",
+    "options": [
+      {
+        "id": "baisse-forte",
+        "titre": "Baisse de 10 milliards",
+        "explication": "Les usines respirent et investissent davantage, mais les collectivités perdent une ressource qu'il faut compenser.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.35,
+            "type": "durable",
+            "hypothese": "10 Md€ de recettes en moins, soit environ 0,35 point de PIB."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Les sites industriels sont les plus exposés à ces impôts ; effet progressif sur l'implantation."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Hausse des marges en partie réinvestie."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effet modeste sur l'emploi industriel."
+          }
+        ]
+      },
+      {
+        "id": "baisse-ciblee",
+        "titre": "Baisse ciblée sur l'industrie verte",
+        "explication": "Seules les usines qui décarbonent en profitent : moins cher, effet concentré.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Coût de 3 Md€ environ."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.15,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Effet localisé sur les filières vertes."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Accélération de la décarbonation des sites aidés."
+          }
+        ]
+      },
+      {
+        "id": "maintien-contreparties",
+        "titre": "Maintien, avec contreparties",
+        "explication": "Pas de baisse, mais les aides existantes sont conditionnées à l'emploi local : aucun coût, les entreprises protestent.",
+        "effets": [
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.2,
+            "type": "estompe",
+            "hypothese": "Incertitude réglementaire et contraintes supplémentaires."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Les contreparties sont populaires."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.05,
+            "type": "durable",
+            "hypothese": "Quelques aides non versées faute de contreparties."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les impôts de production frappent les entreprises indépendamment de leurs bénéfices, ce qui pèse sur l'industrie, mais ils financent largement les collectivités locales."
+  },
+  {
+    "id": "fiscalite-is",
+    "theme": "fiscalite",
+    "type": "curseur",
+    "titre": "Quel taux pour l'impôt sur les sociétés ?",
+    "titreCourt": "Impôt sur les sociétés",
+    "contexte": "Le taux normal est de 25 % depuis 2022, proche de la moyenne européenne. Cet impôt sur les bénéfices des entreprises rapporte autour de 60 milliards d'euros par an.",
+    "curseur": {
+      "min": 20,
+      "max": 30,
+      "pas": 2.5,
+      "unite": "%"
+    },
+    "options": [
+      {
+        "id": "20",
+        "valeur": 20,
+        "titre": "20 %",
+        "explication": "Les entreprises gardent plus de bénéfices pour investir ou distribuer ; l'État perd une dizaine de milliards.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.4,
+            "type": "durable",
+            "hypothese": "Perte de recettes d'environ 0,4 point de PIB, partiellement compensée par l'activité."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": 0.6,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Rentabilité après impôt plus élevée, attractivité accrue."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Implantations industrielles attirées par la fiscalité."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": 0.02,
+            "type": "durable",
+            "hypothese": "Les dividendes profitent surtout aux ménages aisés."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.5,
+            "type": "estompe",
+            "hypothese": "Mesure perçue comme favorable aux grandes entreprises."
+          }
+        ]
+      },
+      {
+        "id": "25",
+        "valeur": 25,
+        "titre": "25 %",
+        "explication": "On garde le taux actuel : ni cadeau ni hausse, la France reste dans la moyenne européenne.",
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0,
+            "type": "immediat",
+            "hypothese": "Statu quo : pas d'effet propre au-delà de la tendance."
+          }
+        ]
+      },
+      {
+        "id": "30",
+        "valeur": 30,
+        "titre": "30 %",
+        "explication": "Les grandes entreprises paient davantage ; certaines investissent ou s'installent ailleurs.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.35,
+            "type": "durable",
+            "hypothese": "Recettes supplémentaires, réduites par l'optimisation fiscale."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.6,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Rentabilité après impôt plus faible."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": -0.15,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Quelques projets industriels réorientés vers l'étranger."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Compétitivité des exportateurs un peu réduite."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.8,
+            "type": "estompe",
+            "hypothese": "Mesure perçue comme juste par une partie de l'opinion."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La France a baissé son taux d'impôt sur les sociétés de 33,3 % à 25 % entre 2017 et 2022. Les économistes débattent encore de l'effet réel sur l'investissement."
+  }
+]

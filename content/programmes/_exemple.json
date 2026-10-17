@@ -1,0 +1,12 @@
+{
+  "id": "exemple",
+  "candidat": "Candidat fictif (exemple de format)",
+  "document": "Programme fictif",
+  "date": "2027-01-15",
+  "url": "https://example.org/programme",
+  "positions": {
+    "retraites-age": { "option": 64, "source": "Programme fictif, p. 12", "date": "2027-01-15", "url": "https://example.org/programme#retraites" },
+    "energie-nucleaire": { "option": "six", "citation": "Exemple de citation courte.", "source": "Programme fictif, p. 30", "date": "2027-01-15", "url": "https://example.org/programme#energie" },
+    "secu-cannabis": { "option": "non_positionne", "source": "Programme fictif (muet sur le sujet)", "date": "2027-01-15", "url": "https://example.org/programme" }
+  }
+}

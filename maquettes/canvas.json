@@ -1,0 +1,40 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-17T07:46:02Z"},
+  "title": "Faillite ! — maquettes",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1920, "h": 1080, "title": "Hôte · Tour en cours (choix unique)"},
+    "Hote-Curseur.dc.html": {"x": 2000, "y": 0, "w": 1920, "h": 1080, "title": "Hôte · Tour en cours (curseur retraites)"},
+    "Hote-Resultat.dc.html": {"x": 4000, "y": 0, "w": 1920, "h": 1080, "title": "Hôte · Résultat du vote"},
+    "Hote-Accueil.dc.html": {"x": 0, "y": 1500, "w": 1920, "h": 1080, "title": "Hôte · Accueil"},
+    "Hote-Fin.dc.html": {"x": 2000, "y": 1500, "w": 1920, "h": 1080, "title": "Hôte · Fin de partie"},
+    "Mobile-Rejoindre.dc.html": {"x": 0, "y": 2980, "w": 390, "h": 844, "title": "Téléphone · Rejoindre"},
+    "Mobile-Vote.dc.html": {"x": 470, "y": 2980, "w": 390, "h": 844, "title": "Téléphone · Vote (interactif)", "is_interactive": true},
+    "Mobile-Enregistre.dc.html": {"x": 940, "y": 2980, "w": 390, "h": 844, "title": "Téléphone · Vote enregistré"},
+    "Mobile-Curseur.dc.html": {"x": 1410, "y": 2980, "w": 390, "h": 844, "title": "Téléphone · Vote curseur (interactif)", "is_interactive": true},
+    "Mobile-Resultat.dc.html": {"x": 1880, "y": 2980, "w": 390, "h": 844, "title": "Téléphone · Résultat"},
+    "Composants.dc.html": {"x": 0, "y": 4224, "w": 1920, "h": 1500, "title": "Style et composants"}
+  },
+  "order": [
+    "Main.dc.html",
+    "Hote-Curseur.dc.html",
+    "Hote-Resultat.dc.html",
+    "Hote-Accueil.dc.html",
+    "Hote-Fin.dc.html",
+    "Mobile-Rejoindre.dc.html",
+    "Mobile-Vote.dc.html",
+    "Mobile-Enregistre.dc.html",
+    "Mobile-Curseur.dc.html",
+    "Mobile-Resultat.dc.html",
+    "Composants.dc.html"
+  ],
+  "notes": {
+    "row1": {"x": 0, "y": -300, "text": "Grand écran · le tour de jeu", "kind": "title1", "maxW": 5920},
+    "row2": {"x": 0, "y": 1200, "text": "Grand écran · avant et après la partie", "kind": "title1", "maxW": 3920},
+    "row3": {"x": 0, "y": 2680, "text": "Téléphones des participants", "kind": "title1", "maxW": 2270},
+    "row4": {"x": 0, "y": 3924, "text": "Style et composants réutilisables", "kind": "title1", "maxW": 1920}
+  },
+  "designSystems": []
+}

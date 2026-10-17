@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Faillite ! · Tour en cours, curseur</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#15131C}
+a{color:#FFD23F}a:hover{color:#FFE27A}
+</style>
+</helmet>
+<div style="width: 1920px; height: 1080px; box-sizing: border-box; padding: 36px 44px; background: #15131C; color: #F6F1E7; font-family: 'DM Sans', system-ui, sans-serif; display: grid; grid-template-columns: 440px minmax(0, 1fr); gap: 40px; overflow: hidden">
+
+  <aside style="display: flex; flex-direction: column; gap: 12px; min-height: 0">
+    <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -1px; line-height: 1; margin-bottom: 10px">Faillite<span style="color: #FFD23F"> !</span></div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; background: #221F2B; border-radius: 16px; padding: 14px 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg>
+        <span style="font-size: 24px; font-weight: 500; flex: 1">Économie</span>
+        <span style="font-size: 20px; color: #A6E36B; font-weight: 700" aria-label="en hausse">▲</span>
+        <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; width: 52px; text-align: right">56</span>
+      </div>
+      <div style="position: relative; height: 10px; background: #34303F; border-radius: 99px"><div style="width: 56%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 16px; background: #8C8698"></div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; background: #221F2B; border-radius: 16px; padding: 14px 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg>
+        <span style="font-size: 24px; font-weight: 500; flex: 1">Finances publiques</span>
+        <span style="font-size: 20px; color: #FF9A3C; font-weight: 700" aria-label="en baisse">▼</span>
+        <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; width: 52px; text-align: right">38</span>
+      </div>
+      <div style="position: relative; height: 10px; background: #34303F; border-radius: 99px"><div style="width: 38%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 16px; background: #8C8698"></div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; background: #221F2B; border-radius: 16px; padding: 14px 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 14.5c1 1.3 2.4 2 4 2s3-.7 4-2"></path><line x1="9" y1="9.5" x2="9" y2="10"></line><line x1="15" y1="9.5" x2="15" y2="10"></line></svg>
+        <span style="font-size: 24px; font-weight: 500; flex: 1">Paix sociale</span>
+        <span style="font-size: 20px; color: #FF9A3C; font-weight: 700" aria-label="en baisse">▼</span>
+        <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; width: 52px; text-align: right">56</span>
+      </div>
+      <div style="position: relative; height: 10px; background: #34303F; border-radius: 99px"><div style="width: 56%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 16px; background: #8C8698"></div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; background: #221F2B; border-radius: 16px; padding: 14px 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 15-14-1 10-6 15-14 15"></path><path d="M5 19c3-4 6-7 10-9"></path></svg>
+        <span style="font-size: 24px; font-weight: 500; flex: 1">Écologie</span>
+        <span style="font-size: 20px; color: #A6E36B; font-weight: 700" aria-label="en hausse">▲</span>
+        <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; width: 52px; text-align: right">39</span>
+      </div>
+      <div style="position: relative; height: 10px; background: #34303F; border-radius: 99px"><div style="width: 39%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 16px; background: #8C8698"></div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; background: #221F2B; border-radius: 16px; padding: 14px 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5L12 4l9 5.5"></path><line x1="4" y1="20" x2="20" y2="20"></line><line x1="6" y1="11" x2="6" y2="17"></line><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line><line x1="18" y1="11" x2="18" y2="17"></line></svg>
+        <span style="font-size: 24px; font-weight: 500; flex: 1">Services publics</span>
+        <span style="font-size: 20px; color: #8C8698; font-weight: 700" aria-label="stable">–</span>
+        <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; width: 52px; text-align: right">47</span>
+      </div>
+      <div style="position: relative; height: 10px; background: #34303F; border-radius: 99px"><div style="width: 47%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 16px; background: #8C8698"></div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; background: #221F2B; border-radius: 16px; padding: 14px 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg>
+        <span style="font-size: 24px; font-weight: 500; flex: 1">Cohésion</span>
+        <span style="font-size: 20px; color: #A6E36B; font-weight: 700" aria-label="en hausse">▲</span>
+        <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; width: 52px; text-align: right">55</span>
+      </div>
+      <div style="position: relative; height: 10px; background: #34303F; border-radius: 99px"><div style="width: 55%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 16px; background: #8C8698"></div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; background: #221F2B; border-radius: 16px; padding: 14px 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="6" r="2.5"></circle><path d="M4 21v-6a4 4 0 0 1 8 0v6"></path><circle cx="17" cy="10" r="2"></circle><path d="M14 21v-4a3 3 0 0 1 6 0v4"></path></svg>
+        <span style="font-size: 24px; font-weight: 500; flex: 1">Démographie</span>
+        <span style="font-size: 20px; color: #2ED47A; font-weight: 700" aria-label="en forte hausse">▲▲</span>
+        <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; width: 52px; text-align: right">50</span>
+      </div>
+      <div style="position: relative; height: 10px; background: #34303F; border-radius: 99px"><div style="width: 50%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 16px; background: #8C8698"></div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; background: #221F2B; border-radius: 16px; padding: 14px 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"></path></svg>
+        <span style="font-size: 24px; font-weight: 500; flex: 1">Souveraineté</span>
+        <span style="font-size: 20px; color: #8C8698; font-weight: 700" aria-label="stable">–</span>
+        <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; width: 52px; text-align: right">61</span>
+      </div>
+      <div style="position: relative; height: 10px; background: #34303F; border-radius: 99px"><div style="width: 61%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 16px; background: #8C8698"></div></div>
+    </div>
+
+    <button type="button" style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; background: transparent; color: #F6F1E7; border: 2px solid #3A3547; border-radius: 14px; padding: 14px 18px; font: 500 21px 'DM Sans', sans-serif; cursor: pointer">
+      Indicateurs chiffrés (42)
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg>
+    </button>
+  </aside>
+
+  <main style="display: flex; flex-direction: column; gap: 22px; min-width: 0">
+
+    <div style="display: flex; align-items: center; gap: 28px">
+      <div style="display: flex; align-items: baseline; gap: 22px">
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 96px; line-height: .9; letter-spacing: -3px; font-variant-numeric: tabular-nums">2035</span>
+        <span style="font-size: 26px; font-weight: 700; background: #2C2838; padding: 8px 18px; border-radius: 999px">Tour 9 / 30</span>
+      </div>
+      <div style="flex: 1"></div>
+      <div style="display: flex; align-items: center; gap: 18px; background: #221F2B; border-radius: 22px; padding: 14px 26px 14px 18px">
+        <svg width="80" height="80" viewBox="0 0 100 100" role="img" aria-label="1 minute 15 restantes">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#34303F" stroke-width="10"></circle>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#FFD23F" stroke-width="10" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="44" transform="rotate(-90 50 50)"></circle>
+        </svg>
+        <div style="display: flex; flex-direction: column">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 52px; line-height: 1; font-variant-numeric: tabular-nums; color: #FFD23F">1:15</span>
+          <span style="font-size: 19px; color: #B4ADBF">pour voter</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 20px; background: #221F2B; border-radius: 22px; padding: 14px 26px">
+        <div style="display: flex; flex-direction: column">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 52px; line-height: 1; font-variant-numeric: tabular-nums">4<span style="color: #8C8698"> / 12</span></span>
+          <span style="font-size: 19px; color: #B4ADBF">ont voté</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px" role="img" aria-label="4 votes sur 12">
+          <span style="width: 22px; height: 22px; border-radius: 50%; background: #FFD23F"></span><span style="width: 22px; height: 22px; border-radius: 50%; background: #FFD23F"></span><span style="width: 22px; height: 22px; border-radius: 50%; background: #FFD23F"></span><span style="width: 22px; height: 22px; border-radius: 50%; background: #FFD23F"></span><span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span><span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span>
+          <span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span><span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span><span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span><span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span><span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span><span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Événement positif -->
+    <div style="display: flex; align-items: center; gap: 22px; background: #2C2838; border-radius: 20px; padding: 18px 26px">
+      <div style="width: 64px; height: 64px; flex: none; border-radius: 16px; background: #2ED47A; display: flex; align-items: center; justify-content: center">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#15131C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"></path></svg>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0">
+        <span style="font-size: 17px; font-weight: 700; letter-spacing: 1.5px; color: #9BF0C2">ÉVÉNEMENT 2035 · BONNE NOUVELLE</span>
+        <span style="font-size: 30px; font-weight: 700">Petit baby-boom : les naissances repartent à la hausse</span>
+        <span style="font-size: 21px; color: #D9D2E3">Plus de futurs actifs… et plus de places en crèche à trouver.</span>
+      </div>
+      <div style="display: flex; gap: 10px; flex: none">
+        <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #2ED47A">▲▲ Démographie</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #FF9A3C">▼ Services publics</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="align-self: flex-start; font-size: 18px; font-weight: 700; letter-spacing: 1.2px; color: #15131C; background: #FFD23F; padding: 6px 14px; border-radius: 8px">CURSEUR · LA VALEUR MÉDIANE DES VOTES EST RETENUE</span>
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 54px; line-height: 1.05; letter-spacing: -1px">À quel âge part-on à la retraite ?</h1>
+    </div>
+
+    <!-- Échelle du curseur -->
+    <div style="background: #221F2B; border-radius: 24px; padding: 26px 56px 22px">
+      <div style="position: relative; height: 60px">
+        <div style="position: absolute; left: 0; right: 0; top: 24px; height: 12px; border-radius: 99px; background: #34303F"></div>
+        <div style="position: absolute; left: 0; top: 18px; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%; background: #F6F1E7"></div>
+        <div style="position: absolute; left: 25%; top: 21px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: #6B6479"></div>
+        <div style="position: absolute; left: 50%; top: 18px; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%; background: #F6F1E7"></div>
+        <div style="position: absolute; left: 75%; top: 21px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: #6B6479"></div>
+        <div style="position: absolute; left: 100%; top: 18px; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%; background: #F6F1E7"></div>
+      </div>
+      <div style="position: relative; height: 56px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-variant-numeric: tabular-nums">
+        <span style="position: absolute; left: 0; transform: translateX(-50%); font-size: 46px">62</span>
+        <span style="position: absolute; left: 25%; transform: translateX(-50%); font-size: 34px; color: #8C8698; top: 8px">63</span>
+        <span style="position: absolute; left: 50%; transform: translateX(-50%); font-size: 46px">64</span>
+        <span style="position: absolute; left: 75%; transform: translateX(-50%); font-size: 34px; color: #8C8698; top: 8px">65</span>
+        <span style="position: absolute; left: 100%; transform: translateX(-50%); font-size: 46px">66</span>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 20px; color: #B4ADBF; margin-top: 6px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+        Les positions de chacun restent secrètes : la médiane est révélée à la clôture
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; flex: 1; min-height: 0">
+
+      <div style="display: flex; flex-direction: column; gap: 12px; background: #221F2B; border: 2px solid #3A3547; border-radius: 24px; padding: 22px 26px">
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px; line-height: 1">62 ans</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; letter-spacing: 1.2px; color: #B4ADBF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg>EFFET SUR PLUSIEURS ANNÉES</span>
+        <p style="margin: 0; font-size: 21px; line-height: 1.35; color: #D9D2E3">Plus de retraités à financer, moins de cotisants : la facture grimpe, la tension sociale baisse.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto">
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #FF9A3C">▼ Finances</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #A6E36B">▲ Paix sociale</span>        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; background: #221F2B; border: 2px solid #3A3547; border-radius: 24px; padding: 22px 26px">
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px; line-height: 1">64 ans</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; letter-spacing: 1.2px; color: #B4ADBF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg>EFFET SUR PLUSIEURS ANNÉES</span>
+        <p style="margin: 0; font-size: 21px; line-height: 1.35; color: #D9D2E3">Plus de cotisants et moins de pensions versées : les comptes s'améliorent, mais la mesure est mal vécue au début.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto">
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #A6E36B">▲ Finances</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #FF9A3C">▼ Paix sociale</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #A6E36B">▲ Économie</span>        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; background: #221F2B; border: 2px solid #3A3547; border-radius: 24px; padding: 22px 26px">
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px; line-height: 1">66 ans</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; letter-spacing: 1.2px; color: #B4ADBF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg>EFFET SUR PLUSIEURS ANNÉES</span>
+        <p style="margin: 0; font-size: 21px; line-height: 1.35; color: #D9D2E3">Effet très fort sur les comptes, mais touche surtout les carrières longues et les métiers pénibles.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto">
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #2ED47A">▲▲ Finances</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #FF4D5E">▼▼ Paix sociale</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 19px; color: #15131C; background: #FF9A3C">▼ Cohésion</span>        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1920,"height":1080}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

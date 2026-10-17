@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Faillite ! · Style et composants</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#15131C}
+a{color:#FFD23F}a:hover{color:#FFE27A}
+</style>
+</helmet>
+<div style="width: 1920px; height: 1500px; box-sizing: border-box; padding: 56px 64px; background: #15131C; color: #F6F1E7; font-family: 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 36px">
+
+  <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 64px; letter-spacing: -2px">Faillite<span style="color: #FFD23F"> !</span> <span style="font-weight: 500; color: #B4ADBF; font-size: 40px; letter-spacing: 0">· style et composants</span></h1>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr) minmax(0, 5fr); gap: 28px">
+    <!-- Palette -->
+    <section style="display: flex; flex-direction: column; gap: 16px; background: #221F2B; border-radius: 24px; padding: 28px">
+      <h2 style="margin: 0; font-size: 26px">Palette neutre</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; font-size: 16px">
+        <div style="display: flex; flex-direction: column; gap: 6px"><span style="height: 70px; border-radius: 14px; background: #15131C; border: 2px solid #3A3547"></span><b>Encre</b><span style="color: #B4ADBF">#15131C · fond</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px"><span style="height: 70px; border-radius: 14px; background: #2C2838"></span><b>Surface</b><span style="color: #B4ADBF">#221F2B / #2C2838</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px"><span style="height: 70px; border-radius: 14px; background: #F6F1E7"></span><b>Craie</b><span style="color: #B4ADBF">#F6F1E7 · texte</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px"><span style="height: 70px; border-radius: 14px; background: #FFD23F"></span><b>Moutarde</b><span style="color: #B4ADBF">#FFD23F · jeu</span></div>
+      </div>
+      <p style="margin: 0; font-size: 17px; line-height: 1.4; color: #D9D2E3">Fond sombre pour la soirée et le contraste sur télé. Une seule couleur d'action (moutarde) pour l'année, le minuteur, les votes et les boutons. Aucun bleu-blanc-rouge.</p>
+    </section>
+
+    <!-- Impacts -->
+    <section style="display: flex; flex-direction: column; gap: 14px; background: #221F2B; border-radius: 24px; padding: 28px">
+      <h2 style="margin: 0; font-size: 26px">Code des impacts</h2>
+      <div style="display: flex; align-items: center; gap: 14px; font-size: 18px"><span style="width: 108px; padding: 6px 0; text-align: center; border-radius: 999px; font-weight: 700; color: #15131C; background: #FF4D5E">▼▼</span>Négatif fort · #FF4D5E</div>
+      <div style="display: flex; align-items: center; gap: 14px; font-size: 18px"><span style="width: 108px; padding: 6px 0; text-align: center; border-radius: 999px; font-weight: 700; color: #15131C; background: #FF9A3C">▼</span>Négatif faible · #FF9A3C</div>
+      <div style="display: flex; align-items: center; gap: 14px; font-size: 18px"><span style="width: 108px; padding: 6px 0; text-align: center; border-radius: 999px; font-weight: 700; color: #15131C; background: #8C8698">–</span>Pas d'effet · #8C8698</div>
+      <div style="display: flex; align-items: center; gap: 14px; font-size: 18px"><span style="width: 108px; padding: 6px 0; text-align: center; border-radius: 999px; font-weight: 700; color: #15131C; background: #A6E36B">▲</span>Positif faible · #A6E36B</div>
+      <div style="display: flex; align-items: center; gap: 14px; font-size: 18px"><span style="width: 108px; padding: 6px 0; text-align: center; border-radius: 999px; font-weight: 700; color: #15131C; background: #2ED47A">▲▲</span>Très positif · #2ED47A</div>
+      <p style="margin: 0; font-size: 16px; color: #B4ADBF">Toujours flèche + couleur : lisible pour les daltoniens.</p>
+    </section>
+
+    <!-- Typo -->
+    <section style="display: flex; flex-direction: column; gap: 14px; background: #221F2B; border-radius: 24px; padding: 28px">
+      <h2 style="margin: 0; font-size: 26px">Typographies</h2>
+      <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 84px; line-height: .9; letter-spacing: -3px">2034</span>
+      <span style="font-size: 18px; color: #D9D2E3"><b style="color: #F6F1E7">Bricolage Grotesque</b> 700–800 · titres, année, chiffres-clés. Joueuse sans être enfantine.</span>
+      <span style="font-size: 26px; font-weight: 500">Une aide réservée aux ménages modestes.</span>
+      <span style="font-size: 18px; color: #D9D2E3"><b style="color: #F6F1E7">DM Sans</b> 400–700 · textes, options, interface. Très lisible de loin.</span>
+      <span style="font-size: 16px; color: #B4ADBF">Télé : texte courant ≥ 21 px · Téléphone : ≥ 14 px</span>
+    </section>
+  </div>
+
+  <!-- Icônes -->
+  <section style="display: flex; flex-direction: column; gap: 18px; background: #221F2B; border-radius: 24px; padding: 28px">
+    <h2 style="margin: 0; font-size: 26px">Icônes des 8 jauges <span style="font-weight: 500; font-size: 18px; color: #B4ADBF">· trait 2 px, coins arrondis</span></h2>
+    <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 16px">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: #2C2838; border-radius: 18px; padding: 20px 8px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg><span style="font-size: 19px; font-weight: 700">Économie</span><span style="font-size: 15px; color: #B4ADBF">courbe montante</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: #2C2838; border-radius: 18px; padding: 20px 8px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg><span style="font-size: 19px; font-weight: 700">Finances</span><span style="font-size: 15px; color: #B4ADBF">pile de pièces</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: #2C2838; border-radius: 18px; padding: 20px 8px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 14.5c1 1.3 2.4 2 4 2s3-.7 4-2"></path><line x1="9" y1="9.5" x2="9" y2="10"></line><line x1="15" y1="9.5" x2="15" y2="10"></line></svg><span style="font-size: 19px; font-weight: 700">Paix sociale</span><span style="font-size: 15px; color: #B4ADBF">humeur du pays</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: #2C2838; border-radius: 18px; padding: 20px 8px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 15-14-1 10-6 15-14 15"></path><path d="M5 19c3-4 6-7 10-9"></path></svg><span style="font-size: 19px; font-weight: 700">Écologie</span><span style="font-size: 15px; color: #B4ADBF">feuille</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: #2C2838; border-radius: 18px; padding: 20px 8px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5L12 4l9 5.5"></path><line x1="4" y1="20" x2="20" y2="20"></line><line x1="6" y1="11" x2="6" y2="17"></line><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line><line x1="18" y1="11" x2="18" y2="17"></line></svg><span style="font-size: 19px; font-weight: 700">Services publics</span><span style="font-size: 15px; color: #B4ADBF">bâtiment public</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: #2C2838; border-radius: 18px; padding: 20px 8px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg><span style="font-size: 19px; font-weight: 700">Cohésion</span><span style="font-size: 15px; color: #B4ADBF">cœur, solidarité</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: #2C2838; border-radius: 18px; padding: 20px 8px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="6" r="2.5"></circle><path d="M4 21v-6a4 4 0 0 1 8 0v6"></path><circle cx="17" cy="10" r="2"></circle><path d="M14 21v-4a3 3 0 0 1 6 0v4"></path></svg><span style="font-size: 19px; font-weight: 700">Démographie</span><span style="font-size: 15px; color: #B4ADBF">adulte et enfant</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: #2C2838; border-radius: 18px; padding: 20px 8px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#F6F1E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"></path></svg><span style="font-size: 19px; font-weight: 700">Souveraineté</span><span style="font-size: 15px; color: #B4ADBF">bouclier</span></div>
+    </div>
+  </section>
+
+  <!-- Composants -->
+  <section style="display: flex; flex-direction: column; gap: 18px; flex: 1">
+    <h2 style="margin: 0; font-size: 26px">Composants réutilisables</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; flex: 1">
+
+      <div style="display: flex; flex-direction: column; gap: 12px; background: #221F2B; border-radius: 22px; padding: 22px">
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 1.5px; color: #B4ADBF">JAUGE · NORMALE / ALERTE</span>
+        <div style="display: flex; flex-direction: column; gap: 8px; background: #2C2838; border-radius: 14px; padding: 12px 14px">
+          <div style="display: flex; align-items: center; gap: 10px"><span style="font-size: 20px; flex: 1">Cohésion</span><span style="color: #A6E36B; font-weight: 700">▲</span><span style="font-size: 28px; font-weight: 700">52</span></div>
+          <div style="position: relative; height: 9px; background: #3A3547; border-radius: 99px"><div style="width: 52%; height: 100%; background: #F6F1E7; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 15px; background: #8C8698"></div></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; background: #3A1D27; border: 2px solid #FF4D5E; border-radius: 14px; padding: 10px 12px">
+          <div style="display: flex; align-items: center; gap: 10px"><span style="font-size: 20px; font-weight: 700; flex: 1">Écologie</span><span style="color: #FF4D5E; font-weight: 700">▼▼</span><span style="font-size: 28px; font-weight: 700; color: #FF4D5E">31</span></div>
+          <div style="position: relative; height: 9px; background: #4A2833; border-radius: 99px"><div style="width: 31%; height: 100%; background: #FF4D5E; border-radius: 99px"></div><div style="position: absolute; left: 35%; top: -3px; width: 2px; height: 15px; background: #F6F1E7"></div></div>
+        </div>
+        <span style="font-size: 15px; color: #B4ADBF">Repère vertical = seuil d'alerte (35). En alerte : cadre rouge + pulsation douce.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; background: #221F2B; border-radius: 22px; padding: 22px">
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 1.5px; color: #B4ADBF">PASTILLES ET MENTION DE DURÉE</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <span style="padding: 6px 12px; border-radius: 999px; font-weight: 700; font-size: 18px; color: #15131C; background: #FF4D5E">▼▼ Finances</span>
+          <span style="padding: 6px 12px; border-radius: 999px; font-weight: 700; font-size: 18px; color: #15131C; background: #2ED47A">▲▲ Écologie</span>
+          <span style="padding: 6px 12px; border-radius: 999px; font-weight: 700; font-size: 18px; color: #15131C; background: #A6E36B">▲ Cohésion</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 16px; font-weight: 700; letter-spacing: 1.2px; color: #B4ADBF">EFFET SUR 1 AN</span>
+          <span style="font-size: 16px; font-weight: 700; letter-spacing: 1.2px; color: #B4ADBF">EFFET SUR PLUSIEURS ANNÉES</span>
+        </div>
+        <span style="font-size: 15px; color: #B4ADBF">La durée s'écrit en texte sous le titre de l'option, pas dans une bulle : les bulles sont réservées aux impacts.</span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 1.5px; color: #B4ADBF; margin-top: 8px">TYPE DE CARTE</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <span style="font-size: 14px; font-weight: 700; color: #15131C; background: #F6F1E7; padding: 4px 10px; border-radius: 6px">CHOIX UNIQUE</span>
+          <span style="font-size: 14px; font-weight: 700; color: #15131C; background: #F6F1E7; padding: 4px 10px; border-radius: 6px">CUMULABLE · 2 RETENUES</span>
+          <span style="font-size: 14px; font-weight: 700; color: #15131C; background: #FFD23F; padding: 4px 10px; border-radius: 6px">CURSEUR</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; background: #221F2B; border-radius: 22px; padding: 22px">
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 1.5px; color: #B4ADBF">MINUTEUR · COMPTEUR DE VOTES</span>
+        <div style="display: flex; align-items: center; gap: 14px">
+          <svg width="72" height="72" viewBox="0 0 100 100" role="img" aria-label="42 secondes restantes"><circle cx="50" cy="50" r="42" fill="none" stroke="#34303F" stroke-width="10"></circle><circle cx="50" cy="50" r="42" fill="none" stroke="#FFD23F" stroke-width="10" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="79" transform="rotate(-90 50 50)"></circle></svg>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 46px; color: #FFD23F">0:42</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 46px">9<span style="color: #8C8698">/12</span></span>
+          <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px" aria-hidden="true">
+            <span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span><span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span><span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span><span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span><span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span><span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span>
+            <span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span><span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span><span style="width: 18px; height: 18px; border-radius: 50%; background: #FFD23F"></span><span style="width: 18px; height: 18px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span><span style="width: 18px; height: 18px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span><span style="width: 18px; height: 18px; border-radius: 50%; border: 3px solid #4A4458; box-sizing: border-box"></span>
+          </div>
+        </div>
+        <span style="font-size: 15px; color: #B4ADBF">Sous 10 s, l'anneau passe en orange et bat la mesure. Le compteur ne montre jamais qui a voté quoi.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; background: #221F2B; border-radius: 22px; padding: 22px">
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 1.5px; color: #B4ADBF">BANDEAU D'ÉVÉNEMENT</span>
+        <div style="display: flex; align-items: center; gap: 12px; background: #2C2838; border-radius: 14px; padding: 12px">
+          <span style="width: 40px; height: 40px; flex: none; border-radius: 10px; background: #FF4D5E"></span>
+          <span style="font-size: 17px; font-weight: 700">Négatif : pastille rouge</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; background: #2C2838; border-radius: 14px; padding: 12px">
+          <span style="width: 40px; height: 40px; flex: none; border-radius: 10px; background: #2ED47A"></span>
+          <span style="font-size: 17px; font-weight: 700">Positif : pastille verte</span>
+        </div>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 1.5px; color: #B4ADBF; margin-top: 6px">CURSEUR · QR CODE</span>
+        <div style="position: relative; height: 24px; margin: 0 10px"><div style="position: absolute; left: 0; right: 0; top: 8px; height: 8px; border-radius: 99px; background: #34303F"></div><div style="position: absolute; left: 50%; top: 0; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%; background: #FFD23F"></div></div>
+        <span style="font-size: 15px; color: #B4ADBF">QR code noir sur fond craie, toujours ≥ 300 px sur l'écran d'accueil, avec le code de salle en clair à côté.</span>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1920,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

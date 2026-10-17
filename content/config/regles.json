@@ -1,0 +1,20 @@
+{
+  "_doc": "Règles générales du jeu. Voir README, section « Règles ».",
+  "anneeDepart": 2027,
+  "toursPossibles": [30, 20],
+  "seuilAlerte": 35,
+  "dureeVoteSecondes": 60,
+  "maxJoueurs": 30,
+  "probaEvenement": 1,
+  "evenements": {
+    "delaiAvantRepetition": 8,
+    "maxOccurrences": 2,
+    "delaiEntreAlertesMemeJauge": 3
+  },
+  "impacts": {
+    "horizon": 6,
+    "seuilNotable": 0.3,
+    "seuilFort": 2
+  },
+  "estompeDureeParDefaut": 4
+}

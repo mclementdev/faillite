@@ -1,0 +1,454 @@
+[
+  {
+    "id": "retraites-age",
+    "theme": "retraites",
+    "type": "curseur",
+    "titre": "À quel âge part-on à la retraite ?",
+    "titreCourt": "Retraite",
+    "contexte": "Il y a 1,8 cotisant pour un retraité, contre 2,1 en 2002. Reculer l'âge légal fait cotiser plus longtemps ; l'avancer soulage ceux qui ont commencé tôt.",
+    "curseur": {
+      "min": 62,
+      "max": 66,
+      "pas": 1,
+      "unite": "ans"
+    },
+    "options": [
+      {
+        "id": "62",
+        "valeur": 62,
+        "titre": "62 ans",
+        "explication": "Plus de retraités à financer, moins de cotisants : la facture grimpe, la tension sociale baisse.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.4,
+            "type": "durable",
+            "hypothese": "Revenir de 64 à 62 ans coûterait de l'ordre de 0,4 point de PIB par an une fois la mesure montée en charge (ordre de grandeur des chiffrages du COR)."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": -0.6,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les 62-63 ans sortent plus tôt du marché du travail : le taux d'emploi des 15-64 ans recule de quelques dixièmes."
+          },
+          {
+            "cible": "ratio_cotisants_retraites",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Deux générations de plus à la retraite réduisent le ratio cotisants/retraités d'environ 0,05."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": -30,
+            "type": "estompe",
+            "hypothese": "Mesure attendue par une partie des salariés : la conflictualité baisse quelques années."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 2,
+            "type": "estompe",
+            "hypothese": "Gain de confiance temporaire lié à une revendication satisfaite."
+          }
+        ]
+      },
+      {
+        "id": "64",
+        "valeur": 64,
+        "titre": "64 ans",
+        "explication": "Plus de cotisants et moins de pensions versées : les comptes s'améliorent, mais la mesure est mal vécue au début.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Maintenir 64 ans et achever la montée en charge rapporte environ 0,2 point de PIB par rapport à la trajectoire actuelle."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": 0.4,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les seniors restent plus longtemps en emploi : +0,4 point de taux d'emploi environ."
+          },
+          {
+            "cible": "ratio_cotisants_retraites",
+            "valeur": 0.02,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Effet modeste mais durable sur le ratio démographique."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 40,
+            "type": "estompe",
+            "hypothese": "Une réforme contestée entraîne des mouvements sociaux qui s'atténuent."
+          }
+        ]
+      },
+      {
+        "id": "66",
+        "valeur": 66,
+        "titre": "66 ans",
+        "explication": "Effet très fort sur les comptes, mais touche surtout les carrières longues et les métiers pénibles.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.7,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Deux ans de plus que 64 ans : environ 0,7 point de PIB d'économies à terme."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Les 64-65 ans restent en emploi : +1,5 point de taux d'emploi environ."
+          },
+          {
+            "cible": "ratio_cotisants_retraites",
+            "valeur": 0.08,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Deux générations de cotisants en plus."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 160,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Mouvement social de grande ampleur, comparable à 2023 (171 jours pour 1 000 salariés)."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -4,
+            "type": "estompe",
+            "duree": 6,
+            "hypothese": "Réforme imposée contre une large opposition : défiance durable."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Les seniors ni en emploi ni en retraite (chômage, invalidité) sont plus nombreux."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "L'âge de départ joue sur deux leviers à la fois : la durée de cotisation et la durée de versement des pensions. Les effets sur les comptes arrivent progressivement, génération après génération."
+  },
+  {
+    "id": "retraites-financement",
+    "theme": "retraites",
+    "type": "unique",
+    "titre": "Le régime des retraites reste dans le rouge : qui paie ?",
+    "contexte": "Le COR prévoit un déficit durable du système de retraite. Il faut trouver l'équivalent de 0,5 % du PIB par an.",
+    "options": [
+      {
+        "id": "cotisations",
+        "titre": "Hausse des cotisations",
+        "explication": "Salariés et employeurs cotisent un peu plus : les pensions sont préservées, mais le travail coûte plus cher.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.5,
+            "type": "durable",
+            "hypothese": "Une hausse d'environ 1,5 point de cotisation rapporte de l'ordre de 0,5 point de PIB."
+          },
+          {
+            "cible": "prelevements_obligatoires",
+            "valeur": 0.5,
+            "type": "durable",
+            "hypothese": "Les cotisations sont des prélèvements obligatoires."
+          },
+          {
+            "cible": "chomage",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Le coût du travail augmente : léger effet négatif sur l'emploi."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.1,
+            "type": "immediat",
+            "hypothese": "Baisse du revenu disponible et des marges la première année."
+          }
+        ]
+      },
+      {
+        "id": "sous-indexation",
+        "titre": "Pensions moins revalorisées",
+        "explication": "Les pensions augmentent moins vite que les prix pendant quelques années : économie rapide, pouvoir d'achat des retraités en baisse.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.5,
+            "type": "durable",
+            "hypothese": "Une sous-indexation d'environ 1 point par an pendant 3 ans représente à terme près de 0,5 point de PIB."
+          },
+          {
+            "cible": "depenses_publiques",
+            "valeur": -0.5,
+            "type": "durable",
+            "hypothese": "Les pensions représentent près de 14 % du PIB : la dépense baisse d'autant."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les petites retraites passent plus souvent sous le seuil de pauvreté."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -2,
+            "type": "estompe",
+            "hypothese": "Les retraités votent beaucoup et vivent mal la mesure."
+          }
+        ]
+      },
+      {
+        "id": "capitalisation",
+        "titre": "Une part de capitalisation",
+        "explication": "Une petite partie des cotisations alimente un fonds placé en bourse : rendement espéré à long terme, mais il faut payer deux fois pendant la transition.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "durable",
+            "duree": 10,
+            "hypothese": "Pendant la transition, les cotisations détournées vers le fonds manquent au régime par répartition."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": 0.4,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "L'épargne retraite investie en actions finance davantage les entreprises."
+          },
+          {
+            "cible": "part_dette_non_residents",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Une partie du fonds achète de la dette française : moins de dépendance aux investisseurs étrangers."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 10,
+            "hypothese": "Après la transition, le fonds verse une partie des pensions et soulage le régime."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": 0.03,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Les revenus d'un fonds de capitalisation profitent davantage aux hauts salaires, qui cotisent le plus."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Mesure perçue comme un pas vers la privatisation des retraites par une partie de l'opinion."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Pour équilibrer un régime par répartition, il n'existe que trois leviers : les recettes (cotisations), le niveau des pensions et l'âge de départ."
+  },
+  {
+    "id": "retraites-penibilite",
+    "theme": "retraites",
+    "type": "unique",
+    "titre": "Métiers pénibles : faut-il partir plus tôt ?",
+    "contexte": "Un ouvrier vit en moyenne plusieurs années de moins en bonne santé qu'un cadre. Les dispositifs de départ anticipé sont peu utilisés.",
+    "options": [
+      {
+        "id": "depart-anticipe",
+        "titre": "Départ anticipé élargi",
+        "explication": "Port de charges, nuit, gestes répétitifs : ces métiers ouvrent droit à partir deux ans plus tôt. Coûteux, mais très attendu.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Quelques dizaines de milliers de départs anticipés par an : coût de l'ordre de 0,15 point de PIB."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Moins d'usure en fin de carrière pour les métiers concernés."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": -15,
+            "type": "estompe",
+            "hypothese": "Apaisement temporaire du dialogue social."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Sorties plus précoces de l'emploi."
+          }
+        ]
+      },
+      {
+        "id": "reconversion",
+        "titre": "Reconversion à mi-carrière",
+        "explication": "Un compte formation renforcé pour changer de métier vers 45 ans : moins cher, effets lents.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Coût de formation limité, de l'ordre de 1 Md€ par an."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": 0.75,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Les seniors reconvertis restent plus longtemps en emploi."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.25,
+            "type": "differe",
+            "delai": 6,
+            "hypothese": "Effet sanitaire plus lent et plus diffus."
+          }
+        ]
+      },
+      {
+        "id": "prevention-entreprise",
+        "titre": "Obligation de prévention",
+        "explication": "Les entreprises doivent réduire l'exposition aux risques, sous peine de pénalités : rien ne coûte à l'État, mais les employeurs grincent.",
+        "effets": [
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.2,
+            "type": "durable",
+            "duree": 4,
+            "hypothese": "Les mises aux normes mobilisent une partie des budgets d'investissement."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.15,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "La prévention réduit les accidents et maladies professionnelles."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": -5,
+            "type": "estompe",
+            "hypothese": "Mesure plutôt consensuelle chez les salariés."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "L'écart d'espérance de vie sans incapacité entre catégories sociales est un argument central des débats sur la pénibilité."
+  },
+  {
+    "id": "retraites-retour",
+    "theme": "retraites",
+    "type": "unique",
+    "titre": "La réforme de l'âge fait toujours débat : on y revient ?",
+    "contexte": "Quelques années après votre décision sur l'âge de départ, une pétition massive demande de rouvrir le dossier.",
+    "conditions": [
+      {
+        "carteJouee": "retraites-age"
+      },
+      {
+        "tourMin": 6
+      }
+    ],
+    "options": [
+      {
+        "id": "annuler",
+        "titre": "Annuler la réforme",
+        "explication": "On revient sur la décision : l'apaisement est immédiat, mais les effets financiers de la réforme disparaissent.",
+        "annule": [
+          "retraites-age"
+        ],
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": 2,
+            "type": "estompe",
+            "hypothese": "Geste d'écoute qui rassure une partie de l'opinion."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": 0.15,
+            "type": "estompe",
+            "hypothese": "Les marchés y voient un signal de moindre sérieux budgétaire."
+          }
+        ]
+      },
+      {
+        "id": "maintenir",
+        "titre": "Maintenir le cap",
+        "explication": "On ne touche à rien : la stabilité rassure les créanciers, la frustration demeure.",
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.8,
+            "type": "estompe",
+            "hypothese": "Une demande forte restée sans réponse."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": -0.05,
+            "type": "estompe",
+            "hypothese": "Stabilité des règles appréciée par les investisseurs."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "Les économies de la réforme sont confirmées et rassurent sur la trajectoire."
+          }
+        ]
+      },
+      {
+        "id": "referendum",
+        "titre": "Un référendum",
+        "explication": "On demande aux Français de trancher : la participation grimpe, la campagne divise.",
+        "effets": [
+          {
+            "cible": "participation_elections",
+            "valeur": 3,
+            "type": "estompe",
+            "duree": 6,
+            "hypothese": "Un vote direct sur un sujet très suivi mobilise."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.5,
+            "type": "estompe",
+            "hypothese": "Le recours au peuple renforce la légitimité de la décision, quelle qu'elle soit."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 15,
+            "type": "immediat",
+            "hypothese": "Une campagne référendaire polarise le débat."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Une réforme annulée fait perdre ses effets futurs, mais pas ses coûts passés : c'est l'un des arbitrages entre stabilité des règles et écoute."
+  }
+]

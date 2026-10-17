@@ -1,0 +1,570 @@
+[
+  {
+    "id": "dette-economies",
+    "theme": "dette_depenses",
+    "type": "unique",
+    "titre": "Il faut trouver 20 milliards d'économies",
+    "contexte": "Le déficit dépasse les règles européennes. Bruxelles demande un effort sur plusieurs années.",
+    "options": [
+      {
+        "id": "rabot",
+        "titre": "Coup de rabot partout",
+        "explication": "Chaque ministère baisse son budget de 3 % : rapide et équitable en apparence, mais tous les services publics s'usent un peu.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.6,
+            "type": "durable",
+            "hypothese": "20 Md€ de dépenses en moins, soit environ 0,6 point de PIB."
+          },
+          {
+            "cible": "depenses_publiques",
+            "valeur": -0.7,
+            "type": "durable",
+            "hypothese": "Baisse directe de la dépense."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.25,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Multiplicateur budgétaire de l'ordre de 0,5 à court terme."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de moyens pour les hôpitaux et centres de santé de proximité."
+          },
+          {
+            "cible": "delai_jugement",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Justice déjà sous-dotée : les délais s'allongent."
+          }
+        ]
+      },
+      {
+        "id": "niches",
+        "titre": "Supprimer des niches fiscales",
+        "explication": "On rabote les réductions d'impôt les moins efficaces : pas de coupe dans les services, mais chaque niche a ses défenseurs.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.5,
+            "type": "durable",
+            "hypothese": "Les niches coûtent plus de 80 Md€ par an ; en supprimer un quart rapporte environ 0,5 point de PIB."
+          },
+          {
+            "cible": "prelevements_obligatoires",
+            "valeur": 0.5,
+            "type": "durable",
+            "hypothese": "Supprimer une niche augmente les prélèvements effectifs."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Une partie des niches soutient l'investissement (crédit d'impôt recherche, etc.)."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 10,
+            "type": "immediat",
+            "hypothese": "Mobilisation des professions concernées."
+          }
+        ]
+      },
+      {
+        "id": "point-indice",
+        "titre": "Geler les salaires des fonctionnaires",
+        "explication": "Le point d'indice ne bouge plus pendant trois ans : économie rapide, mais les métiers publics attirent moins.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.4,
+            "type": "durable",
+            "hypothese": "La masse salariale publique dépasse 300 Md€ ; un gel de 3 ans économise environ 0,4 point de PIB."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 50,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Grèves dans la fonction publique."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Difficultés de recrutement des enseignants, effet lent sur le niveau."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Moins d'attractivité de l'hôpital public."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Réduire le déficit freine l'activité à court terme : c'est l'effet multiplicateur. Le rythme et la nature des économies comptent autant que leur montant."
+  },
+  {
+    "id": "dette-regle-or",
+    "theme": "dette_depenses",
+    "type": "unique",
+    "titre": "Graver une règle d'or dans la Constitution ?",
+    "contexte": "Plusieurs pays limitent leur déficit par la loi. La France n'a jamais voté un budget à l'équilibre depuis 1974.",
+    "options": [
+      {
+        "id": "regle-stricte",
+        "titre": "Déficit limité à 3 % en 5 ans",
+        "explication": "La règle s'impose aux gouvernements futurs : crédibilité forte, marges de manœuvre réduites en cas de crise.",
+        "effets": [
+          {
+            "cible": "taux_10_ans",
+            "valeur": -0.4,
+            "type": "durable",
+            "hypothese": "Les investisseurs exigent une prime de risque plus faible d'un emprunteur discipliné."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.8,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "La règle force une consolidation progressive."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 2,
+            "duree": 3,
+            "hypothese": "La consolidation freine l'activité quelques années."
+          },
+          {
+            "cible": "depenses_publiques",
+            "valeur": -0.8,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "L'ajustement passe surtout par la dépense."
+          }
+        ]
+      },
+      {
+        "id": "regle-investissement",
+        "titre": "Règle d'or hors investissement",
+        "explication": "Le fonctionnement doit être équilibré, mais on peut emprunter pour investir (écoles, rail, énergie).",
+        "effets": [
+          {
+            "cible": "taux_10_ans",
+            "valeur": -0.15,
+            "type": "durable",
+            "hypothese": "Crédibilité partielle."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effort concentré sur les dépenses courantes."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "L'investissement public entraîne une partie de l'investissement privé."
+          }
+        ]
+      },
+      {
+        "id": "pas-de-regle",
+        "titre": "Pas de règle, du cas par cas",
+        "explication": "On garde la liberté de dépenser en cas de besoin : souplesse, mais les marchés surveillent.",
+        "effets": [
+          {
+            "cible": "taux_10_ans",
+            "valeur": 0.15,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Les agences de notation regrettent l'absence d'ancrage budgétaire."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.5,
+            "type": "estompe",
+            "hypothese": "Moins d'austérité annoncée."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.1,
+            "type": "estompe",
+            "hypothese": "Pas d'austérité imposée : l'investissement public peut soutenir l'activité."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 1,
+            "duree": 4,
+            "hypothese": "L'investissement public n'est pas sacrifié et soutient la demande adressée aux entreprises."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Une règle budgétaire rassure les prêteurs et fait baisser les taux d'intérêt, mais elle peut empêcher de soutenir l'économie pendant une crise."
+  },
+  {
+    "id": "dette-note",
+    "theme": "dette_depenses",
+    "type": "unique",
+    "titre": "Les agences de notation menacent : que fait-on ?",
+    "contexte": "Les finances publiques se dégradent. Une nouvelle baisse de la note ferait grimper le coût de la dette.",
+    "conditions": [
+      {
+        "jauge": "finances",
+        "inferieurA": 42
+      }
+    ],
+    "options": [
+      {
+        "id": "plan-choc",
+        "titre": "Plan de redressement immédiat",
+        "explication": "Gel des dépenses et hausse temporaire d'impôts : les marchés sont rassurés, le pays souffre.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -1.2,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Effort d'environ 1 point de PIB la première année, réduit ensuite."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "La note est maintenue, la prime de risque baisse."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Choc d'austérité sur la demande."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 80,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Mouvements sociaux contre l'austérité."
+          }
+        ]
+      },
+      {
+        "id": "trajectoire-lente",
+        "titre": "Trajectoire lente mais crédible",
+        "explication": "Un plan sur dix ans, voté et suivi par une autorité indépendante : moins douloureux, moins convaincant.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.6,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effort progressif de 0,3 point par an jusqu'à 0,6."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": 0.2,
+            "type": "estompe",
+            "hypothese": "La note baisse d'un cran malgré tout."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 20,
+            "type": "estompe",
+            "hypothese": "Un plan d'économies sur dix ans suscite aussi des oppositions."
+          }
+        ]
+      },
+      {
+        "id": "ignorer",
+        "titre": "Ne pas céder aux marchés",
+        "explication": "On refuse l'austérité : la croissance est préservée, mais la note est dégradée et l'emprunt coûte plus cher.",
+        "effets": [
+          {
+            "cible": "taux_10_ans",
+            "valeur": 0.7,
+            "type": "estompe",
+            "duree": 6,
+            "hypothese": "Une dégradation de deux crans renchérit l'emprunt de plusieurs dixièmes de point."
+          },
+          {
+            "cible": "part_dette_non_residents",
+            "valeur": -3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Une partie des investisseurs étrangers vend ses titres."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Discours de souveraineté apprécié par une partie de l'opinion."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le coût de la dette dépend de la confiance des prêteurs. Une hausse de 1 point des taux finit par coûter environ 1 point de PIB par an une fois toute la dette renouvelée."
+  },
+  {
+    "id": "dette-collectivites",
+    "theme": "dette_depenses",
+    "type": "unique",
+    "titre": "Mairies et départements : plus ou moins de moyens ?",
+    "contexte": "Les collectivités assurent 70 % de l'investissement public. Leurs dotations sont versées par l'État.",
+    "options": [
+      {
+        "id": "baisse-dotations",
+        "titre": "Baisser les dotations",
+        "explication": "L'État verse moins : son déficit baisse, mais les collectivités repoussent travaux et services.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.2,
+            "type": "durable",
+            "hypothese": "Les collectivités réduisent surtout l'investissement, donc l'effet net sur le déficit est partiel."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.1,
+            "type": "estompe",
+            "hypothese": "Moins de commandes au BTP local."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de services de proximité (piscines, bibliothèques, transports)."
+          }
+        ]
+      },
+      {
+        "id": "decentraliser",
+        "titre": "Décentraliser avec un impôt local",
+        "explication": "Les régions lèvent leur propre impôt et gèrent plus de compétences : plus d'autonomie, plus d'inégalités entre territoires.",
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les élus locaux bénéficient d'une confiance plus élevée que l'État."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": 0.03,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Les territoires riches financent mieux leurs services."
+          },
+          {
+            "cible": "prelevements_obligatoires",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les nouveaux impôts locaux ne sont qu'en partie compensés."
+          }
+        ]
+      },
+      {
+        "id": "fonds-investissement",
+        "titre": "Fonds pour l'investissement local",
+        "explication": "L'État finance écoles, réseaux d'eau et rénovation : bon pour le BTP et l'écologie, coûteux.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "durable",
+            "duree": 6,
+            "hypothese": "Fonds de 6 Md€ par an pendant 6 ans."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.15,
+            "type": "estompe",
+            "hypothese": "Effet d'entraînement sur le BTP."
+          },
+          {
+            "cible": "conso_energie_finale",
+            "valeur": -10,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Rénovation des bâtiments publics."
+          },
+          {
+            "cible": "eleves_par_classe",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Construction de classes dans les zones en croissance."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les collectivités ne peuvent emprunter que pour investir. Réduire leurs moyens freine d'abord l'investissement public."
+  },
+  {
+    "id": "dette-effort",
+    "theme": "dette_depenses",
+    "type": "curseur",
+    "titre": "Combien d'économies par an sur la dépense publique ?",
+    "titreCourt": "Économies",
+    "contexte": "Pour ramener le déficit sous 3 % du PIB, on évoque 30 à 40 milliards d'économies par an. Chaque milliard économisé est un service, une aide ou un poste en moins.",
+    "curseur": {
+      "min": 0,
+      "max": 40,
+      "pas": 10,
+      "unite": "Md€/an"
+    },
+    "options": [
+      {
+        "id": "0",
+        "valeur": 0,
+        "titre": "Aucune économie",
+        "explication": "On laisse filer : pas de coupes, mais la dette continue de grimper et les marchés s'inquiètent.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "Dérive naturelle de la dépense sans effort de maîtrise."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": 0.25,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Les investisseurs exigent une prime de risque."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": -10,
+            "type": "estompe",
+            "hypothese": "Pas de mesure impopulaire."
+          }
+        ]
+      },
+      {
+        "id": "20",
+        "valeur": 20,
+        "titre": "20 milliards",
+        "explication": "Un effort réel mais étalé : gel de certaines dépenses, quelques services réduits.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.7,
+            "type": "durable",
+            "hypothese": "20 Md€ représentent environ 0,7 point de PIB."
+          },
+          {
+            "cible": "depenses_publiques",
+            "valeur": -0.7,
+            "type": "durable",
+            "hypothese": "Baisse du poids de la dépense dans le PIB."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.2,
+            "type": "estompe",
+            "hypothese": "Effet récessif de la baisse de la demande publique."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de moyens pour les services de santé."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 30,
+            "type": "estompe",
+            "hypothese": "Mobilisations contre les coupes."
+          }
+        ]
+      },
+      {
+        "id": "40",
+        "valeur": 40,
+        "titre": "40 milliards",
+        "explication": "Cure d'austérité : le déficit fond vite, mais écoles, hôpitaux et aides sociales sont touchés.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -1.3,
+            "type": "durable",
+            "hypothese": "Effort d'environ 1,4 point de PIB, en partie annulé par la baisse de l'activité."
+          },
+          {
+            "cible": "depenses_publiques",
+            "valeur": -1.4,
+            "type": "durable",
+            "hypothese": "Forte baisse de la dépense publique."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Contraction de la demande publique."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 1.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Fermetures de services hospitaliers."
+          },
+          {
+            "cible": "eleves_par_classe",
+            "valeur": 0.6,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Suppressions de postes d'enseignants."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Aides sociales moins revalorisées."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": -0.3,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Crédibilité budgétaire renforcée."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 90,
+            "type": "estompe",
+            "hypothese": "Forte mobilisation sociale."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Réduire le déficit vite rassure les prêteurs mais freine l'activité : c'est le débat sur le « multiplicateur budgétaire », qui dépend de la conjoncture."
+  }
+]

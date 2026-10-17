@@ -1,0 +1,438 @@
+[
+  {
+    "id": "emploi-assurance-chomage",
+    "theme": "emploi_travail",
+    "type": "unique",
+    "titre": "Assurance chômage : durcir ou protéger ?",
+    "contexte": "Le chômage remonte au-dessus de 8 %. Certains secteurs peinent pourtant à recruter.",
+    "options": [
+      {
+        "id": "durcir",
+        "titre": "Durée d'indemnisation réduite",
+        "explication": "On indemnise moins longtemps quand le chômage est bas : incite à reprendre un emploi, fragilise les chômeurs de longue durée.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.25,
+            "type": "durable",
+            "hypothese": "Économies de quelques milliards pour l'Unédic."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.25,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Retour à l'emploi un peu plus rapide, effet discuté."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Plus de chômeurs en fin de droits."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 15,
+            "type": "estompe",
+            "hypothese": "Opposition syndicale."
+          }
+        ]
+      },
+      {
+        "id": "formation",
+        "titre": "Formation massive des chômeurs",
+        "explication": "Chaque chômeur se voit proposer une formation dans un métier qui recrute : coûteux, efficace si les formations sont bonnes.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "duree": 6,
+            "hypothese": "Environ 3 Md€ par an."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Meilleur appariement entre offres et demandes d'emploi."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Main-d'œuvre mieux qualifiée."
+          }
+        ]
+      },
+      {
+        "id": "garantie-emploi",
+        "titre": "Territoires zéro chômeur",
+        "explication": "Des emplois utiles financés pour les chômeurs de longue durée : dignité retrouvée, coût par emploi élevé.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "Environ 2 Md€ par an pour 100 000 emplois, net des allocations économisées."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.15,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "100 000 chômeurs de longue durée embauchés."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Passage des minima sociaux à un salaire."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.02,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "L'emploi améliore fortement le bien-être des chômeurs de longue durée."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Une indemnisation plus courte accélère un peu le retour à l'emploi, mais augmente la pauvreté des personnes qui ne retrouvent pas."
+  },
+  {
+    "id": "emploi-temps-travail",
+    "theme": "emploi_travail",
+    "type": "unique",
+    "titre": "Travailler plus, ou autrement ?",
+    "contexte": "Les Français travaillent moins d'heures sur une vie que la moyenne européenne, mais avec une productivité horaire élevée.",
+    "options": [
+      {
+        "id": "semaine-4-jours",
+        "titre": "Semaine de 4 jours encouragée",
+        "explication": "Les entreprises qui passent à 4 jours sans baisse de salaire sont aidées : bien-être en hausse, coûts pour les employeurs.",
+        "effets": [
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.08,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Les expérimentations montrent un bien-être nettement amélioré."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Productivité horaire en hausse quand la durée baisse."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.1,
+            "type": "estompe",
+            "duree": 4,
+            "hypothese": "Moins d'heures travaillées au total dans certains secteurs."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "duree": 5,
+            "hypothese": "Aides à la transition."
+          }
+        ]
+      },
+      {
+        "id": "heures-sup",
+        "titre": "Heures supplémentaires défiscalisées",
+        "explication": "Les heures sup ne sont plus imposées : plus de revenus pour ceux qui travaillent plus, moins de recettes.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Coût d'environ 3 Md€ par an."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.05,
+            "type": "estompe",
+            "hypothese": "Léger surcroît d'heures travaillées."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.5,
+            "type": "estompe",
+            "hypothese": "Mesure de pouvoir d'achat populaire."
+          }
+        ]
+      },
+      {
+        "id": "jour-ferie",
+        "titre": "Supprimer un jour férié",
+        "explication": "Une journée de travail en plus pour financer la dépendance : quelques milliards de recettes, une mesure impopulaire.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "La journée de solidarité rapporte environ 3 Md€."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.05,
+            "type": "immediat",
+            "hypothese": "Une journée de production en plus."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 20,
+            "type": "immediat",
+            "hypothese": "Contestation de la mesure."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Mesure perçue comme injuste."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La richesse produite dépend des heures travaillées et de la productivité de chaque heure : on peut jouer sur l'une ou l'autre."
+  },
+  {
+    "id": "emploi-smic",
+    "theme": "emploi_travail",
+    "type": "unique",
+    "titre": "Faut-il augmenter le SMIC ?",
+    "contexte": "Plus de 3 millions de salariés sont payés au SMIC. Beaucoup y restent longtemps.",
+    "options": [
+      {
+        "id": "hausse",
+        "titre": "SMIC +10 %",
+        "explication": "Coup de pouce important : pouvoir d'achat en hausse pour les bas salaires, risque pour l'emploi peu qualifié.",
+        "effets": [
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.4,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Hausse du revenu des travailleurs pauvres."
+          },
+          {
+            "cible": "chomage",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Effets négatifs sur l'emploi peu qualifié, ampleur débattue."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.4,
+            "type": "immediat",
+            "hypothese": "Répercussion partielle sur les prix des services."
+          },
+          {
+            "cible": "ecart_salaire_hf",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Les femmes sont surreprésentées parmi les salariés au SMIC."
+          }
+        ]
+      },
+      {
+        "id": "prime-activite",
+        "titre": "Hausse de la prime d'activité",
+        "explication": "L'État complète les bas salaires : pas de coût pour les entreprises, mais pour le budget.",
+        "effets": [
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Prime ciblée sur les ménages modestes en emploi."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Environ 4 Md€ par an."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Incitation à reprendre un emploi."
+          }
+        ]
+      },
+      {
+        "id": "branches",
+        "titre": "Obliger les branches à négocier",
+        "explication": "Les grilles salariales sous le SMIC doivent être relevées : progression des salaires au-dessus du minimum.",
+        "effets": [
+          {
+            "cible": "rapport_interdecile",
+            "valeur": -0.02,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de tassement des salaires autour du SMIC."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": -10,
+            "type": "estompe",
+            "hypothese": "Dialogue social relancé."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.1,
+            "type": "immediat",
+            "hypothese": "Légère hausse des coûts salariaux."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Un salaire minimum plus élevé réduit la pauvreté des travailleurs, mais peut freiner l'embauche des moins qualifiés si la hausse est trop forte."
+  },
+  {
+    "id": "emploi-duree-legale",
+    "theme": "emploi_travail",
+    "type": "curseur",
+    "titre": "Quelle durée légale du travail par semaine ?",
+    "titreCourt": "Durée du travail",
+    "contexte": "La durée légale est de 35 heures depuis 2000 : au-delà, les heures sont majorées. Les salariés à temps complet travaillent en moyenne autour de 39 heures.",
+    "curseur": {
+      "min": 32,
+      "max": 38,
+      "pas": 1,
+      "unite": "heures"
+    },
+    "options": [
+      {
+        "id": "32",
+        "valeur": 32,
+        "titre": "32 heures",
+        "explication": "Semaine de quatre jours généralisée : plus de temps libre, des entreprises qui doivent s'organiser.",
+        "effets": [
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Meilleur équilibre vie professionnelle et personnelle."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Productivité par heure plus élevée sur des semaines plus courtes."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.25,
+            "type": "estompe",
+            "duree": 4,
+            "hypothese": "Moins d'heures travaillées au total."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Partage du travail et embauches compensatrices."
+          },
+          {
+            "cible": "ecart_salaire_hf",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Moins de temps partiels subis."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Aides aux entreprises pour la transition."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.2,
+            "type": "estompe",
+            "hypothese": "Coût horaire du travail en hausse."
+          }
+        ]
+      },
+      {
+        "id": "35",
+        "valeur": 35,
+        "titre": "35 heures",
+        "explication": "On garde les règles actuelles : heures supplémentaires majorées au-delà de 35 heures.",
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0,
+            "type": "immediat",
+            "hypothese": "Statu quo : pas de changement de la durée légale."
+          }
+        ]
+      },
+      {
+        "id": "38",
+        "valeur": 38,
+        "titre": "38 heures",
+        "explication": "On travaille plus sans majoration : plus de production, des salariés et syndicats en colère.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.25,
+            "type": "estompe",
+            "duree": 4,
+            "hypothese": "Hausse du volume d'heures travaillées."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.15,
+            "type": "durable",
+            "hypothese": "Recettes fiscales et sociales supplémentaires."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": -0.08,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Moins de temps libre, heures sup moins payées."
+          },
+          {
+            "cible": "chomage",
+            "valeur": 0.15,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les entreprises embauchent moins pour le même travail."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 80,
+            "type": "estompe",
+            "hypothese": "Forte mobilisation syndicale."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1.5,
+            "type": "estompe",
+            "hypothese": "Mesure vécue comme un recul social."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les Français à temps complet travaillent un peu moins d'heures par an que la moyenne européenne, mais leur productivité horaire est parmi les plus élevées."
+  }
+]

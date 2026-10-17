@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Faillite ! · Voter</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#15131C}
+a{color:#FFD23F}a:hover{color:#FFE27A}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 20px 16px 20px; background: #15131C; color: #F6F1E7; font-family: 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 12px">
+
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <span style="font-size: 16px; font-weight: 700; color: #D9D2E3"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px; color: #F6F1E7">2034</span> · Tour 8/30</span>
+    <span style="display: inline-flex; align-items: center; gap: 8px; background: #FFD23F; color: #15131C; border-radius: 999px; padding: 6px 14px 6px 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; font-variant-numeric: tabular-nums">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><polyline points="12 9 12 13 14.5 14.5"></polyline><line x1="10" y1="2.5" x2="14" y2="2.5"></line></svg>
+      0:42
+    </span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <span style="align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #15131C; background: #F6F1E7; padding: 3px 8px; border-radius: 6px">CHOIX UNIQUE</span>
+    <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 25px; line-height: 1.1">Les prix de l'énergie flambent : que fait-on ?</h1>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px; flex: 1; min-height: 0">
+    <sc-for list="{{options}}" as="o" hint-placeholder-count="3">
+      <button type="button" onClick="{{o.pick}}" aria-pressed="{{o.pressed}}" style="{{o.cardStyle}}">
+        <span style="display: flex; align-items: center; gap: 10px">
+          <span style="{{o.letterStyle}}">{{o.letter}}</span>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.1; flex: 1">{{o.title}}</span>
+          <sc-if value="{{o.selected}}" hint-placeholder-val="{{ false }}">
+            <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#FFD23F"></circle><polyline points="7 12 10.5 15.5 17 9" fill="none" stroke="#15131C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+          </sc-if>
+        </span>
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #B4ADBF">{{o.durLabel}}</span>
+        <span style="font-size: 14px; line-height: 1.35; color: #D9D2E3">{{o.text}}</span>
+        <span style="display: flex; flex-wrap: wrap; gap: 6px">
+          <sc-for list="{{o.pills}}" as="p" hint-placeholder-count="3">
+            <span style="{{p.style}}">{{p.label}}</span>
+          </sc-for>        </span>
+      </button>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{notVoted}}" hint-placeholder-val="{{ true }}">
+    <button type="button" onClick="{{vote}}" style="height: 62px; flex: none; background: #FFD23F; color: #15131C; border: 0; border-radius: 18px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px; cursor: pointer">Voter {{choiceLabel}}</button>
+  </sc-if>
+  <sc-if value="{{voted}}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 8px; flex: none">
+      <div role="status" style="display: flex; align-items: center; gap: 10px; background: #1E3A2B; border: 2px solid #2ED47A; border-radius: 16px; padding: 10px 14px">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2ED47A"></circle><polyline points="7 12 10.5 15.5 17 9" fill="none" stroke="#15131C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+        <span style="font-size: 15px; line-height: 1.3"><b>Vote enregistré.</b> Tu peux encore changer d'avis jusqu'à la fin du minuteur.</span>
+      </div>
+      <button type="button" onClick="{{change}}" style="height: 52px; background: transparent; color: #F6F1E7; border: 2px solid #4A4458; border-radius: 16px; font: 700 18px 'DM Sans', sans-serif; cursor: pointer">Changer mon vote</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { selected: 'B', voted: false };
+  }
+  renderVals() {
+    const sel = this.state.selected;
+    const voted = this.state.voted;
+    const C = { n2: '#FF4D5E', n1: '#FF9A3C', p1: '#A6E36B', p2: '#2ED47A' };
+    const pill = (lvl, label) => ({
+      label: label,
+      style: 'display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-weight: 700; font-size: 13px; color: #15131C; background: ' + C[lvl]
+    });
+    const data = [
+      { id: 'A', title: 'Bouclier tarifaire', text: "L'État plafonne les prix pour tous : ménages protégés, budget plombé.", pills: [pill('n2', '▼▼ Finances'), pill('p1', '▲ Paix sociale'), pill('p1', '▲ Cohésion')], dur: '1 an', long: false },
+      { id: 'B', title: 'Chèque énergie ciblé', text: 'Aide réservée aux ménages modestes : moins cher, mais les classes moyennes paient plein pot.', pills: [pill('n1', '▼ Finances'), pill('p2', '▲▲ Cohésion'), pill('n1', '▼ Paix sociale')], dur: '1 an', long: false },
+      { id: 'C', title: 'Plan de rénovation des logements', text: 'Rien ne change cet hiver, mais la consommation baisse durablement.', pills: [pill('n1', '▼ Finances'), pill('p2', '▲▲ Écologie'), pill('p1', '▲ Économie'), pill('n1', '▼ Paix sociale')], dur: 'Plusieurs années', long: true }
+    ];
+    const options = data.map((o) => {
+      const s = sel === o.id;
+      const dim = voted && !s;
+      return Object.assign({}, o, {
+        selected: s,
+        durLabel: 'EFFET SUR ' + o.dur.toUpperCase(),
+        pressed: s ? 'true' : 'false',
+        pick: () => this.setState({ selected: o.id, voted: false }),
+        cardStyle: 'display: flex; flex-direction: column; gap: 8px; text-align: left; width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 18px; cursor: pointer; color: #F6F1E7; font-family: inherit; min-height: 44px; '
+          + (s ? 'background: #2C2838; border: 3px solid #FFD23F;' : 'background: #221F2B; border: 3px solid #3A3547;')
+          + (dim ? ' opacity: .45;' : ''),
+        letterStyle: 'width: 30px; height: 30px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: \'Bricolage Grotesque\', sans-serif; font-weight: 800; font-size: 16px; '
+          + (s ? 'background: #FFD23F; color: #15131C;' : 'border: 2px solid #FFD23F; color: #FFD23F; box-sizing: border-box;'),
+        durStyle: 'display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-weight: 700; font-size: 13px; '
+          + 'border: 2px solid #4A4458; color: #F6F1E7;'
+      });
+    });
+    const chosen = data.find((o) => o.id === sel);
+    return {
+      options: options,
+      voted: voted,
+      notVoted: !voted,
+      choiceLabel: chosen ? chosen.id + ' · ' + chosen.title : '',
+      vote: () => this.setState({ voted: true }),
+      change: () => this.setState({ voted: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+[
+  {
+    "id": "educ-classes",
+    "theme": "education",
+    "type": "unique",
+    "titre": "Moins d'élèves par classe ?",
+    "contexte": "Le niveau en mathématiques a reculé de plus de 20 points dans PISA entre 2018 et 2022. Les naissances baissent, ce qui libère des postes.",
+    "options": [
+      {
+        "id": "dedoubler",
+        "titre": "Classes de 15 en primaire",
+        "explication": "On garde les postes libérés par la baisse des naissances pour réduire les classes : effet prouvé sur les plus fragiles, lent.",
+        "effets": [
+          {
+            "cible": "eleves_par_classe",
+            "valeur": -3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Les postes non supprimés réduisent mécaniquement la taille des classes."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "Coût des postes maintenus, environ 3 Md€."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": 3,
+            "type": "differe",
+            "delai": 6,
+            "hypothese": "Effets mesurés des dédoublements en éducation prioritaire, généralisés."
+          }
+        ]
+      },
+      {
+        "id": "supprimer-postes",
+        "titre": "Supprimer les postes en trop",
+        "explication": "Moins d'élèves, donc moins de professeurs : économie importante, classes inchangées.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.25,
+            "type": "durable",
+            "hypothese": "Non-remplacement de départs à la retraite."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 20,
+            "type": "estompe",
+            "hypothese": "Mobilisation des enseignants et des parents."
+          },
+          {
+            "cible": "eleves_par_classe",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Fermetures de classes en zone rurale."
+          }
+        ]
+      },
+      {
+        "id": "groupes-niveau",
+        "titre": "Groupes de niveau au collège",
+        "explication": "Français et maths en petits groupes selon le niveau : les élèves en difficulté sont mieux suivis, au risque de les enfermer.",
+        "effets": [
+          {
+            "cible": "pisa_maths",
+            "valeur": 2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Effet moyen modeste, résultats discutés par la recherche."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": 0.01,
+            "type": "differe",
+            "delai": 10,
+            "hypothese": "Risque d'accentuer les écarts scolaires puis sociaux."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Heures d'enseignement supplémentaires."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "L'éducation est l'investissement dont les effets sont les plus différés : un élève de CP entre sur le marché du travail 15 à 20 ans plus tard."
+  },
+  {
+    "id": "educ-professeurs",
+    "theme": "education",
+    "type": "unique",
+    "titre": "On ne trouve plus de professeurs",
+    "contexte": "Chaque année, des postes ne sont pas pourvus aux concours, surtout en mathématiques et en lettres.",
+    "options": [
+      {
+        "id": "salaires",
+        "titre": "Augmenter les salaires de 20 %",
+        "explication": "Le métier redevient attractif : plus de candidats, de meilleurs recrutements, une facture élevée.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.35,
+            "type": "durable",
+            "hypothese": "La masse salariale enseignante dépasse 50 Md€ : +20 % coûte environ 10 Md€."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": 3,
+            "type": "differe",
+            "delai": 6,
+            "hypothese": "Meilleure sélection et stabilité des équipes."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": -10,
+            "type": "estompe",
+            "hypothese": "Apaisement dans l'Éducation nationale."
+          }
+        ]
+      },
+      {
+        "id": "contractuels",
+        "titre": "Recruter des contractuels",
+        "explication": "On embauche sans concours : les classes ont un professeur, mais moins formé.",
+        "effets": [
+          {
+            "cible": "pisa_maths",
+            "valeur": -1.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Enseignants moins formés et plus souvent remplacés."
+          },
+          {
+            "cible": "eleves_par_classe",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Postes pourvus plus rapidement."
+          }
+        ]
+      },
+      {
+        "id": "formation-recrutement",
+        "titre": "Recruter dès la licence, payé pendant les études",
+        "explication": "Les futurs professeurs sont rémunérés pendant leur formation en échange de quelques années de service.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.07,
+            "type": "durable",
+            "hypothese": "Environ 2 Md€ par an."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": 2,
+            "type": "differe",
+            "delai": 7,
+            "hypothese": "Viviers de candidats élargis, effet lent."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Débouché rémunéré pour des étudiants."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La qualité des enseignants est l'un des facteurs les plus déterminants des résultats des élèves selon les études internationales."
+  },
+  {
+    "id": "educ-apprentissage",
+    "theme": "education",
+    "type": "unique",
+    "titre": "Apprentissage : continuer à payer les entreprises ?",
+    "contexte": "Les aides à l'embauche d'apprentis ont fait exploser leur nombre, au prix de plusieurs milliards par an.",
+    "options": [
+      {
+        "id": "maintenir",
+        "titre": "Maintenir les aides",
+        "explication": "Près d'un million d'apprentis : l'insertion des jeunes s'améliore, mais l'aide profite aussi à des diplômés qui auraient trouvé seuls.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Poursuite d'une dépense d'environ 5 Md€ par an au-delà de la trajectoire prévue."
+          },
+          {
+            "cible": "chomage_jeunes",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Les apprentis sont comptés en emploi."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.4,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Moins de jeunes sans emploi ni formation."
+          }
+        ]
+      },
+      {
+        "id": "cibler",
+        "titre": "Réserver aux moins diplômés",
+        "explication": "Les aides ne vont plus qu'aux CAP et bacs pros : moins coûteux et mieux ciblé, moins d'apprentis dans le supérieur.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.12,
+            "type": "durable",
+            "hypothese": "Économie sur les apprentis du supérieur."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.75,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effet concentré sur les jeunes les plus éloignés de l'emploi."
+          },
+          {
+            "cible": "chomage_jeunes",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Moins d'apprentis au total."
+          }
+        ]
+      },
+      {
+        "id": "lycee-pro",
+        "titre": "Réinvestir dans les lycées professionnels",
+        "explication": "Des ateliers modernes et des stages mieux encadrés : moins rapide que l'apprentissage, mais pour tous les élèves.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "duree": 8,
+            "hypothese": "Plan d'investissement de 1,5 Md€ par an."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Moins de décrochage en voie professionnelle."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Main-d'œuvre qualifiée pour l'industrie."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Une aide généreuse crée des effets d'aubaine : une partie des bénéficiaires aurait fait le même choix sans elle."
+  },
+  {
+    "id": "educ-budget",
+    "theme": "education",
+    "type": "curseur",
+    "titre": "De combien augmenter le budget de l'Éducation nationale ?",
+    "titreCourt": "Budget éducation",
+    "contexte": "L'Éducation nationale est le premier budget de l'État, plus de 60 milliards d'euros. Les élèves français ont reculé dans les classements internationaux en mathématiques.",
+    "curseur": {
+      "min": 0,
+      "max": 20,
+      "pas": 5,
+      "unite": "%"
+    },
+    "options": [
+      {
+        "id": "0",
+        "valeur": 0,
+        "titre": "0 %",
+        "explication": "Budget gelé : l'inflation rogne les moyens, les difficultés de recrutement persistent.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "Économie en euros constants."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": -1.5,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Moyens réels en baisse."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 10,
+            "type": "estompe",
+            "hypothese": "Mécontentement des personnels."
+          }
+        ]
+      },
+      {
+        "id": "10",
+        "valeur": 10,
+        "titre": "+10 %",
+        "explication": "Six milliards de plus : salaires revalorisés et classes un peu allégées.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.25,
+            "type": "durable",
+            "hypothese": "Environ 6 Md€ supplémentaires par an."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": 2.5,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Recrutement facilité et effectifs réduits."
+          },
+          {
+            "cible": "eleves_par_classe",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Créations de postes."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Moins de décrochage scolaire."
+          }
+        ]
+      },
+      {
+        "id": "20",
+        "valeur": 20,
+        "titre": "+20 %",
+        "explication": "Effort historique : on recrute massivement, mais le résultat ne se verra que dans dix ans.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.5,
+            "type": "durable",
+            "hypothese": "Environ 12 Md€ supplémentaires par an."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": 4.5,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Effet cumulé sur une génération d'élèves."
+          },
+          {
+            "cible": "eleves_par_classe",
+            "valeur": -1.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Créations massives de postes."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Décrochage scolaire en recul."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 10,
+            "hypothese": "Main-d'œuvre mieux formée à long terme."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La France dépense pour l'école un peu plus que la moyenne de l'OCDE, mais moins pour le primaire et davantage pour le lycée. Les effets d'un effort éducatif se mesurent sur des décennies."
+  }
+]

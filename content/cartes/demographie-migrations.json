@@ -1,0 +1,583 @@
+[
+  {
+    "id": "demo-famille",
+    "theme": "demographie_migrations",
+    "type": "unique",
+    "titre": "Les naissances sont au plus bas depuis 1918",
+    "contexte": "En 2025, la France a enregistré plus de décès que de naissances, une première depuis 1945. Fécondité : 1,56 enfant par femme.",
+    "options": [
+      {
+        "id": "allocations",
+        "titre": "Allocations familiales renforcées",
+        "explication": "Aides plus fortes dès le premier enfant : effet modeste sur les naissances selon les études, effet net sur la pauvreté des familles.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "Environ 6 Md€ par an."
+          },
+          {
+            "cible": "fecondite",
+            "valeur": 0.04,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les études estiment un effet faible des aides financières sur la fécondité."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Les familles nombreuses et monoparentales sont plus souvent pauvres."
+          }
+        ]
+      },
+      {
+        "id": "creches",
+        "titre": "Une place en crèche garantie",
+        "explication": "Un droit opposable à la garde d'enfant : les parents, surtout les mères, peuvent continuer à travailler.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "200 000 places supplémentaires et leur fonctionnement."
+          },
+          {
+            "cible": "fecondite",
+            "valeur": 0.05,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "La conciliation travail-famille est un déterminant majeur de la fécondité en Europe."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": 0.4,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Hausse de l'activité des mères de jeunes enfants."
+          },
+          {
+            "cible": "ecart_salaire_hf",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Moins d'interruptions de carrière pour les femmes."
+          }
+        ]
+      },
+      {
+        "id": "conge-parental",
+        "titre": "Congé parental court et bien payé",
+        "explication": "Six mois par parent, payés à 70 % du salaire : les pères s'impliquent davantage, coût élevé.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.12,
+            "type": "durable",
+            "hypothese": "Environ 3,5 Md€ par an."
+          },
+          {
+            "cible": "fecondite",
+            "valeur": 0.03,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effet observé dans les pays nordiques."
+          },
+          {
+            "cible": "ecart_salaire_hf",
+            "valeur": -0.8,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Partage plus égal des interruptions de carrière."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La natalité réagit lentement et faiblement aux politiques publiques ; ses effets sur les cotisants n'apparaissent que vingt ans plus tard."
+  },
+  {
+    "id": "demo-immigration-travail",
+    "theme": "demographie_migrations",
+    "type": "curseur",
+    "titre": "Combien de visas de travail par an pour les métiers en tension ?",
+    "titreCourt": "Visas de travail",
+    "contexte": "Bâtiment, restauration, soins, agriculture : des centaines de milliers de postes ne trouvent pas preneur. Environ 50 000 titres de séjour pour le travail sont délivrés chaque année.",
+    "curseur": {
+      "min": 0,
+      "max": 150,
+      "pas": 25,
+      "unite": "milliers"
+    },
+    "options": [
+      {
+        "id": "0",
+        "valeur": 0,
+        "titre": "Aucun nouveau visa",
+        "explication": "On mise uniquement sur les chômeurs et la formation : plus de pression pour recruter localement, des secteurs en pénurie.",
+        "effets": [
+          {
+            "cible": "solde_migratoire",
+            "valeur": -40,
+            "type": "durable",
+            "hypothese": "Arrêt de l'essentiel de l'immigration de travail extra-européenne."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 1,
+            "duree": 5,
+            "hypothese": "Pénuries de main-d'œuvre dans certains secteurs."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les employeurs recrutent davantage parmi les demandeurs d'emploi."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de médecins et soignants diplômés à l'étranger."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de demande de logement dans les zones tendues."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Mesure approuvée par une partie de l'opinion."
+          }
+        ]
+      },
+      {
+        "id": "50",
+        "valeur": 50,
+        "titre": "50 000 par an",
+        "explication": "On reste au niveau actuel : statu quo sur l'immigration de travail.",
+        "effets": [
+          {
+            "cible": "solde_migratoire",
+            "valeur": 0,
+            "type": "durable",
+            "hypothese": "Niveau actuel maintenu."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0,
+            "type": "immediat",
+            "hypothese": "Pas de changement perceptible."
+          }
+        ]
+      },
+      {
+        "id": "150",
+        "valeur": 150,
+        "titre": "150 000 par an",
+        "explication": "On recrute massivement à l'étranger pour les métiers en tension : plus de cotisants, mais intégration et logement à organiser.",
+        "effets": [
+          {
+            "cible": "solde_migratoire",
+            "valeur": 80,
+            "type": "durable",
+            "hypothese": "Arrivées supplémentaires de travailleurs et d'une partie de leurs familles."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.15,
+            "type": "differe",
+            "delai": 1,
+            "duree": 8,
+            "hypothese": "Postes vacants pourvus dans les secteurs en tension."
+          },
+          {
+            "cible": "ratio_cotisants_retraites",
+            "valeur": 0.03,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Arrivées majoritairement en âge de travailler."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Demande de logement supplémentaire dans les zones tendues."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1.5,
+            "type": "estompe",
+            "hypothese": "Sujet clivant : une partie de l'opinion désapprouve fortement."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "L'immigration de travail modifie la pyramide des âges et le marché du travail ; ses effets sur les finances publiques dépendent du taux d'emploi des arrivants."
+  },
+  {
+    "id": "demo-asile",
+    "theme": "demographie_migrations",
+    "type": "unique",
+    "titre": "Demandes d'asile : comment les traiter ?",
+    "contexte": "La France reçoit environ 150 000 demandes d'asile par an. Les délais d'examen dépassent souvent un an.",
+    "options": [
+      {
+        "id": "accelerer",
+        "titre": "Décisions en 3 mois",
+        "explication": "Plus d'agents pour décider vite : ceux qui sont acceptés s'intègrent plus tôt, ceux qui sont déboutés doivent partir plus vite.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.02,
+            "type": "durable",
+            "hypothese": "Recrutements à l'OFPRA et à la CNDA."
+          },
+          {
+            "cible": "delai_jugement",
+            "valeur": -0.75,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Désengorgement des juridictions administratives."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": 0.25,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les réfugiés reconnus accèdent plus tôt au travail."
+          }
+        ]
+      },
+      {
+        "id": "travail-immediat",
+        "titre": "Droit de travailler dès la demande",
+        "explication": "Les demandeurs peuvent travailler pendant l'examen : moins d'aides versées, mais un signal d'attractivité discuté.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.02,
+            "type": "durable",
+            "hypothese": "Moins d'allocation pour demandeur d'asile versée."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": 0.375,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Des dizaines de milliers de personnes accèdent à l'emploi."
+          },
+          {
+            "cible": "solde_migratoire",
+            "valeur": 25.0,
+            "type": "durable",
+            "hypothese": "Effet d'attractivité possible, ampleur débattue."
+          }
+        ]
+      },
+      {
+        "id": "externaliser",
+        "titre": "Examen hors d'Europe",
+        "explication": "Les demandes sont examinées dans des pays partenaires : moins d'arrivées, des accords coûteux et des critiques sur les droits.",
+        "effets": [
+          {
+            "cible": "solde_migratoire",
+            "valeur": -50.0,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Baisse des arrivées spontanées."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Coût des accords avec les pays tiers."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1.25,
+            "type": "estompe",
+            "hypothese": "Mesure approuvée par une partie de l'opinion, contestée par une autre."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le droit d'asile est encadré par des conventions internationales : les marges nationales portent surtout sur les délais et les conditions d'accueil."
+  },
+  {
+    "id": "demo-regularisations",
+    "theme": "demographie_migrations",
+    "type": "unique",
+    "titre": "Travailleurs sans papiers : régulariser ?",
+    "contexte": "Plusieurs centaines de milliers de personnes travaillent sans titre de séjour, souvent dans le bâtiment, le nettoyage ou la restauration.",
+    "options": [
+      {
+        "id": "regulariser-travail",
+        "titre": "Régulariser ceux qui travaillent",
+        "explication": "Un titre de séjour pour ceux qui ont un emploi depuis un an : plus de cotisations, un signal politique contesté.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.03,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Cotisations et impôts sur des emplois aujourd'hui non déclarés."
+          },
+          {
+            "cible": "taux_emploi",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Emplois déclarés comptabilisés dans la statistique."
+          },
+          {
+            "cible": "solde_migratoire",
+            "valeur": 5,
+            "type": "durable",
+            "hypothese": "Possible effet d'appel, débattu."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Décision clivante."
+          }
+        ]
+      },
+      {
+        "id": "cas-par-cas",
+        "titre": "Au cas par cas, comme aujourd'hui",
+        "explication": "Les préfets décident dossier par dossier : peu de changement, des situations très variables selon les départements.",
+        "effets": [
+          {
+            "cible": "delai_jugement",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Contentieux administratifs persistants."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0,
+            "type": "immediat",
+            "hypothese": "Statu quo : aucun changement perceptible pour l'opinion."
+          }
+        ]
+      },
+      {
+        "id": "controles",
+        "titre": "Sanctionner les employeurs",
+        "explication": "Contrôles renforcés et amendes lourdes pour l'emploi illégal : moins de travail au noir, des pénuries dans certains secteurs.",
+        "effets": [
+          {
+            "cible": "solde_migratoire",
+            "valeur": -10,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "L'emploi illégal devient moins accessible."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 1,
+            "duree": 4,
+            "hypothese": "Pénuries dans le bâtiment et la restauration."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.02,
+            "type": "durable",
+            "hypothese": "Amendes et cotisations redressées."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les régularisations et les contrôles agissent sur la même réalité, le travail non déclaré, par deux bouts opposés."
+  },
+  {
+    "id": "demo-jeunes-diplomes",
+    "theme": "demographie_migrations",
+    "type": "unique",
+    "titre": "Les jeunes diplômés partent à l'étranger",
+    "contexte": "De plus en plus d'ingénieurs, chercheurs et médecins formés en France partent travailler à Londres, en Suisse ou aux États-Unis.",
+    "options": [
+      {
+        "id": "salaires-recherche",
+        "titre": "Doubler le salaire des jeunes chercheurs",
+        "explication": "Les postes de recherche deviennent compétitifs : on garde les talents, effet visible sur l'innovation à long terme.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Environ 1,5 Md€ par an."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 6,
+            "hypothese": "Effet de la recherche sur l'innovation et la productivité, très différé."
+          },
+          {
+            "cible": "solde_migratoire",
+            "valeur": 3,
+            "type": "durable",
+            "hypothese": "Moins de départs et quelques retours de chercheurs."
+          }
+        ]
+      },
+      {
+        "id": "exoneration",
+        "titre": "Moins d'impôts pour les jeunes actifs",
+        "explication": "Impôt sur le revenu réduit les 5 premières années de carrière : attractif, mais injuste pour les autres contribuables.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Environ 3 Md€ par an."
+          },
+          {
+            "cible": "solde_migratoire",
+            "valeur": 6,
+            "type": "durable",
+            "hypothese": "Moins de départs de jeunes diplômés."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.5,
+            "type": "estompe",
+            "hypothese": "Inégalité de traitement entre générations."
+          }
+        ]
+      },
+      {
+        "id": "engagement",
+        "titre": "Contrepartie aux études gratuites",
+        "explication": "Ceux qui partent dans les 5 ans remboursent une partie de leurs études : mesure de justice pour certains, repoussoir pour d'autres.",
+        "effets": [
+          {
+            "cible": "solde_migratoire",
+            "valeur": 5.0,
+            "type": "durable",
+            "hypothese": "Effet dissuasif sur les départs."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.01,
+            "type": "durable",
+            "hypothese": "Remboursements modestes."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": -1.25,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Moindre attractivité des filières scientifiques."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Former un ingénieur ou un médecin coûte cher à la collectivité : son départ est un investissement qui profite à un autre pays."
+  },
+  {
+    "id": "demo-grand-age",
+    "theme": "demographie_migrations",
+    "type": "unique",
+    "titre": "Grand âge : qui s'occupe de nos aînés ?",
+    "contexte": "Le nombre de personnes de plus de 85 ans va doubler d'ici 2050. Les Ehpad manquent de personnel.",
+    "options": [
+      {
+        "id": "domicile",
+        "titre": "Priorité au maintien à domicile",
+        "explication": "Aides à domicile mieux payées et logements adaptés : ce que souhaitent la plupart des personnes âgées.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Revalorisation des aides à domicile, environ 4 Md€."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Prévention de la perte d'autonomie à domicile."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Création d'emplois de services à la personne."
+          }
+        ]
+      },
+      {
+        "id": "assurance",
+        "titre": "Assurance dépendance obligatoire",
+        "explication": "Une cotisation dès 40 ans finance la dépendance : recettes nouvelles, prélèvement supplémentaire.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.2,
+            "type": "durable",
+            "hypothese": "Nouvelle cotisation affectée."
+          },
+          {
+            "cible": "prelevements_obligatoires",
+            "valeur": 0.3,
+            "type": "durable",
+            "hypothese": "Hausse des prélèvements."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Restes à charge réduits pour les familles modestes."
+          }
+        ]
+      },
+      {
+        "id": "ehpad",
+        "titre": "Un soignant par résident en Ehpad",
+        "explication": "Les Ehpad sont mieux dotés : qualité de vie en hausse, recrutement très difficile.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.25,
+            "type": "durable",
+            "hypothese": "Environ 7 Md€ par an à terme."
+          },
+          {
+            "cible": "depenses_sante",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Dépense de soins en établissement."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.03,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins d'inquiétude des familles."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le vieillissement est la tendance la plus prévisible de toutes : les personnes qui auront 85 ans en 2050 sont déjà nées."
+  }
+]

@@ -1,0 +1,395 @@
+[
+  {
+    "id": "sante-deserts",
+    "theme": "sante",
+    "type": "cumulable",
+    "titre": "Déserts médicaux : deux mesures pour attirer les médecins",
+    "contexte": "Plus d'un tiers des Français vit dans une zone où il est difficile de trouver un généraliste. Choisissez deux mesures.",
+    "options": [
+      {
+        "id": "regulation",
+        "titre": "Réguler l'installation",
+        "explication": "Un médecin ne peut s'installer en zone bien dotée que si un autre part : efficace sur la carte, les jeunes médecins protestent.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": -4,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Les nouvelles installations sont orientées vers les zones sous-dotées, effet progressif."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 15,
+            "type": "estompe",
+            "hypothese": "Grèves des internes et des médecins libéraux."
+          }
+        ]
+      },
+      {
+        "id": "etudes",
+        "titre": "Former plus de médecins",
+        "explication": "On double les places en faculté : la mesure la plus efficace à long terme… dans dix ans.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": -6,
+            "type": "differe",
+            "delai": 10,
+            "hypothese": "Il faut 9 à 11 ans pour former un médecin."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.08,
+            "type": "durable",
+            "hypothese": "Doubler les places en faculté et les terrains de stage coûte de l'ordre de 2 Md€ par an."
+          }
+        ]
+      },
+      {
+        "id": "centres-sante",
+        "titre": "Centres de santé salariés",
+        "explication": "Les collectivités embauchent des médecins salariés : beaucoup de jeunes médecins préfèrent ce mode d'exercice.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": -2.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Quelques centaines de centres créés en zones sous-dotées."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Salaires et locaux en partie financés par l'État."
+          }
+        ]
+      },
+      {
+        "id": "infirmiers",
+        "titre": "Plus de missions aux infirmiers et pharmaciens",
+        "explication": "Ils peuvent prescrire et vacciner pour les soins simples : rapide et peu coûteux, les médecins craignent une médecine à deux vitesses.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Une partie des consultations simples ne nécessite plus de médecin."
+          },
+          {
+            "cible": "depenses_sante",
+            "valeur": -0.05,
+            "type": "durable",
+            "hypothese": "Actes moins coûteux."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La pénurie de médecins vient en partie du numerus clausus des années 1990 : un effet différé de 30 ans."
+  },
+  {
+    "id": "sante-hopital",
+    "theme": "sante",
+    "type": "unique",
+    "titre": "L'hôpital public craque : que fait-on ?",
+    "contexte": "Lits fermés faute de personnel, urgences saturées l'été : soignants et patients tirent la sonnette d'alarme.",
+    "options": [
+      {
+        "id": "salaires",
+        "titre": "Revaloriser les soignants",
+        "explication": "Hausse de salaire de 10 % pour infirmiers et aides-soignants : on garde les équipes, la facture est lourde.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.25,
+            "type": "durable",
+            "hypothese": "Environ 7 Md€ par an, ordre de grandeur du Ségur de la santé."
+          },
+          {
+            "cible": "depenses_sante",
+            "valeur": 0.25,
+            "type": "durable",
+            "hypothese": "Hausse de la dépense hospitalière."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de départs, réouverture de lits et de services."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": -10,
+            "type": "estompe",
+            "hypothese": "Apaisement social à l'hôpital."
+          }
+        ]
+      },
+      {
+        "id": "reorganiser",
+        "titre": "Réorganiser sans plus d'argent",
+        "explication": "Regrouper les petits services, réduire les tâches administratives : pas de coût, mais des fermetures locales.",
+        "effets": [
+          {
+            "cible": "depenses_sante",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Gains d'efficacité modestes."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Fermetures de maternités et de services de proximité."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1.5,
+            "type": "estompe",
+            "hypothese": "Fermetures très mal vécues localement."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Regroupements et simplifications génèrent quelques économies."
+          }
+        ]
+      },
+      {
+        "id": "prive",
+        "titre": "S'appuyer sur les cliniques privées",
+        "explication": "Les cliniques prennent une partie des urgences et des opérations : la capacité augmente vite, avec plus de dépassements d'honoraires.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Capacité supplémentaire mobilisable rapidement."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": 0.02,
+            "type": "durable",
+            "hypothese": "Les restes à charge pèsent plus sur les ménages modestes."
+          },
+          {
+            "cible": "depenses_sante",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Coût par acte parfois plus élevé."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La santé est le premier poste où l'on voit l'effet du vieillissement : la demande de soins augmente chaque année."
+  },
+  {
+    "id": "sante-prevention",
+    "theme": "sante",
+    "type": "unique",
+    "titre": "Prévenir plutôt que guérir ?",
+    "contexte": "Tabac, alcool, sédentarité et alimentation sont responsables d'une grande partie des maladies chroniques.",
+    "options": [
+      {
+        "id": "taxes-sante",
+        "titre": "Taxes sur le sucre, l'alcool et le tabac",
+        "explication": "Ce qui rend malade coûte plus cher : des recettes et moins de maladies, mais des taxes qui pèsent sur les plus modestes.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "Quelques milliards de recettes supplémentaires."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.4,
+            "type": "differe",
+            "delai": 6,
+            "hypothese": "Baisse de la consommation de produits nocifs, effet lent."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.1,
+            "type": "immediat",
+            "hypothese": "Hausse ponctuelle de quelques prix."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Taxes plutôt régressives."
+          }
+        ]
+      },
+      {
+        "id": "sport-ecole",
+        "titre": "Une heure de sport par jour à l'école",
+        "explication": "Bouger tous les jours dès le plus jeune âge : bon pour la santé et la concentration, effet visible dans vingt ans.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Encadrement et équipements."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 12,
+            "hypothese": "Effet générationnel, très différé."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Effet positif modeste de l'activité physique sur l'attention."
+          }
+        ]
+      },
+      {
+        "id": "depistage",
+        "titre": "Bilans de santé gratuits",
+        "explication": "Un bilan complet à 25, 45 et 65 ans : on détecte tôt les maladies, mais il faut des médecins pour les faire.",
+        "effets": [
+          {
+            "cible": "depenses_sante",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Coût des bilans, compensé à long terme par moins de soins lourds."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Dépistage précoce des cancers et maladies cardiovasculaires."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Temps médical supplémentaire mobilisé."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La prévention coûte un peu tout de suite et rapporte beaucoup, mais très tard : un exemple d'effet différé difficile à défendre politiquement."
+  },
+  {
+    "id": "sante-ondam",
+    "theme": "sante",
+    "type": "curseur",
+    "titre": "De combien les dépenses d'assurance maladie peuvent-elles augmenter chaque année ?",
+    "titreCourt": "Dépenses de santé",
+    "contexte": "Les dépenses d'assurance maladie dépassent 250 milliards d'euros. Elles augmentent d'environ 3 % par an, tirées par le vieillissement et les maladies chroniques.",
+    "curseur": {
+      "min": 1.5,
+      "max": 4.5,
+      "pas": 0.5,
+      "unite": "% par an"
+    },
+    "options": [
+      {
+        "id": "1.5",
+        "valeur": 1.5,
+        "titre": "1,5 % par an",
+        "explication": "Serrage de vis : moins de dépenses, mais des hôpitaux sous tension et des soins reportés.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.4,
+            "type": "durable",
+            "hypothese": "Économie cumulée sur l'assurance maladie."
+          },
+          {
+            "cible": "depenses_sante",
+            "valeur": -0.3,
+            "type": "durable",
+            "hypothese": "Dépense de santé contenue."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins de moyens pour l'hôpital et la médecine de ville."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Soins reportés et dépistages réduits."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 30,
+            "type": "estompe",
+            "hypothese": "Mobilisation des soignants."
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "valeur": 3,
+        "titre": "3 % par an",
+        "explication": "On suit la tendance : le système tient, sans s'améliorer.",
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0,
+            "type": "immediat",
+            "hypothese": "Statu quo : progression conforme à la tendance."
+          }
+        ]
+      },
+      {
+        "id": "4.5",
+        "valeur": 4.5,
+        "titre": "4,5 % par an",
+        "explication": "On investit dans les soins : plus de soignants, mais la Sécurité sociale creuse son déficit.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.4,
+            "type": "durable",
+            "hypothese": "Dépense supplémentaire non financée."
+          },
+          {
+            "cible": "depenses_sante",
+            "valeur": 0.3,
+            "type": "durable",
+            "hypothese": "Hausse de la dépense de santé."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Recrutements et ouvertures de lits."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Meilleur accès aux soins."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Chaque année, le Parlement vote un objectif de dépenses d'assurance maladie (Ondam). Il est souvent dépassé : le vieillissement fait mécaniquement monter les besoins."
+  }
+]

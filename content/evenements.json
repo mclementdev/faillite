@@ -1,0 +1,699 @@
+[
+  {
+    "id": "canicule",
+    "titre": "Canicule record : l'été le plus chaud jamais mesuré",
+    "nature": "negatif",
+    "description": "Récoltes en baisse, hôpitaux sous tension, la facture d'énergie s'envole.",
+    "effets": [
+      {
+        "cible": "autonomie_alimentaire",
+        "valeur": -2,
+        "type": "immediat",
+        "hypothese": "Sécheresse et chaleur font chuter les rendements de l'année."
+      },
+      {
+        "cible": "depenses_sante",
+        "valeur": 0.05,
+        "type": "immediat",
+        "hypothese": "Afflux aux urgences et surmortalité estivale."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.2,
+        "type": "immediat",
+        "hypothese": "Baisse de production agricole et de productivité."
+      }
+    ]
+  },
+  {
+    "id": "crise-energie",
+    "titre": "Choc pétrolier : le baril double en trois mois",
+    "nature": "negatif",
+    "description": "Un conflit au Moyen-Orient fait flamber les prix du pétrole et du gaz.",
+    "effets": [
+      {
+        "cible": "inflation",
+        "valeur": 2.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Ordre de grandeur des chocs énergétiques de 2022."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.6,
+        "type": "immediat",
+        "hypothese": "Perte de pouvoir d'achat et de marges."
+      },
+      {
+        "cible": "solde_commercial",
+        "valeur": -25,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "La facture énergétique importée gonfle."
+      }
+    ]
+  },
+  {
+    "id": "crise-financiere",
+    "titre": "Crise bancaire européenne",
+    "nature": "negatif",
+    "description": "Une grande banque vacille, le crédit se resserre, les bourses plongent.",
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Récession comparable à 2009 en moins sévère."
+      },
+      {
+        "cible": "chomage",
+        "valeur": 0.8,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Hausse du chômage suivant la récession."
+      },
+      {
+        "cible": "taux_10_ans",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Fuite vers les dettes jugées les plus sûres."
+      }
+    ]
+  },
+  {
+    "id": "pandemie",
+    "titre": "Nouvelle épidémie : des confinements partiels",
+    "nature": "negatif",
+    "description": "Un virus respiratoire se propage ; écoles et commerces ferment plusieurs semaines.",
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -2,
+        "type": "immediat",
+        "hypothese": "Choc plus limité que 2020 (−7,5 %)."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 1.5,
+        "type": "immediat",
+        "hypothese": "Dispositifs de soutien d'urgence."
+      },
+      {
+        "cible": "pisa_maths",
+        "valeur": -2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Effet des fermetures d'écoles sur les apprentissages."
+      }
+    ]
+  },
+  {
+    "id": "cyberattaque",
+    "titre": "Cyberattaque massive contre les hôpitaux",
+    "nature": "negatif",
+    "description": "Des dizaines d'hôpitaux et une administration paralysés pendant des semaines.",
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 1,
+        "type": "immediat",
+        "hypothese": "Déprogrammations et services fermés temporairement."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "hypothese": "Défiance envers la capacité de l'État à protéger."
+      },
+      {
+        "cible": "productivite_horaire",
+        "valeur": -0.5,
+        "type": "immediat",
+        "hypothese": "Paralysie d'une partie des services."
+      }
+    ]
+  },
+  {
+    "id": "inondations",
+    "titre": "Inondations historiques dans le Sud-Ouest",
+    "nature": "negatif",
+    "description": "Des villages sous l'eau, des routes coupées, des milliards de dégâts.",
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": 0.2,
+        "type": "immediat",
+        "hypothese": "Fonds de catastrophe naturelle et reconstruction."
+      },
+      {
+        "cible": "satisfaction_vie",
+        "valeur": -0.05,
+        "type": "estompe",
+        "hypothese": "Choc pour les populations touchées."
+      },
+      {
+        "cible": "taux_effort_logement",
+        "valeur": 0.3,
+        "type": "estompe",
+        "hypothese": "Hausse des primes d'assurance habitation."
+      }
+    ]
+  },
+  {
+    "id": "tensions-commerciales",
+    "titre": "Guerre commerciale : de nouveaux droits de douane",
+    "nature": "negatif",
+    "description": "Un grand partenaire taxe lourdement le vin, les cosmétiques et l'aéronautique.",
+    "effets": [
+      {
+        "cible": "solde_commercial",
+        "valeur": -8,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Exportations françaises pénalisées."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Effet direct sur les secteurs exportateurs."
+      },
+      {
+        "cible": "part_industrie_va",
+        "valeur": -0.1,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Délocalisations pour contourner les droits."
+      }
+    ]
+  },
+  {
+    "id": "scandale",
+    "titre": "Scandale politique au sommet de l'État",
+    "nature": "negatif",
+    "description": "Une affaire de corruption éclabousse plusieurs ministres.",
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": -4,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Les affaires font durablement baisser la confiance politique."
+      },
+      {
+        "cible": "participation_elections",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Abstention en hausse aux élections suivantes."
+      }
+    ]
+  },
+  {
+    "id": "penurie-medicaments",
+    "titre": "Pénurie de médicaments essentiels",
+    "nature": "negatif",
+    "description": "Antibiotiques et anticancéreux manquent en pharmacie pendant tout l'hiver.",
+    "effets": [
+      {
+        "cible": "esperance_vie_bonne_sante",
+        "valeur": -0.1,
+        "type": "immediat",
+        "hypothese": "Traitements retardés ou substitués."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1,
+        "type": "estompe",
+        "hypothese": "Sentiment de déclassement."
+      }
+    ]
+  },
+  {
+    "id": "baby-boom",
+    "titre": "Petit baby-boom : les naissances repartent à la hausse",
+    "nature": "positif",
+    "description": "Plus de futurs actifs… et plus de places en crèche à trouver.",
+    "effets": [
+      {
+        "cible": "fecondite",
+        "valeur": 0.08,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Rebond conjoncturel des naissances, comme après certaines crises."
+      },
+      {
+        "cible": "eleves_par_classe",
+        "valeur": 0.5,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Les enfants arrivent à l'école trois ans plus tard."
+      }
+    ]
+  },
+  {
+    "id": "percee-technologique",
+    "titre": "Percée française dans les batteries",
+    "nature": "positif",
+    "description": "Une start-up française invente une batterie deux fois moins chère.",
+    "effets": [
+      {
+        "cible": "part_industrie_va",
+        "valeur": 0.3,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Usines construites en France pour produire la technologie."
+      },
+      {
+        "cible": "productivite_horaire",
+        "valeur": 0.8,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Diffusion de l'innovation."
+      },
+      {
+        "cible": "independance_energetique",
+        "valeur": 1,
+        "type": "differe",
+        "delai": 4,
+        "hypothese": "Stockage de l'électricité renouvelable."
+      }
+    ]
+  },
+  {
+    "id": "jeux-olympiques",
+    "titre": "La France remporte un grand événement sportif mondial",
+    "nature": "positif",
+    "description": "Ferveur nationale, touristes en masse, investissements dans les infrastructures.",
+    "effets": [
+      {
+        "cible": "satisfaction_vie",
+        "valeur": 0.08,
+        "type": "estompe",
+        "hypothese": "Effet de fierté collective temporaire."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.2,
+        "type": "immediat",
+        "hypothese": "Tourisme et chantiers."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1.5,
+        "type": "estompe",
+        "hypothese": "Moment d'unité nationale."
+      }
+    ]
+  },
+  {
+    "id": "baisse-prix-energie",
+    "titre": "Les prix de l'énergie s'effondrent",
+    "nature": "positif",
+    "description": "Surproduction mondiale de gaz et de pétrole : les factures baissent.",
+    "effets": [
+      {
+        "cible": "inflation",
+        "valeur": -1,
+        "type": "immediat",
+        "hypothese": "Baisse des prix de l'énergie importée."
+      },
+      {
+        "cible": "solde_commercial",
+        "valeur": 10,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "La facture énergétique fond, comme en 2025."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.3,
+        "type": "immediat",
+        "hypothese": "Gain de pouvoir d'achat."
+      }
+    ]
+  },
+  {
+    "id": "reprise-europeenne",
+    "titre": "Forte reprise en Europe",
+    "nature": "positif",
+    "description": "L'Allemagne et l'Italie repartent : les commandes affluent dans les usines françaises.",
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.8,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Effet d'entraînement de la demande européenne."
+      },
+      {
+        "cible": "solde_commercial",
+        "valeur": 5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Exportations vers l'Union européenne."
+      },
+      {
+        "cible": "chomage",
+        "valeur": -0.3,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Embauches dans l'industrie."
+      }
+    ]
+  },
+  {
+    "id": "retour-talents",
+    "titre": "Les expatriés reviennent",
+    "nature": "positif",
+    "description": "Une crise outre-Atlantique pousse des milliers de chercheurs et d'ingénieurs français à rentrer.",
+    "effets": [
+      {
+        "cible": "solde_migratoire",
+        "valeur": 37.5,
+        "type": "estompe",
+        "hypothese": "Retours d'expatriés qualifiés."
+      },
+      {
+        "cible": "productivite_horaire",
+        "valeur": 1.25,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Compétences rapatriées."
+      }
+    ]
+  },
+  {
+    "id": "taux-bas",
+    "titre": "La BCE baisse ses taux",
+    "nature": "positif",
+    "description": "L'inflation ralentit en Europe : emprunter redevient moins cher pour l'État et les ménages.",
+    "effets": [
+      {
+        "cible": "taux_10_ans",
+        "valeur": -0.6,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Transmission de la politique monétaire aux taux longs."
+      },
+      {
+        "cible": "investissement_entreprises",
+        "valeur": 0.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Crédit moins cher."
+      },
+      {
+        "cible": "taux_effort_logement",
+        "valeur": -0.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Crédits immobiliers moins chers."
+      }
+    ]
+  },
+  {
+    "id": "record-touristique",
+    "titre": "Année record pour le tourisme",
+    "nature": "positif",
+    "description": "Plus de 110 millions de visiteurs étrangers : hôtels et restaurants affichent complet.",
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.2,
+        "type": "immediat",
+        "hypothese": "Dépenses des touristes étrangers."
+      },
+      {
+        "cible": "chomage_jeunes",
+        "valeur": -0.5,
+        "type": "immediat",
+        "hypothese": "Emplois saisonniers occupés par des jeunes."
+      }
+    ]
+  },
+  {
+    "id": "bonne-recolte",
+    "titre": "Récoltes exceptionnelles",
+    "nature": "positif",
+    "description": "Météo idéale : blé, vin et fruits battent des records.",
+    "effets": [
+      {
+        "cible": "autonomie_alimentaire",
+        "valeur": 2,
+        "type": "immediat",
+        "hypothese": "Production agricole très supérieure à la moyenne."
+      },
+      {
+        "cible": "solde_commercial",
+        "valeur": 3,
+        "type": "immediat",
+        "hypothese": "Exportations agricoles."
+      },
+      {
+        "cible": "inflation",
+        "valeur": -0.2,
+        "type": "immediat",
+        "hypothese": "Baisse des prix alimentaires."
+      }
+    ]
+  },
+  {
+    "id": "alerte-economie",
+    "titre": "Vague de faillites : les usines ferment",
+    "nature": "negatif",
+    "declencheur": {
+      "jauge": "economie"
+    },
+    "description": "L'économie s'enlise, les plans sociaux se multiplient dans l'industrie.",
+    "effets": [
+      {
+        "cible": "chomage",
+        "valeur": 0.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Destruction d'emplois suivant les faillites."
+      },
+      {
+        "cible": "part_industrie_va",
+        "valeur": -0.2,
+        "type": "durable",
+        "hypothese": "Sites fermés rarement rouverts."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "hypothese": "Sentiment d'abandon des territoires."
+      }
+    ]
+  },
+  {
+    "id": "alerte-finances",
+    "titre": "La note de la France est dégradée",
+    "nature": "negatif",
+    "declencheur": {
+      "jauge": "finances"
+    },
+    "description": "Les agences de notation sanctionnent la dérive des comptes : emprunter coûte plus cher.",
+    "effets": [
+      {
+        "cible": "taux_10_ans",
+        "valeur": 0.6,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Prime de risque en hausse après une dégradation."
+      },
+      {
+        "cible": "part_dette_non_residents",
+        "valeur": -2,
+        "type": "immediat",
+        "hypothese": "Certains fonds ne peuvent plus détenir de la dette moins bien notée."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1,
+        "type": "estompe",
+        "hypothese": "Signal d'échec de la politique budgétaire."
+      }
+    ]
+  },
+  {
+    "id": "alerte-paix-sociale",
+    "titre": "Mouvement social : le pays bloqué",
+    "nature": "negatif",
+    "declencheur": {
+      "jauge": "paix_sociale"
+    },
+    "description": "Blocages, manifestations chaque samedi, ronds-points occupés.",
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 120,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Conflictualité comparable aux grands mouvements de 2019 et 2023."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Perturbations de l'activité."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.3,
+        "type": "immediat",
+        "hypothese": "Mesures d'apaisement d'urgence, comme en 2019."
+      }
+    ]
+  },
+  {
+    "id": "alerte-ecologie",
+    "titre": "Sécheresse historique : l'eau est rationnée",
+    "nature": "negatif",
+    "declencheur": {
+      "jauge": "ecologie"
+    },
+    "description": "Des villages ravitaillés par camion-citerne, des cultures abandonnées.",
+    "effets": [
+      {
+        "cible": "autonomie_alimentaire",
+        "valeur": -3,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Pertes agricoles majeures."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Restrictions pour l'industrie et l'agriculture."
+      },
+      {
+        "cible": "biodiversite_oiseaux",
+        "valeur": -1,
+        "type": "durable",
+        "hypothese": "Assèchement des zones humides."
+      }
+    ]
+  },
+  {
+    "id": "alerte-services-publics",
+    "titre": "Urgences fermées tout l'été",
+    "nature": "negatif",
+    "declencheur": {
+      "jauge": "services_publics"
+    },
+    "description": "Faute de soignants, des services d'urgence ferment la nuit dans des dizaines de villes.",
+    "effets": [
+      {
+        "cible": "esperance_vie_bonne_sante",
+        "valeur": -0.2,
+        "type": "estompe",
+        "hypothese": "Retards de prise en charge."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "hypothese": "Sentiment d'abandon dans les territoires."
+      },
+      {
+        "cible": "desert_medical",
+        "valeur": 1.5,
+        "type": "estompe",
+        "hypothese": "Fermetures temporaires de services."
+      }
+    ]
+  },
+  {
+    "id": "alerte-cohesion",
+    "titre": "Émeutes dans les quartiers populaires",
+    "nature": "negatif",
+    "declencheur": {
+      "jauge": "cohesion"
+    },
+    "description": "Après un drame, plusieurs nuits de violences urbaines.",
+    "effets": [
+      {
+        "cible": "violences_physiques",
+        "valeur": 0.3,
+        "type": "immediat",
+        "hypothese": "Hausse ponctuelle des violences."
+      },
+      {
+        "cible": "sentiment_insecurite",
+        "valeur": 3,
+        "type": "estompe",
+        "hypothese": "Choc dans l'opinion."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.05,
+        "type": "immediat",
+        "hypothese": "Coût des dégradations de bâtiments publics."
+      }
+    ]
+  },
+  {
+    "id": "alerte-demographie",
+    "titre": "Pénurie de main-d'œuvre généralisée",
+    "nature": "negatif",
+    "declencheur": {
+      "jauge": "demographie"
+    },
+    "description": "Trop peu d'actifs : hôpitaux, écoles et entreprises ne trouvent plus personne.",
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "estompe",
+        "hypothese": "Production limitée par le manque de bras."
+      },
+      {
+        "cible": "desert_medical",
+        "valeur": 1,
+        "type": "durable",
+        "hypothese": "Postes de soignants non pourvus."
+      },
+      {
+        "cible": "inflation",
+        "valeur": 0.5,
+        "type": "immediat",
+        "hypothese": "Tensions sur les salaires."
+      }
+    ]
+  },
+  {
+    "id": "alerte-souverainete",
+    "titre": "Rupture d'approvisionnement stratégique",
+    "nature": "negatif",
+    "declencheur": {
+      "jauge": "souverainete"
+    },
+    "description": "Un fournisseur étranger coupe ses livraisons de composants : chaînes d'assemblage à l'arrêt.",
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.5,
+        "type": "immediat",
+        "hypothese": "Arrêts de production comme lors des pénuries de puces de 2021."
+      },
+      {
+        "cible": "part_industrie_va",
+        "valeur": -0.2,
+        "type": "estompe",
+        "hypothese": "Production industrielle perdue."
+      },
+      {
+        "cible": "inflation",
+        "valeur": 0.5,
+        "type": "immediat",
+        "hypothese": "Prix des biens concernés en hausse."
+      }
+    ]
+  }
+]

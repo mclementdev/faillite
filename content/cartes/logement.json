@@ -1,0 +1,404 @@
+[
+  {
+    "id": "logement-construction",
+    "theme": "logement",
+    "type": "unique",
+    "titre": "On ne construit plus assez de logements",
+    "contexte": "Les mises en chantier sont au plus bas depuis des décennies. Trouver un logement abordable devient difficile dans les grandes villes.",
+    "options": [
+      {
+        "id": "logement-social",
+        "titre": "100 000 logements sociaux par an",
+        "explication": "L'État finance massivement le logement social : les loyers modérés reviennent, mais il faut des terrains et de l'argent.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "duree": 10,
+            "hypothese": "Environ 4 à 5 Md€ par an d'aides à la pierre."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -1.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Offre supplémentaire à loyers modérés."
+          },
+          {
+            "cible": "artificialisation",
+            "valeur": 1000,
+            "type": "durable",
+            "duree": 10,
+            "hypothese": "Une partie des constructions se fait en extension urbaine."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.1,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Emplois du BTP."
+          }
+        ]
+      },
+      {
+        "id": "simplifier",
+        "titre": "Simplifier les règles d'urbanisme",
+        "explication": "Permis plus rapides, hauteurs relevées : les promoteurs construisent plus, les riverains râlent.",
+        "effets": [
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.8,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Hausse de l'offre privée, effet modéré sur les loyers."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.1,
+            "type": "estompe",
+            "duree": 4,
+            "hypothese": "Relance de la construction."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.5,
+            "type": "estompe",
+            "hypothese": "Contentieux locaux et oppositions."
+          }
+        ]
+      },
+      {
+        "id": "pret-primo",
+        "titre": "Aides à l'achat pour les primo-accédants",
+        "explication": "Un prêt aidé pour acheter son premier logement : de nouveaux propriétaires, mais l'aide pousse aussi les prix.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Coût du prêt à taux zéro élargi."
+          },
+          {
+            "cible": "fecondite",
+            "valeur": 0.02,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "L'accès à un logement plus grand facilite les projets d'enfants."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "La demande solvabilisée fait monter les prix."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le logement est un marché lent : il faut 3 à 5 ans entre la décision et l'emménagement."
+  },
+  {
+    "id": "logement-loyers",
+    "theme": "logement",
+    "type": "unique",
+    "titre": "Faut-il encadrer les loyers partout ?",
+    "contexte": "L'encadrement des loyers existe à Paris, Lyon ou Lille. Les propriétaires dénoncent une atteinte à leur rentabilité.",
+    "options": [
+      {
+        "id": "generaliser",
+        "titre": "Encadrement dans toutes les zones tendues",
+        "explication": "Les loyers ne peuvent plus dépasser un plafond : les locataires respirent, mais certains bailleurs vendent ou passent en location courte.",
+        "effets": [
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.6,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Baisse modérée des loyers de relocation en zones tendues."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.25,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Moins d'investissement locatif."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Gain de pouvoir d'achat pour les locataires modestes."
+          }
+        ]
+      },
+      {
+        "id": "supprimer",
+        "titre": "Supprimer l'encadrement",
+        "explication": "Liberté des loyers pour relancer l'investissement : plus d'offre à terme, des loyers plus chers à court terme.",
+        "effets": [
+          {
+            "cible": "taux_effort_logement",
+            "valeur": 1,
+            "type": "estompe",
+            "duree": 5,
+            "hypothese": "Rattrapage des loyers dans les villes encadrées."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.4,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Offre locative privée un peu plus abondante à long terme."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Retour d'investisseurs privés."
+          }
+        ]
+      },
+      {
+        "id": "locations-courtes",
+        "titre": "Limiter les locations touristiques",
+        "explication": "Plafond de 90 nuits par an : des logements reviennent sur le marché, les villes touristiques perdent des revenus.",
+        "effets": [
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Retour de dizaines de milliers de logements vers la location classique."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.03,
+            "type": "durable",
+            "hypothese": "Moins de revenus touristiques."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Encadrer un prix protège ceux qui ont déjà un logement ; l'effet sur ceux qui en cherchent un dépend de l'offre."
+  },
+  {
+    "id": "logement-vacants",
+    "theme": "logement",
+    "type": "unique",
+    "titre": "3 millions de logements vides",
+    "contexte": "Les logements vacants sont surtout dans les petites villes et centres anciens, loin des zones où la demande est forte.",
+    "options": [
+      {
+        "id": "taxe",
+        "titre": "Taxer fortement les logements vides",
+        "explication": "Une taxe qui double chaque année : les propriétaires louent ou vendent, certains crient à la spoliation.",
+        "effets": [
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -1.0,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Remise sur le marché d'une partie des logements vacants en zone tendue."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.02,
+            "type": "durable",
+            "hypothese": "Recettes modestes."
+          }
+        ]
+      },
+      {
+        "id": "revitaliser",
+        "titre": "Revitaliser les centres-villes",
+        "explication": "Rénover les logements anciens et attirer commerces et services dans les villes moyennes.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "duree": 8,
+            "hypothese": "Plan de 1,5 Md€ par an."
+          },
+          {
+            "cible": "artificialisation",
+            "valeur": -1500,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "On réhabilite au lieu de construire en périphérie."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.03,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Centres-villes plus vivants."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Les villes moyennes attirent davantage de professionnels de santé."
+          }
+        ]
+      },
+      {
+        "id": "requisition",
+        "titre": "Réquisition des bureaux vides",
+        "explication": "Les bureaux inoccupés depuis 2 ans sont transformés en logements : rapide, contesté juridiquement.",
+        "effets": [
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.75,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Quelques dizaines de milliers de logements en zone dense."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.25,
+            "type": "estompe",
+            "hypothese": "Inquiétude des investisseurs immobiliers."
+          },
+          {
+            "cible": "artificialisation",
+            "valeur": -1250.0,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Logements créés sans consommer de foncier."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le problème du logement est d'abord géographique : il y a des logements vides là où on ne cherche pas à habiter."
+  },
+  {
+    "id": "logement-hlm",
+    "theme": "logement",
+    "type": "curseur",
+    "titre": "Combien de logements sociaux financer chaque année ?",
+    "titreCourt": "Logements sociaux",
+    "contexte": "Environ 2,7 millions de demandes de logement social sont en attente. Moins de 100 000 logements sociaux sont financés chaque année.",
+    "curseur": {
+      "min": 60,
+      "max": 180,
+      "pas": 30,
+      "unite": "milliers / an"
+    },
+    "options": [
+      {
+        "id": "60",
+        "valeur": 60,
+        "titre": "60 000 par an",
+        "explication": "On réduit l'effort : économies pour l'État, mais les files d'attente s'allongent.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.25,
+            "type": "durable",
+            "hypothese": "Moins d'aides à la pierre."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": 0.4,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Pénurie accrue dans les zones tendues."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Ménages modestes contraints au parc privé plus cher."
+          }
+        ]
+      },
+      {
+        "id": "120",
+        "valeur": 120,
+        "titre": "120 000 par an",
+        "explication": "Rythme soutenu : les chantiers reprennent, la pression sur les loyers baisse lentement.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.12,
+            "type": "durable",
+            "hypothese": "Aides à la pierre et garanties d'emprunt."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.8,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Offre nouvelle à loyer modéré."
+          },
+          {
+            "cible": "artificialisation",
+            "valeur": 800,
+            "type": "durable",
+            "hypothese": "Constructions nouvelles en périphérie."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.05,
+            "type": "estompe",
+            "hypothese": "Activité du bâtiment."
+          }
+        ]
+      },
+      {
+        "id": "180",
+        "valeur": 180,
+        "titre": "180 000 par an",
+        "explication": "Grand plan national : le bâtiment tourne à plein, mais il faut des terrains et des milliards.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.3,
+            "type": "durable",
+            "hypothese": "Effort budgétaire important."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -1.6,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Forte hausse de l'offre abordable."
+          },
+          {
+            "cible": "artificialisation",
+            "valeur": 1800,
+            "type": "durable",
+            "hypothese": "Besoins de foncier importants."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.15,
+            "type": "estompe",
+            "hypothese": "Embauches massives dans le bâtiment."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Baisse du coût du logement des ménages modestes."
+          },
+          {
+            "cible": "fecondite",
+            "valeur": 0.02,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Accès au logement favorable aux projets familiaux."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Un logement social coûte environ 150 000 € à construire, financé surtout par des prêts de la Caisse des dépôts. Il faut 3 à 5 ans entre la décision et l'emménagement."
+  }
+]

@@ -1,0 +1,736 @@
+[
+  {
+    "id": "souv-defense",
+    "theme": "souverainete",
+    "type": "curseur",
+    "titre": "Quel budget pour la défense ?",
+    "titreCourt": "Défense",
+    "contexte": "La France consacre environ 2 % de son PIB à la défense. L'OTAN demande d'aller vers 3,5 % d'ici 2035.",
+    "curseur": {
+      "min": 2,
+      "max": 3.5,
+      "pas": 0.5,
+      "unite": "% du PIB"
+    },
+    "options": [
+      {
+        "id": "2",
+        "valeur": 2,
+        "titre": "2 % du PIB",
+        "explication": "On reste au niveau actuel : pas d'effort budgétaire supplémentaire, des alliés qui s'impatientent.",
+        "effets": [
+          {
+            "cible": "budget_defense",
+            "valeur": -0.15,
+            "type": "durable",
+            "hypothese": "On renonce à la hausse prévue par la loi de programmation militaire."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.25,
+            "type": "durable",
+            "hypothese": "Économie par rapport à la trajectoire prévue."
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "valeur": 3,
+        "titre": "3 % du PIB",
+        "explication": "Hausse nette : l'industrie de défense embauche, le budget doit trouver 25 milliards par an.",
+        "effets": [
+          {
+            "cible": "budget_defense",
+            "valeur": 0.8,
+            "type": "durable",
+            "hypothese": "Montée en charge vers 3 % du PIB."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.6,
+            "type": "durable",
+            "hypothese": "Hausse de dépense en partie non financée."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Commandes à l'industrie de défense française."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Investissements dans le cyber et les systèmes souverains."
+          }
+        ]
+      },
+      {
+        "id": "3.5",
+        "valeur": 3.5,
+        "titre": "3,5 % du PIB",
+        "explication": "Objectif OTAN atteint : la France pèse dans la défense européenne, au prix d'économies ailleurs ou d'impôts.",
+        "effets": [
+          {
+            "cible": "budget_defense",
+            "valeur": 1.3,
+            "type": "durable",
+            "hypothese": "Montée en charge vers 3,5 % du PIB."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.9,
+            "type": "durable",
+            "hypothese": "40 Md€ de plus par an, en partie compensés."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Effet d'entraînement sur l'industrie."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Investissements numériques souverains."
+          },
+          {
+            "cible": "depenses_publiques",
+            "valeur": 1.2,
+            "type": "durable",
+            "hypothese": "Hausse de la dépense publique."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La dépense de défense soutient l'industrie nationale, mais elle se finance comme toute dépense : par l'impôt, la dette ou des économies ailleurs."
+  },
+  {
+    "id": "souv-relocalisation",
+    "theme": "souverainete",
+    "type": "cumulable",
+    "titre": "Relocaliser : deux filières stratégiques à soutenir",
+    "contexte": "La crise sanitaire a montré notre dépendance pour les médicaments et les composants. Choisissez deux filières à relocaliser.",
+    "options": [
+      {
+        "id": "medicaments",
+        "titre": "Médicaments essentiels",
+        "explication": "Paracétamol, antibiotiques : fin des pénuries, mais des médicaments un peu plus chers.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "duree": 8,
+            "hypothese": "Aides à l'installation d'usines."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.25,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Usines pharmaceutiques."
+          },
+          {
+            "cible": "depenses_sante",
+            "valeur": 0.075,
+            "type": "durable",
+            "hypothese": "Prix d'achat plus élevés."
+          }
+        ]
+      },
+      {
+        "id": "batteries",
+        "titre": "Batteries et véhicules électriques",
+        "explication": "Des gigafactories dans le Nord : des milliers d'emplois, une course contre la Chine.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.08,
+            "type": "durable",
+            "duree": 8,
+            "hypothese": "Subventions comparables aux aides américaines et chinoises."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.4,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Filière automobile électrique relocalisée."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": 4,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Moins d'importations de batteries et de véhicules."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Emplois industriels dans des bassins touchés."
+          }
+        ]
+      },
+      {
+        "id": "semi-conducteurs",
+        "titre": "Puces électroniques",
+        "explication": "Des usines de semi-conducteurs : très coûteux, stratégique pour l'industrie et la défense.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "duree": 8,
+            "hypothese": "Investissements publics très élevés par emploi créé."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Industrie à forte valeur ajoutée."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Moins de dépendance aux composants asiatiques."
+          }
+        ]
+      },
+      {
+        "id": "textile-agro",
+        "titre": "Textile et agroalimentaire",
+        "explication": "Soutien aux PME du textile et de la transformation alimentaire : emplois locaux, produits plus chers.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "duree": 6,
+            "hypothese": "Aides aux PME."
+          },
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Transformation des produits agricoles sur le territoire."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Emplois peu qualifiés dans les territoires."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.1,
+            "type": "immediat",
+            "hypothese": "Coûts de production plus élevés qu'à l'étranger."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Relocaliser coûte plus cher que d'importer : on paie une assurance contre les ruptures d'approvisionnement."
+  },
+  {
+    "id": "souv-cloud",
+    "theme": "souverainete",
+    "type": "unique",
+    "titre": "Nos données sont hébergées aux États-Unis",
+    "contexte": "Administrations, hôpitaux et entreprises utilisent massivement des services numériques américains, soumis aux lois de leur pays.",
+    "options": [
+      {
+        "id": "cloud-souverain",
+        "titre": "Cloud souverain obligatoire pour l'État",
+        "explication": "Les données publiques sensibles doivent être hébergées par des acteurs européens : plus sûr, plus cher et parfois moins pratique.",
+        "effets": [
+          {
+            "cible": "dependance_numerique",
+            "valeur": -6,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "La commande publique fait émerger des acteurs européens."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "duree": 6,
+            "hypothese": "Coûts de migration."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": -0.3,
+            "type": "estompe",
+            "hypothese": "Transition coûteuse pour les services."
+          }
+        ]
+      },
+      {
+        "id": "champion-europeen",
+        "titre": "Champion européen du numérique",
+        "explication": "Un fonds commun européen pour l'IA et le cloud : ambitieux, il faut convaincre 26 partenaires.",
+        "effets": [
+          {
+            "cible": "dependance_numerique",
+            "valeur": -4,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Effet d'échelle européen, lent à construire."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "duree": 10,
+            "hypothese": "Contribution française au fonds."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 6,
+            "hypothese": "Diffusion de l'IA dans l'économie."
+          }
+        ]
+      },
+      {
+        "id": "ouverture",
+        "titre": "Les meilleurs outils, d'où qu'ils viennent",
+        "explication": "On prend les services les plus performants du marché : gains de productivité rapides, dépendance accrue.",
+        "effets": [
+          {
+            "cible": "productivite_horaire",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Adoption rapide de l'IA et des outils numériques."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": 4,
+            "type": "durable",
+            "hypothese": "Concentration chez quelques fournisseurs non européens."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La souveraineté numérique oppose souvent performance immédiate et maîtrise à long terme."
+  },
+  {
+    "id": "souv-alimentation",
+    "theme": "souverainete",
+    "type": "unique",
+    "titre": "Moins d'agriculteurs chaque année",
+    "contexte": "La moitié des agriculteurs partira à la retraite d'ici dix ans. Fruits, légumes et volailles sont de plus en plus importés.",
+    "options": [
+      {
+        "id": "installation",
+        "titre": "Aider l'installation des jeunes",
+        "explication": "Terres et prêts facilités pour les nouveaux agriculteurs : la relève est assurée, il faut l'accompagner.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.12,
+            "type": "durable",
+            "hypothese": "Environ 1 Md€ par an."
+          },
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Moins de fermes disparues, maintien de la production."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Débouchés pour des jeunes en zones rurales."
+          }
+        ]
+      },
+      {
+        "id": "prix-plancher",
+        "titre": "Prix plancher garantis",
+        "explication": "Les industriels ne peuvent acheter sous le coût de production : revenu agricole protégé, prix en rayon plus élevés.",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Les productions françaises redeviennent rentables."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.3,
+            "type": "immediat",
+            "hypothese": "Hausse des prix alimentaires."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "L'alimentation pèse plus pour les ménages modestes."
+          }
+        ]
+      },
+      {
+        "id": "agrandissement",
+        "titre": "Grandes exploitations compétitives",
+        "explication": "On facilite l'agrandissement et la modernisation : production efficace, moins d'agriculteurs et paysages transformés.",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Gains de productivité agricole."
+          },
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": -1.5,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Disparition des haies et intensification."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Exportations agricoles compétitives."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La souveraineté alimentaire dépend autant du revenu des agriculteurs que de la surface cultivée."
+  },
+  {
+    "id": "souv-europe",
+    "theme": "souverainete",
+    "type": "unique",
+    "titre": "Quelle place pour la France en Europe ?",
+    "contexte": "L'Union européenne propose un grand emprunt commun pour financer la défense et la transition. Certains pays y voient une perte de souveraineté.",
+    "options": [
+      {
+        "id": "emprunt-commun",
+        "titre": "Oui à l'emprunt commun",
+        "explication": "L'Europe emprunte pour tous à taux bas : investissements massifs, mais des décisions partagées avec 26 pays.",
+        "effets": [
+          {
+            "cible": "taux_10_ans",
+            "valeur": -0.2,
+            "type": "durable",
+            "hypothese": "Solidarité européenne perçue par les marchés."
+          },
+          {
+            "cible": "part_renouvelables",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Projets financés au niveau européen."
+          },
+          {
+            "cible": "budget_defense",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Programmes de défense communs."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Débat sur la souveraineté nationale."
+          },
+          {
+            "cible": "prelevements_obligatoires",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Remboursement de l'emprunt commun par de nouvelles ressources propres européennes (taxes)."
+          }
+        ]
+      },
+      {
+        "id": "cooperations",
+        "titre": "Coopérations à la carte",
+        "explication": "On avance avec quelques pays volontaires sur des projets précis : plus souple, moins puissant.",
+        "effets": [
+          {
+            "cible": "budget_defense",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Projets bilatéraux d'armement."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Projets industriels franco-allemands ou franco-italiens."
+          }
+        ]
+      },
+      {
+        "id": "national",
+        "titre": "Garder la main au niveau national",
+        "explication": "On refuse de nouveaux transferts : la France décide seule, mais finance seule.",
+        "effets": [
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Discours de souveraineté apprécié par une partie de l'opinion."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Pas de mutualisation des risques."
+          },
+          {
+            "cible": "part_dette_non_residents",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Effort de placement de la dette auprès des épargnants français."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Mutualiser des décisions donne plus de poids collectif, mais réduit la marge de choix de chaque pays."
+  },
+  {
+    "id": "souv-otan",
+    "theme": "souverainete",
+    "type": "unique",
+    "titre": "Commandement intégré de l'OTAN : rester ou prendre ses distances ?",
+    "contexte": "La France est revenue dans le commandement intégré de l'OTAN en 2009. Les tensions entre alliés relancent le débat.",
+    "options": [
+      {
+        "id": "renforcer",
+        "titre": "Renforcer l'engagement",
+        "explication": "Plus de troupes et d'exercices communs : sécurité collective renforcée, plus d'achats d'équipements alliés.",
+        "effets": [
+          {
+            "cible": "budget_defense",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "Contributions supplémentaires aux missions de l'Alliance."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Coût des déploiements."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Interopérabilité avec des systèmes non européens."
+          }
+        ]
+      },
+      {
+        "id": "pilier-europeen",
+        "titre": "Construire un pilier européen",
+        "explication": "Rester dans l'OTAN, mais acheter européen et mutualiser avec nos voisins.",
+        "effets": [
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Commandes groupées à l'industrie européenne."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Coûts de développement partagés."
+          }
+        ]
+      },
+      {
+        "id": "retrait",
+        "titre": "Quitter le commandement intégré",
+        "explication": "La France reprend une autonomie totale de décision militaire : symbole fort, isolement possible.",
+        "effets": [
+          {
+            "cible": "budget_defense",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Il faut compenser seul certaines capacités partagées."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Coût de ces capacités nationales."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": 0.1,
+            "type": "estompe",
+            "hypothese": "Incertitude géopolitique perçue par les marchés."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.5,
+            "type": "estompe",
+            "hypothese": "Une partie de l'opinion approuve l'indépendance."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Une alliance offre une protection collective en échange d'engagements et d'une part d'interdépendance."
+  },
+  {
+    "id": "souv-preference-europeenne",
+    "theme": "souverainete",
+    "type": "curseur",
+    "titre": "Quelle part des achats publics réserver au « made in Europe » ?",
+    "titreCourt": "Préférence européenne",
+    "contexte": "L'État, les collectivités et les hôpitaux achètent pour plus de 150 milliards d'euros par an. Aucune règle générale n'oblige aujourd'hui à acheter européen.",
+    "curseur": {
+      "min": 0,
+      "max": 60,
+      "pas": 15,
+      "unite": "%"
+    },
+    "options": [
+      {
+        "id": "0",
+        "valeur": 0,
+        "titre": "Aucune obligation",
+        "explication": "On achète au meilleur prix, d'où qu'il vienne : économique pour le contribuable, peu pour l'industrie.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.12,
+            "type": "durable",
+            "hypothese": "Achats publics au meilleur prix mondial."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Accès aux équipements les plus performants, d'où qu'ils viennent."
+          },
+          {
+            "cible": "inflation",
+            "valeur": -0.15,
+            "type": "immediat",
+            "hypothese": "Mise en concurrence mondiale qui tire les prix d'achat vers le bas."
+          }
+        ]
+      },
+      {
+        "id": "30",
+        "valeur": 30,
+        "titre": "30 %",
+        "explication": "Un tiers des achats réservés : l'industrie européenne gagne des débouchés, à un coût modéré.",
+        "effets": [
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.25,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Débouchés garantis pour les producteurs européens."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": -2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Logiciels et cloud européens favorisés."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Surcoût des achats européens."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": 3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Moins d'importations hors Europe."
+          }
+        ]
+      },
+      {
+        "id": "60",
+        "valeur": 60,
+        "titre": "60 %",
+        "explication": "Préférence massive : forte relance industrielle, mais des achats plus chers et des partenaires mécontents.",
+        "effets": [
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.45,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Relocalisations pour accéder aux marchés publics."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": -4,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Bascule vers des solutions européennes."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.35,
+            "type": "durable",
+            "hypothese": "Surcoût notable des achats publics."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": 5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Substitution d'importations."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.3,
+            "type": "immediat",
+            "hypothese": "Prix des marchés publics en hausse."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Moins de concurrence sur certains équipements."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Les États-Unis réservent depuis 1933 une partie de leurs achats publics aux produits américains (Buy American Act). L'Union européenne en débat, au nom de sa souveraineté industrielle."
+  }
+]
