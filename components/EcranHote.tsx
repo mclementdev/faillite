@@ -60,7 +60,7 @@ const CADRE = {
 };
 
 export default function EcranHote({ code }: { code: string }) {
-  const { vue, erreur, decalage, rafraichir } = useSalle(code, 1000);
+  const { vue, erreur, decalage, rafraichir, appliquer } = useSalle(code, 1000);
   const [hote, setHote] = useState<string | null>(null);
   const [occupe, setOccupe] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -75,8 +75,9 @@ export default function EcranHote({ code }: { code: string }) {
     setOccupe(true);
     setMessage(null);
     try {
-      await appel(`/api/salles/${code}/hote`, { ...corps, hote });
-      await rafraichir();
+      const r = await appel<{ vue?: VuePublique }>(`/api/salles/${code}/hote`, { ...corps, hote });
+      if (r.vue) appliquer(r.vue);
+      else await rafraichir();
     } catch (e) {
       setMessage((e as Error).message);
     } finally {

@@ -7,7 +7,8 @@ export function json(data: unknown, init?: ResponseInit & { cache?: "aucun" | "p
   const headers = new Headers(init?.headers);
   // « partage » : l'état public d'une salle est mis en cache 1 s par le CDN de Vercel,
   // ce qui mutualise les lectures de tous les téléphones (une seule lecture Redis par seconde).
-  headers.set("Cache-Control", init?.cache === "partage" ? "public, max-age=0, s-maxage=1, stale-while-revalidate=1" : "no-store");
+  // Pas de stale-while-revalidate : il servirait un état vieux de 2 s après chaque action.
+  headers.set("Cache-Control", init?.cache === "partage" ? "public, max-age=0, s-maxage=1" : "no-store");
   return NextResponse.json(data, { ...init, headers });
 }
 

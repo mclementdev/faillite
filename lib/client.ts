@@ -26,6 +26,14 @@ export function useSalle(code: string, intervalle: number) {
   const echantillons = useRef<number[]>([]);
   const versionVue = useRef(-1);
 
+  /** Affiche une vue reçue directement (réponse d'une action), si elle est plus récente. */
+  const appliquer = useCallback((data: VuePublique) => {
+    if (data.version >= versionVue.current) {
+      versionVue.current = data.version;
+      setVue(data);
+    }
+  }, []);
+
   const rafraichir = useCallback(async () => {
     try {
       const r = await fetch(`/api/salles/${code}`, { cache: "no-store" });
@@ -64,7 +72,7 @@ export function useSalle(code: string, intervalle: number) {
     };
   }, [rafraichir, intervalle]);
 
-  return { vue, erreur, decalage, rafraichir };
+  return { vue, erreur, decalage, rafraichir, appliquer };
 }
 
 export function lireLocal(cle: string): string | null {

@@ -8,7 +8,7 @@ import { formatMinuteur, formatNombre, IconeCadenas, IconeCoche, IconeCouronne, 
 type Vote = string | number;
 
 export default function EcranJoueur({ code }: { code: string }) {
-  const { vue, erreur, decalage } = useSalle(code, 1500);
+  const { vue, erreur, decalage } = useSalle(code, 1000);
   const cleJeton = `faillite:joueur:${code}`;
   const [jeton, setJeton] = useState<string | null>(null);
   const [pseudo, setPseudo] = useState<string>("");

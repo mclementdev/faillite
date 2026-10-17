@@ -109,9 +109,10 @@ export async function creerSalle(): Promise<Salle> {
  * Lit, modifie et réécrit la salle avec contrôle de version (quelques essais en cas de conflit).
  * `modifier` renvoie false pour ne rien écrire.
  */
-async function transaction(code: string, modifier: (s: Salle) => boolean | void): Promise<Salle> {
+async function transaction(code: string, modifier: (s: Salle) => boolean | void, dejaLue?: Salle): Promise<Salle> {
   for (let essai = 0; essai < 5; essai++) {
-    const s = await lireSalle(code);
+    // Premier essai : on réutilise la salle déjà lue par l'appelant (un aller-retour Redis de moins).
+    const s = essai === 0 && dejaLue ? (structuredClone(dejaLue) as Salle) : await lireSalle(code);
     if (!s) throw new ErreurSalle("Salle introuvable ou expirée.", 404);
     const version = s.version;
     if (modifier(s) === false) return s;
@@ -241,7 +242,7 @@ export async function appliquerEcheances(salle: Salle): Promise<Salle> {
   return transaction(salle.code, (s) => {
     if (!ouvert(s) || s.phase !== salle.phase) return false;
     clore(s, sc);
-  });
+  }, salle);
 }
 
 function demarrerTourSuivant(s: Salle) {
@@ -321,5 +322,5 @@ export async function actionHote(code: string, hote: string, a: ActionHote): Pro
         return;
       }
     }
-  });
+  }, actuelle);
 }
