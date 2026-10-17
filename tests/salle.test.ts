@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { actionHote, creerSalle, lireSalle, nbVotes, rejoindre, voter, appliquerEcheances } from "@/lib/salle";
-import { definirStockage, StockageMemoire } from "@/lib/stockage";
+import { definirStockage, StockageMemoire, versObjet } from "@/lib/stockage";
 import { construireVue } from "@/lib/vue";
 
 beforeEach(() => definirStockage(new StockageMemoire()));
@@ -72,5 +72,12 @@ describe("salle de jeu", () => {
     const s = await creerSalle();
     expect(s.poids.cartes["retraites-age"]).toBe(1);
     expect(Object.keys(s.poids.cartes).length).toBeGreaterThanOrEqual(36);
+  });
+
+  it("HGETALL d'Upstash (tableau à plat) est converti en objet", () => {
+    expect(versObjet(["a", '{"x":1}', "b", "2"])).toEqual({ a: '{"x":1}', b: "2" });
+    expect(versObjet({ a: { x: 1 }, b: "s" })).toEqual({ a: '{"x":1}', b: "s" });
+    expect(versObjet(null)).toEqual({});
+    expect(versObjet([])).toEqual({});
   });
 });

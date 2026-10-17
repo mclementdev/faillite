@@ -57,7 +57,7 @@ class StockageRedis implements Stockage {
     return (await this.r.hget<string>(cle, champ)) ?? null;
   }
   async hgetall(cle: string) {
-    return ((await this.r.hgetall<Record<string, string>>(cle)) ?? {}) as Record<string, string>;
+    return versObjet(await this.r.hgetall(cle));
   }
   async hlen(cle: string) {
     return this.r.hlen(cle);
@@ -81,6 +81,20 @@ class StockageRedis implements Stockage {
   async lrange(cle: string, debut: number, fin: number) {
     return this.r.lrange<string>(cle, debut, fin);
   }
+}
+
+/**
+ * Sans désérialisation automatique, Upstash renvoie HGETALL brut : un tableau à plat
+ * [champ, valeur, champ, valeur…]. On accepte aussi un objet (autres versions du client).
+ */
+export function versObjet(brut: unknown): Record<string, string> {
+  if (!brut) return {};
+  if (Array.isArray(brut)) {
+    const o: Record<string, string> = {};
+    for (let i = 0; i + 1 < brut.length; i += 2) o[String(brut[i])] = String(brut[i + 1]);
+    return o;
+  }
+  return Object.fromEntries(Object.entries(brut as Record<string, unknown>).map(([k, v]) => [k, typeof v === "string" ? v : JSON.stringify(v)]));
 }
 
 /* ------------------------------------------------------------------ */
