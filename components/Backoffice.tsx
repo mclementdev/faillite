@@ -8,12 +8,11 @@ import { Logo } from "./ui";
 const NOMS_JAUGES: Record<JaugeId, string> = {
   economie: "Économie",
   finances: "Finances publiques",
-  paix_sociale: "Paix sociale",
-  ecologie: "Écologie",
+  cohesion: "Cohésion sociale",
+  ecologie: "Climat et nature",
   services_publics: "Services publics",
-  cohesion: "Cohésion",
-  demographie: "Démographie",
   souverainete: "Souveraineté",
+  popularite: "Popularité",
 };
 const ORDRE_JAUGES = Object.keys(NOMS_JAUGES) as JaugeId[];
 
@@ -60,7 +59,7 @@ export function ConnexionAdmin({ avecCode }: { avecCode: boolean }) {
             <input id="code" type="password" autoComplete="current-password" required value={code} onChange={(e) => setCode(e.target.value)} />
           </>
         )}
-        {erreur && <p role="alert" style={{ margin: 0, color: "#FFB3BA" }}>{erreur}</p>}
+        {erreur && <p role="alert" style={{ margin: 0, color: "var(--n2-texte)" }}>{erreur}</p>}
         <button className="btn" type="submit" disabled={envoi}>Entrer</button>
         <p className="note" style={{ margin: 0 }}>Accès réservé aux adresses autorisées. Aucun e-mail n&apos;est envoyé.</p>
       </form>
@@ -124,7 +123,7 @@ export default function Backoffice({ email }: { email: string }) {
           <button key={id} type="button" role="tab" className="onglet" aria-selected={onglet === id} onClick={() => setOnglet(id)}>{nom}</button>
         ))}
       </div>
-      {message && <p role="alert" style={{ color: "#FFB3BA", margin: 0 }}>{message}</p>}
+      {message && <p role="alert" style={{ color: "var(--n2-texte)", margin: 0 }}>{message}</p>}
       {!donnees ? (
         <p className="note">Chargement…</p>
       ) : (
@@ -246,7 +245,7 @@ function PanneauSimulation({ simulation, donnees, recharger }: { simulation: Sim
   const [n, setN] = useState(1000);
   const [graine, setGraine] = useState(42);
   const [mode, setMode] = useState<"aleatoire" | "sans_intervention">("aleatoire");
-  const [nbTours, setNbTours] = useState(30);
+  const [nbAnnees, setNbAnnees] = useState(5);
   const [encours, setEncours] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
 
@@ -254,7 +253,7 @@ function PanneauSimulation({ simulation, donnees, recharger }: { simulation: Sim
     setEncours(true);
     setErreur(null);
     try {
-      await api("/api/admin/simulation", "POST", { n, graine, mode, nbTours });
+      await api("/api/admin/simulation", "POST", { n, graine, mode, nbAnnees });
       await recharger();
     } catch (e) {
       setErreur((e as Error).message);
@@ -279,10 +278,10 @@ function PanneauSimulation({ simulation, donnees, recharger }: { simulation: Sim
             <input type="number" value={graine} onChange={(e) => setGraine(Number(e.target.value))} style={{ width: 110 }} />
           </label>
           <label style={{ display: "flex", flexDirection: "column", gap: 4 }} className="note">
-            Tours
-            <select value={nbTours} onChange={(e) => setNbTours(Number(e.target.value))}>
-              <option value={30}>30</option>
-              <option value={20}>20</option>
+            Mandat
+            <select value={nbAnnees} onChange={(e) => setNbAnnees(Number(e.target.value))}>
+              <option value={5}>1 quinquennat (5 ans)</option>
+              <option value={10}>2 quinquennats (10 ans)</option>
             </select>
           </label>
           <label style={{ display: "flex", flexDirection: "column", gap: 4 }} className="note">
@@ -295,7 +294,7 @@ function PanneauSimulation({ simulation, donnees, recharger }: { simulation: Sim
           <button type="button" className="btn" onClick={lancer} disabled={encours}>{encours ? "Calcul en cours…" : `Lancer ${n.toLocaleString("fr-FR")} parties`}</button>
         </div>
         <p className="note" style={{ margin: 0 }}>Utilise les poids actuels. 1 000 parties prennent une dizaine de secondes.</p>
-        {erreur && <p role="alert" style={{ margin: 0, color: "#FFB3BA" }}>{erreur}</p>}
+        {erreur && <p role="alert" style={{ margin: 0, color: "var(--n2-texte)" }}>{erreur}</p>}
       </section>
 
       {simulation && (
@@ -304,7 +303,7 @@ function PanneauSimulation({ simulation, donnees, recharger }: { simulation: Sim
             <h2 style={{ fontSize: 22 }}>Synthèse</h2>
             <p style={{ margin: 0, fontSize: 17, lineHeight: 1.5 }}>{simulation.synthese}</p>
             <p className="note" style={{ margin: 0 }}>
-              {simulation.n} parties · {simulation.nbTours} tours · graine {simulation.graine} · {simulation.mode === "aleatoire" ? "votes aléatoires" : "sans intervention"} · {(simulation.dureeMs / 1000).toFixed(1)} s · {new Date(simulation.date).toLocaleString("fr-FR")} · {simulation.lancePar}
+              {simulation.n} parties · {simulation.nbAnnees} ans · {simulation.evenementsParPartie} événements par partie, dont {simulation.crisesParPartie} crises et {simulation.provoquesParPartie} provoqués par une décision · graine {simulation.graine} · {simulation.mode === "aleatoire" ? "votes aléatoires" : "sans intervention"} · {(simulation.dureeMs / 1000).toFixed(1)} s · {new Date(simulation.date).toLocaleString("fr-FR")} · {simulation.lancePar}
             </p>
           </section>
 
@@ -327,8 +326,8 @@ function PanneauSimulation({ simulation, donnees, recharger }: { simulation: Sim
                         <td className="tabnum">{s.p90}</td>
                         <td style={{ minWidth: 200 }}>
                           <div style={{ position: "relative", height: 12, background: "var(--piste)", borderRadius: 99 }} aria-hidden="true">
-                            <div style={{ position: "absolute", left: `${s.p10}%`, width: `${Math.max(1, s.p90 - s.p10)}%`, height: "100%", background: "var(--moutarde)", borderRadius: 99, opacity: 0.6 }} />
-                            <div style={{ position: "absolute", left: `${s.mediane}%`, top: -3, width: 3, height: 18, background: "var(--craie)" }} />
+                            <div style={{ position: "absolute", left: `${s.p10}%`, width: `${Math.max(1, s.p90 - s.p10)}%`, height: "100%", background: "var(--soleil)", borderRadius: 99, opacity: 0.6 }} />
+                            <div style={{ position: "absolute", left: `${s.mediane}%`, top: -3, width: 3, height: 18, background: "var(--texte-1)" }} />
                             <div style={{ position: "absolute", left: "35%", top: -3, width: 2, height: 18, background: "var(--n2)" }} />
                           </div>
                         </td>
@@ -408,7 +407,7 @@ function Frequences({ titre, valeurs, nom, n }: { titre: string; valeurs: Record
         <div key={id} style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) 120px 70px", gap: 10, alignItems: "center", fontSize: 14 }}>
           <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={nom(id)}>{nom(id)}</span>
           <div style={{ height: 8, background: "var(--piste)", borderRadius: 99 }}>
-            <div style={{ width: `${(100 * v) / max}%`, height: "100%", background: v ? "var(--moutarde)" : "var(--n2)", borderRadius: 99 }} />
+            <div style={{ width: `${(100 * v) / max}%`, height: "100%", background: v ? "var(--soleil)" : "var(--n2)", borderRadius: 99 }} />
           </div>
           <span className="tabnum" style={{ textAlign: "right" }}>{(v / n).toFixed(2)}/partie</span>
         </div>

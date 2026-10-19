@@ -6,8 +6,8 @@ const titre = Bricolage_Grotesque({ subsets: ["latin"], weight: ["500", "700", "
 const texte = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-texte", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Faillite !",
-  description: "Un jeu de soirée pour comprendre l'impact des décisions politiques sur la France.",
+  title: "À vous l'Élysée !",
+  description: "Un jeu de soirée : faites campagne, gouvernez la France ensemble et découvrez l'impact réel de vos décisions.",
 };
 
 export const viewport: Viewport = {

@@ -53,8 +53,8 @@ export function CoucheInfobulles({ scene, children }: { scene: RefObject<HTMLDiv
             top: bulle.y,
             transform: bulle.dessous ? undefined : "translateY(-100%)",
             width: LARGEUR,
-            background: "var(--surface-2)",
-            color: "var(--craie)",
+            background: "var(--surface)",
+            color: "var(--texte-1)",
             border: "2px solid var(--trait-2)",
             borderRadius: 16,
             padding: "14px 18px",
@@ -64,7 +64,7 @@ export function CoucheInfobulles({ scene, children }: { scene: RefObject<HTMLDiv
             letterSpacing: 0,
             textAlign: "left",
             textTransform: "none",
-            boxShadow: "0 12px 40px rgba(0,0,0,.45)",
+            boxShadow: "0 12px 40px rgba(29,36,69,.18)",
             pointerEvents: "none",
             animation: "apparition .15s ease",
           }}
@@ -107,5 +107,5 @@ export function Info({ texte, children, bloc, style }: { texte: ReactNode; child
 
 /** Titre en petites capitales d'une infobulle. */
 export function TitreBulle({ children }: { children: ReactNode }) {
-  return <b style={{ display: "block", marginBottom: 4, color: "var(--moutarde)", fontSize: 18, letterSpacing: 1 }}>{children}</b>;
+  return <b style={{ display: "block", marginBottom: 4, color: "var(--accent-texte)", fontSize: 18, letterSpacing: 1 }}>{children}</b>;
 }

@@ -3,29 +3,59 @@ import {
   appliquerChoix,
   bilanFinal,
   calculerJauges,
-  commencerTour,
+  carteDeLEtape,
   creerPartie,
+  effectifs,
   effetsVersModificateurs,
   ErreurContenu,
+  etapeAVoter,
   flux,
   jouerPartie,
+  moisDesDecisions,
   mulberry32,
   normaliser,
   optionPourValeur,
-  resoudreElection,
+  populariteDepart,
+  prochaineEtape,
+  resoudreSecondTour,
   resoudreVote,
+  risqueRejetReferendum,
   simulate,
-  terminerTour,
+  terminerAnnee,
   tirerPondere,
   trajectoireSansIntervention,
   valeurModificateur,
   valeursEffectives,
   type Carte,
+  type Etape,
+  type EtatPartie,
 } from "../engine";
 import { chargerContenu } from "../content";
-import { carteCurseur, carteTest, contenuTest, H } from "./fixtures";
+import { carteCurseur, carteTest, cartesTest, contenuTest, H } from "./fixtures";
 
 const src = { type: "carte" as const, id: "t" };
+const effet = (cible: string, valeur: number) => ({ cible, valeur, type: "immediat", hypothese: H });
+const breve = (id: string, extra: Record<string, unknown> = {}) => ({ id, titre: `Événement ${id}`, description: "Événement de test.", nature: "negatif", effets: [effet("e", 1)], ...extra });
+const crise = (id: string, extra: Record<string, unknown> = {}) => ({
+  id,
+  titre: `Crise ${id}`,
+  description: "Crise de test.",
+  nature: "negatif",
+  gravite: "crise",
+  effets: [effet("e", -5)],
+  reponses: [
+    { id: "r1", titre: "Réponse 1", explication: "Première réponse de test.", effets: [effet("a", 5)] },
+    { id: "r2", titre: "Réponse 2", explication: "Deuxième réponse de test.", effets: [effet("b", 5)] },
+  ],
+  ...extra,
+});
+
+/** Joue une partie en notant chaque arrêt (décisions et événements). */
+function jouerEnNotant(c: ReturnType<typeof contenuTest>, opts: Parameters<typeof jouerPartie>[1], option = "x") {
+  const arrets: Etape[] = [];
+  const etat = jouerPartie(c, opts, (carte) => ({ options: [carte.options.find((o) => o.id === option)?.id ?? carte.options[0].id] }), (_e, etape) => arrets.push(structuredClone(etape)));
+  return { etat, arrets };
+}
 
 describe("effets", () => {
   it("immédiat : actif seulement l'année de la décision", () => {
@@ -76,18 +106,18 @@ describe("effets", () => {
   it("annuler une carte coupe ses effets durables", () => {
     const c = contenuTest({
       cartes: [
-        carteTest("c1", "fiscalite"),
-        { ...carteTest("c2", "sante"), options: [{ id: "x", titre: "Annuler", explication: "Annule la carte c1.", annule: ["c1"], effets: [{ cible: "e", valeur: 0.1, type: "immediat", hypothese: H }] }, carteTest("c2").options[1]] },
+        carteTest("c1"),
+        { ...carteTest("c2", "sante"), options: [{ id: "x", titre: "Annuler", explication: "Annule la carte c1.", annule: ["c1"], effets: [effet("e", 0.1)] }, carteTest("c2").options[1]] },
       ],
     });
-    const etat = creerPartie(c, { graine: 1, nbTours: 5 });
-    etat.courant = { tour: 0, annee: 2027, jaugesPrecedentes: etat.jaugesDepart, jaugesBilan: etat.jaugesDepart, impactsOptions: {}, resonances: [], carte: "c1" };
+    const etat = creerPartie(c, { graine: 1, nbAnnees: 5 });
+    const etape = (carte: string, n: number): Etape => ({ n, annee: 2027, mois: n + 1, type: "decision", carte, impactsOptions: {}, resonances: [] });
+    etat.etape = etape("c1", 0);
     appliquerChoix(c, etat, { options: ["x"] });
-    terminerTour(c, etat);
-    expect(valeursEffectives(c, etat.base, etat.mods, etat.annee).a).toBe(60);
-    etat.courant = { tour: 1, annee: 2028, jaugesPrecedentes: etat.jaugesDepart, jaugesBilan: etat.jaugesDepart, impactsOptions: {}, resonances: [], carte: "c2" };
+    expect(effectifs(c, etat).a).toBe(60);
+    etat.etape = etape("c2", 1);
     appliquerChoix(c, etat, { options: ["x"] });
-    expect(valeursEffectives(c, etat.base, etat.mods, etat.annee).a).toBe(50);
+    expect(effectifs(c, etat).a).toBe(50);
   });
 });
 
@@ -110,52 +140,219 @@ describe("jauges", () => {
       { id: "d", poids: 0 },
       { id: "e", poids: 0 },
     ];
-    const j = calculerJauges(c, { a: 80, b: 40, c: 0, d: 0, e: 0 });
+    const j = calculerJauges(c, { a: 80, b: 40, c: 0, d: 0, e: 0, popularite: 50 });
     expect(j.economie).toBeCloseTo(70, 9); // (3×80 + 1×40) / 4
   });
 
   it("la sensibilité amplifie l'écart à la situation de départ sans changer le départ", () => {
     const c = contenuTest();
     c.jauges.economie.sensibilite = 3;
-    const depart = calculerJauges(c, { a: 50, b: 50, c: 50, d: 50, e: 50 });
+    const depart = calculerJauges(c, { a: 50, b: 50, c: 50, d: 50, e: 50, popularite: 50 });
     expect(depart.economie).toBeCloseTo(50, 9);
-    const apres = calculerJauges(c, { a: 60, b: 50, c: 50, d: 50, e: 50 });
+    const apres = calculerJauges(c, { a: 60, b: 50, c: 50, d: 50, e: 50, popularite: 50 });
     expect(apres.economie).toBeCloseTo(50 + 3 * 2, 9); // écart brut de 2 points ×3
     expect(apres.finances).toBeCloseTo(52, 9); // sensibilité 1 par défaut
-    expect(calculerJauges(c, { a: 100, b: 100, c: 100, d: 100, e: 100 }).economie).toBe(100); // bornée
+    expect(calculerJauges(c, { a: 100, b: 100, c: 100, d: 100, e: 100, popularite: 50 }).economie).toBe(100); // bornée
   });
 
-  it("chaque jauge du vrai contenu a au moins 5 indicateurs", () => {
+  it("le vrai contenu : 6 jauges du pays d'au moins 5 indicateurs, plus la popularité", () => {
     const c = chargerContenu();
-    for (const j of Object.values(c.jauges)) expect(j.indicateurs.filter((x) => x.poids > 0).length).toBeGreaterThanOrEqual(5);
+    for (const [id, j] of Object.entries(c.jauges)) {
+      if (id === "popularite") expect(j.indicateurs.map((x) => x.id)).toEqual(["popularite"]);
+      else expect(j.indicateurs.filter((x) => x.poids > 0).length).toBeGreaterThanOrEqual(5);
+    }
+    expect(Object.keys(c.jauges)).not.toContain("demographie");
+  });
+});
+
+describe("calendrier : les mois défilent", () => {
+  it("trois décisions par an, à des mois distincts espacés d'au moins deux mois", () => {
+    for (let g = 0; g < 200; g++) {
+      const m = moisDesDecisions(3, mulberry32(g));
+      expect(m).toHaveLength(3);
+      expect(m.every((x) => x >= 1 && x <= 12)).toBe(true);
+      expect(m[1] - m[0]).toBeGreaterThanOrEqual(2);
+      expect(m[2] - m[1]).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it("une année : 3 décisions et au plus 2 événements, dans l'ordre des mois", () => {
+    const c = contenuTest({ evenements: [breve("e1"), breve("e2"), breve("e3")], regles: { evenements: { maxParAn: 2, probaParMois: 1, delaiAvantRepetition: 0, maxOccurrences: 99, delaiEntreAlertesMemeJauge: 0 } } });
+    const { etat, arrets } = jouerEnNotant(c, { graine: 4, nbAnnees: 2 });
+    for (const annee of [2027, 2028]) {
+      const de = arrets.filter((a) => a.annee === annee);
+      expect(de.filter((a) => a.type === "decision")).toHaveLength(3);
+      expect(de.filter((a) => a.type === "evenement")).toHaveLength(2);
+      const mois = de.map((a) => a.mois);
+      expect([...mois].sort((x, y) => x - y)).toEqual(mois);
+    }
+    expect(etat.historique).toHaveLength(2);
+    expect(etat.termine).toBe(true);
+  });
+
+  it("sans événement tiré, l'année ne compte que les décisions", () => {
+    const c = contenuTest({ evenements: [breve("e1")] });
+    const { arrets } = jouerEnNotant(c, { graine: 2, nbAnnees: 1 });
+    expect(arrets.map((a) => a.type)).toEqual(["decision", "decision", "decision"]);
+  });
+});
+
+describe("événements provoqués par une décision", () => {
+  const avecSuite = (chance: number) =>
+    contenuTest({
+      cartes: [{ ...carteTest("k"), poids: 1000 }, ...cartesTest()],
+      evenements: [breve("suite", { poids: 0, declenchePar: [{ carte: "k", options: ["x"], chance, delai: [2, 3] }] })],
+    });
+
+  it("peut survenir quelques mois plus tard, et l'on sait quelle décision l'a provoqué", () => {
+    const c = avecSuite(1);
+    const { etat } = jouerEnNotant(c, { graine: 1, nbAnnees: 2 }, "x");
+    const d = etat.decisions.find((x) => x.carte === "k")!;
+    const evt = etat.evenements.find((e) => e.id === "suite")!;
+    expect(evt.cause).toMatchObject({ carte: "k", annee: d.annee, mois: d.mois });
+    const ecart = evt.annee * 12 + evt.mois - (d.annee * 12 + d.mois);
+    expect(ecart).toBeGreaterThanOrEqual(2);
+    expect(ecart).toBeLessThanOrEqual(3 + 1); // +1 : décalé si un autre événement occupe le mois
+  });
+
+  it("ne survient pas si l'option n'est pas celle qui le provoque, ni si la chance est nulle", () => {
+    expect(jouerEnNotant(avecSuite(1), { graine: 1, nbAnnees: 2 }, "y").etat.evenements.some((e) => e.id === "suite")).toBe(false);
+    expect(jouerEnNotant(avecSuite(0), { graine: 1, nbAnnees: 2 }, "x").etat.evenements.some((e) => e.id === "suite")).toBe(false);
+  });
+
+  it("n'est jamais certain : la chance est respectée sur de nombreuses parties", () => {
+    const c = avecSuite(0.5);
+    let n = 0;
+    for (let g = 0; g < 120; g++) if (jouerEnNotant(c, { graine: g, nbAnnees: 2 }, "x").etat.evenements.some((e) => e.id === "suite")) n++;
+    expect(n).toBeGreaterThan(35);
+    expect(n).toBeLessThan(85);
+  });
+});
+
+describe("crises", () => {
+  const c = contenuTest({ evenements: [crise("k1")], regles: { evenements: { maxParAn: 1, probaParMois: 1, delaiAvantRepetition: 0, maxOccurrences: 99, delaiEntreAlertesMemeJauge: 0 } } });
+
+  it("une crise appelle un vote parmi ses réponses ; le choc s'applique quoi qu'il arrive", () => {
+    const etat = creerPartie(c, { graine: 3, nbAnnees: 1 });
+    const etape = prochaineEtape(c, etat)!;
+    expect(etape.type).toBe("evenement");
+    expect(etapeAVoter(etape)).toBe(true);
+    expect(effectifs(c, etat).e).toBe(45); // choc : −5
+    const carte = carteDeLEtape(c, etape)!;
+    expect(carte.options.map((o) => o.id)).toEqual(["r1", "r2"]);
+    const res = appliquerChoix(c, etat, { options: ["r2"] });
+    expect(res.decision.crise).toBe(true);
+    expect(etat.evenements[0].reponse).toBe(0);
+    expect(effectifs(c, etat).b).toBe(55);
+    // Les réponses aux crises s'ajoutent aux trois décisions de l'année.
+    const suite = prochaineEtape(c, etat)!;
+    expect(suite.type).toBe("decision");
+  });
+
+  it("sans intervention, la crise passe sans réponse", () => {
+    const etat = trajectoireSansIntervention(c, 3, 1);
+    expect(etat.evenements).toHaveLength(1);
+    expect(etat.decisions).toHaveLength(0);
   });
 });
 
 describe("seuils d'alerte", () => {
-  it("une jauge sous le seuil déclenche l'événement lié l'année suivante", () => {
-    const c = contenuTest({
-      evenements: [
-        { id: "alerte-eco", titre: "Alerte économie", description: "Événement d'alerte de test.", nature: "negatif", declencheur: { jauge: "economie" }, effets: [{ cible: "e", valeur: 1, type: "immediat", hypothese: H }] },
-        { id: "normal", titre: "Événement normal", description: "Événement aléatoire de test.", nature: "positif", effets: [{ cible: "e", valeur: 1, type: "immediat", hypothese: H }] },
-      ],
-    });
-    const etat = creerPartie(c, { graine: 3, nbTours: 5 });
-    etat.base = { a: 20, b: 20, c: 20, d: 20, e: 20 }; // toutes les jauges à 20 < 35
-    const t1 = commencerTour(c, etat);
-    expect(t1.evenement?.id).toBe("normal"); // pas encore d'alerte programmée
-    terminerTour(c, etat);
-    expect(etat.alertesProgrammees.some((a) => a.jauge === "economie" && a.annee === 2028)).toBe(true);
-    const t2 = commencerTour(c, etat);
-    expect(t2.evenement?.id).toBe("alerte-eco");
-    expect(t2.evenement?.alerte).toBe("economie");
+  it("une jauge sous le seuil provoque l'événement lié au début de l'année suivante", () => {
+    const c = contenuTest({ evenements: [breve("alerte-eco", { alerte: "economie" })] });
+    const etat = creerPartie(c, { graine: 3, nbAnnees: 3 });
+    etat.base = { a: 20, b: 20, c: 20, d: 20, e: 20, popularite: 50 }; // jauges du pays à 20 < 35
+    while (prochaineEtape(c, etat)) appliquerChoix(c, etat, { options: ["x"] });
+    terminerAnnee(c, etat);
+    const p = etat.planifies.find((x) => x.alerte === "economie")!;
+    expect(p.moisAbsolu).toBeGreaterThanOrEqual(2028 * 12);
+    expect(p.moisAbsolu).toBeLessThan(2028 * 12 + 4);
+    let etape = prochaineEtape(c, etat);
+    while (etape && etape.type !== "evenement") {
+      appliquerChoix(c, etat, { options: ["x"] });
+      etape = prochaineEtape(c, etat);
+    }
+    expect(etape?.evenement).toMatchObject({ id: "alerte-eco", alerte: "economie" });
   });
 
   it("pas d'alerte au-dessus du seuil", () => {
-    const c = contenuTest();
-    const etat = creerPartie(c, { graine: 3, nbTours: 5 });
-    commencerTour(c, etat);
-    terminerTour(c, etat);
-    expect(etat.alertesProgrammees).toHaveLength(0);
+    const c = contenuTest({ evenements: [breve("alerte-eco", { alerte: "economie" })] });
+    const etat = creerPartie(c, { graine: 3, nbAnnees: 3 });
+    while (prochaineEtape(c, etat)) appliquerChoix(c, etat, { options: ["z"] });
+    terminerAnnee(c, etat);
+    expect(etat.planifies).toHaveLength(0);
+  });
+});
+
+describe("référendum et popularité", () => {
+  it("le risque de rejet baisse quand la popularité monte, dans des bornes", () => {
+    expect(risqueRejetReferendum(10)).toBe(0.6);
+    expect(risqueRejetReferendum(80)).toBe(0.05);
+    expect(risqueRejetReferendum(30)).toBeGreaterThan(risqueRejetReferendum(45));
+  });
+
+  it("un référendum rejeté n'applique pas la mesure et affaiblit le président", () => {
+    const c = contenuTest({ cartes: [{ ...carteTest("r"), options: [{ id: "x", titre: "Référendum", explication: "Le peuple tranche.", outil: "referendum", effets: [effet("a", 20)] }, carteTest("r").options[1]] }] });
+    let rejets = 0;
+    for (let g = 0; g < 60; g++) {
+      const etat = creerPartie(c, { graine: g, nbAnnees: 1 });
+      etat.base.popularite = 20;
+      prochaineEtape(c, etat);
+      const res = appliquerChoix(c, etat, { options: ["x"] });
+      if (res.decision.rejete) {
+        rejets++;
+        expect(effectifs(c, etat).a).toBe(50);
+        expect(effectifs(c, etat).popularite).toBeLessThan(20);
+      } else expect(effectifs(c, etat).a).toBe(70);
+    }
+    expect(rejets).toBeGreaterThan(15); // risque de 60 % avec 20 % de popularité
+    expect(rejets).toBeLessThan(55);
+  });
+});
+
+describe("promesses de campagne", () => {
+  const promesse = (id: string, carte: string, demago: number, extra: Record<string, unknown> = {}) => ({
+    id,
+    texte: `Promesse ${id} de test.`,
+    realite: "La réalité chiffrée de test.",
+    source: "Test",
+    url: "https://example.org",
+    demago,
+    popularite: 5,
+    carte,
+    options: ["x"],
+    ...extra,
+  });
+  const c = contenuTest({ cartes: [...cartesTest(), { ...carteTest("promise"), poids: 0.001 }], promesses: [promesse("p1", "promise", 3), promesse("p2", "c1", 1)] });
+
+  it("chaque promesse faite rend plus populaire au départ, sans dépasser le plafond", () => {
+    expect(populariteDepart(c, [])).toBe(44);
+    expect(populariteDepart(c, ["p1"])).toBe(49);
+    expect(creerPartie(c, { graine: 1, nbAnnees: 1, promesses: ["p1", "p2"] }).base.popularite).toBe(54);
+  });
+
+  it("une promesse est forcément mise sur la table pendant le mandat", () => {
+    for (let g = 0; g < 10; g++) {
+      const { etat } = jouerEnNotant(c, { graine: g, nbAnnees: 1, promesses: ["p1"] }, "y");
+      const d = etat.decisions.find((x) => x.carte === "promise");
+      expect(d?.promesse).toEqual({ id: "p1", tenue: false });
+    }
+  });
+
+  it("tenir sa promesse ne coûte rien ; la trahir fait chuter la popularité", () => {
+    const tenue = jouerEnNotant(c, { graine: 5, nbAnnees: 1, promesses: ["p1"] }, "x").etat;
+    const trahie = jouerEnNotant(c, { graine: 5, nbAnnees: 1, promesses: ["p1"] }, "y").etat;
+    expect(tenue.decisions.find((d) => d.carte === "promise")?.promesse?.tenue).toBe(true);
+    expect(trahie.historique[0].indicateurs.popularite).toBeLessThan(tenue.historique[0].indicateurs.popularite);
+  });
+
+  it("le démagomètre mesure la démagogie promise parmi celle proposée", () => {
+    const etat = jouerPartie(c, { graine: 2, nbAnnees: 1, promesses: ["p1"], promessesProposees: ["p1", "p2"] }, (carte) => ({ options: [carte.options[0].id] }));
+    const b = bilanFinal(c, etat);
+    expect(b.demagometre).toBe(75); // 3 sur 3 + 1
+    expect(b.promesses).toEqual([
+      { id: "p1", faite: true, tenue: true },
+      { id: "p2", faite: false, tenue: undefined },
+    ]);
   });
 });
 
@@ -179,27 +376,28 @@ describe("tirage pondéré", () => {
   it("une carte de poids 0 n'est jamais tirée en partie", () => {
     const c = contenuTest();
     for (let g = 0; g < 20; g++) {
-      const etat = jouerPartie(c, { graine: g, nbTours: 30, poids: { cartes: { c0: 0, c1: 0 } } }, () => ({ options: ["x"] }));
+      const etat = jouerPartie(c, { graine: g, nbAnnees: 10, poids: { cartes: { c0: 0, c1: 0 } } }, () => ({ options: ["x"] }));
       expect(etat.cartesJouees).not.toContain("c0");
       expect(etat.cartesJouees).not.toContain("c1");
     }
   });
 
-  it("la graine rend le tirage reproductible", () => {
+  it("la graine rend la partie reproductible", () => {
     const c = contenuTest();
-    const p1 = jouerPartie(c, { graine: 42, nbTours: 20 }, () => ({ options: ["x"] }));
-    const p2 = jouerPartie(c, { graine: 42, nbTours: 20 }, () => ({ options: ["x"] }));
-    const p3 = jouerPartie(c, { graine: 43, nbTours: 20 }, () => ({ options: ["x"] }));
+    const p1 = jouerPartie(c, { graine: 42, nbAnnees: 5 }, () => ({ options: ["x"] }));
+    const p2 = jouerPartie(c, { graine: 42, nbAnnees: 5 }, () => ({ options: ["x"] }));
+    const p3 = jouerPartie(c, { graine: 43, nbAnnees: 5 }, () => ({ options: ["x"] }));
     expect(p1.cartesJouees).toEqual(p2.cartesJouees);
+    expect(p1.decisions.map((d) => d.mois)).toEqual(p2.decisions.map((d) => d.mois));
     expect(p1.cartesJouees).not.toEqual(p3.cartesJouees);
     expect(flux(1, "x", 2)()).toBe(flux(1, "x", 2)());
   });
 
-  it("une carte n'est jamais tirée deux fois et le même thème n'est pas tiré deux tours de suite", () => {
+  it("une carte n'est jamais tirée deux fois, ni le même ministère deux fois de suite", () => {
     const c = contenuTest();
-    const etat = jouerPartie(c, { graine: 9, nbTours: 30 }, () => ({ options: ["y"] }));
+    const etat = jouerPartie(c, { graine: 9, nbAnnees: 10 }, () => ({ options: ["y"] }));
     expect(new Set(etat.cartesJouees).size).toBe(etat.cartesJouees.length);
-    for (let i = 1; i < etat.themes.length; i++) expect(etat.themes[i]).not.toBe(etat.themes[i - 1]);
+    for (let i = 1; i < etat.ministeres.length; i++) expect(etat.ministeres[i]).not.toBe(etat.ministeres[i - 1]);
   });
 });
 
@@ -216,28 +414,28 @@ describe("règles de vote", () => {
     expect(r.egalite).toBe(false);
   });
 
-  it("égalité : tirage au sort parmi les ex aequo, reproductible", () => {
-    const r1 = resoudreVote(unique, ["x", "y", "x", "y", "z"], mulberry32(5));
-    const r2 = resoudreVote(unique, ["x", "y", "x", "y", "z"], mulberry32(5));
-    expect(r1.egalite).toBe(true);
-    expect(r1.exAequo.sort()).toEqual(["x", "y"]);
-    expect(["x", "y"]).toContain(r1.options[0]);
-    expect(r1.options).toEqual(r2.options);
+  it("égalité au premier tour : les ex aequo sont identifiés pour le second tour", () => {
+    const r = resoudreVote(unique, ["x", "y", "x", "y", "z"], mulberry32(5));
+    expect(r.egalite).toBe(true);
+    expect([...r.exAequo].sort()).toEqual(["x", "y"]);
+  });
+
+  it("second tour : la majorité départage les ex aequo, sinon le sort", () => {
+    const premier = resoudreVote(unique, ["x", "y", "x", "y", "z"], mulberry32(5));
+    const r = resoudreSecondTour(premier, ["y", "y", "x", "z"], mulberry32(1));
+    expect(r.options).toEqual(["y"]);
+    expect(r.egalite).toBe(false);
+    expect(r.secondTour?.decompte).toEqual({ x: 1, y: 2 });
     const gagnants = new Set<string>();
-    for (let s = 0; s < 50; s++) gagnants.add(resoudreVote(unique, ["x", "y"], mulberry32(s)).options[0]);
+    for (let s = 0; s < 40; s++) gagnants.add(resoudreSecondTour(premier, ["x", "y"], mulberry32(s)).options[0]);
     expect(gagnants).toEqual(new Set(["x", "y"]));
   });
 
-  it("cumulable : les deux options les plus votées sont retenues", () => {
-    const r = resoudreVote(cumulable, ["x", "x", "x", "z", "z", "y"], mulberry32(1));
-    expect(r.options.sort()).toEqual(["x", "z"]);
-  });
-
-  it("cumulable : égalité pour la deuxième place tranchée au sort", () => {
-    const r = resoudreVote(cumulable, ["x", "x", "y", "z"], mulberry32(2));
-    expect(r.options[0]).toBe("x");
-    expect(["y", "z"]).toContain(r.options[1]);
-    expect(r.egalite).toBe(true);
+  it("cumulable : les deux options les plus votées ; le second tour départage la deuxième place", () => {
+    expect(resoudreVote(cumulable, ["x", "x", "x", "z", "z", "y"], mulberry32(1)).options.sort()).toEqual(["x", "z"]);
+    const premier = resoudreVote(cumulable, ["x", "x", "y", "z"], mulberry32(2));
+    expect(premier.egalite).toBe(true);
+    expect(resoudreSecondTour(premier, ["z", "z", "y"], mulberry32(1)).options).toEqual(["x", "z"]);
   });
 
   it("curseur : la valeur médiane est retenue", () => {
@@ -257,163 +455,57 @@ describe("règles de vote", () => {
     expect(r.aucunVote).toBe(true);
     expect(r.options).toHaveLength(1);
   });
-
-  it("égalité : la voix de la présidence compte double", () => {
-    for (let s = 0; s < 20; s++) {
-      const r = resoudreVote(unique, ["x", "y", "x", "y", "z"], mulberry32(s), "y");
-      expect(r.options).toEqual(["y"]);
-      expect(r.departagePresident).toBe(true);
-      expect(r.egalite).toBe(false);
-    }
-    // Sans égalité, la présidence n'a qu'une voix.
-    const sans = resoudreVote(unique, ["x", "x", "y"], mulberry32(1), "y");
-    expect(sans.options).toEqual(["x"]);
-    expect(sans.departagePresident).toBe(false);
-  });
-
-  it("égalité persistante (présidence hors du groupe à égalité) : le sort tranche", () => {
-    const r = resoudreVote(unique, ["x", "y", "x", "y", "z"], mulberry32(5), "z");
-    expect(r.departagePresident).toBe(false);
-    expect(r.egalite).toBe(true);
-    expect(["x", "y"]).toContain(r.options[0]);
-  });
-
-  it("cumulable : la présidence départage la deuxième place", () => {
-    const r = resoudreVote(cumulable, ["x", "x", "y", "z"], mulberry32(2), "z");
-    expect(r.options).toEqual(["x", "z"]);
-    expect(r.departagePresident).toBe(true);
-  });
-
-  it("curseur : avec un nombre pair de votes, la voix de la présidence donne la médiane", () => {
-    const r = resoudreVote(curseur, [62, 66], mulberry32(1), 66);
-    expect(r.valeur).toBe(66);
-    expect(r.departagePresident).toBe(true);
-    expect(resoudreVote(curseur, [62, 66, 64], mulberry32(1), 66).valeur).toBe(64); // impair : médiane normale
-  });
-
-  it("élection de la présidence : majorité, égalité au sort, personne ne vote", () => {
-    expect(resoudreElection(["Léa", "Sam", "Noé"], ["Sam", "Léa", "Sam"], mulberry32(1))).toMatchObject({ elu: "Sam", egalite: false, nbVotes: 3 });
-    const egal = resoudreElection(["Léa", "Sam"], ["Sam", "Léa", "Inconnu"], mulberry32(4));
-    expect(egal.egalite).toBe(true);
-    expect(egal.nbVotes).toBe(2);
-    expect(["Léa", "Sam"]).toContain(egal.elu);
-    const vide = resoudreElection(["Léa", "Sam"], [], mulberry32(4));
-    expect(vide.aucunVote).toBe(true);
-    expect(["Léa", "Sam"]).toContain(vide.elu);
-    expect(resoudreElection([], [], mulberry32(4)).elu).toBeUndefined();
-  });
 });
 
 describe("trajectoire sans intervention", () => {
   it("rejoue la même graine sans décision, de façon reproductible", () => {
     const c = chargerContenu();
-    const a = trajectoireSansIntervention(c, 77, 20);
-    const b = trajectoireSansIntervention(c, 77, 20);
+    const a = trajectoireSansIntervention(c, 77, 5);
+    const b = trajectoireSansIntervention(c, 77, 5);
     expect(a.decisions).toHaveLength(0);
     expect(a.cartesJouees).toHaveLength(0);
-    expect(a.historique).toHaveLength(20);
+    expect(a.historique).toHaveLength(5);
     expect(a.historique.map((h) => h.jauges)).toEqual(b.historique.map((h) => h.jauges));
   });
 
-  it("voit passer les mêmes événements aléatoires qu'une partie jouée (hors alertes)", () => {
-    const c = chargerContenu();
-    const sans = trajectoireSansIntervention(c, 5, 30);
-    const jouee = jouerPartie(c, { graine: 5, nbTours: 30 }, (carte) => ({ options: [carte.options[0].id], valeur: carte.options[0].valeur }));
-    const aleatoires = (e: typeof sans) => e.evenements.filter((x) => !x.alerte).map((x) => `${x.annee}:${x.id}`);
-    // Les années sans alerte dans les deux parties tirent le même événement.
-    const anneesAlerte = new Set([...sans.evenements, ...jouee.evenements].filter((x) => x.alerte).map((x) => x.annee));
-    const filtre = (l: string[]) => l.filter((x) => !anneesAlerte.has(Number(x.split(":")[0])));
-    expect(filtre(aleatoires(sans)).slice(0, 5)).toEqual(filtre(aleatoires(jouee)).slice(0, 5));
+  it("voit passer les mêmes événements aléatoires qu'une partie jouée", () => {
+    const c = contenuTest({ evenements: [breve("e1"), breve("e2"), breve("e3")], regles: { evenements: { maxParAn: 2, probaParMois: 0.2, delaiAvantRepetition: 0, maxOccurrences: 99, delaiEntreAlertesMemeJauge: 0 } } });
+    const liste = (e: EtatPartie) => e.evenements.map((x) => `${x.annee}-${x.mois}:${x.id}`);
+    const sans = trajectoireSansIntervention(c, 5, 5);
+    const jouee = jouerPartie(c, { graine: 5, nbAnnees: 5 }, () => ({ options: ["z"] }));
+    expect(liste(sans).length).toBeGreaterThan(2);
+    expect(liste(jouee)).toEqual(liste(sans));
   });
 
-  it("le bilan final compare la partie et la trajectoire sans intervention", () => {
+  it("le bilan final compare le mandat, la trajectoire sans intervention et l'héritage", () => {
     const c = chargerContenu();
-    const etat = jouerPartie(c, { graine: 12, nbTours: 20 }, (carte) => ({ options: [carte.options[1].id], valeur: carte.options[1].valeur }));
+    const etat = jouerPartie(c, { graine: 12, nbAnnees: 5 }, (carte) => ({ options: [carte.options[1].id], valeur: carte.options[1].valeur }));
     const b = bilanFinal(c, etat);
-    expect(b.anneeFin).toBe(2046);
+    expect(b.anneeFin).toBe(2031);
+    expect(b.heritage.annee).toBe(2041);
+    expect(Object.keys(b.jaugesSansIntervention)).toHaveLength(7);
     expect(b.decisionsMarquantes.length).toBeLessThanOrEqual(5);
-    expect(b.enseignements.length).toBeGreaterThanOrEqual(3);
+    expect(b.enseignements.length).toBeGreaterThanOrEqual(2);
     expect(b.enseignements.length).toBeLessThanOrEqual(4);
-    expect(Object.keys(b.jaugesSansIntervention)).toHaveLength(8);
   });
 });
 
 describe("simulation", () => {
-  it("simulate est reproductible et compte les tirages", () => {
+  it("simulate est reproductible et compte trois décisions par an", () => {
     const c = chargerContenu();
-    const r1 = simulate(c, 20, 1, undefined, "aleatoire", 20);
-    const r2 = simulate(c, 20, 1, undefined, "aleatoire", 20);
+    const r1 = simulate(c, 20, 1, undefined, "aleatoire", 5);
+    const r2 = simulate(c, 20, 1, undefined, "aleatoire", 5);
     expect(r1.jaugesFin).toEqual(r2.jaugesFin);
     const tirees = Object.values(r1.cartes).reduce((s, x) => s + x, 0);
-    expect(tirees).toBe(20 * 20);
+    expect(tirees).toBe(20 * 5 * 3);
+    expect(r1.evenementsParPartie).toBeLessThanOrEqual(10);
     expect(r1.synthese.length).toBeGreaterThan(20);
   });
 
   it("une carte désactivée (poids 0) n'est jamais tirée en simulation", () => {
     const c = chargerContenu();
-    const r = simulate(c, 30, 4, { cartes: { "retraites-age": 0 } }, "aleatoire", 30);
+    const r = simulate(c, 30, 4, { cartes: { "retraites-age": 0 } }, "aleatoire", 10);
     expect(r.cartes["retraites-age"]).toBe(0);
-  });
-});
-
-describe("imprévus", () => {
-  const imprevu = (id: string, si: unknown, proba = 1) => ({
-    id,
-    titre: `Imprévu ${id}`,
-    description: "Une conséquence inattendue de test.",
-    nature: "negatif",
-    proba,
-    si,
-    effets: [{ cible: "d", valeur: -20, type: "durable", hypothese: H }],
-  });
-
-  it("caché pendant le vote, révélé et appliqué une fois la décision prise", () => {
-    const c = contenuTest({ cartes: [carteTest("k")], evenements: [], imprevus: [imprevu("aie", { carte: "k", options: ["x"] })] });
-    const e = creerPartie(c, { graine: 3, nbTours: 5 });
-    const tour = commencerTour(c, e);
-    // Les impacts affichés pendant le vote ignorent l'imprévu (seul « a » bouge pour l'option x).
-    expect(tour.impactsOptions.x.economie).toBeGreaterThan(0);
-    const res = appliquerChoix(c, e, { options: ["x"] });
-    expect(res.decision.imprevu?.id).toBe("aie");
-    expect(res.decision.imprevu!.impacts.economie).toBeLessThan(0);
-    expect(res.changements.map((x) => x.id)).toContain("d");
-    expect(e.imprevus).toEqual(["aie"]);
-  });
-
-  it("ne concerne que l'option liée, et survient au plus une fois par partie", () => {
-    const c = contenuTest({ cartes: [carteTest("k"), carteTest("l", "sante")], evenements: [], imprevus: [imprevu("aie", { carte: "k", options: ["x"] }), imprevu("theme", { theme: "sante" })] });
-    const e = creerPartie(c, { graine: 3, nbTours: 5 });
-    commencerTour(c, e);
-    const carte = e.courant!.carte!;
-    const res = appliquerChoix(c, e, { options: ["y"] });
-    expect(res.decision.imprevu?.id).toBe(carte === "l" ? "theme" : undefined);
-    terminerTour(c, e);
-    commencerTour(c, e);
-    const res2 = appliquerChoix(c, e, { options: ["x"] });
-    expect(res2.decision.imprevu?.id).toBe(e.courant!.carte === "k" ? "aie" : "theme");
-    expect(new Set(e.imprevus).size).toBe(e.imprevus.length);
-  });
-
-  it("le tirage dépend de la graine et de la probabilité", () => {
-    const c = contenuTest({ cartes: [carteTest("k")], evenements: [], imprevus: [imprevu("rare", { carte: "k" }, 0.5)] });
-    const issues = Array.from({ length: 200 }, (_, g) => {
-      const e = creerPartie(c, { graine: g, nbTours: 1 });
-      commencerTour(c, e);
-      return appliquerChoix(c, e, { options: ["x"] }).decision.imprevu?.id;
-    });
-    const n = issues.filter(Boolean).length;
-    expect(n).toBeGreaterThan(70);
-    expect(n).toBeLessThan(130);
-    const rejoue = () => {
-      const e = creerPartie(c, { graine: 7, nbTours: 1 });
-      commencerTour(c, e);
-      return appliquerChoix(c, e, { options: ["x"] }).decision.imprevu?.id;
-    };
-    expect(rejoue()).toBe(rejoue());
-  });
-
-  it("une référence inconnue est signalée", () => {
-    expect(() => contenuTest({ imprevus: [imprevu("faux", { carte: "absente" })] })).toThrow(/imprevus.json › « faux » › si : carte inconnue « absente »/);
   });
 });
 
@@ -421,11 +513,19 @@ describe("validation du contenu", () => {
   it("le vrai contenu est valide et assez fourni", () => {
     const c = chargerContenu();
     expect(c.cartes.length).toBeGreaterThanOrEqual(36);
-    expect(c.evenements.filter((e) => !e.declencheur).length).toBeGreaterThanOrEqual(16);
-    for (const carte of c.cartes) for (const o of carte.options) for (const e of o.effets) expect(e.hypothese.length).toBeGreaterThan(10);
+    expect(c.evenements.filter((e) => e.gravite === "breve" && !e.alerte && e.poids > 0).length).toBeGreaterThanOrEqual(16);
+    expect(c.evenements.filter((e) => e.gravite === "crise").length).toBeGreaterThanOrEqual(3);
+    expect(c.evenements.filter((e) => e.declenchePar.length).length).toBeGreaterThanOrEqual(30);
+    expect(c.promesses.length).toBeGreaterThanOrEqual(c.regles.campagne.nbPromesses);
+    for (const carte of c.cartes) {
+      expect(carte.flash).toBeTruthy();
+      for (const o of carte.options) for (const e of o.effets) expect(e.hypothese.length).toBeGreaterThan(10);
+    }
+    const parMinistere = new Map<string, number>();
+    for (const carte of c.cartes) parMinistere.set(carte.ministere, (parMinistere.get(carte.ministere) ?? 0) + 1);
+    expect(parMinistere.size).toBe(12);
+    for (const n of parMinistere.values()) expect(n).toBeGreaterThanOrEqual(2);
     for (const i of Object.values(c.indicateurs)) expect(i.source).toBeTruthy();
-    expect(c.imprevus.length).toBeGreaterThanOrEqual(40);
-    expect(c.imprevus.some((i) => i.nature === "positif")).toBe(true);
   });
 
   it("une erreur indique le fichier, la carte et le champ", () => {
@@ -442,6 +542,14 @@ describe("validation du contenu", () => {
   it("une erreur de schéma indique le chemin du champ", () => {
     const mauvaise = { ...carteTest("sans-type"), type: "multiple" };
     expect(() => contenuTest({ cartes: [mauvaise] })).toThrow(/cartes\.json › « sans-type » › type/);
+  });
+
+  it("une suite qui pointe vers une carte inconnue est signalée", () => {
+    expect(() => contenuTest({ evenements: [breve("e", { declenchePar: [{ carte: "absente", chance: 0.5 }] })] })).toThrow(/evenements\.json › « e » › declenchePar : carte inconnue « absente »/);
+  });
+
+  it("une crise sans réponses est refusée", () => {
+    expect(() => contenuTest({ evenements: [crise("k", { reponses: [] })] })).toThrow(/une crise propose 2 à 4 réponses/);
   });
 });
 

@@ -3,7 +3,7 @@ import Backoffice, { ConnexionAdmin } from "@/components/Backoffice";
 import { codeRequis, COOKIE_ADMIN, verifierJetonSession } from "@/lib/admin";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Faillite ! · Backoffice", robots: { index: false } };
+export const metadata = { title: "À vous l'Élysée ! · Backoffice", robots: { index: false } };
 
 /** La session est vérifiée côté serveur avant d'afficher quoi que ce soit. */
 export default async function PageAdmin() {

@@ -1,6 +1,7 @@
 import { chargerContenu } from "@/content";
 import { poidsParDefaut } from "@/engine";
 import { routeAdmin } from "@/lib/garde-admin";
+import { MINISTERES_LIBELLES } from "@/lib/libelles";
 import { json } from "@/lib/http";
 import { modifierPoids, poidsActuels } from "@/lib/poids";
 import { derniereSimulation } from "@/lib/simulation-admin";
@@ -13,8 +14,8 @@ export const GET = routeAdmin(async () => {
   const defaut = poidsParDefaut(c);
   const [actuels, sim] = await Promise.all([poidsActuels(), derniereSimulation()]);
   return json({
-    cartes: c.cartes.map((x) => ({ id: x.id, theme: x.theme, type: x.type, titre: x.titre, poids: actuels.cartes[x.id], defaut: defaut.cartes[x.id], tirages: sim?.cartes[x.id] ?? null, conditions: x.conditions.length > 0 })),
-    evenements: c.evenements.map((x) => ({ id: x.id, nature: x.nature, alerte: x.declencheur ? c.jauges[x.declencheur.jauge].nom : null, titre: x.titre, poids: actuels.evenements[x.id], defaut: defaut.evenements[x.id], tirages: sim?.evenements[x.id] ?? null })),
+    cartes: c.cartes.map((x) => ({ id: x.id, theme: MINISTERES_LIBELLES[x.ministere], type: x.type, titre: x.titre, poids: actuels.cartes[x.id], defaut: defaut.cartes[x.id], tirages: sim?.cartes[x.id] ?? null, conditions: x.conditions.length > 0 })),
+    evenements: c.evenements.map((x) => ({ id: x.id, nature: x.gravite === "crise" ? "crise" : x.declenchePar.length && !x.poids ? "suite de décision" : x.nature, alerte: x.alerte ? c.jauges[x.alerte].nom : null, titre: x.titre, poids: actuels.evenements[x.id], defaut: defaut.evenements[x.id], tirages: sim?.evenements[x.id] ?? null })),
     simulationDu: sim?.date ?? null,
   });
 });

@@ -6,8 +6,8 @@ import { stockage } from "./stockage";
 
 const CLE = "admin:simulation";
 
-export async function lancerSimulation(n: number, graine: number, mode: ModeSimulation, nbTours: number, email: string) {
-  const r = simulate(chargerContenu(), n, graine, await poidsActuels(), mode, nbTours);
+export async function lancerSimulation(n: number, graine: number, mode: ModeSimulation, nbAnnees: number, email: string) {
+  const r = simulate(chargerContenu(), n, graine, await poidsActuels(), mode, nbAnnees);
   const sauvegarde = { ...r, lancePar: email };
   await stockage().set(CLE, JSON.stringify(sauvegarde));
   return sauvegarde;

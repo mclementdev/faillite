@@ -1,26 +1,25 @@
 "use client";
 /**
- * Tutoriel du grand écran (6 étapes), affiché avant le premier tour ou depuis le salon.
+ * Tutoriel du grand écran (6 étapes), affiché avant la campagne ou depuis le salon.
  * Chaque étape montre les vrais composants du jeu avec des valeurs d'exemple.
  */
 import { useCallback, useEffect, useState, type CSSProperties, type ReactNode } from "react";
+import { MOIS_COURTS } from "@/lib/libelles";
 import type { Pastille, VueJauge } from "@/lib/types";
-import { IconeCadenas, IconeFleche, IconeHorloge, JaugeLigne, MentionDuree, Pastilles, Puce } from "./ui";
+import { BadgeMinistere, EtiquetteOutil, IconeAlerte, IconeElysee, IconeFleche, IconeHorloge, JaugeLigne, JaugePopularite, MentionBudget, MentionDuree, Pastilles } from "./ui";
 
 const P = (jauge: Pastille["jauge"], nom: string, niveau: Pastille["niveau"], delta?: number): Pastille => ({ jauge, nom, niveau, delta });
 
 const JAUGES_EXEMPLE: VueJauge[] = [
   { id: "economie", nom: "Économie", valeur: 52, tendance: "p1", alerte: false },
   { id: "finances", nom: "Finances publiques", valeur: 31, tendance: "n2", alerte: true },
-  { id: "ecologie", nom: "Écologie", valeur: 44, tendance: "0", alerte: false },
+  { id: "ecologie", nom: "Climat et nature", valeur: 44, tendance: "0", alerte: false },
 ];
 
-function Bloc({ children, style }: { children: ReactNode; style?: CSSProperties }) {
-  return <div style={{ background: "var(--surface)", borderRadius: 24, padding: "24px 28px", display: "flex", flexDirection: "column", gap: 14, ...style }}>{children}</div>;
-}
+const BLOC: CSSProperties = { background: "var(--surface)", border: "2px solid var(--trait)", borderRadius: 24, padding: "24px 28px", display: "flex", flexDirection: "column", gap: 14, boxShadow: "var(--ombre)" };
 
-function Etiquette({ children, couleur = "var(--moutarde)" }: { children: ReactNode; couleur?: string }) {
-  return <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 1.5, color: couleur }}>{children}</span>;
+function Bloc({ children, style }: { children: ReactNode; style?: CSSProperties }) {
+  return <div style={{ ...BLOC, ...style }}>{children}</div>;
 }
 
 interface Etape {
@@ -29,29 +28,29 @@ interface Etape {
   visuel: ReactNode;
 }
 
-function etapes(nbTours: number, anneeDepart: number, seuil: number): Etape[] {
-  const fin = anneeDepart + nbTours - 1;
+function etapes(nbAnnees: number, anneeDepart: number, seuil: number): Etape[] {
+  const fin = anneeDepart + nbAnnees - 1;
   return [
     {
-      titre: "Vous êtes le sénat",
+      titre: "Vous êtes le président",
       texte: (
         <>
-          De {anneeDepart} à {fin}, chaque année, une décision à prendre. Chacun vote en secret sur son téléphone, la majorité l&apos;emporte.
+          Ensemble, vous formez une seule équipe présidentielle. D&apos;abord la campagne, puis {nbAnnees === 5 ? "un quinquennat" : "deux quinquennats"}, de {anneeDepart} à {fin}.
           <br />
           <br />
-          Il n&apos;y a pas de « bonne » réponse : le jeu montre seulement les effets de vos choix, à court et à long terme.
+          Chacun vote en secret sur son téléphone, la majorité l&apos;emporte. Il n&apos;y a pas de « bonne » réponse : le jeu montre les effets de vos choix.
         </>
       ),
       visuel: (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0,1fr))", gap: 18 }}>
           {[
-            ["1", "Lisez", "La carte de l'année et ses options s'affichent ici."],
-            ["2", "Votez", "Sur votre téléphone, avant la fin du minuteur."],
-            ["3", "Découvrez", "Le choix du sénat et ce qui change, en vrais chiffres."],
+            ["1", "La campagne", "Promettre ou pas ? Chaque promesse vous rend populaire… jusqu'au jour où il faut la tenir."],
+            ["2", "Le mandat", "Les mois défilent : des décisions à prendre, des crises à gérer."],
+            ["3", "Le bilan", "Votre France, comparée à celle qu'on aurait eue sans rien faire."],
           ].map(([n, t, d]) => (
             <Bloc key={n} style={{ alignItems: "flex-start" }}>
-              <span className="titre" style={{ width: 64, height: 64, borderRadius: "50%", background: "var(--moutarde)", color: "var(--encre)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 36 }}>{n}</span>
-              <span className="titre" style={{ fontSize: 36, fontWeight: 800 }}>{t}</span>
+              <span className="titre" style={{ width: 60, height: 60, borderRadius: "50%", background: "var(--soleil)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 34 }}>{n}</span>
+              <span className="titre" style={{ fontSize: 34, fontWeight: 800 }}>{t}</span>
               <span style={{ fontSize: 22, color: "var(--texte-2)", lineHeight: 1.35 }}>{d}</span>
             </Bloc>
           ))}
@@ -59,103 +58,106 @@ function etapes(nbTours: number, anneeDepart: number, seuil: number): Etape[] {
       ),
     },
     {
-      titre: "Huit jauges pour suivre le pays",
+      titre: "Le pays, et votre popularité",
       texte: (
         <>
-          Économie, finances, paix sociale, écologie… Chaque jauge va de 0 à 100 et résume au moins cinq vrais indicateurs (chômage, dette, émissions…), partis des derniers chiffres officiels.
+          Six jauges de 0 à 100 résument le pays, chacune à partir de vrais indicateurs partis des derniers chiffres officiels.
           <br />
           <br />
-          Sous <b style={{ color: "var(--n2)" }}>{seuil}</b>, la jauge passe <b style={{ color: "var(--n2)" }}>en alerte</b> : une crise liée éclate l&apos;année suivante.
+          Sous <b style={{ color: "var(--n2-texte)" }}>{seuil}</b>, une jauge passe <b style={{ color: "var(--n2-texte)" }}>en alerte</b> : une crise peut éclater. La <b>popularité</b> réagit plus vite que tout le reste.
         </>
       ),
       visuel: (
-        <Bloc style={{ gap: 12 }}>
+        <Bloc style={{ gap: 10 }}>
+          <JaugePopularite j={{ id: "popularite", nom: "Popularité", valeur: 47, tendance: "n1", alerte: false }} seuil={seuil} />
           {JAUGES_EXEMPLE.map((j) => (
-            <JaugeLigne key={j.id} j={j} seuil={seuil} anneeSuivante={anneeDepart + 1} />
+            <JaugeLigne key={j.id} j={j} seuil={seuil} compacte />
           ))}
-          <span style={{ fontSize: 20, color: "var(--texte-3)", marginTop: 6 }}>Le bouton « Indicateurs chiffrés » affiche à tout moment les vrais chiffres derrière chaque jauge.</span>
+          <span style={{ fontSize: 19, color: "var(--texte-3)", marginTop: 6 }}>Le bouton « Les vrais chiffres » montre à tout moment les indicateurs derrière chaque jauge, dont la démographie.</span>
         </Bloc>
       ),
     },
     {
-      titre: "Lire une option",
+      titre: "Les mois défilent",
       texte: (
         <>
-          Les pastilles disent <b>quelles jauges bougent</b> et dans quel sens : <b className="fleche-p1">▲</b> hausse, <b className="fleche-n1">▼</b> baisse, doublées si l&apos;effet est fort.
+          Chaque année, <b>trois décisions</b> tombent à des moments imprévisibles, et <b>au plus deux événements</b> : bonnes nouvelles, coups durs ou crises.
           <br />
           <br />
-          Les chiffres exacts restent cachés jusqu&apos;au vote. Certaines mesures agissent tout de suite, d&apos;autres mettent des années à produire leurs effets.
+          Une crise exige une réponse immédiate. Et vos décisions passées peuvent en provoquer : le jeu vous dira laquelle.
         </>
       ),
       visuel: (
-        <Bloc style={{ border: "2px solid var(--trait)", gap: 16 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <span className="titre" style={{ width: 52, height: 52, flex: "none", borderRadius: "50%", border: "3px solid var(--moutarde)", color: "var(--moutarde)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 28 }}>A</span>
-            <span className="titre" style={{ fontWeight: 700, fontSize: 38, lineHeight: 1.05 }}>Former plus de médecins</span>
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+          <Bloc>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(12, minmax(0,1fr))", gap: 6 }}>
+              {MOIS_COURTS.map((m, i) => (
+                <div key={m} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+                  <div style={{ width: "100%", height: i === 4 ? 18 : 12, borderRadius: 99, background: i === 4 ? "var(--soleil)" : i < 4 ? "var(--texte-1)" : "var(--piste)" }} />
+                  <span style={{ fontSize: i === 4 ? 19 : 15, fontWeight: i === 4 ? 800 : 600, color: i <= 4 ? "var(--texte-1)" : "var(--gris)" }}>{m}</span>
+                </div>
+              ))}
+            </div>
+          </Bloc>
+          <div style={{ background: "var(--alerte-fond)", border: "3px solid var(--n2)", borderRadius: 24, padding: "20px 26px", display: "flex", flexDirection: "column", gap: 8 }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, alignSelf: "flex-start", fontSize: 18, fontWeight: 800, letterSpacing: 2, color: "#fff", background: "var(--n2-texte)", padding: "4px 12px", borderRadius: 8 }}>
+              <IconeAlerte /> CRISE · MAI {anneeDepart + 1}
+            </span>
+            <span className="titre" style={{ fontSize: 34, fontWeight: 800 }}>Plus d&apos;essence : les raffineries bloquées</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 19, fontWeight: 600, color: "var(--violet)", background: "var(--violet-fond)", borderRadius: 10, padding: "6px 12px", alignSelf: "flex-start" }}>
+              <IconeHorloge taille={18} /> Conséquence de votre décision de février {anneeDepart + 1} : Taxe carbone à 150 €/t
+            </span>
           </div>
-          <MentionDuree duree="plusieurs_annees" taille={20} />
-          <p style={{ margin: 0, fontSize: 24, lineHeight: 1.35, color: "var(--texte-2)" }}>Plus de places en faculté de médecine : les nouveaux médecins arrivent dans dix ans.</p>
-          <Pastilles liste={[P("services_publics", "Services", "p2"), P("finances", "Finances", "n1")]} taille={22} />
-          <span style={{ fontSize: 19, color: "var(--texte-3)" }}>Après le vote, les écarts sont chiffrés :</span>
-          <Pastilles liste={[P("services_publics", "Services", "p2", 3.4), P("finances", "Finances", "n1", -0.6)]} taille={20} chiffre />
-        </Bloc>
-      ),
-    },
-    {
-      titre: "Trois façons de voter",
-      texte: (
-        <>
-          La carte annonce toujours le type de vote. Vous pouvez changer d&apos;avis tant que le minuteur tourne.
-          <br />
-          <br />
-          En cas d&apos;égalité, la voix de la <b>présidence</b>, élue juste après ce tutoriel, compte double. Si l&apos;égalité persiste, ou si personne ne vote, le sort tranche.
-        </>
-      ),
-      visuel: (
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {[
-            ["unique" as const, "Un seul choix", "L'option qui a le plus de voix est appliquée."],
-            ["cumulable" as const, "Deux mesures retenues", "Les deux options les plus votées sont appliquées ensemble."],
-            ["curseur" as const, "Un curseur", "Chacun place le curseur ; la valeur médiane l'emporte."],
-          ].map(([type, t, d]) => (
-            <Bloc key={type} style={{ flexDirection: "row", alignItems: "center", gap: 22, padding: "20px 24px" }}>
-              <span style={{ flex: "none", whiteSpace: "nowrap" }}>
-                <Puce fond={type === "curseur" ? "var(--moutarde)" : "var(--craie)"}>{t}</Puce>
-              </span>
-              <span style={{ fontSize: 23, color: "var(--texte-2)" }}>{d}</span>
-            </Bloc>
-          ))}
-          <span style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 20, color: "var(--texte-3)" }}>
-            <IconeCadenas /> Vote anonyme : personne ne sait qui a voté quoi.
-          </span>
         </div>
       ),
     },
     {
-      titre: "Le monde ne vous attend pas",
+      titre: "Lire une décision",
       texte: (
         <>
-          Chaque année peut apporter un <b>événement</b> : bonne nouvelle ou coup dur. Des <b>imprévus</b> peuvent aussi suivre vos décisions : une conséquence que personne n&apos;avait annoncée, révélée seulement après le vote.
+          Chaque carte relève d&apos;un <b>ministère</b>. Chaque option dit <b>comment</b> elle s&apos;applique (décret, loi, budget, référendum…) et ce qu&apos;elle <b>coûte</b>.
           <br />
           <br />
-          Enfin, certaines décisions se combinent et produisent un effet en plus.
+          Les pastilles montrent les jauges touchées : <b className="fleche-p1">▲</b> hausse, <b className="fleche-n1">▼</b> baisse, doublées si l&apos;effet est fort. Les chiffres exacts arrivent après le vote.
         </>
       ),
       visuel: (
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <Bloc style={{ background: "var(--surface-2)", gap: 8 }}>
-            <Etiquette couleur="#FFB3BA">ÉVÉNEMENT · COUP DUR</Etiquette>
-            <span style={{ fontSize: 30, fontWeight: 700 }}>Choc pétrolier : le baril double en trois mois</span>
-            <Pastilles liste={[P("economie", "Économie", "n2"), P("paix_sociale", "Paix sociale", "n1")]} taille={19} />
+        <Bloc style={{ gap: 14 }}>
+          <BadgeMinistere ministere="sante" />
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <span className="titre" style={{ width: 50, height: 50, flex: "none", borderRadius: "50%", background: "var(--soleil)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 27 }}>A</span>
+            <span className="titre" style={{ fontWeight: 800, fontSize: 36, lineHeight: 1.05 }}>Former plus de médecins</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+            <EtiquetteOutil outil="decret" taille={19} />
+            <MentionDuree duree="plusieurs_annees" taille={18} />
+            <MentionBudget budget={2} taille={19} />
+          </div>
+          <p style={{ margin: 0, fontSize: 23, lineHeight: 1.35, color: "var(--texte-2)" }}>Plus de places en faculté de médecine : les nouveaux médecins arrivent dans dix ans.</p>
+          <Pastilles liste={[P("services_publics", "Services", "p2"), P("finances", "Finances", "n1")]} taille={21} />
+        </Bloc>
+      ),
+    },
+    {
+      titre: "Pendant le vote",
+      texte: (
+        <>
+          À mi-vote, un <b>flash info</b> peut tomber pour relancer le débat : 15 secondes de plus pour changer d&apos;avis.
+          <br />
+          <br />
+          En cas d&apos;<b>égalité</b>, un second tour rapide départage les ex aequo. Si l&apos;égalité persiste, le sort tranche.
+        </>
+      ),
+      visuel: (
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 20, background: "var(--texte-1)", color: "#fff", borderRadius: 20, padding: "18px 24px" }}>
+            <span className="titre" style={{ flex: "none", fontSize: 24, fontWeight: 800, background: "var(--n2-texte)", padding: "6px 12px", borderRadius: 8 }}>FLASH INFO</span>
+            <span style={{ fontSize: 23, lineHeight: 1.3, fontWeight: 600 }}>Les urgences de cinq hôpitaux ferment la nuit cet été faute de personnel.</span>
+          </div>
+          <Bloc style={{ flexDirection: "row", alignItems: "center", gap: 18, background: "#fff3cf", border: "3px solid var(--soleil)" }}>
+            <span className="titre" style={{ fontSize: 30, fontWeight: 800 }}>Égalité ! Second tour</span>
+            <span style={{ fontSize: 21, color: "var(--texte-2)" }}>20 secondes pour départager A et C.</span>
           </Bloc>
-          <Bloc style={{ background: "var(--surface-2)", border: "2px dashed var(--violet)", gap: 8 }}>
-            <Etiquette couleur="var(--violet)">IMPRÉVU · RÉVÉLÉ APRÈS LE VOTE</Etiquette>
-            <span style={{ fontSize: 30, fontWeight: 700 }}>Les trains du quotidien sont pris d&apos;assaut</span>
-            <Pastilles liste={[P("ecologie", "Écologie", "p1", 1.2), P("cohesion", "Cohésion", "p1", 0.8)]} taille={19} chiffre />
-          </Bloc>
-          <span style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 20, color: "var(--texte-3)" }}>
-            <IconeHorloge /> Les effets différés de vos anciens votes sont signalés quand ils arrivent.
-          </span>
         </div>
       ),
     },
@@ -163,34 +165,17 @@ function etapes(nbTours: number, anneeDepart: number, seuil: number): Etape[] {
       titre: `Rendez-vous en ${fin}`,
       texte: (
         <>
-          À la fin, le bilan compare votre France à celle qu&apos;on aurait eue <b style={{ color: "var(--violet)" }}>sans aucune intervention</b>, avec les mêmes événements.
+          Le bilan compare votre France à celle qu&apos;on aurait eue <b style={{ color: "var(--violet)" }}>sans aucune décision</b>, montre l&apos;héritage dix ans plus tard… et sort le <b>démagomètre</b> : vos promesses face aux vrais chiffres.
           <br />
           <br />
-          Gouverner, c&apos;est arbitrer : chaque gain se paie quelque part. Premier vote : élire la présidence du sénat.
+          Gouverner, c&apos;est arbitrer. Bonne campagne !
         </>
       ),
       visuel: (
-        <Bloc style={{ gap: 18 }}>
-          {[
-            ["Économie", 52, 61, 48],
-            ["Finances publiques", 56, 44, 36],
-            ["Écologie", 41, 67, 59],
-          ].map(([nom, depart, finV, sans]) => (
-            <div key={nom as string} style={{ display: "grid", gridTemplateColumns: "240px minmax(0,1fr) 110px", alignItems: "center", gap: 18, fontSize: 23 }}>
-              <span>{nom}</span>
-              <div style={{ position: "relative", height: 16, background: "var(--piste)", borderRadius: 99 }}>
-                <div style={{ width: `${finV}%`, height: "100%", background: "var(--moutarde)", borderRadius: 99 }} />
-                <div style={{ position: "absolute", left: `${depart}%`, top: -6, width: 4, height: 28, background: "var(--gris)", borderRadius: 2 }} />
-                <div style={{ position: "absolute", left: `${sans}%`, top: -3, width: 22, height: 22, marginLeft: -11, border: "4px solid var(--violet)", borderRadius: "50%", background: "var(--surface)" }} />
-              </div>
-              <span className="tabnum" style={{ textAlign: "right", fontWeight: 700 }}>{depart} → {finV}</span>
-            </div>
-          ))}
-          <div style={{ display: "flex", gap: 26, fontSize: 18, color: "var(--texte-2)" }}>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}><span style={{ width: 4, height: 20, background: "var(--gris)", borderRadius: 2 }} />Départ</span>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}><span style={{ width: 14, height: 14, border: "3px solid var(--violet)", borderRadius: "50%" }} />Sans intervention</span>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}><span style={{ width: 22, height: 10, background: "var(--moutarde)", borderRadius: 99 }} />Votre partie</span>
-          </div>
+        <Bloc style={{ alignItems: "center", gap: 18 }}>
+          <IconeElysee taille={90} couleur="#1d2445" />
+          <span className="titre" style={{ fontSize: 40, fontWeight: 800 }}>Démagomètre : 72 %</span>
+          <span style={{ fontSize: 22, color: "var(--texte-2)", textAlign: "center" }}>« Je ramènerai l&apos;âge de la retraite à 62 ans » : environ 10 à 15 milliards d&apos;euros par an. Promesse trahie.</span>
         </Bloc>
       ),
     },
@@ -198,11 +183,10 @@ function etapes(nbTours: number, anneeDepart: number, seuil: number): Etape[] {
 }
 
 /**
- * `terminer` est appelé à la dernière étape (ou avec « Passer ») ; `libelleFin` nomme ce bouton
- * (« Commencer la partie » avant le premier tour, « Fermer » depuis le salon).
+ * `terminer` est appelé à la dernière étape (ou avec « Passer ») ; `libelleFin` nomme ce bouton.
  */
-export default function Tutoriel({ nbTours, anneeDepart, seuil, terminer, libelleFin }: { nbTours: number; anneeDepart: number; seuil: number; terminer: () => void; libelleFin: string }) {
-  const liste = etapes(nbTours, anneeDepart, seuil);
+export default function Tutoriel({ nbAnnees, anneeDepart, seuil, terminer, libelleFin }: { nbAnnees: number; anneeDepart: number; seuil: number; terminer: () => void; libelleFin: string }) {
+  const liste = etapes(nbAnnees, anneeDepart, seuil);
   const [i, setI] = useState(0);
   const derniere = i === liste.length - 1;
   const suivant = useCallback(() => (derniere ? terminer() : setI((x) => x + 1)), [derniere, terminer]);
@@ -219,12 +203,12 @@ export default function Tutoriel({ nbTours, anneeDepart, seuil, terminer, libell
 
   const e = liste[i];
   return (
-    <div role="dialog" aria-modal="true" aria-label="Comment jouer" style={{ position: "absolute", inset: 0, zIndex: 20, background: "var(--encre)", padding: "56px 72px", display: "flex", flexDirection: "column", gap: 36 }}>
+    <div role="dialog" aria-modal="true" aria-label="Comment jouer" style={{ position: "absolute", inset: 0, zIndex: 20, background: "var(--fond)", padding: "56px 72px", display: "flex", flexDirection: "column", gap: 36 }}>
       <header style={{ display: "flex", alignItems: "center", gap: 20 }}>
         <span style={{ fontSize: 22, fontWeight: 700, letterSpacing: 2, color: "var(--texte-3)" }}>COMMENT JOUER · {i + 1} / {liste.length}</span>
         <div style={{ display: "flex", gap: 10 }} aria-hidden="true">
           {liste.map((_, k) => (
-            <span key={k} style={{ width: k === i ? 40 : 14, height: 14, borderRadius: 99, background: k <= i ? "var(--moutarde)" : "var(--piste)", transition: "width .3s ease" }} />
+            <span key={k} style={{ width: k === i ? 40 : 14, height: 14, borderRadius: 99, background: k <= i ? "var(--soleil)" : "var(--piste)", transition: "width .3s ease" }} />
           ))}
         </div>
         <div style={{ flex: 1 }} />
@@ -237,8 +221,8 @@ export default function Tutoriel({ nbTours, anneeDepart, seuil, terminer, libell
 
       <div key={i} style={{ flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "minmax(0,5fr) minmax(0,6fr)", gap: 72, alignItems: "center", animation: "apparition .45s ease" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          <h1 className="titre" style={{ margin: 0, fontWeight: 800, fontSize: 84, lineHeight: 1, letterSpacing: -2 }}>{e.titre}</h1>
-          <p style={{ margin: 0, fontSize: 31, lineHeight: 1.4, color: "var(--texte-2)" }}>{e.texte}</p>
+          <h1 className="titre" style={{ margin: 0, fontWeight: 800, fontSize: 80, lineHeight: 1, letterSpacing: -2 }}>{e.titre}</h1>
+          <p style={{ margin: 0, fontSize: 30, lineHeight: 1.4, color: "var(--texte-2)" }}>{e.texte}</p>
         </div>
         <div>{e.visuel}</div>
       </div>

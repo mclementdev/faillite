@@ -3,20 +3,27 @@ import { JAUGES, validerContenu, type Contenu } from "../engine";
 
 const src = { source: "test", url: "https://example.org", provisoire: false, annee: 2025, unite: "u" };
 
-export function contenuTest(over: { cartes?: unknown[]; evenements?: unknown[]; resonances?: unknown[]; imprevus?: unknown[]; regles?: Record<string, unknown> } = {}): Contenu {
-  // 5 indicateurs a..e, tous normalisés 0 → 0 et 100 → 100, partagés par les 8 jauges.
+export function contenuTest(over: { cartes?: unknown[]; evenements?: unknown[]; resonances?: unknown[]; promesses?: unknown[]; regles?: Record<string, unknown> } = {}): Contenu {
+  // 5 indicateurs a..e, tous normalisés 0 → 0 et 100 → 100, partagés par les jauges du pays ;
+  // la popularité a son propre indicateur.
   const ids = ["a", "b", "c", "d", "e"];
-  const indicateurs = Object.fromEntries(ids.map((id) => [id, { nom: `Indicateur ${id}`, valeur: 50, ...src }]));
-  const modele = Object.fromEntries(ids.map((id) => [id, { normalisation: { type: "lineaire", zero: 0, cent: 100 }, min: 0, max: 100 }]));
-  const jauges = Object.fromEntries(JAUGES.map((j) => [j, { nom: j, nomCourt: j, indicateurs: ids.map((id) => ({ id, poids: 1 })) }]));
+  const indicateurs = Object.fromEntries([...ids, "popularite"].map((id) => [id, { nom: `Indicateur ${id}`, valeur: 50, ...src }]));
+  const modele = Object.fromEntries([...ids, "popularite"].map((id) => [id, { normalisation: { type: "lineaire", zero: 0, cent: 100 }, min: 0, max: 100 }]));
+  const jauges = Object.fromEntries(
+    JAUGES.map((j) => [j, { nom: j, nomCourt: j, indicateurs: j === "popularite" ? [{ id: "popularite", poids: 1 }] : ids.map((id) => ({ id, poids: 1 })) }]),
+  );
   const regles = {
     anneeDepart: 2027,
-    toursPossibles: [30, 20],
+    dureesPossibles: [5, 10],
+    decisionsParAn: 3,
     seuilAlerte: 35,
     dureeVoteSecondes: 60,
+    bonusFlashSecondes: 15,
+    dureeSecondTourSecondes: 20,
     maxJoueurs: 30,
-    probaEvenement: 1,
-    evenements: { delaiAvantRepetition: 0, maxOccurrences: 99, delaiEntreAlertesMemeJauge: 0 },
+    evenements: { maxParAn: 2, probaParMois: 0, delaiAvantRepetition: 0, maxOccurrences: 99, delaiEntreAlertesMemeJauge: 0 },
+    campagne: { nbPromesses: 4, popularite: { depart: 44, max: 70 } },
+    pibMdEuros: 3000,
     impacts: { horizon: 4, seuilNotable: 0.5, seuilFort: 3 },
     estompeDureeParDefaut: 4,
     ...(over.regles ?? {}),
@@ -29,16 +36,16 @@ export function contenuTest(over: { cartes?: unknown[]; evenements?: unknown[]; 
     cartes: [{ fichier: "cartes.json", data: over.cartes ?? cartesTest() }],
     evenements: { fichier: "evenements.json", data: over.evenements ?? [] },
     resonances: { fichier: "resonances.json", data: over.resonances ?? [] },
-    imprevus: { fichier: "imprevus.json", data: over.imprevus ?? [] },
+    promesses: { fichier: "promesses.json", data: over.promesses ?? [] },
   });
 }
 
 const H = "hypothèse de test suffisamment longue";
 
-export function carteTest(id: string, theme = "fiscalite", poids = 1, type: "unique" | "cumulable" = "unique") {
+export function carteTest(id: string, ministere = "economie_finances", poids = 1, type: "unique" | "cumulable" = "unique") {
   return {
     id,
-    theme,
+    ministere,
     type,
     titre: `Carte ${id}`,
     contexte: "Contexte de test pour la carte.",
@@ -55,7 +62,7 @@ export function carteTest(id: string, theme = "fiscalite", poids = 1, type: "uni
 export function carteCurseur() {
   return {
     id: "curseur",
-    theme: "retraites",
+    ministere: "travail",
     type: "curseur",
     titre: "Carte curseur",
     contexte: "Contexte de test pour le curseur.",
@@ -70,8 +77,8 @@ export function carteCurseur() {
 }
 
 export function cartesTest() {
-  const themes = ["fiscalite", "sante", "energie", "logement", "education"];
-  return Array.from({ length: 40 }, (_, i) => carteTest(`c${i}`, themes[i % themes.length]));
+  const ministeres = ["economie_finances", "sante", "ecologie", "logement", "education"];
+  return Array.from({ length: 40 }, (_, i) => carteTest(`c${i}`, ministeres[i % ministeres.length]));
 }
 
 export { H };

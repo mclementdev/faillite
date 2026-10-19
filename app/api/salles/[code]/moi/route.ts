@@ -10,7 +10,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ code: st
     const jeton = req.headers.get("x-jeton") ?? "";
     const r = jeton ? await moi(code, jeton) : null;
     if (!r) return json({ erreur: "Participant inconnu." }, { status: 404 });
-    return json({ pseudo: r.joueur.pseudo, couleur: r.joueur.couleur, vote: r.vote });
+    return json({ pseudo: r.joueur.pseudo, couleur: r.joueur.couleur, vote: r.vote, scrutin: r.scrutin ?? null });
   } catch (e) {
     return erreur(e);
   }

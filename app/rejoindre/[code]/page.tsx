@@ -1,6 +1,6 @@
 import EcranJoueur from "@/components/EcranJoueur";
 
-export const metadata = { title: "Faillite ! · Rejoindre" };
+export const metadata = { title: "À vous l'Élysée ! · Rejoindre" };
 
 export default async function PageRejoindre({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
