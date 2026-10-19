@@ -1,8 +1,9 @@
-# Faillite !
+# À vous l'Élysée !
 
-Jeu de soirée : un groupe gouverne la France de 2027 à 2056 et découvre l'impact de chaque décision.
-Un grand écran pour l'hôte, chaque participant vote sur son téléphone après avoir scanné un QR code.
-Aucune option n'est présentée comme la bonne, aucune étiquette politique : on montre seulement les impacts.
+Jeu de soirée : ensemble, votre groupe fait campagne, remporte l'élection et gouverne la France pendant un ou
+deux quinquennats (2027-2031 ou 2027-2036). Un grand écran pour l'hôte ; chaque participant vote sur son
+téléphone après avoir scanné un QR code. Aucune option n'est présentée comme la bonne, aucune étiquette
+politique : on montre seulement les impacts. Imaginé par François K.
 
 > **Simplification pédagogique.** Le jeu part de chiffres officiels réels (INSEE, Banque de France, SDES,
 > DREES, Citepa…), mais les effets des décisions sont des **ordres de grandeur plausibles, pas des prévisions**.
@@ -84,11 +85,11 @@ engine/      moteur en TypeScript pur (aucune dépendance à Next ni à la base)
   contenu.ts   validation + références croisées, erreurs « fichier › carte › champ »
   modele.ts    indicateurs → modificateurs, évolution naturelle, calcul des jauges
   cartes.ts    impacts estimés et niveaux (▼▼ ▼ – ▲ ▲▲), curseurs interpolés
-  vote.ts      majorité, égalité, cumulable, médiane
-  partie.ts    déroulé d'une année, tirages pondérés, alertes, résonances
-  bilan.ts     bilan de fin de partie et trajectoire « sans intervention »
+  vote.ts      majorité, égalité et second tour, cumulable, médiane
+  partie.ts    calendrier mois par mois : décisions, événements, crises, suites, promesses, alertes
+  bilan.ts     bilan du mandat : « sans intervention », héritage à 10 ans, démagomètre
   simulation.ts  simulate(n, graine, poids, mode)
-content/     contenu JSON : indicateurs, config (modèle, jauges, règles), cartes, événements, résonances
+content/     contenu JSON : indicateurs, config (modèle, jauges, règles), cartes, événements, promesses, résonances
 lib/         serveur : stockage Redis/mémoire, salles, vue publique, poids, admin
 app/         Next.js App Router : pages et routes API
 components/  écrans (hôte 1920×1080 mis à l'échelle, téléphone, backoffice)
@@ -116,94 +117,82 @@ seul permet de piloter la partie ; tout autre navigateur ouvrant `/salle/CODE` e
 
 ## Ajouter une carte ou un événement
 
-Les cartes sont réparties par thème dans `content/cartes/*.json`. Pour une nouvelle carte, ajoutez un objet
-au fichier du thème ; pour un nouveau fichier, ajoutez-le aussi à `FICHIERS_CARTES` dans `content/index.ts`.
+**Cartes de décision.** Elles sont rangées par fichier dans `content/cartes/*.json` et chacune relève d'un
+**ministère** (`economie_finances`, `travail`, `ecologie`, `agriculture`, `sante`, `education`, `armees`,
+`interieur`, `justice`, `culture`, `logement`, `europe`). Pour un nouveau fichier, ajoutez-le aussi à
+`FICHIERS_CARTES` dans `content/index.ts`.
 
 ```json
 {
-  "id": "retraites-age",
-  "theme": "retraites",
+  "id": "eco-vitesse",
+  "ministere": "ecologie",
   "type": "curseur",
-  "titre": "À quel âge part-on à la retraite ?",
-  "titreCourt": "Retraite",
-  "contexte": "Court contexte en 2 ou 3 lignes.",
-  "poids": 1,
-  "conditions": [],
-  "curseur": { "min": 62, "max": 66, "pas": 1, "unite": "ans" },
+  "titre": "Quelle vitesse maximale sur autoroute ?",
+  "titreCourt": "Vitesse sur autoroute",
+  "contexte": "Court contexte (260 caractères maximum).",
+  "flash": "Flash info qui tombe à mi-vote pour relancer le débat (200 caractères maximum).",
+  "curseur": { "min": 110, "max": 130, "pas": 10, "unite": "km/h" },
   "options": [
     {
-      "id": "64", "valeur": 64, "titre": "64 ans",
-      "explication": "1 à 2 phrases : pourquoi ça joue sur les principaux paramètres.",
-      "effets": [
-        { "cible": "deficit_public", "valeur": -0.2, "type": "differe", "delai": 2,
-          "hypothese": "La logique et l'ordre de grandeur qui justifient l'effet." }
-      ]
+      "id": "110", "valeur": 110, "titre": "110 km/h", "outil": "decret",
+      "explication": "220 caractères maximum.",
+      "effets": [ { "cible": "emissions_ges", "valeur": -3, "type": "durable", "hypothese": "…" } ]
     }
   ],
-  "notePedagogique": "Une phrase sur le mécanisme réel.",
-  "positionsCandidats": {}
+  "notePedagogique": "Le saviez-vous ? affiché après le vote."
 }
 ```
 
-- `type` : `unique` (2 à 4 options, majorité), `cumulable` (3 ou 4 options, les 2 plus votées sont retenues),
+- `type` : `unique` (2 à 4 options), `cumulable` (3 options et plus, les 2 plus votées sont retenues) ou
   `curseur` (options placées sur l'échelle ; les valeurs intermédiaires sont **interpolées**).
-- `theme` : `retraites`, `fiscalite`, `dette_depenses`, `transition_ecologique`, `energie`, `sante`,
-  `education`, `securite_justice`, `logement`, `emploi_travail`, `demographie_migrations`, `souverainete`.
-- `conditions` (toutes doivent être vraies) : `{ "jauge": "finances", "inferieurA": 42 }`,
-  `{ "indicateur": "chomage", "superieurA": 9 }`, `{ "tourMin": 6 }`, `{ "carteJouee": "id" }`,
-  `{ "carteNonJouee": "id" }`.
-- `effets[].cible` : un id de `content/indicateurs.json`, en **unités réelles** de l'indicateur.
-- `effets[].type` : `immediat` (l'année seulement, ou `duree` ans), `differe` (à partir de N + `delai`,
-  puis permanent ou `duree` ans), `durable` (tant que non annulé), `estompe` (appliqué tout de suite puis
-  résorbé linéairement sur `duree` ans, 4 par défaut).
-- `annule` (option) : liste d'ids de cartes dont les effets durables sont arrêtés.
-- `duree` (option) : `un_an` / `plusieurs_annees` ; déduite des effets si absente.
-- **Les pastilles de couleur ne se saisissent pas** : elles sont calculées à partir des effets réels.
+- `outil` (option) : `decret`, `loi`, `budget`, `referendum`, `negociation` ou `decision`. Il est affiché sur
+  la carte ; un **référendum peut être rejeté** (risque de 5 % à 60 % selon la popularité), la mesure ne
+  s'applique alors pas et le président perd 5 points de popularité.
+- Le **coût en euros** affiché (« Coût ≈ 9 Md€/an ») est calculé à partir des effets sur `deficit_public`
+  (en points de PIB, convertis avec `regles.pibMdEuros`). Les **pastilles** sont calculées, jamais saisies.
+- La **réaction de l'opinion** est un effet sur l'indicateur `popularite` (estompé sur 3 ans).
+- `conditions`, `annule`, `poids`, `titreCourt` : inchangés (voir le schéma `engine/schema.ts`).
 
-Les **événements** sont dans `content/evenements.json` (`nature` : `positif`/`negatif`, `poids`,
-`conditions`, `effets`). Un événement avec `"declencheur": { "jauge": "ecologie" }` est un **événement
-d'alerte** : il n'est tiré que l'année suivant le passage de cette jauge sous le seuil.
+**Événements** (`content/evenements.json`) :
+
+- **brève** (`gravite` absent ou `"breve"`) : s'applique d'elle-même, avec ses `effets` ;
+- **crise** (`"gravite": "crise"`) : ses `effets` sont le choc, puis le groupe vote une des `reponses`
+  (2 à 4, même format qu'une option, avec un `outil`) ;
+- `poids` : tirage au hasard (0 = jamais tiré au hasard) ; `alerte: "finances"` : tiré l'année suivant le
+  passage de cette jauge sous le seuil ;
+- `declenchePar` : décisions qui **peuvent** provoquer l'événement quelques mois plus tard. Jamais certain,
+  jamais annoncé pendant le vote ; quand il survient, l'écran indique la décision en cause.
+
+```json
+"declenchePar": [
+  { "carte": "eco-taxe-carbone", "options": ["100", "125", "150"], "chance": 0.35, "delai": [2, 7] },
+  { "carte": "crise-banque", "options": ["laisser"], "chance": 0.5, "delai": [2, 6] }
+]
+```
+
+`carte` peut viser une carte de décision (options ou valeurs de curseur) ou une crise (ses réponses).
+
+**Promesses de campagne** (`content/promesses.json`) : `texte` (140 caractères), `realite` chiffrée révélée
+au bilan avec sa `source`, `demago` de 0 (réaliste) à 3, `popularite` gagnée en la promettant, et la `carte`
+dont les `options` la tiennent. Une promesse faite est forcément mise sur la table pendant le mandat.
 
 Les **résonances** (`content/resonances.json`) déclenchent un effet supplémentaire quand certaines décisions
 ont été prises (`si`) et pas d'autres (`sauf`), `apres` N années.
 
-Les **imprévus** (`content/imprevus.json`) sont des conséquences inattendues, **cachées pendant le vote** :
-ni texte ni pastille ne les annonce. Une fois la décision prise, chaque imprévu lié est tenté avec sa
-probabilité `proba` ; au plus un est retenu par décision, et chacun survient au plus une fois par partie.
-Il est révélé sur le grand écran et les téléphones avec ses effets chiffrés.
-
-```json
-{
-  "id": "eco-gilets",
-  "titre": "Fronde contre la taxe carbone",
-  "description": "Ronds-points occupés chaque samedi : la colère s'étend aux zones rurales.",
-  "nature": "negatif",
-  "proba": 0.45,
-  "si": { "carte": "eco-taxe-carbone", "options": ["150"] },
-  "effets": [ { "cible": "jours_greve", "valeur": 150, "type": "estompe", "duree": 3, "hypothese": "…" } ]
-}
-```
-
-`si` vise une carte (toutes ses options, ou seulement celles listées ; pour un curseur, n'importe quelle valeur de l'échelle, ex. `"22.5"`) ou un
-thème entier (`{ "theme": "sante" }`, à garder rare : `proba` autour de 0,15). Il y a environ autant de
-bonnes surprises que de mauvaises, et toutes les familles de choix en reçoivent.
-
 Après toute modification : `npm run validate` puis `npm test`. Les erreurs indiquent le fichier, la carte
 et le champ, par exemple :
-`content/cartes/sante.json › « sante-hopital » › option « salaires » : effet sur un indicateur inconnu « deficit »`.
-
-Le contenu est validé au premier chargement côté serveur ; un contenu invalide fait échouer les routes avec
-un message détaillé dans les journaux.
+`content/evenements.json › « crise-banque » › declenchePar : carte inconnue « dette-notes »`.
 
 ## Modifier les poids
 
-Chaque carte et chaque événement a un `poids` (≥ 0, 1 par défaut). À chaque tour, la carte est tirée au
+Chaque carte et chaque événement a un `poids` (≥ 0, 1 par défaut). À chaque décision, la carte est tirée au
 hasard **proportionnellement aux poids** parmi les cartes éligibles (pas déjà jouées, conditions remplies,
-poids > 0), en évitant le thème du tour précédent quand c'est possible. Un poids de 0 désactive l'élément.
+poids > 0), en évitant le ministère de la décision précédente quand c'est possible. Les cartes liées aux
+promesses de campagne ont un poids triplé, et sont imposées si le mandat touche à sa fin. Un poids de 0 désactive l'élément.
 
 - **Valeurs par défaut** : le champ `poids` des fichiers de `content/`.
 - **Valeurs modifiées** : backoffice `/admin`, onglets *Poids des cartes* / *Poids des événements*
-  (filtre par thème, case « Actif », bouton *Revenir aux valeurs par défaut*). Elles sont stockées dans
+  (filtre par ministère, case « Actif », bouton *Revenir aux valeurs par défaut*). Elles sont stockées dans
   Redis (seules les différences avec les défauts) et journalisées.
 - **Une salle fige les poids à sa création** : une partie en cours ne change jamais de règles.
 
@@ -211,29 +200,29 @@ poids > 0), en évitant le thème du tour précédent quand c'est possible. Un p
 
 La même fonction `simulate(n, graine, poids, mode)` du moteur sert partout :
 
-- **Backoffice** : onglet *Simulation*, bouton « Lancer 1 000 parties » (nombre, graine, 20/30 tours, mode
+- **Backoffice** : onglet *Simulation*, bouton « Lancer 1 000 parties » (nombre, graine, un ou deux quinquennats, mode
   réglables), avec les poids actuels. Le dernier résultat est conservé.
 - **Ligne de commande** (poids par défaut du contenu) :
 
   ```bash
   npm run simulate -- --n 1000 --graine 42
-  npm run simulate -- --n 1000 --mode sans_intervention --tours 20
+  npm run simulate -- --n 1000 --mode sans_intervention --annees 10
   npm run simulate -- --n 200 --json > resultat.json
   ```
 
 - **Tests** : `tests/moteur.test.ts`.
 
-Résultats : distribution des 8 jauges en fin de partie (moyenne, médiane, 10e et 90e centiles), part des
+Résultats : nombre moyen d'événements (dont crises et événements provoqués), distribution des 7 jauges en fin de partie (moyenne, médiane, 10e et 90e centiles), part des
 parties où une jauge passe sous le seuil (et laquelle), fréquence de tirage de chaque carte et événement,
 effet moyen de chaque option avec repérage des options **dominantes** (bien meilleures que leurs voisines sans
 coût notable) ou **toujours perdantes**, et une phrase de synthèse.
 
-En mode `aleatoire`, chaque partie simule 12 votants qui votent au hasard (ce qui exerce aussi les règles
-d'égalité et de médiane).
+En mode `aleatoire`, chaque partie simule une campagne (chaque promesse faite une fois sur deux) puis
+12 votants qui votent au hasard.
 
 ## Le modèle : indicateurs, jauges, effets
 
-- **Indicateurs** (`content/indicateurs.json`) : 49 chiffres réels avec `valeur`, `unite`, `annee`,
+- **Indicateurs** (`content/indicateurs.json`) : 49 chiffres réels, plus la cote de `popularite`, avec `valeur`, `unite`, `annee`,
   `source`, `url`, `provisoire`. Les valeurs `provisoire: true` sont introuvables, anciennes ou
   approximatives (liste : `npm run validate`).
 - **Modèle** (`content/config/modele.json`) pour chaque indicateur :
@@ -244,64 +233,55 @@ d'égalité et de médiane).
     `cible` (rappel vers une valeur d'équilibre qui peut dépendre d'autres indicateurs) et `variation`
     (accumulation, ex. dette += déficit − dette × croissance nominale). Termes :
     `coef × (source − ref)` ou `coef × source × source2`.
-- **Jauges** (`content/config/jauges.json`) : moyenne pondérée des indicateurs normalisés, au moins
-  5 indicateurs par jauge. Un indicateur peut alimenter plusieurs jauges. La `sensibilite` (1 par défaut)
-  amplifie l'écart à la situation de départ : `jauge = départ + sensibilité × (moyenne − départ)`. La
-  valeur de départ ne change pas ; une jauge faite d'indicateurs lents (cohésion, paix sociale) devient
-  lisible. Réglage actuel : Économie 1,6 · Finances 1 · Paix sociale 2,2 · Écologie 2 · Services 2,2 ·
-  Cohésion 4 · Démographie 1,1 · Souveraineté 2,2.
+- **Jauges** (`content/config/jauges.json`) : six jauges du pays (Économie, Finances publiques, Cohésion
+  sociale, Climat et nature, Services publics, Souveraineté), chacune moyenne pondérée d'au moins 5
+  indicateurs normalisés, et la **popularité** du président (cote en %, qui réagit vite : chômage, prix,
+  croissance, impôts, grèves, crises, promesses trahies). La cohésion sociale réunit l'ancienne paix sociale
+  et l'ancienne cohésion. La **démographie n'est plus une jauge** : ses indicateurs restent visibles dans le
+  panneau « Les vrais chiffres » et agissent sur les finances et les services. La `sensibilite` amplifie
+  l'écart à la situation de départ : `jauge = départ + sensibilité × (moyenne − départ)`.
 - **Règles** (`content/config/regles.json`) : seuil d'alerte (35), minuteur, nombre de joueurs, répétition
   des événements, seuils d'affichage des impacts (`seuilNotable` 0,3 et `seuilFort` 2 points de jauge).
 - **Impact affiché d'une option** : on projette l'état actuel sans aléa avec et sans l'option, sur 6 ans (ou
   plus si l'effet est très différé), et on garde l'écart le plus fort sur chaque jauge.
 
-Sans aucune décision, le modèle produit une France qui vieillit (démographie en baisse), dont la dette
-augmente lentement malgré une consolidation spontanée quand elle dépasse 115 % du PIB, dont les services
-publics se dégradent (déserts médicaux, délais de justice) et dont l'écologie se dégrade lentement : on fait
-l'hypothèse que, sans nouvelles mesures, la baisse des émissions s'arrête et que l'activité les fait remonter
-d'environ 2,5 Mt par an (`emissions_ges.dynamique.derive`), avec un recul de la biodiversité.
+Sans aucune décision, le modèle produit une France qui vieillit, dont la dette augmente lentement, dont les
+services publics se dégradent et dont les émissions remontent légèrement (hypothèse : sans nouvelles
+mesures, la baisse des émissions s'arrête et l'activité les fait remonter d'environ 2,5 Mt par an).
 
-Équilibrage (1 000 parties, choix aléatoires, graine 42) : 89 % des parties ont au moins une alerte.
-Finances 44 %, Démographie 39 %, Paix sociale 31 %, Économie 26 %, Services publics 22 %, Écologie 11 %,
-Souveraineté 8 %, Cohésion 1 %. Un vrai groupe vote moins au hasard : attendez-vous à des écarts plus marqués.
+Équilibrage (400 parties d'un quinquennat, choix aléatoires, graine 42) : environ 8 événements par partie,
+dont 2,3 provoqués par une décision et 1,8 crise ; 53 % des parties ont au moins une jauge en alerte
+(popularité 35 %, économie 20 %, cohésion 13 %, climat 8 %, souveraineté 8 %). Popularité moyenne en fin de
+mandat : 37 %. Un vrai groupe vote moins au hasard : attendez-vous à des écarts plus marqués.
 
 ## Règles du jeu tranchées
 
-Points que le cahier des charges laissait ouverts, tranchés ainsi (modifiables dans le code ou la config) :
-
-- **Tutoriel** : 6 écrans sur le grand écran avant le premier tour (une fois par salle, on peut le passer ;
-  « Comment jouer » le rouvre depuis le salon). Les téléphones affichent un résumé en 3 points en attendant.
-- **Bouton Menu** sur le grand écran (salon, tours, résultat, bilan) : retour à l'accueil après
-  confirmation. La salle reste ouverte 12 h et l'accueil propose « Reprendre la salle ».
-- **Présidence du sénat** : juste après le tutoriel, premier vote pour élire une personne de la salle (même
-  minuteur ; on peut voter pour soi ; égalité ou absence de votes : le sort désigne). Ensuite, quand un vote
-  est à égalité, **sa voix compte double** : son option l'emporte si elle fait partie des ex aequo. Sinon
-  (elle a voté pour une autre option, ou pas du tout), le sort tranche comme avant. Pour un curseur, une
-  « égalité » est un nombre pair de votes avec deux valeurs centrales différentes : la voix de la présidence
-  est comptée une seconde fois, ce qui donne une médiane exacte. Sans participant, pas de présidence.
-- **Un tour** : bilan (évolution naturelle + effets différés) → événement → carte affichée en lecture →
-  l'hôte ouvre le vote (60 s par défaut, 45/60/90 s au choix) → résultat → l'hôte passe à l'année suivante.
-- **Événement chaque année** (`probaEvenement` = 1). Un même événement ne revient pas avant 8 ans, au plus
-  2 fois par partie. Si plusieurs jauges sont en alerte, l'événement d'alerte de la plus basse l'emporte ;
-  une même jauge ne redéclenche pas d'alerte avant 3 ans.
-- **Imprévus** : tirés après le vote, au plus un par décision ; leurs effets s'ajoutent à « Ce qui bouge ».
-- **Personne n'a voté** : le hasard choisit (affiché comme tel).
-- **Cumulable** : chaque participant a une voix ; les 2 options les plus votées sont retenues (égalité pour la
-  2e place tirée au sort). Si une seule option a reçu des voix, elle seule est retenue.
-- **Curseur** : médiane des valeurs ; avec un nombre pair de votes, moyenne des deux valeurs centrales
-  ramenée à la valeur autorisée la plus proche (la plus basse en cas d'écart égal).
-- **Égalité** (choix unique) : voix de la présidence comptée double, sinon tirage au sort reproductible
-  (graine), animé sur le grand écran.
-- **Les effets immédiats** ne durent qu'un an mais agissent sur la suite par la dynamique (un déficit d'un an
-  laisse une dette plus élevée).
-- **Démographie et neutralité** : le solde migratoire est un indicateur affiché mais **non noté** dans la
-  jauge Démographie (poids 0) ; il n'agit que par ses effets mécaniques (cotisants par retraité, âge médian,
-  part des 65 ans et plus).
-- **Prélèvements obligatoires** : normalisation « cible » (ni trop bas ni trop haut) pour ne pas présenter
-  une hausse ou une baisse d'impôts comme bonne en soi.
-- **Annulation** : la carte « La réforme de l'âge fait toujours débat » (après la carte retraites, à partir du
-  tour 6) peut annuler ses effets durables.
-- Une partie de 30 tours va de 2027 à 2056, de 20 tours de 2027 à 2046. Pas de victoire ni de défaite.
+- **Tutoriel** : 6 écrans avant la campagne (une fois par salle, on peut le passer ; « Comment jouer » le
+  rouvre depuis le salon). Les téléphones affichent un résumé en 3 points en attendant.
+- **Campagne** : 8 promesses tirées au sort parmi 14, présentées une à une (20 s de vote : « On le promet ! »
+  ou « Trop risqué » ; égalité tranchée au sort). Chaque promesse faite ajoute de la popularité de départ
+  (44 % sans promesse, 68 % au maximum). Aucun chiffre n'est montré avant le bilan.
+- **Investiture** : le programme s'affiche ; le groupe joue ensemble un seul président.
+- **Le mandat, mois par mois** : une frise de janvier à décembre défile jusqu'au prochain arrêt.
+  - 3 décisions par an, à des mois tirés au sort (au moins deux mois d'écart) ;
+  - au plus 2 événements par an : alertes d'abord, puis événements provoqués par une décision, puis tirage
+    au hasard (10 % par mois, 30 % à partir de juillet si l'année a été calme) ;
+  - une **crise** exige une réponse votée, en plus des 3 décisions ;
+  - en décembre, **bilan de l'année**, puis évolution naturelle du pays.
+- **Vote** : 60 s par défaut (45/60/90 au choix). À mi-vote, le **flash info** de la carte tombe et ajoute
+  15 s. **Égalité** : second tour de 20 s entre les ex aequo ; si l'égalité persiste, le sort tranche
+  (animation). Personne n'a voté : le hasard choisit. Curseur : médiane des valeurs.
+- **Promesses** : tenue si l'option retenue est l'une de celles qui la tiennent ; trahie sinon (perte de
+  1 + la popularité qu'elle avait rapportée). Au bilan, le **démagomètre** donne la part de la démagogie
+  possible (somme des notes `demago`) que le groupe a promise, avec la réalité chiffrée de chaque promesse.
+- **Bilan du mandat** : jauges au départ, en fin de mandat, sans intervention (mêmes événements tirés au
+  sort, aucune décision) et **héritage** dix ans après (projection sans nouvelle décision), décisions
+  marquantes, moments clés (avec leur cause), enseignements.
+- **Bouton Menu** à côté du logo sur le grand écran : retour à l'accueil après confirmation. La salle reste
+  ouverte 12 h et l'accueil propose « Reprendre la salle ».
+- **Neutralité** : le solde migratoire n'est noté dans aucune jauge ; les prélèvements obligatoires ont une
+  normalisation « cible » ; les promesses couvrent toutes les sensibilités et ne citent aucun candidat.
+- Une partie courte va de 2027 à 2031 (15 décisions, environ 1 h), une longue de 2027 à 2036 (30 décisions).
 - 30 participants au plus par salle (`maxJoueurs`), pseudos en double suffixés (« Léa 2 »).
 
 ## Backoffice et sécurité

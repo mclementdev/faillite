@@ -222,7 +222,8 @@ function Salon({ vue, agir, occupe, controle, ouvrirMenu, demarrer, ouvrirTuto }
       <section style={{ display: "flex", flexDirection: "column", gap: 36 }}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-            <Logo taille={92} />
+            <Logo taille={80} />
+            <BoutonMenu ouvrir={ouvrirMenu} style={{ font: "600 22px var(--texte)", padding: "12px 20px", borderRadius: 16 }} />
           </div>
           <p style={{ margin: "18px 0 0", fontSize: 32, color: "var(--texte-2)", lineHeight: 1.3 }}>
             Ensemble, faites campagne, gouvernez la France et découvrez l&apos;impact réel de vos décisions.
@@ -246,7 +247,6 @@ function Salon({ vue, agir, occupe, controle, ouvrirMenu, demarrer, ouvrirTuto }
             <span aria-hidden="true" className="titre" style={{ width: 34, height: 34, borderRadius: "50%", background: "var(--soleil)", display: "inline-flex", alignItems: "center", justifyContent: "center", fontWeight: 800 }}>?</span>
             Comment jouer
           </button>
-          <BoutonMenu ouvrir={ouvrirMenu} style={{ font: "600 24px var(--texte)", padding: "14px 24px", borderRadius: 16 }} />
         </div>
       </section>
 
@@ -367,7 +367,7 @@ function Campagne(props: PropsEcran) {
         </EnTete>
       </div>
 
-      <main style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: 0 }}>
+      <main style={{ display: "flex", flexDirection: "column", gap: 30, minHeight: 0, justifyContent: "center", paddingBottom: 40 }}>
         <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: 2, color: "var(--accent-texte)" }}>
           CAMPAGNE PRÉSIDENTIELLE · PROMESSE {c.index + 1} SUR {c.total}
         </span>
@@ -1089,6 +1089,7 @@ function Fin({ vue, ouvrirMenu }: PropsEcran) {
               <h2 style={{ margin: 0, fontSize: 30 }}>Démagomètre</h2>
             </Info>
             <Demagometre valeur={b.demagometre} />
+            <span className="titre tabnum" style={{ fontSize: 56, fontWeight: 800, lineHeight: 1, marginTop: -8 }}>{b.demagometre} %</span>
             <p style={{ margin: 0, fontSize: 22, lineHeight: 1.35, color: "var(--texte-2)" }}>
               {b.demagometre >= 60
                 ? "Votre campagne a promis bien plus que ce que les comptes permettaient."
@@ -1196,7 +1197,6 @@ function Demagometre({ valeur }: { valeur: number }) {
         <line x1="170" y1="180" x2="170" y2="62" stroke="#1d2445" strokeWidth="8" strokeLinecap="round" />
       </g>
       <circle cx="170" cy="180" r="14" fill="#1d2445" />
-      <text x="170" y="140" textAnchor="middle" fontSize="44" fontWeight="800" fill="#1d2445" fontFamily="var(--titre)">{valeur} %</text>
     </svg>
   );
 }

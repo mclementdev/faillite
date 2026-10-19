@@ -375,7 +375,10 @@ function evenementDuMois(contenu: Contenu, etat: EtatPartie, mois: number, maxPa
   }
   // Événement aléatoire : même tirage avec ou sans décisions (trajectoire « sans intervention »).
   const rng = flux(etat.graine, "mois", abs);
-  if (rng() >= contenu.regles.evenements.probaParMois) return undefined;
+  // Une année restée calme jusqu'à l'été devient plus propice aux événements.
+  const base = contenu.regles.evenements.probaParMois;
+  const p = base > 0 && etat.evenementsAnnee === 0 && mois >= 7 ? Math.max(base, 0.3) : base;
+  if (rng() >= p) return undefined;
   const eff = effectifs(contenu, etat);
   const evt = tirerPondere(evenementsAleatoiresEligibles(contenu, etat, calculerJauges(contenu, eff), eff), poids, rng);
   return evt ? { evt } : undefined;

@@ -255,6 +255,8 @@ function vueResultat(contenu: Contenu, salle: Salle, vc: VueCarte, jauges: Recor
 
   const changements = r.changements
     .filter((c) => c.id !== "popularite")
+    // Un changement invisible une fois arrondi n'apprend rien.
+    .filter((c) => format(c.avant, contenu.indicateurs[c.id].decimales) !== format(c.apres, contenu.indicateurs[c.id].decimales))
     .map((c) => {
       const i = contenu.indicateurs[c.id];
       const niveau = niveauIndicateur(contenu, c.id, c.avant, c.apres);
