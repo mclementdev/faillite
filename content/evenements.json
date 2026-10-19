@@ -80,6 +80,19 @@
         "duree": 3,
         "hypothese": "Fuite vers les dettes jugées les plus sûres."
       }
+    ],
+    "declenchePar": [
+      {
+        "carte": "crise-banque",
+        "options": [
+          "laisser"
+        ],
+        "chance": 0.5,
+        "delai": [
+          2,
+          6
+        ]
+      }
     ]
   },
   {
@@ -464,10 +477,8 @@
     "id": "alerte-economie",
     "titre": "Vague de faillites : les usines ferment",
     "nature": "negatif",
-    "declencheur": {
-      "jauge": "economie"
-    },
     "description": "L'économie s'enlise, les plans sociaux se multiplient dans l'industrie.",
+    "alerte": "economie",
     "effets": [
       {
         "cible": "chomage",
@@ -494,10 +505,8 @@
     "id": "alerte-finances",
     "titre": "La note de la France est dégradée",
     "nature": "negatif",
-    "declencheur": {
-      "jauge": "finances"
-    },
     "description": "Les agences de notation sanctionnent la dérive des comptes : emprunter coûte plus cher.",
+    "alerte": "finances",
     "effets": [
       {
         "cible": "taux_10_ans",
@@ -521,43 +530,11 @@
     ]
   },
   {
-    "id": "alerte-paix-sociale",
-    "titre": "Mouvement social : le pays bloqué",
-    "nature": "negatif",
-    "declencheur": {
-      "jauge": "paix_sociale"
-    },
-    "description": "Blocages, manifestations chaque samedi, ronds-points occupés.",
-    "effets": [
-      {
-        "cible": "jours_greve",
-        "valeur": 120,
-        "type": "estompe",
-        "duree": 2,
-        "hypothese": "Conflictualité comparable aux grands mouvements de 2019 et 2023."
-      },
-      {
-        "cible": "croissance_pib",
-        "valeur": -0.3,
-        "type": "immediat",
-        "hypothese": "Perturbations de l'activité."
-      },
-      {
-        "cible": "deficit_public",
-        "valeur": 0.3,
-        "type": "immediat",
-        "hypothese": "Mesures d'apaisement d'urgence, comme en 2019."
-      }
-    ]
-  },
-  {
     "id": "alerte-ecologie",
     "titre": "Sécheresse historique : l'eau est rationnée",
     "nature": "negatif",
-    "declencheur": {
-      "jauge": "ecologie"
-    },
     "description": "Des villages ravitaillés par camion-citerne, des cultures abandonnées.",
+    "alerte": "ecologie",
     "effets": [
       {
         "cible": "autonomie_alimentaire",
@@ -584,10 +561,8 @@
     "id": "alerte-services-publics",
     "titre": "Urgences fermées tout l'été",
     "nature": "negatif",
-    "declencheur": {
-      "jauge": "services_publics"
-    },
     "description": "Faute de soignants, des services d'urgence ferment la nuit dans des dizaines de villes.",
+    "alerte": "services_publics",
     "effets": [
       {
         "cible": "esperance_vie_bonne_sante",
@@ -611,59 +586,36 @@
   },
   {
     "id": "alerte-cohesion",
-    "titre": "Émeutes dans les quartiers populaires",
+    "titre": "Colère sociale : la rue s'embrase",
     "nature": "negatif",
-    "declencheur": {
-      "jauge": "cohesion"
-    },
-    "description": "Après un drame, plusieurs nuits de violences urbaines.",
+    "description": "Pauvreté, logement, inégalités : le mécontentement déborde. Manifestations dans toute la France et violences en marge des cortèges.",
+    "alerte": "cohesion",
     "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 120,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Mobilisation sociale large et durable."
+      },
       {
         "cible": "violences_physiques",
         "valeur": 0.3,
         "type": "immediat",
-        "hypothese": "Hausse ponctuelle des violences."
+        "hypothese": "Débordements en marge des manifestations."
       },
-      {
-        "cible": "sentiment_insecurite",
-        "valeur": 3,
-        "type": "estompe",
-        "hypothese": "Choc dans l'opinion."
-      },
-      {
-        "cible": "deficit_public",
-        "valeur": 0.05,
-        "type": "immediat",
-        "hypothese": "Coût des dégradations de bâtiments publics."
-      }
-    ]
-  },
-  {
-    "id": "alerte-demographie",
-    "titre": "Pénurie de main-d'œuvre généralisée",
-    "nature": "negatif",
-    "declencheur": {
-      "jauge": "demographie"
-    },
-    "description": "Trop peu d'actifs : hôpitaux, écoles et entreprises ne trouvent plus personne.",
-    "effets": [
       {
         "cible": "croissance_pib",
-        "valeur": -0.3,
-        "type": "estompe",
-        "hypothese": "Production limitée par le manque de bras."
-      },
-      {
-        "cible": "desert_medical",
-        "valeur": 1,
-        "type": "durable",
-        "hypothese": "Postes de soignants non pourvus."
-      },
-      {
-        "cible": "inflation",
-        "valeur": 0.5,
+        "valeur": -0.2,
         "type": "immediat",
-        "hypothese": "Tensions sur les salaires."
+        "hypothese": "Perturbations de l'activité."
+      },
+      {
+        "cible": "popularite",
+        "valeur": -4,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Le pouvoir est tenu pour responsable."
       }
     ]
   },
@@ -671,10 +623,8 @@
     "id": "alerte-souverainete",
     "titre": "Rupture d'approvisionnement stratégique",
     "nature": "negatif",
-    "declencheur": {
-      "jauge": "souverainete"
-    },
     "description": "Un fournisseur étranger coupe ses livraisons de composants : chaînes d'assemblage à l'arrêt.",
+    "alerte": "souverainete",
     "effets": [
       {
         "cible": "croissance_pib",
@@ -693,6 +643,4276 @@
         "valeur": 0.5,
         "type": "immediat",
         "hypothese": "Prix des biens concernés en hausse."
+      }
+    ]
+  },
+  {
+    "id": "alerte-popularite",
+    "titre": "Motion de censure : le gouvernement vacille",
+    "nature": "negatif",
+    "description": "Votre impopularité donne des ailes à l'opposition. Une motion de censure échoue de quelques voix, mais le pays est paralysé pendant des semaines.",
+    "alerte": "popularite",
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Crise politique ouverte."
+      },
+      {
+        "cible": "taux_10_ans",
+        "valeur": 0.15,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Instabilité politique surveillée par les marchés."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.1,
+        "type": "immediat",
+        "hypothese": "Attentisme des ménages et des entreprises."
+      }
+    ],
+    "notePedagogique": "Sous la Ve République, une seule motion de censure a renversé un gouvernement avant 2024 (1962). Elles restent rares mais pèsent sur l'action."
+  },
+  {
+    "id": "retraites-62-seniors-sante",
+    "titre": "Départs anticipés : la santé des seniors s'améliore",
+    "description": "Moins d'arrêts maladie et d'invalidité chez les 60-62 ans : une partie du coût est compensée.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "retraites-age",
+        "options": [
+          "62"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "esperance_vie_bonne_sante",
+        "valeur": 0.4,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Moins d'usure professionnelle en fin de carrière, effet observé sur la santé déclarée."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": -0.15,
+        "type": "durable",
+        "hypothese": "Baisse des dépenses d'invalidité et d'arrêts longs des seniors."
+      }
+    ]
+  },
+  {
+    "id": "retraites-66-chomage-seniors",
+    "titre": "Les seniors ne trouvent pas d'emploi",
+    "description": "Beaucoup de 63-66 ans se retrouvent au chômage ou en invalidité au lieu de travailler.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "retraites-age",
+        "options": [
+          "66"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "chomage",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Report de l'âge sans emploi disponible : une partie bascule au chômage."
+      },
+      {
+        "cible": "taux_pauvrete",
+        "valeur": 0.3,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Fin de carrière entre chômage et minima sociaux."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.2,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Hausse des dépenses d'assurance chômage et d'invalidité qui réduit l'économie attendue."
+      }
+    ]
+  },
+  {
+    "id": "retraites-64-acceptation",
+    "titre": "La réforme passe mieux que prévu",
+    "description": "Les syndicats obtiennent des aménagements, la mobilisation retombe vite.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "retraites-age",
+        "options": [
+          "64"
+        ],
+        "chance": 0.25,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": -40,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Accord sur les fins de carrière, conflictualité en baisse."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Le dialogue social est perçu comme ayant fonctionné."
+      }
+    ]
+  },
+  {
+    "id": "retraites-capitalisation-krach",
+    "titre": "Krach boursier : les fonds de pension plongent",
+    "description": "Les premiers épargnants retraite voient leur capital fondre de 25 % en un an.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "retraites-financement",
+        "options": [
+          "capitalisation"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": -3,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Perte en capital très visible pour les futurs retraités."
+      },
+      {
+        "cible": "taux_pauvrete",
+        "valeur": 0.3,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Revenus de retraite plus faibles pour les premiers bénéficiaires."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Effet de richesse négatif sur la consommation."
+      }
+    ]
+  },
+  {
+    "id": "retraites-cotisations-embauche",
+    "titre": "Les entreprises gèlent les embauches",
+    "description": "La hausse du coût du travail arrive en pleine période de ralentissement.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "retraites-financement",
+        "options": [
+          "cotisations"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "chomage",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Coût du travail plus élevé sur les bas salaires."
+      },
+      {
+        "cible": "investissement_entreprises",
+        "valeur": -0.4,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Marges réduites, investissements reportés."
+      }
+    ]
+  },
+  {
+    "id": "retraites-referendum-mobilisation",
+    "titre": "Le référendum mobilise massivement",
+    "description": "Campagne animée, participation record : le débat public sort grandi.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "retraites-retour",
+        "options": [
+          "referendum"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "participation_elections",
+        "valeur": 4,
+        "type": "estompe",
+        "duree": 6,
+        "hypothese": "Effet d'entraînement d'un vote direct très médiatisé."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Le sentiment d'être consulté renforce la légitimité."
+      }
+    ]
+  },
+  {
+    "id": "retraites-reconversion-succes",
+    "titre": "Les reconversions font des émules",
+    "description": "Les métiers en tension (soin, bâtiment) recrutent des milliers de reconvertis.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "retraites-penibilite",
+        "options": [
+          "reconversion"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "chomage",
+        "valeur": -0.3,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Meilleur appariement entre postes vacants et candidats."
+      },
+      {
+        "cible": "desert_medical",
+        "valeur": -1.5,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Une partie des reconvertis rejoint les métiers du soin."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-exil",
+    "titre": "Départs de contribuables fortunés",
+    "description": "Plusieurs grandes fortunes s'installent en Belgique et en Suisse, très médiatisées.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "fiscalite-patrimoine",
+        "options": [
+          "impot-fortune"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "investissement_entreprises",
+        "valeur": -0.4,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Départ de capitaux et d'actionnaires d'entreprises familiales."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.1,
+        "type": "durable",
+        "hypothese": "Rendement de l'impôt plus faible qu'annoncé."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-fortune-rendement",
+    "titre": "L'impôt rapporte plus que prévu",
+    "description": "Peu de départs, une assiette plus large qu'estimé : les recettes dépassent les prévisions.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "fiscalite-patrimoine",
+        "options": [
+          "impot-fortune",
+          "successions"
+        ],
+        "chance": 0.25,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": -0.25,
+        "type": "durable",
+        "hypothese": "Assiette sous-estimée lors du chiffrage initial."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Sentiment de justice fiscale."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-capital-dividendes",
+    "titre": "L'allègement finance surtout des dividendes",
+    "description": "Les entreprises distribuent davantage sans investir plus : le débat s'enflamme.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "fiscalite-patrimoine",
+        "options": [
+          "baisse-capital"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Perception d'un cadeau fiscal sans contrepartie."
+      },
+      {
+        "cible": "rapport_interdecile",
+        "valeur": 0.03,
+        "type": "durable",
+        "hypothese": "Les revenus du capital, concentrés en haut, augmentent."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-consommation",
+    "titre": "Les classes moyennes consomment",
+    "description": "La baisse d'impôt est dépensée plutôt qu'épargnée : le commerce repart.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "fiscalite-impot-revenu",
+        "options": [
+          "baisse-classes-moyennes"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Propension à consommer élevée des ménages intermédiaires."
+      },
+      {
+        "cible": "chomage",
+        "valeur": -0.2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Embauches dans le commerce et les services."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-tva-inflation",
+    "titre": "La TVA sociale fait flamber les prix",
+    "description": "Les distributeurs répercutent la hausse au-delà de la baisse des cotisations.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "fiscalite-tva",
+        "options": [
+          "tva-sociale"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "inflation",
+        "valeur": 1.2,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Répercussion intégrale, voire supérieure, sur les prix."
+      },
+      {
+        "cible": "jours_greve",
+        "valeur": 50,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Revendications salariales face à la perte de pouvoir d'achat."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-tva-marges",
+    "titre": "La baisse de TVA est absorbée par les marges",
+    "description": "Les prix en rayon baissent à peine : la grande distribution garde l'essentiel.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "fiscalite-tva",
+        "options": [
+          "tva-reduite"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "inflation",
+        "valeur": 0.3,
+        "type": "immediat",
+        "hypothese": "Transmission partielle de la baisse de TVA aux prix."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Sentiment que la mesure a profité aux distributeurs."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-usine-geante",
+    "titre": "Une gigafactory choisit la France",
+    "description": "Un industriel annonce 3 000 emplois dans le Nord, citant la fiscalité de production.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "fiscalite-production",
+        "options": [
+          "baisse-forte",
+          "baisse-ciblee"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "part_industrie_va",
+        "valeur": 0.4,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Investissement industriel majeur et sous-traitants."
+      },
+      {
+        "cible": "chomage",
+        "valeur": -0.2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Emplois directs et indirects dans le bassin."
+      },
+      {
+        "cible": "solde_commercial",
+        "valeur": 3,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Production exportée ou substituée aux importations."
+      }
+    ]
+  },
+  {
+    "id": "dette-rabot-panne",
+    "titre": "Les services publics craquent après le rabot",
+    "description": "Fermetures de guichets et de lits : les économies coûtent ailleurs.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "dette-economies",
+        "options": [
+          "rabot"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 2,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Réduction indifférenciée des moyens hospitaliers."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Dégradation visible du service rendu."
+      },
+      {
+        "cible": "delai_jugement",
+        "valeur": 1,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Postes non remplacés dans les greffes."
+      }
+    ]
+  },
+  {
+    "id": "dette-niches-simplification",
+    "titre": "La suppression des niches simplifie l'impôt",
+    "description": "Les entreprises gagnent du temps, les contrôles sont plus efficaces.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "dette-economies",
+        "options": [
+          "niches"
+        ],
+        "chance": 0.25,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": -0.2,
+        "type": "durable",
+        "hypothese": "Moins d'optimisation et d'erreurs, recouvrement amélioré."
+      },
+      {
+        "cible": "productivite_horaire",
+        "valeur": 0.5,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Moins de temps consacré à la gestion fiscale."
+      }
+    ]
+  },
+  {
+    "id": "dette-greve-fonctionnaires",
+    "titre": "Grève reconductible dans la fonction publique",
+    "description": "Écoles et hôpitaux tournent au ralenti pendant six semaines.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "dette-economies",
+        "options": [
+          "point-indice"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 120,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Mobilisation longue des agents publics."
+      },
+      {
+        "cible": "pisa_maths",
+        "valeur": -2,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Semaines de cours perdues."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.2,
+        "type": "immediat",
+        "hypothese": "Perturbations des transports et des services."
+      }
+    ]
+  },
+  {
+    "id": "dette-marches-saluent",
+    "titre": "Les marchés saluent la règle d'or",
+    "description": "Les agences relèvent la perspective de la note : les taux baissent.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "dette-regle-or",
+        "options": [
+          "regle-stricte",
+          "regle-investissement"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_10_ans",
+        "valeur": -0.4,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Crédibilité budgétaire accrue, prime de risque réduite."
+      }
+    ]
+  },
+  {
+    "id": "dette-plan-recession",
+    "titre": "Le plan de choc provoque une récession",
+    "description": "La consommation s'effondre : les recettes fiscales aussi.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "dette-note",
+        "options": [
+          "plan-choc"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.8,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Multiplicateur budgétaire élevé en période de faiblesse."
+      },
+      {
+        "cible": "chomage",
+        "valeur": 0.5,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Destructions d'emplois liées au choc de demande."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Recettes en baisse qui effacent une partie de l'effort."
+      }
+    ]
+  },
+  {
+    "id": "dette-ignorer-degradation",
+    "titre": "Dégradation de la note souveraine",
+    "description": "Deux agences abaissent la note : la France emprunte plus cher que l'Espagne.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "dette-note",
+        "options": [
+          "ignorer"
+        ],
+        "chance": 0.5,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_10_ans",
+        "valeur": 0.8,
+        "type": "estompe",
+        "duree": 6,
+        "hypothese": "Prime de risque accrue après la dégradation."
+      },
+      {
+        "cible": "investissement_entreprises",
+        "valeur": -0.4,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Hausse du coût du crédit pour les entreprises."
+      }
+    ]
+  },
+  {
+    "id": "dette-collectivites-investissent",
+    "titre": "Les mairies se lancent dans les travaux",
+    "description": "Ronds-points, écoles et réseaux de chaleur : le BTP local tourne à plein.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "dette-collectivites",
+        "options": [
+          "fonds-investissement",
+          "decentraliser"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.3,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Effet d'entraînement de l'investissement public local."
+      },
+      {
+        "cible": "emissions_ges",
+        "valeur": -3,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Rénovations et réseaux de chaleur."
+      }
+    ]
+  },
+  {
+    "id": "eco-cheque-redistribution",
+    "titre": "Le chèque climat est plébiscité",
+    "description": "La redistribution intégrale des recettes rend la taxe populaire chez les ménages modestes.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-taxe-carbone",
+        "options": [
+          "75",
+          "150"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_pauvrete",
+        "valeur": -0.3,
+        "type": "durable",
+        "hypothese": "Recettes reversées en montant forfaitaire, plus favorable aux bas revenus."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Mesure perçue comme juste."
+      }
+    ]
+  },
+  {
+    "id": "eco-artisans",
+    "titre": "Pénurie d'artisans pour la rénovation",
+    "description": "Les devis s'envolent et les chantiers prennent deux ans de retard.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-renovation",
+        "options": [
+          "obligation",
+          "aides-massives"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "inflation",
+        "valeur": 0.3,
+        "type": "immediat",
+        "hypothese": "Tension sur les prix du bâtiment."
+      },
+      {
+        "cible": "taux_effort_logement",
+        "valeur": 0.5,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Hausse des coûts répercutée sur les loyers."
+      },
+      {
+        "cible": "emissions_ges",
+        "valeur": 2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Une partie des rénovations est reportée."
+      }
+    ]
+  },
+  {
+    "id": "eco-renovation-emplois",
+    "titre": "La rénovation crée une filière",
+    "description": "Formation de 80 000 artisans : le bâtiment recrute partout en France.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-renovation",
+        "options": [
+          "aides-massives",
+          "pret-taux-zero"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "chomage",
+        "valeur": -0.3,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Emplois non délocalisables dans le bâtiment."
+      },
+      {
+        "cible": "chomage_jeunes",
+        "valeur": -1,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Apprentissages dans les métiers de la rénovation."
+      }
+    ]
+  },
+  {
+    "id": "eco-zan-prix",
+    "titre": "Le prix des terrains explose",
+    "description": "Avec moins de terrains constructibles, les prix du foncier doublent en périphérie.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-sols",
+        "options": [
+          "zan-strict"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_effort_logement",
+        "valeur": 1,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Rareté du foncier constructible."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Colère des maires ruraux."
+      }
+    ]
+  },
+  {
+    "id": "eco-pesticides-rendements",
+    "titre": "Les rendements résistent",
+    "description": "Les alternatives aux pesticides fonctionnent mieux que prévu dans les grandes cultures.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-agriculture",
+        "options": [
+          "interdire",
+          "accompagner"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "autonomie_alimentaire",
+        "valeur": 2,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Adoption réussie de techniques agronomiques alternatives."
+      },
+      {
+        "cible": "qualite_air",
+        "valeur": -0.3,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Moins d'épandages et de particules agricoles."
+      }
+    ]
+  },
+  {
+    "id": "eco-colere-agricole",
+    "titre": "Les tracteurs bloquent Paris",
+    "description": "Les agriculteurs dénoncent une concurrence déloyale et bloquent les autoroutes.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-agriculture",
+        "options": [
+          "interdire"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 60,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Mobilisation agricole et blocages."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Sentiment d'abandon du monde rural."
+      }
+    ]
+  },
+  {
+    "id": "eco-rail-succes",
+    "titre": "Les trains du quotidien sont pris d'assaut",
+    "description": "La fréquentation double : de nombreuses familles renoncent à leur deuxième voiture.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-transports",
+        "options": [
+          "rail",
+          "velo"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "emissions_ges",
+        "valeur": -4,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Report modal plus fort que prévu."
+      },
+      {
+        "cible": "satisfaction_vie",
+        "valeur": 0.05,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Moins de temps et de stress dans les transports."
+      },
+      {
+        "cible": "taux_effort_logement",
+        "valeur": -0.3,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Ménages moins dépendants de la voiture."
+      }
+    ]
+  },
+  {
+    "id": "eco-voitures-importees",
+    "titre": "Les voitures électriques viennent de Chine",
+    "description": "Les aides profitent surtout à des modèles importés : le déficit commercial se creuse.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-transports",
+        "options": [
+          "voiture-electrique"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "solde_commercial",
+        "valeur": -6,
+        "type": "durable",
+        "hypothese": "Les modèles les moins chers éligibles sont importés."
+      },
+      {
+        "cible": "part_industrie_va",
+        "valeur": -0.2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Pression sur les sites automobiles français."
+      }
+    ]
+  },
+  {
+    "id": "eco-autoroute-recours",
+    "titre": "Recours en justice contre l'autoroute",
+    "description": "Le chantier est bloqué cinq ans par des recours : coût et colère des deux côtés.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-transports",
+        "options": [
+          "autoroutes"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Projet ni abandonné ni réalisé."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.1,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Indemnités et surcoûts du chantier interrompu."
+      }
+    ]
+  },
+  {
+    "id": "energie-epr-retard",
+    "titre": "Le chantier des réacteurs prend du retard",
+    "description": "Malfaçons sur les soudures : mise en service repoussée et budget dépassé.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "energie-nucleaire",
+        "options": [
+          "quatorze",
+          "six"
+        ],
+        "chance": 0.45,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": 0.25,
+        "type": "estompe",
+        "duree": 6,
+        "hypothese": "Surcoûts du chantier supportés par l'État actionnaire."
+      },
+      {
+        "cible": "independance_energetique",
+        "valeur": -2,
+        "type": "differe",
+        "delai": 4,
+        "duree": 6,
+        "hypothese": "Production attendue décalée de plusieurs années."
+      }
+    ]
+  },
+  {
+    "id": "energie-filiere-export",
+    "titre": "La filière nucléaire décroche des contrats",
+    "description": "Trois pays européens commandent des réacteurs français.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "energie-nucleaire",
+        "options": [
+          "quatorze",
+          "six"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "solde_commercial",
+        "valeur": 5,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Exportations d'équipements et d'ingénierie."
+      },
+      {
+        "cible": "part_industrie_va",
+        "valeur": 0.3,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Montée en cadence des chaînes industrielles."
+      }
+    ]
+  },
+  {
+    "id": "energie-renouvelables-stockage",
+    "titre": "Percée sur le stockage par batteries",
+    "description": "Le prix des batteries s'effondre : le renouvelable devient pilotable.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "energie-nucleaire",
+        "options": [
+          "zero"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "part_renouvelables",
+        "valeur": 4,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Le stockage réduit les pertes liées à l'intermittence."
+      },
+      {
+        "cible": "independance_energetique",
+        "valeur": 3,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Moins d'importations de gaz pour l'équilibrage."
+      }
+    ]
+  },
+  {
+    "id": "energie-bouclier-cout",
+    "titre": "Le bouclier coûte deux fois plus que prévu",
+    "description": "Les prix restent hauts plus longtemps : la facture pour l'État s'alourdit.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "energie-prix",
+        "options": [
+          "bouclier"
+        ],
+        "chance": 0.45,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": 0.8,
+        "type": "immediat",
+        "hypothese": "Prix de marché durablement élevés."
+      },
+      {
+        "cible": "conso_energie_finale",
+        "valeur": 20,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Le signal prix étant gommé, la consommation ne baisse pas."
+      }
+    ]
+  },
+  {
+    "id": "energie-eolien-contentieux",
+    "titre": "Les pêcheurs bloquent les parcs éoliens",
+    "description": "Recours en cascade : deux parcs en mer prennent quatre ans de retard.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "energie-renouvelables",
+        "options": [
+          "eolien-mer"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "part_renouvelables",
+        "valeur": -1.5,
+        "type": "differe",
+        "delai": 2,
+        "duree": 4,
+        "hypothese": "Production décalée par les contentieux."
+      }
+    ]
+  },
+  {
+    "id": "energie-cooperatives",
+    "titre": "Les coopératives énergétiques essaiment",
+    "description": "Des milliers de citoyens investissent dans leur parc local.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "energie-renouvelables",
+        "options": [
+          "partage-local",
+          "solaire-toits"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "part_renouvelables",
+        "valeur": 2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Projets acceptés localement, moins de recours."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1.5,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Appropriation locale de la transition."
+      }
+    ]
+  },
+  {
+    "id": "sante-regulation-fuite",
+    "titre": "Les jeunes médecins boudent la médecine libérale",
+    "description": "Face à la régulation, beaucoup choisissent le salariat ou l'étranger.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "sante-deserts",
+        "options": [
+          "regulation"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 2.5,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Baisse des installations en libéral."
+      }
+    ]
+  },
+  {
+    "id": "sante-teleconsultation",
+    "titre": "La téléconsultation décolle dans les campagnes",
+    "description": "Les cabines en pharmacie couvrent une partie des besoins.",
+    "nature": "positif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": -2,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Accès facilité aux consultations simples."
+      },
+      {
+        "cible": "depenses_sante",
+        "valeur": -0.05,
+        "type": "durable",
+        "hypothese": "Moins de recours aux urgences pour des cas bénins."
+      }
+    ]
+  },
+  {
+    "id": "sante-hopital-attractif",
+    "titre": "Les soignants reviennent à l'hôpital",
+    "description": "Les postes vacants fondent : des services rouvrent leurs lits.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "sante-hopital",
+        "options": [
+          "salaires"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": -2,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Retour d'infirmiers partis vers l'intérim ou l'étranger."
+      },
+      {
+        "cible": "esperance_vie_bonne_sante",
+        "valeur": 0.3,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Meilleure prise en charge hospitalière."
+      }
+    ]
+  },
+  {
+    "id": "sante-urgences-fermees",
+    "titre": "Des urgences ferment l'été",
+    "description": "Sans moyens nouveaux, une dizaine de services d'urgence ferment la nuit.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "sante-hopital",
+        "options": [
+          "reorganiser"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Fermetures nocturnes faute de personnel."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Accès aux soins perçu comme dégradé."
+      }
+    ]
+  },
+  {
+    "id": "sante-taxes-contrebande",
+    "titre": "Explosion de la contrebande de tabac",
+    "description": "Un paquet sur trois est acheté hors du circuit officiel.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "sante-prevention",
+        "options": [
+          "taxes-sante"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": 0.1,
+        "type": "durable",
+        "hypothese": "Recettes de taxes plus faibles qu'attendu."
+      },
+      {
+        "cible": "sentiment_insecurite",
+        "valeur": 1,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Trafics visibles dans certains quartiers."
+      }
+    ]
+  },
+  {
+    "id": "educ-professeurs-vocation",
+    "titre": "Les candidats aux concours affluent",
+    "description": "Le nombre de candidats double : les académies retrouvent des listes d'attente.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "educ-professeurs",
+        "options": [
+          "salaires",
+          "formation-recrutement"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "pisa_maths",
+        "valeur": 3,
+        "type": "differe",
+        "delai": 4,
+        "hypothese": "Recrutements plus sélectifs et mieux formés."
+      },
+      {
+        "cible": "eleves_par_classe",
+        "valeur": -0.4,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Postes non pourvus enfin occupés."
+      }
+    ]
+  },
+  {
+    "id": "educ-contractuels-turnover",
+    "titre": "Valse des contractuels",
+    "description": "Un tiers des contractuels démissionne dans l'année : des classes sans professeur.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "educ-professeurs",
+        "options": [
+          "contractuels"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "pisa_maths",
+        "valeur": -2.5,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Heures de cours perdues et formation insuffisante."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Parents inquiets."
+      }
+    ]
+  },
+  {
+    "id": "educ-classes-locaux",
+    "titre": "Pas assez de salles de classe",
+    "description": "Dédoubler les classes demande des locaux : les mairies doivent construire en urgence.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "educ-classes",
+        "options": [
+          "dedoubler"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": 0.3,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Construction et location de salles supplémentaires."
+      },
+      {
+        "cible": "artificialisation",
+        "valeur": 400,
+        "type": "durable",
+        "hypothese": "Extensions d'écoles en périphérie."
+      },
+      {
+        "cible": "eleves_par_classe",
+        "valeur": 1,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Faute de salles, le dédoublement est retardé dans une partie des écoles."
+      }
+    ]
+  },
+  {
+    "id": "educ-apprentissage-industrie",
+    "titre": "Les apprentis sauvent l'industrie locale",
+    "description": "Des PME trouvent enfin des soudeurs et des techniciens.",
+    "nature": "positif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "part_industrie_va",
+        "valeur": 0.2,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Pénurie de main-d'œuvre qualifiée réduite."
+      },
+      {
+        "cible": "neet",
+        "valeur": -0.5,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Plus de jeunes en formation qualifiante."
+      }
+    ]
+  },
+  {
+    "id": "secu-proximite-confiance",
+    "titre": "La police de proximité gagne la confiance",
+    "description": "Les plaintes augmentent, les trafics reculent dans les quartiers pilotes.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "secu-police",
+        "options": [
+          "proximite"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "violences_physiques",
+        "valeur": -0.3,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Meilleur renseignement local."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1.5,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Relations apaisées avec les habitants."
+      }
+    ]
+  },
+  {
+    "id": "secu-fuite-donnees",
+    "titre": "Fuite massive des images de vidéosurveillance",
+    "description": "Des millions d'images se retrouvent en ligne : le scandale est national.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "secu-police",
+        "options": [
+          "videosurveillance"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2.5,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Atteinte à la vie privée très médiatisée."
+      },
+      {
+        "cible": "dependance_numerique",
+        "valeur": 1,
+        "type": "durable",
+        "hypothese": "Le prestataire étranger est mis en cause."
+      }
+    ]
+  },
+  {
+    "id": "secu-cannabis-recettes",
+    "titre": "Le cannabis légal rapporte gros",
+    "description": "Les recettes fiscales dépassent le milliard et les réseaux perdent des clients.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "secu-cannabis",
+        "options": [
+          "legaliser"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": -0.1,
+        "type": "durable",
+        "hypothese": "Taxe sur un marché sorti de l'illégalité."
+      },
+      {
+        "cible": "violences_physiques",
+        "valeur": -0.2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Moins de règlements de comptes entre réseaux."
+      }
+    ]
+  },
+  {
+    "id": "secu-narcotrafic",
+    "titre": "Les réseaux se reconvertissent dans la cocaïne",
+    "description": "La pression sur le cannabis pousse les trafics vers des drogues plus dures.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "secu-cannabis",
+        "options": [
+          "guerre-reseaux",
+          "legaliser"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "violences_physiques",
+        "valeur": 0.3,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Guerre de territoires autour de nouveaux trafics."
+      },
+      {
+        "cible": "sentiment_insecurite",
+        "valeur": 2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Fusillades médiatisées."
+      }
+    ]
+  },
+  {
+    "id": "secu-justice-numerique-bug",
+    "titre": "Le logiciel de la justice plante",
+    "description": "La nouvelle plateforme bloque les procédures pendant des mois.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "secu-justice",
+        "options": [
+          "numerique"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "delai_jugement",
+        "valeur": 2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Dossiers bloqués pendant la migration."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.05,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Correctifs et doublement des systèmes."
+      }
+    ]
+  },
+  {
+    "id": "secu-magistrats-formation",
+    "titre": "Pas assez de candidats magistrats",
+    "description": "L'école ne forme que la moitié des postes : le recrutement prend deux fois plus de temps.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "secu-justice",
+        "options": [
+          "magistrats"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "delai_jugement",
+        "valeur": 1.5,
+        "type": "differe",
+        "delai": 2,
+        "duree": 5,
+        "hypothese": "Recrutements étalés sur une décennie."
+      }
+    ]
+  },
+  {
+    "id": "secu-prisons-recidive",
+    "titre": "Les peines alternatives font baisser la récidive",
+    "description": "Les premiers chiffres montrent un tiers de récidive en moins.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "secu-peines",
+        "options": [
+          "alternatives"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "violences_physiques",
+        "valeur": -0.3,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Moins de sorties sèches de prison."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": -0.05,
+        "type": "durable",
+        "hypothese": "Coût moindre qu'une place de prison."
+      }
+    ]
+  },
+  {
+    "id": "secu-surpopulation",
+    "titre": "Mutinerie dans une maison d'arrêt",
+    "description": "La surpopulation dégénère : trois établissements sont saccagés.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "secu-peines",
+        "options": [
+          "peines-planchers"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "sentiment_insecurite",
+        "valeur": 2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Évasions et violences très médiatisées."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.05,
+        "type": "immediat",
+        "hypothese": "Reconstruction en urgence."
+      }
+    ]
+  },
+  {
+    "id": "logement-bailleurs-retirent",
+    "titre": "Des propriétaires retirent leurs biens",
+    "description": "Une partie des bailleurs vend ou passe en location meublée de courte durée.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "logement-loyers",
+        "options": [
+          "generaliser"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_effort_logement",
+        "valeur": 0.8,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Offre locative en baisse dans les zones tendues."
+      }
+    ]
+  },
+  {
+    "id": "logement-boom-chantiers",
+    "titre": "Les grues reviennent",
+    "description": "Les permis de construire bondissent de 30 % : le BTP embauche.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "logement-construction",
+        "options": [
+          "simplifier",
+          "logement-social"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_effort_logement",
+        "valeur": -0.8,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Offre nouvelle qui détend les prix."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.3,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Activité du bâtiment."
+      },
+      {
+        "cible": "artificialisation",
+        "valeur": 1500,
+        "type": "durable",
+        "hypothese": "Constructions sur des terrains nus."
+      }
+    ]
+  },
+  {
+    "id": "logement-bulle",
+    "titre": "Les prix immobiliers s'envolent",
+    "description": "Les aides à l'achat sont absorbées par la hausse des prix.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "logement-construction",
+        "options": [
+          "pret-primo"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_effort_logement",
+        "valeur": 1,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Aide captée par les vendeurs via les prix."
+      },
+      {
+        "cible": "rapport_interdecile",
+        "valeur": 0.02,
+        "type": "durable",
+        "hypothese": "Propriétaires existants enrichis."
+      }
+    ]
+  },
+  {
+    "id": "logement-vacants-remis",
+    "titre": "300 000 logements remis sur le marché",
+    "description": "La mesure fonctionne : les biens vides se louent rapidement.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "logement-vacants",
+        "options": [
+          "taxe",
+          "requisition"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_effort_logement",
+        "valeur": -0.8,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Offre supplémentaire sans construction."
+      },
+      {
+        "cible": "artificialisation",
+        "valeur": -1000,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Moins besoin de construire en périphérie."
+      }
+    ]
+  },
+  {
+    "id": "emploi-4-jours-recrutement",
+    "titre": "La semaine de 4 jours attire les talents",
+    "description": "Les entreprises pilotes recrutent plus facilement et l'absentéisme baisse.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "emploi-temps-travail",
+        "options": [
+          "semaine-4-jours"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "productivite_horaire",
+        "valeur": 1,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Moins d'absentéisme, meilleure organisation."
+      },
+      {
+        "cible": "ecart_salaire_hf",
+        "valeur": -0.5,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Temps partiels subis convertis en 4 jours."
+      }
+    ]
+  },
+  {
+    "id": "emploi-jour-ferie-greve",
+    "titre": "Le 1er mai travaillé tourne à la grève",
+    "description": "Les syndicats appellent à une journée morte : le pays est paralysé.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "emploi-temps-travail",
+        "options": [
+          "jour-ferie"
+        ],
+        "chance": 0.45,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 80,
+        "type": "immediat",
+        "hypothese": "Grève nationale contre la suppression."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Mesure perçue comme injuste."
+      }
+    ]
+  },
+  {
+    "id": "emploi-smic-pme",
+    "titre": "Des PME ne suivent pas la hausse du SMIC",
+    "description": "Faillites dans la restauration et le commerce de proximité.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "emploi-smic",
+        "options": [
+          "hausse"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "chomage",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Destructions d'emplois peu qualifiés."
+      },
+      {
+        "cible": "chomage_jeunes",
+        "valeur": 1.5,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Premiers emplois plus rares."
+      }
+    ]
+  },
+  {
+    "id": "emploi-smic-consommation",
+    "titre": "La hausse du SMIC relance la consommation",
+    "description": "Les petits salaires dépensent : les commerces de centre-ville respirent.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "emploi-smic",
+        "options": [
+          "hausse",
+          "prime-activite"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.3,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Forte propension à consommer des bas revenus."
+      },
+      {
+        "cible": "satisfaction_vie",
+        "valeur": 0.05,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Pouvoir d'achat retrouvé."
+      }
+    ]
+  },
+  {
+    "id": "emploi-formation-inadaptee",
+    "titre": "Des formations sans débouchés",
+    "description": "Un rapport révèle que la moitié des formations ne mène à aucun emploi.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "emploi-assurance-chomage",
+        "options": [
+          "formation"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": 0.1,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Dépenses de formation peu efficaces."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Scandale autour d'organismes de formation."
+      }
+    ]
+  },
+  {
+    "id": "emploi-durcir-pauvrete",
+    "titre": "Les associations alertent sur la pauvreté",
+    "description": "Les fins de droits se multiplient : les banques alimentaires débordent.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "emploi-assurance-chomage",
+        "options": [
+          "durcir"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_pauvrete",
+        "valeur": 0.6,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Chômeurs en fin de droits sans solution."
+      },
+      {
+        "cible": "satisfaction_vie",
+        "valeur": -0.05,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Précarité accrue."
+      }
+    ]
+  },
+  {
+    "id": "emploi-apprentissage-boom",
+    "titre": "Les entreprises s'arrachent les jeunes",
+    "description": "Le marché du travail se tend : les jeunes trouvent plus vite un premier emploi.",
+    "nature": "positif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "chomage_jeunes",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Tensions de recrutement favorables aux jeunes."
+      },
+      {
+        "cible": "neet",
+        "valeur": -0.5,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Moins de jeunes sans activité."
+      }
+    ]
+  },
+  {
+    "id": "demo-creches-personnel",
+    "titre": "Pas assez d'auxiliaires de puériculture",
+    "description": "Les crèches ouvrent à moitié vides faute de personnel.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "demo-famille",
+        "options": [
+          "creches"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "fecondite",
+        "valeur": -0.03,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Promesse non tenue pour les jeunes parents."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Listes d'attente toujours aussi longues."
+      }
+    ]
+  },
+  {
+    "id": "demo-natalite-rebond",
+    "titre": "Rebond surprise des naissances",
+    "description": "Les naissances augmentent de 5 % : un effet de génération inattendu.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "demo-famille",
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "fecondite",
+        "valeur": 0.08,
+        "type": "estompe",
+        "duree": 6,
+        "hypothese": "Effet calendrier et climat de confiance des jeunes couples."
+      }
+    ]
+  },
+  {
+    "id": "demo-visas-hopitaux",
+    "titre": "Les hôpitaux recrutent des soignants étrangers",
+    "description": "Les visas de travail comblent une partie des postes vacants.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "demo-immigration-travail",
+        "options": [
+          "50",
+          "150"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": -2,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Soignants recrutés dans les zones sous-dotées."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": 0.15,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Postes vacants pourvus."
+      }
+    ]
+  },
+  {
+    "id": "demo-visas-penurie",
+    "titre": "Les chantiers s'arrêtent faute de bras",
+    "description": "Bâtiment et agriculture n'arrivent plus à recruter.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "demo-immigration-travail",
+        "options": [
+          "0"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Pénurie de main-d'œuvre dans les secteurs en tension."
+      },
+      {
+        "cible": "inflation",
+        "valeur": 0.4,
+        "type": "immediat",
+        "hypothese": "Hausse des coûts dans le bâtiment et l'agriculture."
+      },
+      {
+        "cible": "autonomie_alimentaire",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Récoltes non ramassées."
+      }
+    ]
+  },
+  {
+    "id": "demo-asile-accord",
+    "titre": "Accord européen sur l'asile",
+    "description": "Les autres pays acceptent une meilleure répartition des demandes.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "demo-asile",
+        "chance": 0.25,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "delai_jugement",
+        "valeur": -0.5,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Moins de dossiers en attente."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Sentiment de maîtrise."
+      }
+    ]
+  },
+  {
+    "id": "demo-externalisation-scandale",
+    "titre": "Scandale dans un centre d'examen à l'étranger",
+    "description": "Une enquête révèle des conditions indignes : condamnation de la Cour européenne.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "demo-asile",
+        "options": [
+          "externaliser"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Image internationale dégradée."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.05,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Amendes et renégociation du contrat."
+      }
+    ]
+  },
+  {
+    "id": "demo-chercheurs-reviennent",
+    "titre": "Des chercheurs stars rentrent en France",
+    "description": "Plusieurs laboratoires de pointe s'installent à Paris-Saclay.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "demo-jeunes-diplomes",
+        "options": [
+          "salaires-recherche"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "productivite_horaire",
+        "valeur": 1.5,
+        "type": "differe",
+        "delai": 4,
+        "hypothese": "Innovation et créations d'entreprises."
+      },
+      {
+        "cible": "part_industrie_va",
+        "valeur": 0.2,
+        "type": "differe",
+        "delai": 5,
+        "hypothese": "Start-up industrielles issues des laboratoires."
+      }
+    ]
+  },
+  {
+    "id": "demo-aidants-epuises",
+    "titre": "Les aidants familiaux s'épuisent",
+    "description": "Le maintien à domicile repose sur des proches qui quittent leur emploi.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "demo-grand-age",
+        "options": [
+          "domicile"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_emploi",
+        "valeur": -0.4,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Aidants qui réduisent leur activité."
+      },
+      {
+        "cible": "ecart_salaire_hf",
+        "valeur": 0.5,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Les aidants sont majoritairement des femmes."
+      }
+    ]
+  },
+  {
+    "id": "souv-defense-export",
+    "titre": "Les Rafale s'exportent comme jamais",
+    "description": "Deux grosses commandes étrangères remplissent les carnets pour dix ans.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-defense",
+        "options": [
+          "3",
+          "3.5"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "solde_commercial",
+        "valeur": 6,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Exportations d'armement."
+      },
+      {
+        "cible": "part_industrie_va",
+        "valeur": 0.3,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Montée en cadence des usines de défense."
+      }
+    ]
+  },
+  {
+    "id": "souv-defense-coupes",
+    "titre": "Le budget de défense coupe ailleurs",
+    "description": "Pour tenir l'objectif, des crédits d'éducation et de santé sont annulés.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-defense",
+        "options": [
+          "3.5"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "eleves_par_classe",
+        "valeur": 0.5,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Créations de postes annulées."
+      },
+      {
+        "cible": "desert_medical",
+        "valeur": 1,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Investissements hospitaliers reportés."
+      }
+    ]
+  },
+  {
+    "id": "souv-puces-retard",
+    "titre": "L'usine de puces accumule les retards",
+    "description": "Le partenaire étranger se retire : le site reste vide.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-relocalisation",
+        "options": [
+          "semi-conducteurs"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": 0.1,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Aides versées sans production."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Promesse industrielle non tenue."
+      }
+    ]
+  },
+  {
+    "id": "souv-medicaments-penurie-evitee",
+    "titre": "La production française évite une pénurie",
+    "description": "Lors d'une rupture mondiale d'antibiotiques, la France est approvisionnée.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-relocalisation",
+        "options": [
+          "medicaments"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "esperance_vie_bonne_sante",
+        "valeur": 0.2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Continuité des traitements."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Démonstration de résilience."
+      }
+    ]
+  },
+  {
+    "id": "souv-cloud-panne",
+    "titre": "Le cloud souverain tombe en panne",
+    "description": "Les sites de l'État sont inaccessibles une semaine.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-cloud",
+        "options": [
+          "cloud-souverain"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "productivite_horaire",
+        "valeur": -0.5,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Services numériques publics interrompus."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Doutes sur la solution nationale."
+      }
+    ]
+  },
+  {
+    "id": "souv-cloud-extraterritorial",
+    "titre": "Une loi américaine expose les données",
+    "description": "Un tribunal étranger exige l'accès aux données de santé hébergées à l'étranger.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-cloud",
+        "options": [
+          "ouverture"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "dependance_numerique",
+        "valeur": 3,
+        "type": "durable",
+        "hypothese": "Dépendance juridique aux lois extraterritoriales."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Atteinte à la souveraineté des données."
+      }
+    ]
+  },
+  {
+    "id": "souv-europe-investissement",
+    "titre": "L'emprunt européen finance des réseaux électriques",
+    "description": "Les interconnexions financées par l'UE font baisser les prix de l'électricité.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-europe",
+        "options": [
+          "emprunt-commun"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "independance_energetique",
+        "valeur": 2,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Interconnexions et stockage européens."
+      },
+      {
+        "cible": "inflation",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Anticipations de baisse des prix de l'énergie."
+      }
+    ]
+  },
+  {
+    "id": "souv-otan-crise",
+    "titre": "Crise diplomatique avec les alliés",
+    "description": "Le retrait du commandement intégré refroidit les partenaires : des contrats sont gelés.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-otan",
+        "options": [
+          "retrait"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "solde_commercial",
+        "valeur": -4,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Contrats d'armement et industriels annulés."
+      },
+      {
+        "cible": "taux_10_ans",
+        "valeur": 0.2,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Incertitude géopolitique."
+      }
+    ]
+  },
+  {
+    "id": "souv-agriculteurs-installation",
+    "titre": "Une nouvelle génération d'agriculteurs",
+    "description": "Les installations de jeunes agriculteurs repartent pour la première fois depuis 30 ans.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "souv-alimentation",
+        "options": [
+          "installation",
+          "prix-plancher"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "autonomie_alimentaire",
+        "valeur": 2,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Exploitations reprises au lieu d'être absorbées."
+      },
+      {
+        "cible": "neet",
+        "valeur": -0.2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Débouchés pour les jeunes ruraux."
+      }
+    ]
+  },
+  {
+    "id": "retraites-cour-comptes",
+    "titre": "La Cour des comptes révise ses projections",
+    "description": "Les besoins de financement des retraites sont plus élevés que prévu.",
+    "nature": "negatif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": 0.2,
+        "type": "durable",
+        "hypothese": "Projections démographiques et salariales moins favorables."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-fraude",
+    "titre": "Une cellule anti-fraude frappe fort",
+    "description": "Un vaste réseau de fraude à la TVA est démantelé : 2 milliards récupérés.",
+    "nature": "positif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "deficit_public",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Recettes exceptionnelles de redressements."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": 1,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Sentiment que l'impôt est mieux respecté."
+      }
+    ]
+  },
+  {
+    "id": "dette-adjudication",
+    "titre": "Adjudication ratée",
+    "description": "Une émission de dette trouve peu de preneurs : les taux bondissent quelques semaines.",
+    "nature": "negatif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "taux_10_ans",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Choc de demande sur la dette souveraine."
+      }
+    ]
+  },
+  {
+    "id": "ecologie-innovation",
+    "titre": "Un procédé français de ciment bas carbone",
+    "description": "Une start-up divise par deux les émissions du ciment : l'industrie l'adopte.",
+    "nature": "positif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "emissions_ges",
+        "valeur": -6,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Décarbonation d'un secteur très émetteur."
+      }
+    ]
+  },
+  {
+    "id": "energie-panne",
+    "titre": "Black-out sur la moitié Ouest",
+    "description": "Une panne géante prive 10 millions de foyers d'électricité pendant une journée.",
+    "nature": "negatif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.2,
+        "type": "immediat",
+        "hypothese": "Production interrompue."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Le réseau est jugé fragile."
+      }
+    ]
+  },
+  {
+    "id": "logement-taux",
+    "titre": "Les taux immobiliers chutent",
+    "description": "Les banques relancent le crédit : les jeunes ménages achètent.",
+    "nature": "positif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "taux_effort_logement",
+        "valeur": -0.6,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Coût du crédit en baisse."
+      },
+      {
+        "cible": "fecondite",
+        "valeur": 0.02,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Accès au logement favorable aux projets familiaux."
+      }
+    ]
+  },
+  {
+    "id": "securite-attentat",
+    "titre": "Attentat déjoué de justesse",
+    "description": "Le pays apprend qu'un attentat de grande ampleur a été évité.",
+    "nature": "negatif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "sentiment_insecurite",
+        "valeur": 3,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Choc dans l'opinion."
+      }
+    ]
+  },
+  {
+    "id": "demographie-vieillissement",
+    "titre": "L'INSEE révise l'espérance de vie à la hausse",
+    "description": "Les retraités vivront plus longtemps que prévu : bonne nouvelle, mais coûteuse.",
+    "nature": "negatif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "esperance_vie",
+        "valeur": 0.5,
+        "type": "durable",
+        "hypothese": "Progrès médicaux plus rapides que prévu."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.15,
+        "type": "durable",
+        "hypothese": "Pensions versées plus longtemps."
+      }
+    ]
+  },
+  {
+    "id": "souverainete-matieres",
+    "titre": "Accord sur les métaux critiques",
+    "description": "La France sécurise lithium et terres rares auprès de partenaires fiables.",
+    "nature": "positif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "part_industrie_va",
+        "valeur": 0.2,
+        "type": "differe",
+        "delai": 2,
+        "hypothese": "Approvisionnement sécurisé des industries."
+      },
+      {
+        "cible": "independance_energetique",
+        "valeur": 1,
+        "type": "differe",
+        "delai": 3,
+        "hypothese": "Moins de dépendance pour les batteries."
+      }
+    ]
+  },
+  {
+    "id": "sante-epidemie",
+    "titre": "Épidémie de grippe sévère",
+    "description": "Hôpitaux saturés pendant deux mois.",
+    "nature": "negatif",
+    "poids": 0.4,
+    "effets": [
+      {
+        "cible": "depenses_sante",
+        "valeur": 0.1,
+        "type": "immediat",
+        "hypothese": "Hospitalisations en hausse."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.1,
+        "type": "immediat",
+        "hypothese": "Absentéisme élevé."
+      }
+    ]
+  },
+  {
+    "id": "eco-vitesse-securite",
+    "titre": "Mortalité routière au plus bas",
+    "description": "Moins de vitesse, moins d'accidents graves : un bilan routier historique.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "eco-vitesse",
+        "options": [
+          "110",
+          "120"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": 2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Bénéfice visible qui fait accepter la mesure."
+      },
+      {
+        "cible": "depenses_sante",
+        "valeur": -0.05,
+        "type": "durable",
+        "hypothese": "Moins de blessés graves à soigner."
+      }
+    ]
+  },
+  {
+    "id": "dette-effort-greve",
+    "titre": "Grève générale contre l'austérité",
+    "description": "Transports, écoles et hôpitaux à l'arrêt pendant trois semaines.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "dette-effort",
+        "options": [
+          "30",
+          "40"
+        ],
+        "chance": 0.45,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 150,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Mouvement social interprofessionnel."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Pays paralysé plusieurs semaines."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Rupture avec une partie de l'opinion."
+      }
+    ]
+  },
+  {
+    "id": "sante-ondam-maternites",
+    "titre": "Des maternités ferment",
+    "description": "Faute de budget, une vingtaine de petites maternités ferment en un an.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "sante-ondam",
+        "options": [
+          "1.5",
+          "2"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 2,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Fermetures de services de proximité."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Sentiment d'abandon des territoires."
+      }
+    ]
+  },
+  {
+    "id": "emploi-32h-hopital",
+    "titre": "Les hôpitaux manquent de bras",
+    "description": "Passer à 32 heures crée un besoin de 100 000 soignants introuvables.",
+    "nature": "negatif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "emploi-duree-legale",
+        "options": [
+          "32",
+          "33"
+        ],
+        "chance": 0.4,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 2.5,
+        "type": "estompe",
+        "duree": 5,
+        "hypothese": "Postes vacants dans les services de soins."
+      },
+      {
+        "cible": "deficit_public",
+        "valeur": 0.1,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Recours coûteux à l'intérim."
+      }
+    ]
+  },
+  {
+    "id": "logement-hlm-renouveau",
+    "titre": "Les quartiers neufs réussissent",
+    "description": "Mixité sociale, commerces, transports : les nouveaux quartiers sont cités en exemple.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "logement-hlm",
+        "options": [
+          "120",
+          "180"
+        ],
+        "chance": 0.3,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "satisfaction_vie",
+        "valeur": 0.05,
+        "type": "differe",
+        "delai": 4,
+        "hypothese": "Meilleur cadre de vie des ménages relogés."
+      },
+      {
+        "cible": "violences_physiques",
+        "valeur": -0.2,
+        "type": "differe",
+        "delai": 4,
+        "hypothese": "Moins de concentration de la pauvreté."
+      }
+    ]
+  },
+  {
+    "id": "fiscalite-is-sieges",
+    "titre": "Des sièges sociaux reviennent en France",
+    "description": "Trois grands groupes rapatrient leur siège européen.",
+    "nature": "positif",
+    "poids": 0,
+    "declenchePar": [
+      {
+        "carte": "fiscalite-is",
+        "options": [
+          "20",
+          "22.5"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "investissement_entreprises",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 4,
+        "hypothese": "Décisions d'investissement rapatriées."
+      },
+      {
+        "cible": "chomage",
+        "valeur": -0.1,
+        "type": "differe",
+        "delai": 1,
+        "hypothese": "Emplois qualifiés créés."
+      }
+    ]
+  },
+  {
+    "id": "crise-raffineries",
+    "titre": "Plus d'essence : les raffineries bloquées",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 2,
+    "description": "Depuis dix jours, les salariés de 5 des 7 raffineries bloquent les dépôts. Un tiers des stations sont à sec. Ambulanciers, agriculteurs et artisans menacent de rejoindre le mouvement.",
+    "declenchePar": [
+      {
+        "carte": "eco-taxe-carbone",
+        "options": [
+          "100",
+          "125",
+          "150"
+        ],
+        "chance": 0.35,
+        "delai": [
+          2,
+          7
+        ]
+      },
+      {
+        "carte": "dette-economies",
+        "options": [
+          "point-indice"
+        ],
+        "chance": 0.2,
+        "delai": [
+          2,
+          8
+        ]
+      },
+      {
+        "carte": "emploi-temps-travail",
+        "options": [
+          "jour-ferie"
+        ],
+        "chance": 0.25,
+        "delai": [
+          2,
+          8
+        ]
+      },
+      {
+        "carte": "emploi-duree-legale",
+        "options": [
+          "37",
+          "38"
+        ],
+        "chance": 0.25,
+        "delai": [
+          2,
+          8
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 60,
+        "type": "immediat",
+        "hypothese": "Blocage des raffineries et grèves de soutien."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.15,
+        "type": "immediat",
+        "hypothese": "Pénurie de carburant : livraisons et déplacements perturbés."
+      }
+    ],
+    "reponses": [
+      {
+        "id": "requisitionner",
+        "titre": "Réquisitionner les grévistes",
+        "outil": "decret",
+        "explication": "L'État oblige une partie des salariés à reprendre le travail. Les stations sont livrées en quelques jours, mais les syndicats dénoncent un passage en force et appellent à étendre la grève.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.1,
+            "type": "immediat",
+            "hypothese": "Retour rapide de l'approvisionnement."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 40,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Extension du conflit à d'autres secteurs."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -2,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Passage en force mal vécu."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -4,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Image d'autorité, mais colère d'une partie du pays."
+          }
+        ]
+      },
+      {
+        "id": "ceder",
+        "titre": "Céder sur les revendications",
+        "outil": "negociation",
+        "explication": "Hausse de salaire et gel de la taxe carbone : le carburant revient vite, mais la mesure climatique est enterrée et le budget perd 2 milliards d'euros par an.",
+        "effets": [
+          {
+            "cible": "jours_greve",
+            "valeur": -50,
+            "type": "immediat",
+            "hypothese": "Fin rapide du conflit."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.07,
+            "type": "durable",
+            "hypothese": "Environ 2 Md€ par an de recettes et de dépenses en moins ou en plus."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": 3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Le signal prix sur le carbone disparaît."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 5,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Soulagement à la pompe."
+          }
+        ]
+      },
+      {
+        "id": "stocks",
+        "titre": "Tenir avec les stocks stratégiques",
+        "outil": "decision",
+        "explication": "La France garde environ 3 mois de réserves de carburant. On ne cède rien, mais la pénurie s'étire et chaque semaine de blocage coûte de la croissance.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.3,
+            "type": "immediat",
+            "hypothese": "Pénurie prolongée."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 30,
+            "type": "immediat",
+            "hypothese": "Conflit qui dure."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -3,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Exaspération des automobilistes."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "En octobre 2022, des grèves dans les raffineries ont privé de carburant jusqu'à un tiers des stations. Le gouvernement avait réquisitionné une partie des salariés."
+  },
+  {
+    "id": "crise-cyberattaque",
+    "titre": "Cyberattaque : les hôpitaux d'Île-de-France paralysés",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 2,
+    "description": "Un rançongiciel a bloqué les dossiers de 12 hôpitaux. Les urgences tournent sur papier, des opérations sont reportées. Les pirates exigent 50 millions d'euros en cryptomonnaie sous 72 heures.",
+    "declenchePar": [
+      {
+        "carte": "souv-cloud",
+        "options": [
+          "ouverture"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          10
+        ]
+      },
+      {
+        "carte": "sante-ondam",
+        "options": [
+          "1.5",
+          "2"
+        ],
+        "chance": 0.15,
+        "delai": [
+          3,
+          10
+        ]
+      },
+      {
+        "carte": "dette-economies",
+        "options": [
+          "rabot"
+        ],
+        "chance": 0.12,
+        "delai": [
+          3,
+          10
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 1.5,
+        "type": "immediat",
+        "hypothese": "Soins déprogrammés pendant la paralysie."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Sentiment de vulnérabilité de l'État."
+      }
+    ],
+    "reponses": [
+      {
+        "id": "payer",
+        "titre": "Payer la rançon",
+        "outil": "decision",
+        "explication": "Les systèmes pourraient revenir en 48 heures. Mais l'État finance des criminels, rien ne garantit la restitution des données et d'autres attaques pourraient suivre.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": -1.2,
+            "type": "immediat",
+            "hypothese": "Retour rapide des systèmes, si les pirates tiennent parole."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": 3,
+            "type": "durable",
+            "hypothese": "Signal de faiblesse envoyé aux groupes criminels."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -3,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "L'affaire finit par fuiter."
+          }
+        ]
+      },
+      {
+        "id": "refuser",
+        "titre": "Refuser et tout reconstruire",
+        "outil": "decision",
+        "explication": "Trois semaines de chaos dans les hôpitaux et 200 millions d'euros de reconstruction. La France montre qu'elle ne cède pas au chantage.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": 1.5,
+            "type": "immediat",
+            "hypothese": "Semaines de fonctionnement dégradé."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.01,
+            "type": "immediat",
+            "hypothese": "Reconstruction des systèmes."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": -1,
+            "type": "durable",
+            "hypothese": "Systèmes reconstruits plus sûrs."
+          }
+        ]
+      },
+      {
+        "id": "bouclier",
+        "titre": "Refuser et voter un « bouclier cyber »",
+        "outil": "loi",
+        "explication": "On ne paie pas et on lance un plan de 2 milliards sur 5 ans pour protéger hôpitaux et mairies. La crise actuelle dure, mais le risque de récidive chute.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": 1,
+            "type": "immediat",
+            "hypothese": "La crise actuelle se règle lentement."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.015,
+            "type": "durable",
+            "duree": 5,
+            "hypothese": "Environ 0,4 Md€ par an pendant 5 ans."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": -5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Sécurisation des systèmes publics."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Fermeté appréciée."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "L'Agence nationale de la sécurité des systèmes d'information recommande de ne jamais payer de rançon. Plusieurs hôpitaux français ont été attaqués depuis 2020."
+  },
+  {
+    "id": "crise-banque",
+    "titre": "Une grande banque française vacille",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 2,
+    "description": "Après des pertes cachées sur l'immobilier, ses clients retirent 20 milliards d'euros en deux jours. Si elle tombe, 8 millions de comptes sont touchés et la panique peut gagner toutes les banques.",
+    "declenchePar": [
+      {
+        "carte": "dette-note",
+        "options": [
+          "ignorer"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.4,
+        "type": "immediat",
+        "hypothese": "Panique bancaire et gel du crédit."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Inquiétude pour l'épargne."
+      }
+    ],
+    "reponses": [
+      {
+        "id": "nationaliser",
+        "titre": "Nationaliser en urgence",
+        "outil": "decret",
+        "explication": "L'État rachète la banque pour un euro symbolique et garantit tous les dépôts. La panique s'arrête net, mais le contribuable porte jusqu'à 30 milliards d'euros de risques.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.3,
+            "type": "immediat",
+            "hypothese": "Fin de la panique bancaire."
+          },
+          {
+            "cible": "dette_publique",
+            "valeur": 0.8,
+            "type": "durable",
+            "hypothese": "Reprise des pertes de la banque par l'État."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Les épargnants sont rassurés."
+          }
+        ]
+      },
+      {
+        "id": "laisser",
+        "titre": "La laisser tomber",
+        "outil": "decision",
+        "explication": "Les dépôts jusqu'à 100 000 € sont garantis par la loi, le reste est perdu. L'État ne dépense rien, mais la confiance dans les banques s'effondre pour des mois.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.8,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Contagion à tout le système financier."
+          },
+          {
+            "cible": "chomage",
+            "valeur": 0.4,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Faillites d'entreprises privées de crédit."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.6,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Crédit rationné."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -6,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Épargnants ruinés au-delà de 100 000 €."
+          }
+        ]
+      },
+      {
+        "id": "europe",
+        "titre": "Sauvetage européen",
+        "outil": "negociation",
+        "explication": "La BCE et les autres banques renflouent, à une condition : la banque est démantelée et 15 000 emplois sont supprimés. Moins coûteux pour l'État, mais long et humiliant.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.1,
+            "type": "immediat",
+            "hypothese": "Panique contenue après quelques semaines."
+          },
+          {
+            "cible": "chomage",
+            "valeur": 0.1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Suppressions d'emplois dans la banque."
+          },
+          {
+            "cible": "part_dette_non_residents",
+            "valeur": 2,
+            "type": "durable",
+            "hypothese": "Dépendance accrue aux partenaires européens."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Sauvetage vécu comme une mise sous tutelle."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "En France, le Fonds de garantie des dépôts protège chaque client jusqu'à 100 000 € par banque. En 2008, les États ont sauvé plusieurs banques pour éviter l'effondrement."
+  },
+  {
+    "id": "crise-megafeux",
+    "titre": "Mégafeux : 40 000 hectares en fumée dans le Sud",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 2,
+    "description": "Après trois mois sans pluie, des incendies géants ravagent la Provence et la Gironde. Des villages sont évacués, les pompiers sont épuisés et les bombardiers d'eau manquent.",
+    "conditions": [
+      {
+        "jauge": "ecologie",
+        "inferieurA": 55
+      }
+    ],
+    "effets": [
+      {
+        "cible": "biodiversite_oiseaux",
+        "valeur": -1.5,
+        "type": "durable",
+        "hypothese": "Habitats naturels détruits."
+      },
+      {
+        "cible": "qualite_air",
+        "valeur": 0.6,
+        "type": "immediat",
+        "hypothese": "Fumées sur des régions entières."
+      },
+      {
+        "cible": "autonomie_alimentaire",
+        "valeur": -1,
+        "type": "immediat",
+        "hypothese": "Récoltes et élevages touchés."
+      }
+    ],
+    "reponses": [
+      {
+        "id": "moyens",
+        "titre": "Doubler la flotte aérienne",
+        "outil": "budget",
+        "explication": "Commande de 20 bombardiers d'eau et recrutement de pompiers. Efficace contre les prochains feux, mais livré dans trois ans et cher.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Environ 1 Md€ par an d'équipements et d'effectifs."
+          },
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": 0.6,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Feux mieux maîtrisés à l'avenir."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Réponse visible et rassurante."
+          }
+        ]
+      },
+      {
+        "id": "interdire",
+        "titre": "Fermer les forêts et imposer le débroussaillage",
+        "outil": "decret",
+        "explication": "Accès interdit aux massifs l'été, amendes lourdes pour les terrains non entretenus. Immédiat et presque gratuit, mais très impopulaire chez les propriétaires.",
+        "effets": [
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Moins de départs de feu."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.03,
+            "type": "durable",
+            "hypothese": "Tourisme estival pénalisé."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Contraintes mal acceptées."
+          }
+        ]
+      },
+      {
+        "id": "adaptation",
+        "titre": "Plan climat d'urgence de 10 milliards",
+        "outil": "loi",
+        "explication": "Adapter les forêts, l'eau et les villes au climat qui vient, et accélérer la baisse des émissions. Le seul choix qui traite la cause, mais il pèse lourd sur le budget.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.3,
+            "type": "durable",
+            "hypothese": "Environ 10 Md€ par an."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -4,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Investissements de décarbonation."
+          },
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 4,
+            "hypothese": "Forêts replantées et diversifiées."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Volontarisme apprécié par une partie de l'opinion."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "En 2022, plus de 70 000 hectares ont brûlé en France, un record depuis des décennies. Le réchauffement allonge la saison des feux et l'étend vers le nord."
+  },
+  {
+    "id": "crise-epidemie",
+    "titre": "Un nouveau virus respiratoire se propage",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 2,
+    "description": "Les services de réanimation se remplissent dans trois régions. Les scientifiques estiment que l'épidémie peut doubler toutes les deux semaines sans mesures.",
+    "declenchePar": [
+      {
+        "carte": "sante-ondam",
+        "options": [
+          "1.5"
+        ],
+        "chance": 0.1,
+        "delai": [
+          4,
+          12
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 1,
+        "type": "immediat",
+        "hypothese": "Hôpitaux saturés."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Absences et prudence des consommateurs."
+      }
+    ],
+    "reponses": [
+      {
+        "id": "confiner",
+        "titre": "Confiner tout le pays six semaines",
+        "outil": "decret",
+        "explication": "L'épidémie est stoppée net et les hôpitaux tiennent. Mais l'économie s'arrête, les écoles ferment et l'État doit financer le chômage partiel.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": -1.5,
+            "type": "immediat",
+            "hypothese": "Arrêt d'une partie de l'activité."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.6,
+            "type": "immediat",
+            "hypothese": "Chômage partiel et aides aux entreprises."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": -0.8,
+            "type": "immediat",
+            "hypothese": "Hôpitaux soulagés."
+          },
+          {
+            "cible": "pisa_maths",
+            "valeur": -1.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Écoles fermées."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -3,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Restrictions de libertés pesantes."
+          }
+        ]
+      },
+      {
+        "id": "cibler",
+        "titre": "Mesures ciblées et télétravail",
+        "outil": "decision",
+        "explication": "On protège les plus fragiles et on évite les rassemblements, sans tout fermer. L'économie tient, mais les hôpitaux débordent pendant des semaines.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.4,
+            "type": "immediat",
+            "hypothese": "Ralentissement limité."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 2,
+            "type": "immediat",
+            "hypothese": "Déprogrammation massive d'opérations."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": -0.2,
+            "type": "immediat",
+            "hypothese": "Surmortalité."
+          }
+        ]
+      },
+      {
+        "id": "vacciner",
+        "titre": "Tout miser sur la vaccination",
+        "outil": "budget",
+        "explication": "Commande massive de vaccins et centres ouverts partout. Efficace en trois mois, coûteux, et une partie de la population refuse.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "immediat",
+            "hypothese": "Achats de vaccins et logistique."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.3,
+            "type": "immediat",
+            "hypothese": "Quelques semaines difficiles."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": 0.5,
+            "type": "immediat",
+            "hypothese": "Tension hospitalière le temps de vacciner."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Sortie de crise visible."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le confinement du printemps 2020 a fait reculer le PIB français de près de 8 % sur l'année. Chaque stratégie épidémique arbitre entre santé, économie et libertés."
+  },
+  {
+    "id": "crise-emeutes",
+    "titre": "Nuits d'émeutes dans plusieurs villes",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 2,
+    "description": "Après la mort d'un adolescent lors d'un contrôle de police, des violences éclatent dans une dizaine de villes. Bâtiments publics incendiés, commerces pillés : la tension monte chaque nuit.",
+    "declenchePar": [
+      {
+        "carte": "secu-police",
+        "options": [
+          "effectifs",
+          "videosurveillance"
+        ],
+        "chance": 0.15,
+        "delai": [
+          3,
+          12
+        ]
+      },
+      {
+        "carte": "dette-economies",
+        "options": [
+          "rabot"
+        ],
+        "chance": 0.08,
+        "delai": [
+          3,
+          12
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "violences_physiques",
+        "valeur": 0.4,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Violences urbaines."
+      },
+      {
+        "cible": "sentiment_insecurite",
+        "valeur": 3,
+        "type": "estompe",
+        "duree": 3,
+        "hypothese": "Images marquantes dans tout le pays."
+      }
+    ],
+    "reponses": [
+      {
+        "id": "fermete",
+        "titre": "Couvre-feu et renforts massifs",
+        "outil": "decret",
+        "explication": "Couvre-feu dans les villes touchées et 45 000 policiers mobilisés. L'ordre revient en quelques jours, mais la colère des quartiers reste entière.",
+        "effets": [
+          {
+            "cible": "violences_physiques",
+            "valeur": -0.3,
+            "type": "immediat",
+            "hypothese": "Retour rapide au calme."
+          },
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -1.5,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Autorité affirmée."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Défiance accrue dans les quartiers concernés."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Majorité favorable à la fermeté."
+          }
+        ]
+      },
+      {
+        "id": "plan",
+        "titre": "Plan d'urgence pour les quartiers",
+        "outil": "budget",
+        "explication": "Écoles, emploi, transports : 5 milliards sur trois ans pour les quartiers populaires. Utile à long terme, mais accusé de « récompenser » les émeutiers.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.06,
+            "type": "durable",
+            "duree": 3,
+            "hypothese": "Environ 1,7 Md€ par an pendant 3 ans."
+          },
+          {
+            "cible": "chomage_jeunes",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Programmes d'emploi des jeunes."
+          },
+          {
+            "cible": "violences_physiques",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Apaisement durable."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Mesure contestée à chaud."
+          }
+        ]
+      },
+      {
+        "id": "enquete",
+        "titre": "Enquête indépendante et dialogue",
+        "outil": "decision",
+        "explication": "Commission indépendante sur l'action policière et rencontres avec les maires. Apaise une partie des tensions, mais les violences durent encore une semaine.",
+        "effets": [
+          {
+            "cible": "violences_physiques",
+            "valeur": 0.2,
+            "type": "immediat",
+            "hypothese": "Violences qui se prolongent."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Signal d'écoute."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Jugé trop lent par une partie de l'opinion."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Fin juin 2023, la mort de Nahel à Nanterre a déclenché plusieurs nuits d'émeutes. Le coût des dégâts a été estimé à environ un milliard d'euros."
+  },
+  {
+    "id": "cyberattaque-recidive",
+    "titre": "Nouvelle cyberattaque : les mairies visées",
+    "nature": "negatif",
+    "poids": 0,
+    "description": "Encouragé par le précédent, un autre groupe criminel bloque les services de 40 mairies et réclame une rançon.",
+    "declenchePar": [
+      {
+        "carte": "crise-cyberattaque",
+        "options": [
+          "payer"
+        ],
+        "chance": 0.5,
+        "delai": [
+          3,
+          12
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1.5,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Services publics locaux paralysés."
+      },
+      {
+        "cible": "dependance_numerique",
+        "valeur": 1,
+        "type": "durable",
+        "hypothese": "Vulnérabilité confirmée."
+      },
+      {
+        "cible": "popularite",
+        "valeur": -2,
+        "type": "estompe",
+        "duree": 2,
+        "hypothese": "Le paiement de la rançon est reproché au gouvernement."
       }
     ]
   }

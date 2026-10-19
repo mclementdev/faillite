@@ -1,7 +1,7 @@
 [
   {
     "id": "dette-economies",
-    "theme": "dette_depenses",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "Il faut trouver 20 milliards d'économies",
     "contexte": "Le déficit dépasse les règles européennes. Bruxelles demande un effort sur plusieurs années.",
@@ -10,6 +10,7 @@
         "id": "rabot",
         "titre": "Coup de rabot partout",
         "explication": "Chaque ministère baisse son budget de 3 % : rapide et équitable en apparence, mais tous les services publics s'usent un peu.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -50,6 +51,7 @@
         "id": "niches",
         "titre": "Supprimer des niches fiscales",
         "explication": "On rabote les réductions d'impôt les moins efficaces : pas de coupe dans les services, mais chaque niche a ses défenseurs.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -75,6 +77,13 @@
             "valeur": 10,
             "type": "immediat",
             "hypothese": "Mobilisation des professions concernées."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -82,6 +91,7 @@
         "id": "point-indice",
         "titre": "Geler les salaires des fonctionnaires",
         "explication": "Le point d'indice ne bouge plus pendant trois ans : économie rapide, mais les métiers publics attirent moins.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -109,15 +119,23 @@
             "type": "differe",
             "delai": 3,
             "hypothese": "Moins d'attractivité de l'hôpital public."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Réduire le déficit freine l'activité à court terme : c'est l'effet multiplicateur. Le rythme et la nature des économies comptent autant que leur montant."
+    "notePedagogique": "Réduire le déficit freine l'activité à court terme : c'est l'effet multiplicateur. Le rythme et la nature des économies comptent autant que leur montant.",
+    "flash": "La Cour des comptes chiffre l'effort : sans économies, la charge de la dette dépassera le budget de l'Éducation nationale avant 2030."
   },
   {
     "id": "dette-regle-or",
-    "theme": "dette_depenses",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "Graver une règle d'or dans la Constitution ?",
     "contexte": "Plusieurs pays limitent leur déficit par la loi. La France n'a jamais voté un budget à l'équilibre depuis 1974.",
@@ -126,6 +144,7 @@
         "id": "regle-stricte",
         "titre": "Déficit limité à 3 % en 5 ans",
         "explication": "La règle s'impose aux gouvernements futurs : crédibilité forte, marges de manœuvre réduites en cas de crise.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "taux_10_ans",
@@ -161,6 +180,7 @@
         "id": "regle-investissement",
         "titre": "Règle d'or hors investissement",
         "explication": "Le fonctionnement doit être équilibré, mais on peut emprunter pour investir (écoles, rail, énergie).",
+        "outil": "loi",
         "effets": [
           {
             "cible": "taux_10_ans",
@@ -188,6 +208,7 @@
         "id": "pas-de-regle",
         "titre": "Pas de règle, du cas par cas",
         "explication": "On garde la liberté de dépenser en cas de besoin : souplesse, mais les marchés surveillent.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "taux_10_ans",
@@ -215,22 +236,30 @@
             "delai": 1,
             "duree": 4,
             "hypothese": "L'investissement public n'est pas sacrifié et soutient la demande adressée aux entreprises."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Une règle budgétaire rassure les prêteurs et fait baisser les taux d'intérêt, mais elle peut empêcher de soutenir l'économie pendant une crise."
+    "notePedagogique": "Une règle budgétaire rassure les prêteurs et fait baisser les taux d'intérêt, mais elle peut empêcher de soutenir l'économie pendant une crise.",
+    "flash": "L'Allemagne assouplit son propre frein à l'endettement pour financer sa défense. Les partisans de la règle d'or sont pris de court."
   },
   {
     "id": "dette-note",
-    "theme": "dette_depenses",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "Les agences de notation menacent : que fait-on ?",
     "contexte": "Les finances publiques se dégradent. Une nouvelle baisse de la note ferait grimper le coût de la dette.",
     "conditions": [
       {
         "jauge": "finances",
-        "inferieurA": 42
+        "inferieurA": 50
       }
     ],
     "options": [
@@ -238,6 +267,7 @@
         "id": "plan-choc",
         "titre": "Plan de redressement immédiat",
         "explication": "Gel des dépenses et hausse temporaire d'impôts : les marchés sont rassurés, le pays souffre.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -266,6 +296,13 @@
             "type": "estompe",
             "duree": 3,
             "hypothese": "Mouvements sociaux contre l'austérité."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -273,6 +310,7 @@
         "id": "trajectoire-lente",
         "titre": "Trajectoire lente mais crédible",
         "explication": "Un plan sur dix ans, voté et suivi par une autorité indépendante : moins douloureux, moins convaincant.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -292,6 +330,13 @@
             "valeur": 20,
             "type": "estompe",
             "hypothese": "Un plan d'économies sur dix ans suscite aussi des oppositions."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -299,6 +344,7 @@
         "id": "ignorer",
         "titre": "Ne pas céder aux marchés",
         "explication": "On refuse l'austérité : la croissance est préservée, mais la note est dégradée et l'emprunt coûte plus cher.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "taux_10_ans",
@@ -319,15 +365,23 @@
             "valeur": 1,
             "type": "estompe",
             "hypothese": "Discours de souveraineté apprécié par une partie de l'opinion."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Le coût de la dette dépend de la confiance des prêteurs. Une hausse de 1 point des taux finit par coûter environ 1 point de PIB par an une fois toute la dette renouvelée."
+    "notePedagogique": "Le coût de la dette dépend de la confiance des prêteurs. Une hausse de 1 point des taux finit par coûter environ 1 point de PIB par an une fois toute la dette renouvelée.",
+    "flash": "Les taux d'emprunt français dépassent ceux de l'Italie pour la première fois. Les marchés attendent un signal avant vendredi."
   },
   {
     "id": "dette-collectivites",
-    "theme": "dette_depenses",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "Mairies et départements : plus ou moins de moyens ?",
     "contexte": "Les collectivités assurent 70 % de l'investissement public. Leurs dotations sont versées par l'État.",
@@ -336,6 +390,7 @@
         "id": "baisse-dotations",
         "titre": "Baisser les dotations",
         "explication": "L'État verse moins : son déficit baisse, mais les collectivités repoussent travaux et services.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -362,6 +417,7 @@
         "id": "decentraliser",
         "titre": "Décentraliser avec un impôt local",
         "explication": "Les régions lèvent leur propre impôt et gèrent plus de compétences : plus d'autonomie, plus d'inégalités entre territoires.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "confiance_institutions",
@@ -383,6 +439,13 @@
             "type": "differe",
             "delai": 2,
             "hypothese": "Les nouveaux impôts locaux ne sont qu'en partie compensés."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -390,6 +453,7 @@
         "id": "fonds-investissement",
         "titre": "Fonds pour l'investissement local",
         "explication": "L'État finance écoles, réseaux d'eau et rénovation : bon pour le BTP et l'écologie, coûteux.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -421,11 +485,12 @@
         ]
       }
     ],
-    "notePedagogique": "Les collectivités ne peuvent emprunter que pour investir. Réduire leurs moyens freine d'abord l'investissement public."
+    "notePedagogique": "Les collectivités ne peuvent emprunter que pour investir. Réduire leurs moyens freine d'abord l'investissement public.",
+    "flash": "L'association des maires de France menace : « Sans moyens, nous fermerons des crèches et des piscines. »"
   },
   {
     "id": "dette-effort",
-    "theme": "dette_depenses",
+    "ministere": "economie_finances",
     "type": "curseur",
     "titre": "Combien d'économies par an sur la dépense publique ?",
     "titreCourt": "Économies",
@@ -442,6 +507,7 @@
         "valeur": 0,
         "titre": "Aucune économie",
         "explication": "On laisse filer : pas de coupes, mais la dette continue de grimper et les marchés s'inquiètent.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -461,6 +527,13 @@
             "valeur": -10,
             "type": "estompe",
             "hypothese": "Pas de mesure impopulaire."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -469,6 +542,7 @@
         "valeur": 20,
         "titre": "20 milliards",
         "explication": "Un effort réel mais étalé : gel de certaines dépenses, quelques services réduits.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -500,6 +574,13 @@
             "valeur": 30,
             "type": "estompe",
             "hypothese": "Mobilisations contre les coupes."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -508,6 +589,7 @@
         "valeur": 40,
         "titre": "40 milliards",
         "explication": "Cure d'austérité : le déficit fond vite, mais écoles, hôpitaux et aides sociales sont touchés.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -561,10 +643,18 @@
             "valeur": 90,
             "type": "estompe",
             "hypothese": "Forte mobilisation sociale."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -3.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Réduire le déficit vite rassure les prêteurs mais freine l'activité : c'est le débat sur le « multiplicateur budgétaire », qui dépend de la conjoncture."
+    "notePedagogique": "Réduire le déficit vite rassure les prêteurs mais freine l'activité : c'est le débat sur le « multiplicateur budgétaire », qui dépend de la conjoncture.",
+    "flash": "Un économiste de renom alerte : « Couper trop vite, c'est risquer la récession. Ne rien couper, c'est risquer la crise de la dette. »"
   }
 ]

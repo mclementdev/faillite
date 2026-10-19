@@ -155,5 +155,14 @@
   "dependance_numerique": { "normalisation": { "type": "lineaire", "zero": 100, "cent": 40 }, "min": 30, "max": 100,
     "dynamique": { "derive": 0.2 } },
   "part_dette_non_residents": { "normalisation": { "type": "lineaire", "zero": 70, "cent": 30 }, "min": 20, "max": 80,
-    "dynamique": { "cible": { "constante": 54, "vitesse": 0.1, "termes": [ { "source": "dette_publique", "coef": 0.05, "ref": 115.6 } ] } } }
+    "dynamique": { "cible": { "constante": 54, "vitesse": 0.1, "termes": [ { "source": "dette_publique", "coef": 0.05, "ref": 115.6 } ] } } },
+
+  "popularite": { "normalisation": { "type": "lineaire", "zero": 0, "cent": 100 }, "min": 5, "max": 85,
+    "dynamique": { "cible": { "constante": 46, "vitesse": 0.3, "termes": [
+      { "source": "chomage", "coef": -2.5, "ref": 8.3 },
+      { "source": "inflation", "coef": -1.5, "ref": 2 },
+      { "source": "croissance_pib", "coef": 2, "ref": 1.1 },
+      { "source": "jours_greve", "coef": -0.03, "ref": 90 },
+      { "source": "prelevements_obligatoires", "coef": -1.5, "ref": 43.6 },
+      { "source": "confiance_institutions", "coef": 0.8, "ref": 25 } ] } } }
 }

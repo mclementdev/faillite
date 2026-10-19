@@ -7,7 +7,7 @@ import { valeursCurseur } from "./cartes";
 import {
   Carte,
   Evenement,
-  Imprevu,
+  Promesse,
   Indicateurs,
   Jauges,
   JAUGES,
@@ -16,7 +16,7 @@ import {
   Resonance,
   type Carte as TCarte,
   type Evenement as TEvenement,
-  type Imprevu as TImprevu,
+  type Promesse as TPromesse,
   type Indicateur,
   type Jauge,
   type JaugeId,
@@ -33,7 +33,7 @@ export interface Contenu {
   cartes: TCarte[];
   evenements: TEvenement[];
   resonances: TResonance[];
-  imprevus: TImprevu[];
+  promesses: TPromesse[];
 }
 
 /** Contenu brut, tel que lu dans les fichiers JSON, avec le nom de chaque fichier. */
@@ -45,7 +45,7 @@ export interface ContenuBrut {
   cartes: { fichier: string; data: unknown }[];
   evenements: { fichier: string; data: unknown };
   resonances: { fichier: string; data: unknown };
-  imprevus: { fichier: string; data: unknown };
+  promesses: { fichier: string; data: unknown };
 }
 
 export class ErreurContenu extends Error {
@@ -101,7 +101,7 @@ export function validerContenu(brut: ContenuBrut): Contenu {
   }
   const evenements = analyser(z.array(Evenement), brut.evenements.fichier, brut.evenements.data, erreurs) ?? [];
   const resonances = analyser(z.array(Resonance), brut.resonances.fichier, brut.resonances.data, erreurs) ?? [];
-  const imprevus = analyser(z.array(Imprevu), brut.imprevus.fichier, brut.imprevus.data, erreurs) ?? [];
+  const promesses = analyser(z.array(Promesse), brut.promesses.fichier, brut.promesses.data, erreurs) ?? [];
 
   if (erreurs.length || !indicateurs || !modele || !jauges || !regles) throw new ErreurContenu(erreurs);
 
@@ -126,7 +126,8 @@ export function validerContenu(brut: ContenuBrut): Contenu {
       continue;
     }
     const actifs = jauge.indicateurs.filter((x) => x.poids > 0);
-    if (actifs.length < 5) erreurs.push(`${brut.jauges.fichier} › ${j} : au moins 5 indicateurs pondérés sont requis (${actifs.length})`);
+    // La popularité est une cote unique ; les jauges du pays résument au moins 5 vrais indicateurs.
+    if (j !== "popularite" && actifs.length < 5) erreurs.push(`${brut.jauges.fichier} › ${j} : au moins 5 indicateurs pondérés sont requis (${actifs.length})`);
     for (const x of jauge.indicateurs) if (!ind.has(x.id)) erreurs.push(`${brut.jauges.fichier} › ${j} : indicateur inconnu « ${x.id} »`);
   }
 
@@ -149,12 +150,42 @@ export function validerContenu(brut: ContenuBrut): Contenu {
       for (const a of o.annule) if (!idsCartes.has(a)) erreurs.push(`${f} › « ${c.id} » › option « ${o.id} » › annule : carte inconnue « ${a} »`);
     }
   }
+  /** Vérifie qu'une carte existe et que ses options (ou valeurs de curseur) aussi. */
+  const verifierChoix = (fichier: string, ou: string, carteId: string, options: string[] | undefined) => {
+    // Une suite peut aussi venir de la réponse à une crise.
+    const crise = evenements.find((e) => e.id === carteId && e.reponses.length);
+    if (crise) {
+      for (const o of options ?? []) if (!crise.reponses.some((r) => r.id === o)) erreurs.push(`${fichier} › ${ou} : réponse « ${o} » absente de la crise « ${carteId} »`);
+      return;
+    }
+    const carte = cartes.find((c) => c.id === carteId);
+    if (!carte) {
+      erreurs.push(`${fichier} › ${ou} : carte inconnue « ${carteId} »`);
+      return;
+    }
+    for (const o of options ?? [])
+      if (!carte.options.some((x) => x.id === o) && !(carte.type === "curseur" && valeursCurseur(carte).some((v) => String(v) === o)))
+        erreurs.push(`${fichier} › ${ou} : option « ${o} » absente de la carte « ${carteId} »`);
+  };
   const idsEvt = new Set<string>();
   for (const e of evenements) {
-    if (idsEvt.has(e.id)) erreurs.push(`${brut.evenements.fichier} › « ${e.id} » : id en double`);
+    const f = brut.evenements.fichier;
+    if (idsEvt.has(e.id)) erreurs.push(`${f} › « ${e.id} » : id en double`);
     idsEvt.add(e.id);
-    verifierEffets(brut.evenements.fichier, `« ${e.id} »`, e.effets);
-    verifierConditions(brut.evenements.fichier, `« ${e.id} »`, e.conditions);
+    verifierEffets(f, `« ${e.id} »`, e.effets);
+    for (const r of e.reponses) verifierEffets(f, `« ${e.id} » › réponse « ${r.id} »`, r.effets);
+    verifierConditions(f, `« ${e.id} »`, e.conditions);
+    for (const d of e.declenchePar) {
+      verifierChoix(f, `« ${e.id} » › declenchePar`, d.carte, d.options);
+      if (d.delai[0] > d.delai[1]) erreurs.push(`${f} › « ${e.id} » › declenchePar : délai [min, max] inversé`);
+    }
+  }
+  const idsPromesses = new Set<string>();
+  for (const p of promesses) {
+    const f = brut.promesses.fichier;
+    if (idsPromesses.has(p.id)) erreurs.push(`${f} › « ${p.id} » : id en double`);
+    idsPromesses.add(p.id);
+    verifierChoix(f, `« ${p.id} »`, p.carte, p.options);
   }
   for (const r of resonances) {
     verifierEffets(brut.resonances.fichier, `« ${r.id} »`, r.effets);
@@ -168,21 +199,6 @@ export function validerContenu(brut: ContenuBrut): Contenu {
         if (!carte.options.some((x) => x.id === o)) erreurs.push(`${brut.resonances.fichier} › « ${r.id} » : option « ${o} » absente de la carte « ${ref.carte} »`);
     }
   }
-  const idsImprevus = new Set<string>();
-  for (const im of imprevus) {
-    const f = brut.imprevus.fichier;
-    if (idsImprevus.has(im.id)) erreurs.push(`${f} › « ${im.id} » : id en double`);
-    idsImprevus.add(im.id);
-    verifierEffets(f, `« ${im.id} »`, im.effets);
-    if ("carte" in im.si) {
-      const carte = cartes.find((c) => c.id === (im.si as { carte: string }).carte);
-      if (!carte) erreurs.push(`${f} › « ${im.id} » › si : carte inconnue « ${im.si.carte} »`);
-      else
-        for (const o of im.si.options ?? [])
-          // Pour un curseur, toute valeur autorisée de l'échelle est acceptée (ex. "22.5").
-          if (!carte.options.some((x) => x.id === o) && !(carte.type === "curseur" && valeursCurseur(carte).some((v) => String(v) === o))) erreurs.push(`${f} › « ${im.id} » › si : option « ${o} » absente de la carte « ${carte.id} »`);
-    }
-  }
   if (erreurs.length) throw new ErreurContenu(erreurs);
-  return { indicateurs, modele, jauges, regles, cartes, evenements, resonances, imprevus };
+  return { indicateurs, modele, jauges, regles, cartes, evenements, resonances, promesses };
 }

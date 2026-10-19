@@ -58,6 +58,7 @@ export function optionPourValeur(carte: Carte, valeur: number): Option {
     titre: `${valeur}${unite ? " " + unite : ""}`,
     explication: `Entre ${a.titre} et ${b.titre} : des effets intermédiaires, plus doux dans les deux sens.`,
     duree: a.duree ?? b.duree,
+    outil: a.outil ?? b.outil,
     effets: [...effets.values()],
     annule: [],
   };

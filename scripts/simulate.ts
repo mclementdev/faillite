@@ -1,5 +1,5 @@
 /**
- * npm run simulate -- [--n 1000] [--graine 42] [--mode aleatoire|sans_intervention] [--tours 30] [--json]
+ * npm run simulate -- [--n 1000] [--graine 42] [--mode aleatoire|sans_intervention] [--annees 5] [--json]
  * Utilise les poids par défaut du contenu (les poids modifiés dans le backoffice vivent dans Redis).
  */
 import { chargerContenu } from "../content";
@@ -13,15 +13,16 @@ const arg = (nom: string, defaut: string) => {
 const n = Number(arg("n", "1000"));
 const graine = Number(arg("graine", "42"));
 const mode = arg("mode", "aleatoire") as ModeSimulation;
-const tours = Number(arg("tours", "30"));
+const annees = Number(arg("annees", "5"));
 
 const contenu = chargerContenu();
-const r = simulate(contenu, n, graine, undefined, mode, tours);
+const r = simulate(contenu, n, graine, undefined, mode, annees);
 if (args.includes("--json")) {
   console.log(JSON.stringify(r, null, 2));
   process.exit(0);
 }
-console.log(`\n${r.n} parties · ${r.nbTours} tours · graine ${r.graine} · mode ${r.mode} · ${r.dureeMs} ms\n`);
+console.log(`\n${r.n} parties · ${r.nbAnnees} ans · graine ${r.graine} · mode ${r.mode} · ${r.dureeMs} ms`);
+console.log(`Événements par partie : ${r.evenementsParPartie} (dont ${r.provoquesParPartie} provoqués par une décision, ${r.crisesParPartie} crises)\n`);
 console.log("Jauges en fin de partie (moyenne · médiane · P10 – P90) :");
 for (const j of JAUGES) {
   const s = r.jaugesFin[j];

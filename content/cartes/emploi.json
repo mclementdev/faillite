@@ -1,7 +1,7 @@
 [
   {
     "id": "emploi-assurance-chomage",
-    "theme": "emploi_travail",
+    "ministere": "travail",
     "type": "unique",
     "titre": "Assurance chômage : durcir ou protéger ?",
     "contexte": "Le chômage remonte au-dessus de 8 %. Certains secteurs peinent pourtant à recruter.",
@@ -10,6 +10,7 @@
         "id": "durcir",
         "titre": "Durée d'indemnisation réduite",
         "explication": "On indemnise moins longtemps quand le chômage est bas : incite à reprendre un emploi, fragilise les chômeurs de longue durée.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "deficit_public",
@@ -36,6 +37,13 @@
             "valeur": 15,
             "type": "estompe",
             "hypothese": "Opposition syndicale."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -43,6 +51,7 @@
         "id": "formation",
         "titre": "Formation massive des chômeurs",
         "explication": "Chaque chômeur se voit proposer une formation dans un métier qui recrute : coûteux, efficace si les formations sont bonnes.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -71,6 +80,7 @@
         "id": "garantie-emploi",
         "titre": "Territoires zéro chômeur",
         "explication": "Des emplois utiles financés pour les chômeurs de longue durée : dignité retrouvée, coût par emploi élevé.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -102,11 +112,12 @@
         ]
       }
     ],
-    "notePedagogique": "Une indemnisation plus courte accélère un peu le retour à l'emploi, mais augmente la pauvreté des personnes qui ne retrouvent pas."
+    "notePedagogique": "Une indemnisation plus courte accélère un peu le retour à l'emploi, mais augmente la pauvreté des personnes qui ne retrouvent pas.",
+    "flash": "Les entreprises peinent à recruter dans la restauration et le bâtiment, pendant que 3 millions de personnes cherchent un emploi."
   },
   {
     "id": "emploi-temps-travail",
-    "theme": "emploi_travail",
+    "ministere": "travail",
     "type": "unique",
     "titre": "Travailler plus, ou autrement ?",
     "contexte": "Les Français travaillent moins d'heures sur une vie que la moyenne européenne, mais avec une productivité horaire élevée.",
@@ -115,6 +126,7 @@
         "id": "semaine-4-jours",
         "titre": "Semaine de 4 jours encouragée",
         "explication": "Les entreprises qui passent à 4 jours sans baisse de salaire sont aidées : bien-être en hausse, coûts pour les employeurs.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "satisfaction_vie",
@@ -150,6 +162,7 @@
         "id": "heures-sup",
         "titre": "Heures supplémentaires défiscalisées",
         "explication": "Les heures sup ne sont plus imposées : plus de revenus pour ceux qui travaillent plus, moins de recettes.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -168,6 +181,13 @@
             "valeur": 0.5,
             "type": "estompe",
             "hypothese": "Mesure de pouvoir d'achat populaire."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -175,6 +195,7 @@
         "id": "jour-ferie",
         "titre": "Supprimer un jour férié",
         "explication": "Une journée de travail en plus pour financer la dépendance : quelques milliards de recettes, une mesure impopulaire.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -199,15 +220,23 @@
             "valeur": -1,
             "type": "estompe",
             "hypothese": "Mesure perçue comme injuste."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "La richesse produite dépend des heures travaillées et de la productivité de chaque heure : on peut jouer sur l'une ou l'autre."
+    "notePedagogique": "La richesse produite dépend des heures travaillées et de la productivité de chaque heure : on peut jouer sur l'une ou l'autre.",
+    "flash": "Une entreprise qui teste la semaine de quatre jours publie ses résultats : moins d'arrêts maladie, production stable."
   },
   {
     "id": "emploi-smic",
-    "theme": "emploi_travail",
+    "ministere": "travail",
     "type": "unique",
     "titre": "Faut-il augmenter le SMIC ?",
     "contexte": "Plus de 3 millions de salariés sont payés au SMIC. Beaucoup y restent longtemps.",
@@ -216,6 +245,7 @@
         "id": "hausse",
         "titre": "SMIC +10 %",
         "explication": "Coup de pouce important : pouvoir d'achat en hausse pour les bas salaires, risque pour l'emploi peu qualifié.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "taux_pauvrete",
@@ -243,6 +273,13 @@
             "type": "differe",
             "delai": 1,
             "hypothese": "Les femmes sont surreprésentées parmi les salariés au SMIC."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -250,6 +287,7 @@
         "id": "prime-activite",
         "titre": "Hausse de la prime d'activité",
         "explication": "L'État complète les bas salaires : pas de coût pour les entreprises, mais pour le budget.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "taux_pauvrete",
@@ -277,6 +315,7 @@
         "id": "branches",
         "titre": "Obliger les branches à négocier",
         "explication": "Les grilles salariales sous le SMIC doivent être relevées : progression des salaires au-dessus du minimum.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "rapport_interdecile",
@@ -300,11 +339,12 @@
         ]
       }
     ],
-    "notePedagogique": "Un salaire minimum plus élevé réduit la pauvreté des travailleurs, mais peut freiner l'embauche des moins qualifiés si la hausse est trop forte."
+    "notePedagogique": "Un salaire minimum plus élevé réduit la pauvreté des travailleurs, mais peut freiner l'embauche des moins qualifiés si la hausse est trop forte.",
+    "flash": "Un sondage révèle que près d'un Français sur trois a déjà renoncé à des soins pour des raisons financières."
   },
   {
     "id": "emploi-duree-legale",
-    "theme": "emploi_travail",
+    "ministere": "travail",
     "type": "curseur",
     "titre": "Quelle durée légale du travail par semaine ?",
     "titreCourt": "Durée du travail",
@@ -321,6 +361,7 @@
         "valeur": 32,
         "titre": "32 heures",
         "explication": "Semaine de quatre jours généralisée : plus de temps libre, des entreprises qui doivent s'organiser.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "satisfaction_vie",
@@ -376,12 +417,19 @@
         "valeur": 35,
         "titre": "35 heures",
         "explication": "On garde les règles actuelles : heures supplémentaires majorées au-delà de 35 heures.",
+        "outil": "loi",
         "effets": [
           {
-            "cible": "confiance_institutions",
-            "valeur": 0,
-            "type": "immediat",
-            "hypothese": "Statu quo : pas de changement de la durée légale."
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Les allègements de cotisations liés aux 35 heures sont maintenus."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.02,
+            "type": "durable",
+            "hypothese": "Volume d'heures travaillées inchangé, plus faible que chez nos voisins."
           }
         ]
       },
@@ -390,6 +438,7 @@
         "valeur": 38,
         "titre": "38 heures",
         "explication": "On travaille plus sans majoration : plus de production, des salariés et syndicats en colère.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "croissance_pib",
@@ -429,10 +478,18 @@
             "valeur": -1.5,
             "type": "estompe",
             "hypothese": "Mesure vécue comme un recul social."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -4.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Les Français à temps complet travaillent un peu moins d'heures par an que la moyenne européenne, mais leur productivité horaire est parmi les plus élevées."
+    "notePedagogique": "Les Français à temps complet travaillent un peu moins d'heures par an que la moyenne européenne, mais leur productivité horaire est parmi les plus élevées.",
+    "flash": "Le patronat chiffre à 30 milliards le gain de croissance d'une semaine plus longue. Les syndicats parlent de « provocation »."
   }
 ]

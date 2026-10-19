@@ -1,7 +1,7 @@
 [
   {
     "id": "souv-defense",
-    "theme": "souverainete",
+    "ministere": "armees",
     "type": "curseur",
     "titre": "Quel budget pour la défense ?",
     "titreCourt": "Défense",
@@ -18,6 +18,7 @@
         "valeur": 2,
         "titre": "2 % du PIB",
         "explication": "On reste au niveau actuel : pas d'effort budgétaire supplémentaire, des alliés qui s'impatientent.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "budget_defense",
@@ -38,6 +39,7 @@
         "valeur": 3,
         "titre": "3 % du PIB",
         "explication": "Hausse nette : l'industrie de défense embauche, le budget doit trouver 25 milliards par an.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "budget_defense",
@@ -72,6 +74,7 @@
         "valeur": 3.5,
         "titre": "3,5 % du PIB",
         "explication": "Objectif OTAN atteint : la France pèse dans la défense européenne, au prix d'économies ailleurs ou d'impôts.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "budget_defense",
@@ -108,11 +111,12 @@
         ]
       }
     ],
-    "notePedagogique": "La dépense de défense soutient l'industrie nationale, mais elle se finance comme toute dépense : par l'impôt, la dette ou des économies ailleurs."
+    "notePedagogique": "La dépense de défense soutient l'industrie nationale, mais elle se finance comme toute dépense : par l'impôt, la dette ou des économies ailleurs.",
+    "flash": "Un rapport parlementaire alerte : en cas de conflit de haute intensité, les stocks de munitions ne tiendraient que quelques semaines."
   },
   {
     "id": "souv-relocalisation",
-    "theme": "souverainete",
+    "ministere": "economie_finances",
     "type": "cumulable",
     "titre": "Relocaliser : deux filières stratégiques à soutenir",
     "contexte": "La crise sanitaire a montré notre dépendance pour les médicaments et les composants. Choisissez deux filières à relocaliser.",
@@ -121,6 +125,7 @@
         "id": "medicaments",
         "titre": "Médicaments essentiels",
         "explication": "Paracétamol, antibiotiques : fin des pénuries, mais des médicaments un peu plus chers.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -148,6 +153,7 @@
         "id": "batteries",
         "titre": "Batteries et véhicules électriques",
         "explication": "Des gigafactories dans le Nord : des milliers d'emplois, une course contre la Chine.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -183,6 +189,7 @@
         "id": "semi-conducteurs",
         "titre": "Puces électroniques",
         "explication": "Des usines de semi-conducteurs : très coûteux, stratégique pour l'industrie et la défense.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -211,6 +218,7 @@
         "id": "textile-agro",
         "titre": "Textile et agroalimentaire",
         "explication": "Soutien aux PME du textile et de la transformation alimentaire : emplois locaux, produits plus chers.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -242,11 +250,12 @@
         ]
       }
     ],
-    "notePedagogique": "Relocaliser coûte plus cher que d'importer : on paie une assurance contre les ruptures d'approvisionnement."
+    "notePedagogique": "Relocaliser coûte plus cher que d'importer : on paie une assurance contre les ruptures d'approvisionnement.",
+    "flash": "Une pénurie mondiale de puces électroniques met à l'arrêt deux usines automobiles françaises."
   },
   {
     "id": "souv-cloud",
-    "theme": "souverainete",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "Nos données sont hébergées aux États-Unis",
     "contexte": "Administrations, hôpitaux et entreprises utilisent massivement des services numériques américains, soumis aux lois de leur pays.",
@@ -255,6 +264,7 @@
         "id": "cloud-souverain",
         "titre": "Cloud souverain obligatoire pour l'État",
         "explication": "Les données publiques sensibles doivent être hébergées par des acteurs européens : plus sûr, plus cher et parfois moins pratique.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "dependance_numerique",
@@ -282,6 +292,7 @@
         "id": "champion-europeen",
         "titre": "Champion européen du numérique",
         "explication": "Un fonds commun européen pour l'IA et le cloud : ambitieux, il faut convaincre 26 partenaires.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "dependance_numerique",
@@ -310,6 +321,7 @@
         "id": "ouverture",
         "titre": "Les meilleurs outils, d'où qu'ils viennent",
         "explication": "On prend les services les plus performants du marché : gains de productivité rapides, dépendance accrue.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "productivite_horaire",
@@ -327,11 +339,12 @@
         ]
       }
     ],
-    "notePedagogique": "La souveraineté numérique oppose souvent performance immédiate et maîtrise à long terme."
+    "notePedagogique": "La souveraineté numérique oppose souvent performance immédiate et maîtrise à long terme.",
+    "flash": "Une loi américaine permet à Washington d'exiger l'accès aux données stockées par ses entreprises, même en Europe."
   },
   {
     "id": "souv-alimentation",
-    "theme": "souverainete",
+    "ministere": "agriculture",
     "type": "unique",
     "titre": "Moins d'agriculteurs chaque année",
     "contexte": "La moitié des agriculteurs partira à la retraite d'ici dix ans. Fruits, légumes et volailles sont de plus en plus importés.",
@@ -340,6 +353,7 @@
         "id": "installation",
         "titre": "Aider l'installation des jeunes",
         "explication": "Terres et prêts facilités pour les nouveaux agriculteurs : la relève est assurée, il faut l'accompagner.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -367,6 +381,7 @@
         "id": "prix-plancher",
         "titre": "Prix plancher garantis",
         "explication": "Les industriels ne peuvent acheter sous le coût de production : revenu agricole protégé, prix en rayon plus élevés.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "autonomie_alimentaire",
@@ -386,6 +401,13 @@
             "valeur": 0.1,
             "type": "durable",
             "hypothese": "L'alimentation pèse plus pour les ménages modestes."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -393,6 +415,7 @@
         "id": "agrandissement",
         "titre": "Grandes exploitations compétitives",
         "explication": "On facilite l'agrandissement et la modernisation : production efficace, moins d'agriculteurs et paysages transformés.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "autonomie_alimentaire",
@@ -418,11 +441,12 @@
         ]
       }
     ],
-    "notePedagogique": "La souveraineté alimentaire dépend autant du revenu des agriculteurs que de la surface cultivée."
+    "notePedagogique": "La souveraineté alimentaire dépend autant du revenu des agriculteurs que de la surface cultivée.",
+    "flash": "La moitié des agriculteurs partiront à la retraite d'ici dix ans, et beaucoup de fermes n'ont pas de repreneur."
   },
   {
     "id": "souv-europe",
-    "theme": "souverainete",
+    "ministere": "europe",
     "type": "unique",
     "titre": "Quelle place pour la France en Europe ?",
     "contexte": "L'Union européenne propose un grand emprunt commun pour financer la défense et la transition. Certains pays y voient une perte de souveraineté.",
@@ -431,6 +455,7 @@
         "id": "emprunt-commun",
         "titre": "Oui à l'emprunt commun",
         "explication": "L'Europe emprunte pour tous à taux bas : investissements massifs, mais des décisions partagées avec 26 pays.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "taux_10_ans",
@@ -464,6 +489,13 @@
             "type": "differe",
             "delai": 4,
             "hypothese": "Remboursement de l'emprunt commun par de nouvelles ressources propres européennes (taxes)."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -471,6 +503,7 @@
         "id": "cooperations",
         "titre": "Coopérations à la carte",
         "explication": "On avance avec quelques pays volontaires sur des projets précis : plus souple, moins puissant.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "budget_defense",
@@ -492,6 +525,7 @@
         "id": "national",
         "titre": "Garder la main au niveau national",
         "explication": "On refuse de nouveaux transferts : la France décide seule, mais finance seule.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "confiance_institutions",
@@ -511,15 +545,23 @@
             "type": "differe",
             "delai": 2,
             "hypothese": "Effort de placement de la dette auprès des épargnants français."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Mutualiser des décisions donne plus de poids collectif, mais réduit la marge de choix de chaque pays."
+    "notePedagogique": "Mutualiser des décisions donne plus de poids collectif, mais réduit la marge de choix de chaque pays.",
+    "flash": "Washington annonce une réduction de sa présence militaire en Europe. Les capitales européennes s'interrogent sur leur autonomie."
   },
   {
     "id": "souv-otan",
-    "theme": "souverainete",
+    "ministere": "armees",
     "type": "unique",
     "titre": "Commandement intégré de l'OTAN : rester ou prendre ses distances ?",
     "contexte": "La France est revenue dans le commandement intégré de l'OTAN en 2009. Les tensions entre alliés relancent le débat.",
@@ -528,6 +570,7 @@
         "id": "renforcer",
         "titre": "Renforcer l'engagement",
         "explication": "Plus de troupes et d'exercices communs : sécurité collective renforcée, plus d'achats d'équipements alliés.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "budget_defense",
@@ -554,6 +597,7 @@
         "id": "pilier-europeen",
         "titre": "Construire un pilier européen",
         "explication": "Rester dans l'OTAN, mais acheter européen et mutualiser avec nos voisins.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "part_industrie_va",
@@ -574,6 +618,7 @@
         "id": "retrait",
         "titre": "Quitter le commandement intégré",
         "explication": "La France reprend une autonomie totale de décision militaire : symbole fort, isolement possible.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "budget_defense",
@@ -600,15 +645,23 @@
             "valeur": 0.5,
             "type": "estompe",
             "hypothese": "Une partie de l'opinion approuve l'indépendance."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Une alliance offre une protection collective en échange d'engagements et d'une part d'interdépendance."
+    "notePedagogique": "Une alliance offre une protection collective en échange d'engagements et d'une part d'interdépendance.",
+    "flash": "Le président américain menace de ne plus défendre les alliés qui « ne paient pas assez ». L'OTAN entre en crise."
   },
   {
     "id": "souv-preference-europeenne",
-    "theme": "souverainete",
+    "ministere": "europe",
     "type": "curseur",
     "titre": "Quelle part des achats publics réserver au « made in Europe » ?",
     "titreCourt": "Préférence européenne",
@@ -625,6 +678,7 @@
         "valeur": 0,
         "titre": "Aucune obligation",
         "explication": "On achète au meilleur prix, d'où qu'il vienne : économique pour le contribuable, peu pour l'industrie.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -652,6 +706,7 @@
         "valeur": 30,
         "titre": "30 %",
         "explication": "Un tiers des achats réservés : l'industrie européenne gagne des débouchés, à un coût modéré.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "part_industrie_va",
@@ -687,6 +742,7 @@
         "valeur": 60,
         "titre": "60 %",
         "explication": "Préférence massive : forte relance industrielle, mais des achats plus chers et des partenaires mécontents.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "part_industrie_va",
@@ -727,10 +783,18 @@
             "type": "differe",
             "delai": 3,
             "hypothese": "Moins de concurrence sur certains équipements."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Les États-Unis réservent depuis 1933 une partie de leurs achats publics aux produits américains (Buy American Act). L'Union européenne en débat, au nom de sa souveraineté industrielle."
+    "notePedagogique": "Les États-Unis réservent depuis 1933 une partie de leurs achats publics aux produits américains (Buy American Act). L'Union européenne en débat, au nom de sa souveraineté industrielle.",
+    "flash": "Les États-Unis subventionnent massivement leurs usines vertes. Trois industriels européens annoncent leur départ outre-Atlantique."
   }
 ]

@@ -1,7 +1,7 @@
 /** Bilan de fin de partie : évolution, comparaison « sans intervention », décisions marquantes, enseignements. */
 import { niveauImpact } from "./cartes";
 import type { Contenu } from "./contenu";
-import type { ValeursJauges } from "./modele";
+import { projeter, type ValeursJauges } from "./modele";
 import { trajectoireSansIntervention, type EtatPartie, type Impacts } from "./partie";
 import { JAUGES, type JaugeId } from "./schema";
 
@@ -14,8 +14,14 @@ export interface BilanFinal {
   /** jauges année par année (partie / sans intervention) */
   courbes: { annee: number; partie: ValeursJauges; sans: ValeursJauges }[];
   indicateurs: { id: string; depart: number; fin: number; sans: number }[];
-  decisionsMarquantes: { annee: number; carte: string; titre: string; jauge: JaugeId; impact: number }[];
-  momentsCles: { annee: number; evenement: string; reponse?: string; alerte?: JaugeId }[];
+  decisionsMarquantes: { annee: number; mois: number; carte: string; titre: string; jauge: JaugeId; impact: number }[];
+  momentsCles: { annee: number; mois: number; evenement: string; reponse?: string; alerte?: JaugeId; cause?: string }[];
+  /** jauges 10 ans après la fin du mandat, sans nouvelle décision : l'héritage */
+  heritage: { annee: number; jauges: ValeursJauges };
+  /** promesses de campagne confrontées à la réalité */
+  promesses: { id: string; faite: boolean; tenue?: boolean }[];
+  /** 0 à 100 : part de la démagogie possible effectivement promise */
+  demagometre: number;
   alertesPartie: JaugeId[];
   alertesSans: JaugeId[];
   enseignements: string[];
@@ -42,7 +48,7 @@ function pluriel(n: number, mot: string, motPluriel = mot + "s"): string {
 }
 
 export function bilanFinal(contenu: Contenu, etat: EtatPartie, sansCalcule?: EtatPartie): BilanFinal {
-  const sans = sansCalcule ?? trajectoireSansIntervention(contenu, etat.graine, etat.nbTours, etat.poids);
+  const sans = sansCalcule ?? trajectoireSansIntervention(contenu, etat.graine, etat.nbAnnees, etat.poids, etat.promesses);
   const dernier = etat.historique[etat.historique.length - 1];
   const dernierSans = sans.historique[sans.historique.length - 1];
   const nomJ = (j: JaugeId) => contenu.jauges[j].nom;
@@ -60,11 +66,11 @@ export function bilanFinal(contenu: Contenu, etat: EtatPartie, sansCalcule?: Eta
     .map((d) => {
       const jauge = JAUGES.reduce((best, j) => (Math.abs(d.impacts[j]) > Math.abs(d.impacts[best]) ? j : best), JAUGES[0]);
       const total = JAUGES.reduce((s, j) => s + Math.abs(d.impacts[j]), 0);
-      return { annee: d.annee, carte: d.carte, titre: d.titre, jauge, impact: d.impacts[jauge], total };
+      return { annee: d.annee, mois: d.mois, carte: d.carte, titre: d.titre, jauge, impact: d.impacts[jauge], total };
     })
     .sort((a, b) => b.total - a.total)
     .slice(0, 5)
-    .sort((a, b) => a.annee - b.annee)
+    .sort((a, b) => a.annee - b.annee || a.mois - b.mois)
     .map(({ total: _t, ...x }) => x);
 
   // Moments clés : événements les plus forts (alertes d'abord), avec la décision du même tour.
@@ -72,12 +78,27 @@ export function bilanFinal(contenu: Contenu, etat: EtatPartie, sansCalcule?: Eta
   const momentsCles = [...etat.evenements]
     .sort((a, b) => (b.alerte ? 1000 : 0) + force(b.impacts) - ((a.alerte ? 1000 : 0) + force(a.impacts)))
     .slice(0, 3)
-    .sort((a, b) => a.annee - b.annee)
+    .sort((a, b) => a.annee - b.annee || a.mois - b.mois)
     .map((e) => {
       const evt = contenu.evenements.find((x) => x.id === e.id)!;
-      const d = etat.decisions.find((x) => x.annee === e.annee);
-      return { annee: e.annee, evenement: evt.titre, reponse: d?.titre, alerte: e.alerte };
+      const d = e.reponse !== undefined ? etat.decisions[e.reponse] : undefined;
+      return { annee: e.annee, mois: e.mois, evenement: evt.titre, reponse: d?.titre, alerte: e.alerte, cause: e.cause?.titre };
     });
+
+  // Héritage : le pays dix ans après, si plus personne ne décide rien.
+  const futur = projeter(contenu, etat.base, etat.mods, etat.annee, 10);
+  const heritage = { annee: etat.annee + 9, jauges: futur[futur.length - 1] };
+
+  // Démagomètre : promesses faites, pondérées par leur irréalisme.
+  const proposees = etat.promessesProposees.map((id) => contenu.promesses.find((p) => p.id === id)).filter((p) => !!p);
+  const maxDemago = proposees.reduce((s, p) => s + p!.demago, 0);
+  const faitDemago = proposees.filter((p) => etat.promesses.includes(p!.id)).reduce((s, p) => s + p!.demago, 0);
+  const demagometre = maxDemago ? Math.round((100 * faitDemago) / maxDemago) : 0;
+  const promesses = proposees.map((p) => {
+    const faite = etat.promesses.includes(p!.id);
+    const d = etat.decisions.find((x) => x.promesse?.id === p!.id);
+    return { id: p!.id, faite, tenue: faite ? !!d?.promesse?.tenue : undefined };
+  });
 
   const seuil = contenu.regles.seuilAlerte;
   const alertesPartie = sousSeuil(etat, seuil);
@@ -114,6 +135,13 @@ export function bilanFinal(contenu: Contenu, etat: EtatPartie, sansCalcule?: Eta
     enseignements.push(
       `Sans aucune décision, ${pluriel(alertesSans.length, "jauge")} ${alertesSans.length > 1 ? "seraient passées" : "serait passée"} sous le seuil d'alerte ; avec vos choix : ${alertesPartie.length}.`,
     );
+  const faites = promesses.filter((p) => p.faite);
+  if (faites.length) {
+    const tenues = faites.filter((p) => p.tenue).length;
+    enseignements.unshift(
+      `Promesses : ${tenues} tenue${tenues > 1 ? "s" : ""} sur ${faites.length}. Démagomètre à ${demagometre} % : ${demagometre >= 60 ? "la campagne a promis beaucoup plus que ce que les finances permettaient" : demagometre >= 30 ? "quelques promesses séduisantes, mais coûteuses" : "une campagne plutôt prudente"}.`,
+    );
+  }
   if (etat.resonances.length) {
     const r = contenu.resonances.find((x) => x.id === etat.resonances[0].id);
     if (r) enseignements.push(`Des décisions se sont combinées : ${r.titre.toLowerCase()}.`);
@@ -129,6 +157,9 @@ export function bilanFinal(contenu: Contenu, etat: EtatPartie, sansCalcule?: Eta
     indicateurs,
     decisionsMarquantes,
     momentsCles,
+    heritage,
+    promesses,
+    demagometre,
     alertesPartie,
     alertesSans,
     enseignements: enseignements.slice(0, 4),

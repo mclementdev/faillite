@@ -1,7 +1,7 @@
 [
   {
     "id": "sante-deserts",
-    "theme": "sante",
+    "ministere": "sante",
     "type": "cumulable",
     "titre": "Déserts médicaux : deux mesures pour attirer les médecins",
     "contexte": "Plus d'un tiers des Français vit dans une zone où il est difficile de trouver un généraliste. Choisissez deux mesures.",
@@ -10,6 +10,7 @@
         "id": "regulation",
         "titre": "Réguler l'installation",
         "explication": "Un médecin ne peut s'installer en zone bien dotée que si un autre part : efficace sur la carte, les jeunes médecins protestent.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "desert_medical",
@@ -23,6 +24,13 @@
             "valeur": 15,
             "type": "estompe",
             "hypothese": "Grèves des internes et des médecins libéraux."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -30,6 +38,7 @@
         "id": "etudes",
         "titre": "Former plus de médecins",
         "explication": "On double les places en faculté : la mesure la plus efficace à long terme… dans dix ans.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "desert_medical",
@@ -50,6 +59,7 @@
         "id": "centres-sante",
         "titre": "Centres de santé salariés",
         "explication": "Les collectivités embauchent des médecins salariés : beaucoup de jeunes médecins préfèrent ce mode d'exercice.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "desert_medical",
@@ -70,6 +80,7 @@
         "id": "infirmiers",
         "titre": "Plus de missions aux infirmiers et pharmaciens",
         "explication": "Ils peuvent prescrire et vacciner pour les soins simples : rapide et peu coûteux, les médecins craignent une médecine à deux vitesses.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "desert_medical",
@@ -87,11 +98,12 @@
         ]
       }
     ],
-    "notePedagogique": "La pénurie de médecins vient en partie du numerus clausus des années 1990 : un effet différé de 30 ans."
+    "notePedagogique": "La pénurie de médecins vient en partie du numerus clausus des années 1990 : un effet différé de 30 ans.",
+    "flash": "Un village de la Creuse n'a plus de médecin depuis trois ans. Le plus proche est à 45 minutes, et ne prend plus de nouveaux patients."
   },
   {
     "id": "sante-hopital",
-    "theme": "sante",
+    "ministere": "sante",
     "type": "unique",
     "titre": "L'hôpital public craque : que fait-on ?",
     "contexte": "Lits fermés faute de personnel, urgences saturées l'été : soignants et patients tirent la sonnette d'alarme.",
@@ -100,6 +112,7 @@
         "id": "salaires",
         "titre": "Revaloriser les soignants",
         "explication": "Hausse de salaire de 10 % pour infirmiers et aides-soignants : on garde les équipes, la facture est lourde.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "deficit_public",
@@ -125,6 +138,13 @@
             "valeur": -10,
             "type": "estompe",
             "hypothese": "Apaisement social à l'hôpital."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -132,6 +152,7 @@
         "id": "reorganiser",
         "titre": "Réorganiser sans plus d'argent",
         "explication": "Regrouper les petits services, réduire les tâches administratives : pas de coût, mais des fermetures locales.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "depenses_sante",
@@ -159,6 +180,13 @@
             "type": "differe",
             "delai": 2,
             "hypothese": "Regroupements et simplifications génèrent quelques économies."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -166,6 +194,7 @@
         "id": "prive",
         "titre": "S'appuyer sur les cliniques privées",
         "explication": "Les cliniques prennent une partie des urgences et des opérations : la capacité augmente vite, avec plus de dépassements d'honoraires.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "desert_medical",
@@ -189,11 +218,12 @@
         ]
       }
     ],
-    "notePedagogique": "La santé est le premier poste où l'on voit l'effet du vieillissement : la demande de soins augmente chaque année."
+    "notePedagogique": "La santé est le premier poste où l'on voit l'effet du vieillissement : la demande de soins augmente chaque année.",
+    "flash": "Les urgences de cinq hôpitaux ferment la nuit cet été faute de personnel. Une infirmière démissionne en direct à la télévision."
   },
   {
     "id": "sante-prevention",
-    "theme": "sante",
+    "ministere": "sante",
     "type": "unique",
     "titre": "Prévenir plutôt que guérir ?",
     "contexte": "Tabac, alcool, sédentarité et alimentation sont responsables d'une grande partie des maladies chroniques.",
@@ -202,6 +232,7 @@
         "id": "taxes-sante",
         "titre": "Taxes sur le sucre, l'alcool et le tabac",
         "explication": "Ce qui rend malade coûte plus cher : des recettes et moins de maladies, mais des taxes qui pèsent sur les plus modestes.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -234,6 +265,7 @@
         "id": "sport-ecole",
         "titre": "Une heure de sport par jour à l'école",
         "explication": "Bouger tous les jours dès le plus jeune âge : bon pour la santé et la concentration, effet visible dans vingt ans.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "deficit_public",
@@ -261,6 +293,7 @@
         "id": "depistage",
         "titre": "Bilans de santé gratuits",
         "explication": "Un bilan complet à 25, 45 et 65 ans : on détecte tôt les maladies, mais il faut des médecins pour les faire.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "depenses_sante",
@@ -285,11 +318,12 @@
         ]
       }
     ],
-    "notePedagogique": "La prévention coûte un peu tout de suite et rapporte beaucoup, mais très tard : un exemple d'effet différé difficile à défendre politiquement."
+    "notePedagogique": "La prévention coûte un peu tout de suite et rapporte beaucoup, mais très tard : un exemple d'effet différé difficile à défendre politiquement.",
+    "flash": "L'obésité touche désormais 1 adulte sur 5. Les industriels de l'agroalimentaire promettent de « s'autoréguler »."
   },
   {
     "id": "sante-ondam",
-    "theme": "sante",
+    "ministere": "sante",
     "type": "curseur",
     "titre": "De combien les dépenses d'assurance maladie peuvent-elles augmenter chaque année ?",
     "titreCourt": "Dépenses de santé",
@@ -306,6 +340,7 @@
         "valeur": 1.5,
         "titre": "1,5 % par an",
         "explication": "Serrage de vis : moins de dépenses, mais des hôpitaux sous tension et des soins reportés.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -338,6 +373,13 @@
             "valeur": 30,
             "type": "estompe",
             "hypothese": "Mobilisation des soignants."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -346,6 +388,7 @@
         "valeur": 3,
         "titre": "3 % par an",
         "explication": "On suit la tendance : le système tient, sans s'améliorer.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "confiance_institutions",
@@ -360,6 +403,7 @@
         "valeur": 4.5,
         "titre": "4,5 % par an",
         "explication": "On investit dans les soins : plus de soignants, mais la Sécurité sociale creuse son déficit.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -390,6 +434,7 @@
         ]
       }
     ],
-    "notePedagogique": "Chaque année, le Parlement vote un objectif de dépenses d'assurance maladie (Ondam). Il est souvent dépassé : le vieillissement fait mécaniquement monter les besoins."
+    "notePedagogique": "Chaque année, le Parlement vote un objectif de dépenses d'assurance maladie (Ondam). Il est souvent dépassé : le vieillissement fait mécaniquement monter les besoins.",
+    "flash": "Les cliniques et hôpitaux préviennent : avec moins de 3 % de hausse, il faudra déprogrammer des opérations."
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "id": "educ-classes",
-    "theme": "education",
+    "ministere": "education",
     "type": "unique",
     "titre": "Moins d'élèves par classe ?",
     "contexte": "Le niveau en mathématiques a reculé de plus de 20 points dans PISA entre 2018 et 2022. Les naissances baissent, ce qui libère des postes.",
@@ -10,6 +10,7 @@
         "id": "dedoubler",
         "titre": "Classes de 15 en primaire",
         "explication": "On garde les postes libérés par la baisse des naissances pour réduire les classes : effet prouvé sur les plus fragiles, lent.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "eleves_par_classe",
@@ -37,6 +38,7 @@
         "id": "supprimer-postes",
         "titre": "Supprimer les postes en trop",
         "explication": "Moins d'élèves, donc moins de professeurs : économie importante, classes inchangées.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -56,6 +58,13 @@
             "type": "differe",
             "delai": 2,
             "hypothese": "Fermetures de classes en zone rurale."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -63,6 +72,7 @@
         "id": "groupes-niveau",
         "titre": "Groupes de niveau au collège",
         "explication": "Français et maths en petits groupes selon le niveau : les élèves en difficulté sont mieux suivis, au risque de les enfermer.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "pisa_maths",
@@ -87,11 +97,12 @@
         ]
       }
     ],
-    "notePedagogique": "L'éducation est l'investissement dont les effets sont les plus différés : un élève de CP entre sur le marché du travail 15 à 20 ans plus tard."
+    "notePedagogique": "L'éducation est l'investissement dont les effets sont les plus différés : un élève de CP entre sur le marché du travail 15 à 20 ans plus tard.",
+    "flash": "Nouveau classement PISA : la France recule encore en mathématiques, et ses écarts entre élèves favorisés et défavorisés restent parmi les plus forts de l'OCDE."
   },
   {
     "id": "educ-professeurs",
-    "theme": "education",
+    "ministere": "education",
     "type": "unique",
     "titre": "On ne trouve plus de professeurs",
     "contexte": "Chaque année, des postes ne sont pas pourvus aux concours, surtout en mathématiques et en lettres.",
@@ -100,6 +111,7 @@
         "id": "salaires",
         "titre": "Augmenter les salaires de 20 %",
         "explication": "Le métier redevient attractif : plus de candidats, de meilleurs recrutements, une facture élevée.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "deficit_public",
@@ -119,6 +131,13 @@
             "valeur": -10,
             "type": "estompe",
             "hypothese": "Apaisement dans l'Éducation nationale."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -126,6 +145,7 @@
         "id": "contractuels",
         "titre": "Recruter des contractuels",
         "explication": "On embauche sans concours : les classes ont un professeur, mais moins formé.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "pisa_maths",
@@ -147,6 +167,7 @@
         "id": "formation-recrutement",
         "titre": "Recruter dès la licence, payé pendant les études",
         "explication": "Les futurs professeurs sont rémunérés pendant leur formation en échange de quelques années de service.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "deficit_public",
@@ -171,11 +192,12 @@
         ]
       }
     ],
-    "notePedagogique": "La qualité des enseignants est l'un des facteurs les plus déterminants des résultats des élèves selon les études internationales."
+    "notePedagogique": "La qualité des enseignants est l'un des facteurs les plus déterminants des résultats des élèves selon les études internationales.",
+    "flash": "À la rentrée, 3 000 postes de professeurs restent vacants. Dans certaines classes, aucun cours de maths depuis septembre."
   },
   {
     "id": "educ-apprentissage",
-    "theme": "education",
+    "ministere": "education",
     "type": "unique",
     "titre": "Apprentissage : continuer à payer les entreprises ?",
     "contexte": "Les aides à l'embauche d'apprentis ont fait exploser leur nombre, au prix de plusieurs milliards par an.",
@@ -184,6 +206,7 @@
         "id": "maintenir",
         "titre": "Maintenir les aides",
         "explication": "Près d'un million d'apprentis : l'insertion des jeunes s'améliore, mais l'aide profite aussi à des diplômés qui auraient trouvé seuls.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -211,6 +234,7 @@
         "id": "cibler",
         "titre": "Réserver aux moins diplômés",
         "explication": "Les aides ne vont plus qu'aux CAP et bacs pros : moins coûteux et mieux ciblé, moins d'apprentis dans le supérieur.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "deficit_public",
@@ -238,6 +262,7 @@
         "id": "lycee-pro",
         "titre": "Réinvestir dans les lycées professionnels",
         "explication": "Des ateliers modernes et des stages mieux encadrés : moins rapide que l'apprentissage, mais pour tous les élèves.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -263,11 +288,12 @@
         ]
       }
     ],
-    "notePedagogique": "Une aide généreuse crée des effets d'aubaine : une partie des bénéficiaires aurait fait le même choix sans elle."
+    "notePedagogique": "Une aide généreuse crée des effets d'aubaine : une partie des bénéficiaires aurait fait le même choix sans elle.",
+    "flash": "Le nombre d'apprentis a triplé en six ans. Mais la Cour des comptes juge le dispositif « très coûteux » et mal ciblé."
   },
   {
     "id": "educ-budget",
-    "theme": "education",
+    "ministere": "education",
     "type": "curseur",
     "titre": "De combien augmenter le budget de l'Éducation nationale ?",
     "titreCourt": "Budget éducation",
@@ -284,6 +310,7 @@
         "valeur": 0,
         "titre": "0 %",
         "explication": "Budget gelé : l'inflation rogne les moyens, les difficultés de recrutement persistent.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -303,6 +330,13 @@
             "valeur": 10,
             "type": "estompe",
             "hypothese": "Mécontentement des personnels."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -311,6 +345,7 @@
         "valeur": 10,
         "titre": "+10 %",
         "explication": "Six milliards de plus : salaires revalorisés et classes un peu allégées.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -346,6 +381,7 @@
         "valeur": 20,
         "titre": "+20 %",
         "explication": "Effort historique : on recrute massivement, mais le résultat ne se verra que dans dix ans.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -384,6 +420,7 @@
         ]
       }
     ],
-    "notePedagogique": "La France dépense pour l'école un peu plus que la moyenne de l'OCDE, mais moins pour le primaire et davantage pour le lycée. Les effets d'un effort éducatif se mesurent sur des décennies."
+    "notePedagogique": "La France dépense pour l'école un peu plus que la moyenne de l'OCDE, mais moins pour le primaire et davantage pour le lycée. Les effets d'un effort éducatif se mesurent sur des décennies.",
+    "flash": "Un rapport compare : un professeur français gagne 20 % de moins que la moyenne européenne après quinze ans de carrière."
   }
 ]

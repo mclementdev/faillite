@@ -1,93 +1,83 @@
 {
-  "_doc": "Chaque jauge = moyenne pondérée des indicateurs normalisés (0-100). Un poids de 0 garde l'indicateur visible sans le compter.",
+  "_doc": "Chaque jauge = moyenne pondérée des indicateurs normalisés (0-100). Un poids de 0 garde l'indicateur visible sans le compter. La démographie n'est plus une jauge : ses indicateurs restent dans le panneau des chiffres.",
   "economie": {
-    "nom": "Économie", "nomCourt": "Économie", "sensibilite": 1.6,
+    "nom": "Économie", "nomCourt": "Économie", "sensibilite": 2,
     "indicateurs": [
-      { "id": "croissance_pib", "poids": 2 },
-      { "id": "chomage", "poids": 2 },
-      { "id": "taux_emploi", "poids": 1 },
-      { "id": "inflation", "poids": 1 },
-      { "id": "investissement_entreprises", "poids": 1 },
-      { "id": "productivite_horaire", "poids": 1 },
-      { "id": "solde_commercial", "poids": 1 }
+      {"id": "croissance_pib", "poids": 2},
+      {"id": "chomage", "poids": 2},
+      {"id": "taux_emploi", "poids": 1},
+      {"id": "inflation", "poids": 1},
+      {"id": "investissement_entreprises", "poids": 1},
+      {"id": "productivite_horaire", "poids": 1},
+      {"id": "solde_commercial", "poids": 1}
     ]
   },
   "finances": {
-    "nom": "Finances publiques", "nomCourt": "Finances", "sensibilite": 1,
+    "nom": "Finances publiques", "nomCourt": "Finances", "sensibilite": 2,
     "indicateurs": [
-      { "id": "dette_publique", "poids": 2 },
-      { "id": "deficit_public", "poids": 2 },
-      { "id": "charge_interets", "poids": 1.5 },
-      { "id": "taux_10_ans", "poids": 1 },
-      { "id": "depenses_publiques", "poids": 0.5 },
-      { "id": "prelevements_obligatoires", "poids": 0.5, "commentaire": "normalisation « cible » : trop bas ou trop haut pèse sur la soutenabilité" }
-    ]
-  },
-  "paix_sociale": {
-    "nom": "Paix sociale", "nomCourt": "Paix sociale", "sensibilite": 2.2,
-    "indicateurs": [
-      { "id": "confiance_institutions", "poids": 1.5 },
-      { "id": "participation_elections", "poids": 1 },
-      { "id": "jours_greve", "poids": 1 },
-      { "id": "sentiment_insecurite", "poids": 1 },
-      { "id": "violences_physiques", "poids": 1 },
-      { "id": "satisfaction_vie", "poids": 1 }
-    ]
-  },
-  "ecologie": {
-    "nom": "Écologie", "nomCourt": "Écologie", "sensibilite": 2,
-    "indicateurs": [
-      { "id": "emissions_ges", "poids": 2 },
-      { "id": "part_renouvelables", "poids": 1 },
-      { "id": "artificialisation", "poids": 1 },
-      { "id": "qualite_air", "poids": 1 },
-      { "id": "conso_energie_finale", "poids": 1 },
-      { "id": "biodiversite_oiseaux", "poids": 1 }
-    ]
-  },
-  "services_publics": {
-    "nom": "Services publics", "nomCourt": "Services publics", "sensibilite": 2.2,
-    "indicateurs": [
-      { "id": "desert_medical", "poids": 1.5 },
-      { "id": "pisa_maths", "poids": 1 },
-      { "id": "eleves_par_classe", "poids": 1 },
-      { "id": "delai_jugement", "poids": 1 },
-      { "id": "esperance_vie_bonne_sante", "poids": 1 },
-      { "id": "depenses_sante", "poids": 0.5, "commentaire": "moyens consacrés, pas un résultat : poids faible" }
+      {"id": "dette_publique", "poids": 2},
+      {"id": "deficit_public", "poids": 2},
+      {"id": "charge_interets", "poids": 1.5},
+      {"id": "taux_10_ans", "poids": 1},
+      {"id": "depenses_publiques", "poids": 0.5},
+      {"id": "prelevements_obligatoires", "poids": 0.5, "commentaire": "normalisation « cible » : trop bas ou trop haut pèse sur la soutenabilité"}
     ]
   },
   "cohesion": {
-    "nom": "Cohésion", "nomCourt": "Cohésion", "sensibilite": 4,
+    "nom": "Cohésion sociale", "nomCourt": "Cohésion", "sensibilite": 3,
     "indicateurs": [
-      { "id": "taux_pauvrete", "poids": 2 },
-      { "id": "rapport_interdecile", "poids": 1 },
-      { "id": "chomage_jeunes", "poids": 1 },
-      { "id": "neet", "poids": 1 },
-      { "id": "taux_effort_logement", "poids": 1 },
-      { "id": "ecart_salaire_hf", "poids": 1 }
+      {"id": "taux_pauvrete", "poids": 2},
+      {"id": "rapport_interdecile", "poids": 1},
+      {"id": "chomage_jeunes", "poids": 1},
+      {"id": "neet", "poids": 0.5},
+      {"id": "taux_effort_logement", "poids": 1},
+      {"id": "ecart_salaire_hf", "poids": 0.5},
+      {"id": "confiance_institutions", "poids": 1.5},
+      {"id": "jours_greve", "poids": 1},
+      {"id": "sentiment_insecurite", "poids": 1},
+      {"id": "violences_physiques", "poids": 0.5},
+      {"id": "satisfaction_vie", "poids": 1},
+      {"id": "participation_elections", "poids": 0.5}
     ]
   },
-  "demographie": {
-    "nom": "Démographie", "nomCourt": "Démographie", "sensibilite": 1.1,
+  "ecologie": {
+    "nom": "Climat et nature", "nomCourt": "Climat", "sensibilite": 2.5,
     "indicateurs": [
-      { "id": "ratio_cotisants_retraites", "poids": 2 },
-      { "id": "fecondite", "poids": 1.5 },
-      { "id": "age_median", "poids": 1 },
-      { "id": "part_65_plus", "poids": 1 },
-      { "id": "esperance_vie", "poids": 1 },
-      { "id": "solde_migratoire", "poids": 0, "commentaire": "neutralité : le solde migratoire n'est pas noté pour lui-même ; il agit via le ratio cotisants/retraités, l'âge médian et la part des 65 ans et plus" }
+      {"id": "emissions_ges", "poids": 2},
+      {"id": "part_renouvelables", "poids": 1},
+      {"id": "artificialisation", "poids": 1},
+      {"id": "qualite_air", "poids": 1},
+      {"id": "conso_energie_finale", "poids": 1},
+      {"id": "biodiversite_oiseaux", "poids": 1}
+    ]
+  },
+  "services_publics": {
+    "nom": "Services publics", "nomCourt": "Services publics", "sensibilite": 3,
+    "indicateurs": [
+      {"id": "desert_medical", "poids": 1.5},
+      {"id": "pisa_maths", "poids": 1},
+      {"id": "eleves_par_classe", "poids": 1},
+      {"id": "delai_jugement", "poids": 1},
+      {"id": "esperance_vie_bonne_sante", "poids": 1},
+      {"id": "depenses_sante", "poids": 0.5, "commentaire": "moyens consacrés, pas un résultat : poids faible"}
     ]
   },
   "souverainete": {
-    "nom": "Souveraineté", "nomCourt": "Souveraineté", "sensibilite": 2.2,
+    "nom": "Souveraineté", "nomCourt": "Souveraineté", "sensibilite": 3,
     "indicateurs": [
-      { "id": "independance_energetique", "poids": 1.5 },
-      { "id": "part_industrie_va", "poids": 1.5 },
-      { "id": "autonomie_alimentaire", "poids": 1 },
-      { "id": "budget_defense", "poids": 1 },
-      { "id": "dependance_numerique", "poids": 1 },
-      { "id": "solde_commercial", "poids": 1 },
-      { "id": "part_dette_non_residents", "poids": 0.5 }
+      {"id": "independance_energetique", "poids": 1.5},
+      {"id": "part_industrie_va", "poids": 1.5},
+      {"id": "autonomie_alimentaire", "poids": 1},
+      {"id": "budget_defense", "poids": 1},
+      {"id": "dependance_numerique", "poids": 1},
+      {"id": "solde_commercial", "poids": 1},
+      {"id": "part_dette_non_residents", "poids": 0.5}
+    ]
+  },
+  "popularite": {
+    "nom": "Popularité", "nomCourt": "Popularité", "sensibilite": 1,
+    "indicateurs": [
+      {"id": "popularite", "poids": 1, "commentaire": "cote de popularité du président"}
     ]
   }
 }

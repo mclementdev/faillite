@@ -1,0 +1,191 @@
+[
+  {
+    "id": "impots-classes-moyennes",
+    "texte": "Je baisserai l'impôt sur le revenu de toutes les classes moyennes.",
+    "realite": "Une baisse sensible coûte de 5 à 10 milliards d'euros par an. Avec un déficit au-dessus de 5 % du PIB, elle se finance par la dette si aucune économie ne suit.",
+    "source": "Direction générale des Finances publiques, Cour des comptes",
+    "url": "https://www.ccomptes.fr/",
+    "demago": 2,
+    "popularite": 4,
+    "carte": "fiscalite-impot-revenu",
+    "options": [
+      "baisse-classes-moyennes"
+    ]
+  },
+  {
+    "id": "retraite-62",
+    "texte": "Je ramènerai l'âge de la retraite à 62 ans.",
+    "realite": "Revenir à 62 ans coûterait de l'ordre de 10 à 15 milliards d'euros par an vers 2030, dans un régime qui est déjà en déficit.",
+    "source": "Conseil d'orientation des retraites",
+    "url": "https://www.cor-retraites.fr/",
+    "demago": 3,
+    "popularite": 5,
+    "carte": "retraites-age",
+    "options": [
+      "62"
+    ]
+  },
+  {
+    "id": "deficit-sans-impots",
+    "texte": "Pas un euro d'impôt en plus, et le déficit sous 3 % en cinq ans.",
+    "realite": "Passer d'environ 5 % à 3 % de déficit sans hausse d'impôts suppose environ 60 milliards d'euros d'économies : plus que tout le budget de la Défense.",
+    "source": "Cour des comptes, situation et perspectives des finances publiques",
+    "url": "https://www.ccomptes.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "dette-effort",
+    "options": [
+      "30",
+      "40"
+    ]
+  },
+  {
+    "id": "medecin-pour-tous",
+    "texte": "Un médecin traitant pour chaque Français.",
+    "realite": "Environ 6 millions de Français n'ont pas de médecin traitant. Former un médecin prend près de 10 ans : même avec plus d'étudiants, l'effet arrive après 2035.",
+    "source": "Assurance maladie, DREES",
+    "url": "https://drees.solidarites-sante.gouv.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "sante-deserts",
+    "options": [
+      "regulation",
+      "etudes"
+    ]
+  },
+  {
+    "id": "smic-10",
+    "texte": "J'augmenterai le SMIC de 10 % dès mon élection.",
+    "realite": "Environ 15 % des salariés sont au SMIC. Une hausse de 10 % coûte peu à l'État, mais pèse sur les petites entreprises et peut freiner les embauches peu qualifiées.",
+    "source": "INSEE, DARES",
+    "url": "https://dares.travail-emploi.gouv.fr/",
+    "demago": 1,
+    "popularite": 4,
+    "carte": "emploi-smic",
+    "options": [
+      "hausse"
+    ]
+  },
+  {
+    "id": "prix-energie",
+    "texte": "Je bloquerai les prix de l'énergie pour protéger votre pouvoir d'achat.",
+    "realite": "Les boucliers tarifaires de 2022-2023 ont coûté plusieurs dizaines de milliards d'euros à l'État, et ils profitaient aussi aux ménages les plus aisés.",
+    "source": "Cour des comptes",
+    "url": "https://www.ccomptes.fr/",
+    "demago": 2,
+    "popularite": 4,
+    "carte": "energie-prix",
+    "options": [
+      "bouclier"
+    ]
+  },
+  {
+    "id": "logements-sociaux",
+    "texte": "Je construirai 150 000 logements sociaux par an.",
+    "realite": "Moins de 100 000 logements sociaux sont financés chaque année. Atteindre 150 000 suppose plusieurs milliards d'aides en plus et des terrains disponibles.",
+    "source": "Ministère du Logement, bilan des logements aidés",
+    "url": "https://www.ecologie.gouv.fr/",
+    "demago": 1,
+    "popularite": 2,
+    "carte": "logement-hlm",
+    "options": [
+      "150",
+      "180"
+    ]
+  },
+  {
+    "id": "classes-15",
+    "texte": "15 élèves maximum par classe en primaire.",
+    "realite": "Généraliser des classes de 15 demanderait des dizaines de milliers de professeurs en plus, alors que des milliers de postes restent déjà vacants chaque rentrée.",
+    "source": "Ministère de l'Éducation nationale",
+    "url": "https://www.education.gouv.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "educ-classes",
+    "options": [
+      "dedoubler"
+    ]
+  },
+  {
+    "id": "carburants",
+    "texte": "Aucune hausse des taxes sur les carburants pendant tout le mandat.",
+    "realite": "Renoncer à toute taxe carbone prive l'État de recettes et ralentit la baisse des émissions, alors que la France est déjà en retard sur ses objectifs climatiques.",
+    "source": "Haut Conseil pour le climat",
+    "url": "https://www.hautconseilclimat.fr/",
+    "demago": 2,
+    "popularite": 4,
+    "carte": "eco-taxe-carbone",
+    "options": [
+      "0",
+      "25"
+    ]
+  },
+  {
+    "id": "policiers",
+    "texte": "10 000 policiers et gendarmes de plus sur le terrain.",
+    "realite": "Recruter, former et équiper 10 000 agents coûte environ 600 millions d'euros par an, et la formation dure plus d'un an : une promesse réaliste, mais lente.",
+    "source": "Ministère de l'Intérieur, Cour des comptes",
+    "url": "https://www.interieur.gouv.fr/",
+    "demago": 0,
+    "popularite": 3,
+    "carte": "secu-police",
+    "options": [
+      "effectifs"
+    ]
+  },
+  {
+    "id": "immigration-travail",
+    "texte": "Je diviserai par deux l'immigration de travail.",
+    "realite": "Le soin, le bâtiment et l'agriculture dépendent en partie de travailleurs étrangers : réduire fortement les visas crée des pénuries de main-d'œuvre dans ces métiers.",
+    "source": "DARES, métiers en tension",
+    "url": "https://dares.travail-emploi.gouv.fr/",
+    "demago": 1,
+    "popularite": 3,
+    "carte": "demo-immigration-travail",
+    "options": [
+      "0",
+      "25"
+    ]
+  },
+  {
+    "id": "isf",
+    "texte": "Je rétablirai l'impôt sur la fortune.",
+    "realite": "L'ancien ISF rapportait environ 5 milliards d'euros par an, moins de 2 % des recettes nettes de l'État : utile pour la justice fiscale, loin de combler le déficit.",
+    "source": "Direction générale des Finances publiques",
+    "url": "https://www.impots.gouv.fr/",
+    "demago": 1,
+    "popularite": 3,
+    "carte": "fiscalite-patrimoine",
+    "options": [
+      "impot-fortune"
+    ]
+  },
+  {
+    "id": "defense-3",
+    "texte": "Nous consacrerons 3 % du PIB à notre défense.",
+    "realite": "Passer d'environ 2 % à 3 % du PIB représente près de 30 milliards d'euros de plus chaque année, à financer par des économies, des impôts ou de la dette.",
+    "source": "Ministère des Armées, loi de programmation militaire",
+    "url": "https://www.defense.gouv.fr/",
+    "demago": 1,
+    "popularite": 1,
+    "carte": "souv-defense",
+    "options": [
+      "3",
+      "3.5"
+    ]
+  },
+  {
+    "id": "semaine-4-jours",
+    "texte": "La semaine de 32 heures pour tous les salariés.",
+    "realite": "Le passage aux 35 heures, en 2000, a nécessité plusieurs milliards d'euros par an d'allègements de cotisations. Passer à 32 heures coûterait davantage.",
+    "source": "DARES, INSEE",
+    "url": "https://dares.travail-emploi.gouv.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "emploi-duree-legale",
+    "options": [
+      "32",
+      "33"
+    ]
+  }
+]

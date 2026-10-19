@@ -1,218 +1,554 @@
 {
   "croissance_pib": {
-    "nom": "Croissance du PIB", "valeur": 0.8, "unite": "%/an", "annee": 2025, "decimales": 1,
-    "source": "INSEE, comptes de la Nation 2025 (Insee Première n° 2105)", "url": "https://www.insee.fr/fr/statistiques/8996855", "provisoire": false
+    "nom": "Croissance du PIB",
+    "valeur": 0.8,
+    "unite": "%/an",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "INSEE, comptes de la Nation 2025 (Insee Première n° 2105)",
+    "url": "https://www.insee.fr/fr/statistiques/8996855",
+    "provisoire": false
   },
   "chomage": {
-    "nom": "Taux de chômage", "valeur": 8.3, "unite": "%", "annee": "T2 2026", "decimales": 1,
-    "source": "INSEE, Informations rapides n° 192 (chômage BIT, France y c. Mayotte)", "url": "https://www.insee.fr/fr/statistiques/9032359", "provisoire": false
+    "nom": "Taux de chômage",
+    "valeur": 8.3,
+    "unite": "%",
+    "annee": "T2 2026",
+    "decimales": 1,
+    "source": "INSEE, Informations rapides n° 192 (chômage BIT, France y c. Mayotte)",
+    "url": "https://www.insee.fr/fr/statistiques/9032359",
+    "provisoire": false
   },
   "taux_emploi": {
-    "nom": "Taux d'emploi des 15-64 ans", "valeur": 69.0, "unite": "%", "annee": "T2 2026", "decimales": 1,
-    "source": "INSEE, enquête Emploi (Informations rapides n° 192)", "url": "https://www.insee.fr/fr/statistiques/9032359", "provisoire": true,
+    "nom": "Taux d'emploi des 15-64 ans",
+    "valeur": 69.0,
+    "unite": "%",
+    "annee": "T2 2026",
+    "decimales": 1,
+    "source": "INSEE, enquête Emploi (Informations rapides n° 192)",
+    "url": "https://www.insee.fr/fr/statistiques/9032359",
+    "provisoire": true,
     "note": "Niveau exact non retrouvé dans la publication (seule l'évolution, −0,3 point, l'était) : ordre de grandeur à vérifier."
   },
   "inflation": {
-    "nom": "Inflation", "valeur": 0.9, "unite": "%/an", "annee": 2025, "decimales": 1,
-    "source": "INSEE, indice des prix à la consommation, moyenne annuelle 2025", "url": "https://www.insee.fr/fr/statistiques/8726461", "provisoire": false
+    "nom": "Inflation",
+    "valeur": 0.9,
+    "unite": "%/an",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "INSEE, indice des prix à la consommation, moyenne annuelle 2025",
+    "url": "https://www.insee.fr/fr/statistiques/8726461",
+    "provisoire": false
   },
   "investissement_entreprises": {
-    "nom": "Taux d'investissement des entreprises", "nomCourt": "Investissement des entreprises", "valeur": 22.2, "unite": "% de la valeur ajoutée", "annee": 2024, "decimales": 1,
-    "source": "OFCE d'après INSEE (sociétés non financières, fin 2024)", "url": "https://ofce.sciences-po.fr/prev/prev2503/france/investissement.html", "provisoire": true,
+    "nom": "Taux d'investissement des entreprises",
+    "nomCourt": "Investissement des entreprises",
+    "valeur": 22.2,
+    "unite": "% de la valeur ajoutée",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "OFCE d'après INSEE (sociétés non financières, fin 2024)",
+    "url": "https://ofce.sciences-po.fr/prev/prev2503/france/investissement.html",
+    "provisoire": true,
     "note": "Mesuré en % de la valeur ajoutée des sociétés non financières (et non du PIB) ; valeur 2025 officielle non retrouvée."
   },
   "productivite_horaire": {
-    "nom": "Productivité horaire du travail", "nomCourt": "Productivité horaire", "valeur": 113, "unite": "indice UE27 = 100", "annee": 2024, "decimales": 0,
-    "source": "Eurostat, PIB par heure travaillée (indice UE27 = 100)", "url": "https://ec.europa.eu/eurostat/databrowser/view/tesem160/default/table", "provisoire": true,
+    "nom": "Productivité horaire du travail",
+    "nomCourt": "Productivité horaire",
+    "valeur": 113,
+    "unite": "indice UE27 = 100",
+    "annee": 2024,
+    "decimales": 0,
+    "source": "Eurostat, PIB par heure travaillée (indice UE27 = 100)",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/tesem160/default/table",
+    "provisoire": true,
     "note": "Ordre de grandeur non vérifié en ligne pendant la construction."
   },
   "solde_commercial": {
-    "nom": "Solde commercial (biens)", "valeur": -69.2, "unite": "Md€", "annee": 2025, "decimales": 1,
-    "source": "Douanes, résultats annuels du commerce extérieur 2025", "url": "https://www.douane.gouv.fr/", "provisoire": false
+    "nom": "Solde commercial (biens)",
+    "valeur": -69.2,
+    "unite": "Md€",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "Douanes, résultats annuels du commerce extérieur 2025",
+    "url": "https://www.douane.gouv.fr/",
+    "provisoire": false
   },
   "dette_publique": {
-    "nom": "Dette publique", "valeur": 115.6, "unite": "% du PIB", "annee": 2025, "decimales": 1,
-    "source": "INSEE, comptes des administrations publiques 2025 (Informations rapides n° 78)", "url": "https://www.insee.fr/fr/statistiques/8956575", "provisoire": false
+    "nom": "Dette publique",
+    "valeur": 115.6,
+    "unite": "% du PIB",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "INSEE, comptes des administrations publiques 2025 (Informations rapides n° 78)",
+    "url": "https://www.insee.fr/fr/statistiques/8956575",
+    "provisoire": false
   },
   "deficit_public": {
-    "nom": "Déficit public", "valeur": 5.1, "unite": "% du PIB", "annee": 2025, "decimales": 1,
-    "source": "INSEE, comptes des administrations publiques 2025 (Informations rapides n° 78)", "url": "https://www.insee.fr/fr/statistiques/8956575", "provisoire": false
+    "nom": "Déficit public",
+    "valeur": 5.1,
+    "unite": "% du PIB",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "INSEE, comptes des administrations publiques 2025 (Informations rapides n° 78)",
+    "url": "https://www.insee.fr/fr/statistiques/8956575",
+    "provisoire": false
   },
   "charge_interets": {
-    "nom": "Charge des intérêts de la dette", "nomCourt": "Intérêts de la dette", "valeur": 2.2, "unite": "% du PIB", "annee": 2025, "decimales": 1,
-    "source": "INSEE, comptes des APU 2025 (64,7 Md€, soit environ 2,2 % du PIB)", "url": "https://www.insee.fr/fr/statistiques/8956575", "provisoire": false
+    "nom": "Charge des intérêts de la dette",
+    "nomCourt": "Intérêts de la dette",
+    "valeur": 2.2,
+    "unite": "% du PIB",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "INSEE, comptes des APU 2025 (64,7 Md€, soit environ 2,2 % du PIB)",
+    "url": "https://www.insee.fr/fr/statistiques/8956575",
+    "provisoire": false
   },
   "depenses_publiques": {
-    "nom": "Dépenses publiques", "valeur": 57.2, "unite": "% du PIB", "annee": 2025, "decimales": 1,
-    "source": "INSEE, comptes des administrations publiques 2025 (Informations rapides n° 78)", "url": "https://www.insee.fr/fr/statistiques/8956575", "provisoire": false
+    "nom": "Dépenses publiques",
+    "valeur": 57.2,
+    "unite": "% du PIB",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "INSEE, comptes des administrations publiques 2025 (Informations rapides n° 78)",
+    "url": "https://www.insee.fr/fr/statistiques/8956575",
+    "provisoire": false
   },
   "prelevements_obligatoires": {
-    "nom": "Prélèvements obligatoires", "valeur": 43.6, "unite": "% du PIB", "annee": 2025, "decimales": 1,
-    "source": "INSEE, Insee Première n° 2106 (comptes des APU 2025)", "url": "https://www.insee.fr/fr/statistiques/8997691", "provisoire": false
+    "nom": "Prélèvements obligatoires",
+    "valeur": 43.6,
+    "unite": "% du PIB",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "INSEE, Insee Première n° 2106 (comptes des APU 2025)",
+    "url": "https://www.insee.fr/fr/statistiques/8997691",
+    "provisoire": false
   },
   "taux_10_ans": {
-    "nom": "Taux d'emprunt de l'État à 10 ans", "nomCourt": "Taux à 10 ans", "valeur": 4.8, "unite": "%", "annee": "oct. 2026", "decimales": 1,
-    "source": "Agence France Trésor (TEC 10), relevés de début octobre 2026 repris par la presse", "url": "https://www.aft.gouv.fr/fr/principaux-chiffres-dette-accueil", "provisoire": true,
+    "nom": "Taux d'emprunt de l'État à 10 ans",
+    "nomCourt": "Taux à 10 ans",
+    "valeur": 4.8,
+    "unite": "%",
+    "annee": "oct. 2026",
+    "decimales": 1,
+    "source": "Agence France Trésor (TEC 10), relevés de début octobre 2026 repris par la presse",
+    "url": "https://www.aft.gouv.fr/fr/principaux-chiffres-dette-accueil",
+    "provisoire": true,
     "note": "Relevés quotidiens entre 4,72 % et 4,90 % début octobre 2026 selon une source secondaire ; à vérifier sur le site de l'AFT."
   },
   "confiance_institutions": {
-    "nom": "Confiance dans les institutions politiques", "nomCourt": "Confiance dans les institutions", "valeur": 25, "unite": "%", "annee": 2026, "decimales": 0,
-    "source": "Sciences Po CEVIPOF, Baromètre de la confiance politique (vague 17, février 2026)", "url": "https://www.sciencespo.fr/cevipof/fr/content/le-barometre-de-la-confiance-politique.html", "provisoire": true,
+    "nom": "Confiance dans les institutions politiques",
+    "nomCourt": "Confiance dans les institutions",
+    "valeur": 25,
+    "unite": "%",
+    "annee": 2026,
+    "decimales": 0,
+    "source": "Sciences Po CEVIPOF, Baromètre de la confiance politique (vague 17, février 2026)",
+    "url": "https://www.sciencespo.fr/cevipof/fr/content/le-barometre-de-la-confiance-politique.html",
+    "provisoire": true,
     "note": "Pourcentage exact par institution non retrouvé : ordre de grandeur de la confiance dans le gouvernement et l'Assemblée."
   },
   "participation_elections": {
-    "nom": "Participation aux élections", "valeur": 66.7, "unite": "% des inscrits", "annee": 2024, "decimales": 1,
-    "source": "Ministère de l'Intérieur, élections législatives 2024 (1er tour)", "url": "https://www.resultats-elections.interieur.gouv.fr/legislatives2024/", "provisoire": false
+    "nom": "Participation aux élections",
+    "valeur": 66.7,
+    "unite": "% des inscrits",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "Ministère de l'Intérieur, élections législatives 2024 (1er tour)",
+    "url": "https://www.resultats-elections.interieur.gouv.fr/legislatives2024/",
+    "provisoire": false
   },
   "jours_greve": {
-    "nom": "Jours de grève", "valeur": 62, "unite": "jours pour 1 000 salariés", "annee": 2024, "decimales": 0,
-    "source": "DARES, enquête Acemo-Dialogue social en entreprise (journées individuelles non travaillées)", "url": "https://dares.travail-emploi.gouv.fr/", "provisoire": false
+    "nom": "Jours de grève",
+    "valeur": 62,
+    "unite": "jours pour 1 000 salariés",
+    "annee": 2024,
+    "decimales": 0,
+    "source": "DARES, enquête Acemo-Dialogue social en entreprise (journées individuelles non travaillées)",
+    "url": "https://dares.travail-emploi.gouv.fr/",
+    "provisoire": false
   },
   "sentiment_insecurite": {
-    "nom": "Sentiment d'insécurité dans son quartier", "nomCourt": "Sentiment d'insécurité", "valeur": 22, "unite": "% des adultes", "annee": 2024, "decimales": 0,
-    "source": "SSMSI, enquête Vécu et ressenti en matière de sécurité, édition 2024", "url": "https://www.interieur.gouv.fr/Interstats/Actualites/Vecu-et-ressenti-en-matiere-de-securite-Victimation-delinquance-et-sentiment-d-insecurite-Rapport-d-enquete-edition-2024", "provisoire": true,
+    "nom": "Sentiment d'insécurité dans son quartier",
+    "nomCourt": "Sentiment d'insécurité",
+    "valeur": 22,
+    "unite": "% des adultes",
+    "annee": 2024,
+    "decimales": 0,
+    "source": "SSMSI, enquête Vécu et ressenti en matière de sécurité, édition 2024",
+    "url": "https://www.interieur.gouv.fr/Interstats/Actualites/Vecu-et-ressenti-en-matiere-de-securite-Victimation-delinquance-et-sentiment-d-insecurite-Rapport-d-enquete-edition-2024",
+    "provisoire": true,
     "note": "Chiffre repris d'une source secondaire citant le rapport ; non vérifié directement."
   },
   "violences_physiques": {
-    "nom": "Coups et blessures volontaires enregistrés", "nomCourt": "Violences physiques", "valeur": 4.7, "unite": "victimes pour 1 000 hab.", "annee": 2022, "decimales": 1,
-    "source": "SSMSI, bilan annuel 2022 (321 900 victimes de 15 ans ou plus)", "url": "https://www.interieur.gouv.fr/Interstats/Actualites/Insecurite-et-delinquance-en-2025-bilan-statistique-et-atlas-departemental", "provisoire": true,
+    "nom": "Coups et blessures volontaires enregistrés",
+    "nomCourt": "Violences physiques",
+    "valeur": 4.7,
+    "unite": "victimes pour 1 000 hab.",
+    "annee": 2022,
+    "decimales": 1,
+    "source": "SSMSI, bilan annuel 2022 (321 900 victimes de 15 ans ou plus)",
+    "url": "https://www.interieur.gouv.fr/Interstats/Actualites/Insecurite-et-delinquance-en-2025-bilan-statistique-et-atlas-departemental",
+    "provisoire": true,
     "note": "Donnée ancienne (2022) : le chiffre 2025 du bilan SSMSI n'a pas pu être extrait."
   },
   "satisfaction_vie": {
-    "nom": "Satisfaction dans la vie", "valeur": 7.2, "unite": "note sur 10", "annee": 2023, "decimales": 1,
-    "source": "INSEE, enquête SRCV (bien-être)", "url": "https://www.insee.fr/fr/statistiques?debut=0&theme=81", "provisoire": true,
+    "nom": "Satisfaction dans la vie",
+    "valeur": 7.2,
+    "unite": "note sur 10",
+    "annee": 2023,
+    "decimales": 1,
+    "source": "INSEE, enquête SRCV (bien-être)",
+    "url": "https://www.insee.fr/fr/statistiques?debut=0&theme=81",
+    "provisoire": true,
     "note": "Ordre de grandeur non vérifié en ligne pendant la construction."
   },
   "emissions_ges": {
-    "nom": "Émissions de gaz à effet de serre", "nomCourt": "Émissions de GES", "valeur": 363.7, "unite": "Mt CO₂e", "annee": 2025, "decimales": 0,
-    "source": "Citepa, baromètre d'avril 2026 (hors puits de carbone, estimation)", "url": "https://www.citepa.org/wp-content/uploads/2026/04/CP-Citepa_Barometre_avril2026.pdf", "provisoire": false
+    "nom": "Émissions de gaz à effet de serre",
+    "nomCourt": "Émissions de GES",
+    "valeur": 363.7,
+    "unite": "Mt CO₂e",
+    "annee": 2025,
+    "decimales": 0,
+    "source": "Citepa, baromètre d'avril 2026 (hors puits de carbone, estimation)",
+    "url": "https://www.citepa.org/wp-content/uploads/2026/04/CP-Citepa_Barometre_avril2026.pdf",
+    "provisoire": false
   },
   "part_renouvelables": {
-    "nom": "Part des énergies renouvelables", "nomCourt": "Énergies renouvelables", "valeur": 23.0, "unite": "% de la conso. finale brute", "annee": 2024, "decimales": 1,
-    "source": "SDES, les énergies renouvelables en France en 2024 (données provisoires)", "url": "https://www.statistiques.developpement-durable.gouv.fr/les-energies-renouvelables-en-france-en-2024-dans-le-cadre-du-suivi-de-la-directive-ue-20182001", "provisoire": false
+    "nom": "Part des énergies renouvelables",
+    "nomCourt": "Énergies renouvelables",
+    "valeur": 23.0,
+    "unite": "% de la conso. finale brute",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "SDES, les énergies renouvelables en France en 2024 (données provisoires)",
+    "url": "https://www.statistiques.developpement-durable.gouv.fr/les-energies-renouvelables-en-france-en-2024-dans-le-cadre-du-suivi-de-la-directive-ue-20182001",
+    "provisoire": false
   },
   "artificialisation": {
-    "nom": "Artificialisation des sols", "valeur": 19263, "unite": "ha/an", "annee": 2023, "decimales": 0,
-    "source": "Cerema, consommation d'espaces naturels, agricoles et forestiers", "url": "https://artificialisation.developpement-durable.gouv.fr/", "provisoire": false
+    "nom": "Artificialisation des sols",
+    "valeur": 19263,
+    "unite": "ha/an",
+    "annee": 2023,
+    "decimales": 0,
+    "source": "Cerema, consommation d'espaces naturels, agricoles et forestiers",
+    "url": "https://artificialisation.developpement-durable.gouv.fr/",
+    "provisoire": false
   },
   "qualite_air": {
-    "nom": "Exposition aux particules fines (PM2,5)", "nomCourt": "Particules fines", "valeur": 9, "unite": "µg/m³", "annee": 2023, "decimales": 1,
-    "source": "Agence européenne pour l'environnement, exposition moyenne de la population", "url": "https://www.eea.europa.eu/en/topics/in-depth/air-pollution", "provisoire": true,
+    "nom": "Exposition aux particules fines (PM2,5)",
+    "nomCourt": "Particules fines",
+    "valeur": 9,
+    "unite": "µg/m³",
+    "annee": 2023,
+    "decimales": 1,
+    "source": "Agence européenne pour l'environnement, exposition moyenne de la population",
+    "url": "https://www.eea.europa.eu/en/topics/in-depth/air-pollution",
+    "provisoire": true,
     "note": "Ordre de grandeur non vérifié en ligne pendant la construction."
   },
   "conso_energie_finale": {
-    "nom": "Consommation d'énergie finale", "nomCourt": "Conso. d'énergie finale", "valeur": 1498, "unite": "TWh", "annee": 2024, "decimales": 0,
-    "source": "SDES, bilan énergétique de la France en 2024 (usage énergétique)", "url": "https://www.statistiques.developpement-durable.gouv.fr/bilan-energetique-de-la-france-en-2024-donnees-provisoires", "provisoire": false
+    "nom": "Consommation d'énergie finale",
+    "nomCourt": "Conso. d'énergie finale",
+    "valeur": 1498,
+    "unite": "TWh",
+    "annee": 2024,
+    "decimales": 0,
+    "source": "SDES, bilan énergétique de la France en 2024 (usage énergétique)",
+    "url": "https://www.statistiques.developpement-durable.gouv.fr/bilan-energetique-de-la-france-en-2024-donnees-provisoires",
+    "provisoire": false
   },
   "biodiversite_oiseaux": {
-    "nom": "Indice des oiseaux communs spécialistes", "nomCourt": "Oiseaux communs", "valeur": 67, "unite": "indice 1989 = 100", "annee": 2024, "decimales": 0,
-    "source": "SDES / MNHN (Vigie-Nature, STOC), état des oiseaux communs en 2024", "url": "https://www.statistiques.developpement-durable.gouv.fr/etat-de-la-population-des-oiseaux-communs-en-france-en-2024", "provisoire": true,
+    "nom": "Indice des oiseaux communs spécialistes",
+    "nomCourt": "Oiseaux communs",
+    "valeur": 67,
+    "unite": "indice 1989 = 100",
+    "annee": 2024,
+    "decimales": 0,
+    "source": "SDES / MNHN (Vigie-Nature, STOC), état des oiseaux communs en 2024",
+    "url": "https://www.statistiques.developpement-durable.gouv.fr/etat-de-la-population-des-oiseaux-communs-en-france-en-2024",
+    "provisoire": true,
     "note": "La publication indique une baisse d'« environ un tiers » depuis 1989 : valeur arrondie."
   },
   "depenses_sante": {
-    "nom": "Dépense courante de santé", "nomCourt": "Dépenses de santé", "valeur": 11.4, "unite": "% du PIB", "annee": 2024, "decimales": 1,
-    "source": "DREES, comptes de la santé, édition 2025", "url": "https://www.drees.solidarites-sante.gouv.fr/publications-communique-de-presse-infographie-documents-de-reference/250930-Panorama-d%C3%A9penses-de-sant%C3%A9", "provisoire": false
+    "nom": "Dépense courante de santé",
+    "nomCourt": "Dépenses de santé",
+    "valeur": 11.4,
+    "unite": "% du PIB",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "DREES, comptes de la santé, édition 2025",
+    "url": "https://www.drees.solidarites-sante.gouv.fr/publications-communique-de-presse-infographie-documents-de-reference/250930-Panorama-d%C3%A9penses-de-sant%C3%A9",
+    "provisoire": false
   },
   "desert_medical": {
-    "nom": "Population en zone sous-dotée en médecins généralistes", "nomCourt": "Déserts médicaux", "valeur": 36.7, "unite": "% de la population", "annee": 2025, "decimales": 1,
-    "source": "Zonage médecins (arrêté du 9 mai 2025), cité par l'ORS PACA", "url": "https://www.orspaca.org/sites/default/files/QES%20301%20V9.pdf", "provisoire": true,
+    "nom": "Population en zone sous-dotée en médecins généralistes",
+    "nomCourt": "Déserts médicaux",
+    "valeur": 36.7,
+    "unite": "% de la population",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "Zonage médecins (arrêté du 9 mai 2025), cité par l'ORS PACA",
+    "url": "https://www.orspaca.org/sites/default/files/QES%20301%20V9.pdf",
+    "provisoire": true,
     "note": "Part en « zone d'intervention prioritaire » (zonage réglementaire), et non l'indicateur APL de la DREES."
   },
   "pisa_maths": {
-    "nom": "Niveau des élèves en mathématiques (PISA)", "nomCourt": "Score PISA (maths)", "valeur": 474, "unite": "points", "annee": 2022, "decimales": 0,
-    "source": "OCDE / DEPP, PISA 2022", "url": "https://www.education.gouv.fr/pisa-2022-la-france-ne-fait-pas-exception-la-baisse-generalisee-des-performances-en-culture-380205", "provisoire": false
+    "nom": "Niveau des élèves en mathématiques (PISA)",
+    "nomCourt": "Score PISA (maths)",
+    "valeur": 474,
+    "unite": "points",
+    "annee": 2022,
+    "decimales": 0,
+    "source": "OCDE / DEPP, PISA 2022",
+    "url": "https://www.education.gouv.fr/pisa-2022-la-france-ne-fait-pas-exception-la-baisse-generalisee-des-performances-en-culture-380205",
+    "provisoire": false
   },
   "eleves_par_classe": {
-    "nom": "Élèves par classe (premier degré)", "nomCourt": "Élèves par classe", "valeur": 21.5, "unite": "élèves", "annee": 2024, "decimales": 1,
-    "source": "DEPP, Repères et références statistiques", "url": "https://www.education.gouv.fr/reperes-et-references-statistiques", "provisoire": true,
+    "nom": "Élèves par classe (premier degré)",
+    "nomCourt": "Élèves par classe",
+    "valeur": 21.5,
+    "unite": "élèves",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "DEPP, Repères et références statistiques",
+    "url": "https://www.education.gouv.fr/reperes-et-references-statistiques",
+    "provisoire": true,
     "note": "Ordre de grandeur non vérifié en ligne pendant la construction."
   },
   "delai_jugement": {
-    "nom": "Délai moyen de jugement (cours d'appel, civil)", "nomCourt": "Délai de jugement", "valeur": 13.7, "unite": "mois", "annee": 2024, "decimales": 1,
-    "source": "Ministère de la Justice, Références statistiques Justice 2024", "url": "https://www.justice.gouv.fr/sites/default/files/2025-10/RSJ2024%204_6.pdf", "provisoire": false
+    "nom": "Délai moyen de jugement (cours d'appel, civil)",
+    "nomCourt": "Délai de jugement",
+    "valeur": 13.7,
+    "unite": "mois",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "Ministère de la Justice, Références statistiques Justice 2024",
+    "url": "https://www.justice.gouv.fr/sites/default/files/2025-10/RSJ2024%204_6.pdf",
+    "provisoire": false
   },
   "esperance_vie_bonne_sante": {
-    "nom": "Espérance de vie sans incapacité à la naissance", "nomCourt": "Espérance de vie en bonne santé", "valeur": 63.9, "unite": "ans", "annee": 2024, "decimales": 1,
-    "source": "DREES, Études et résultats n° 1363 (64,1 ans femmes, 63,7 ans hommes)", "url": "https://drees.solidarites-sante.gouv.fr/publications-communique-de-presse/etudes-et-resultats/260122-ER-esperance-de-vie-sans-incapacite", "provisoire": false
+    "nom": "Espérance de vie sans incapacité à la naissance",
+    "nomCourt": "Espérance de vie en bonne santé",
+    "valeur": 63.9,
+    "unite": "ans",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "DREES, Études et résultats n° 1363 (64,1 ans femmes, 63,7 ans hommes)",
+    "url": "https://drees.solidarites-sante.gouv.fr/publications-communique-de-presse/etudes-et-resultats/260122-ER-esperance-de-vie-sans-incapacite",
+    "provisoire": false
   },
   "taux_pauvrete": {
-    "nom": "Taux de pauvreté", "valeur": 15.4, "unite": "%", "annee": 2024, "decimales": 1,
-    "source": "INSEE, Insee Première n° 2117 (seuil à 60 % du niveau de vie médian)", "url": "https://insee.fr/fr/statistiques/9019316", "provisoire": false
+    "nom": "Taux de pauvreté",
+    "valeur": 15.4,
+    "unite": "%",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "INSEE, Insee Première n° 2117 (seuil à 60 % du niveau de vie médian)",
+    "url": "https://insee.fr/fr/statistiques/9019316",
+    "provisoire": false
   },
   "rapport_interdecile": {
-    "nom": "Rapport interdécile des niveaux de vie (D9/D1)", "nomCourt": "Écart riches / modestes (D9/D1)", "valeur": 3.48, "unite": "ratio", "annee": 2024, "decimales": 2,
-    "source": "INSEE, distribution des niveaux de vie 1996-2024", "url": "https://www.insee.fr/fr/statistiques/2416808", "provisoire": false
+    "nom": "Rapport interdécile des niveaux de vie (D9/D1)",
+    "nomCourt": "Écart riches / modestes (D9/D1)",
+    "valeur": 3.48,
+    "unite": "ratio",
+    "annee": 2024,
+    "decimales": 2,
+    "source": "INSEE, distribution des niveaux de vie 1996-2024",
+    "url": "https://www.insee.fr/fr/statistiques/2416808",
+    "provisoire": false
   },
   "chomage_jeunes": {
-    "nom": "Chômage des 15-24 ans", "nomCourt": "Chômage des jeunes", "valeur": 21.6, "unite": "%", "annee": "T2 2026", "decimales": 1,
-    "source": "INSEE, Informations rapides n° 192", "url": "https://www.insee.fr/fr/statistiques/9032359", "provisoire": false
+    "nom": "Chômage des 15-24 ans",
+    "nomCourt": "Chômage des jeunes",
+    "valeur": 21.6,
+    "unite": "%",
+    "annee": "T2 2026",
+    "decimales": 1,
+    "source": "INSEE, Informations rapides n° 192",
+    "url": "https://www.insee.fr/fr/statistiques/9032359",
+    "provisoire": false
   },
   "neet": {
-    "nom": "Jeunes ni en emploi ni en formation (15-29 ans)", "nomCourt": "Jeunes sans emploi ni formation", "valeur": 12, "unite": "%", "annee": 2023, "decimales": 1,
-    "source": "INSEE, Formations et emploi, édition 2025", "url": "https://www.insee.fr/fr/statistiques/fichier/8305542/BFE2025-F22.pdf", "provisoire": true,
+    "nom": "Jeunes ni en emploi ni en formation (15-29 ans)",
+    "nomCourt": "Jeunes sans emploi ni formation",
+    "valeur": 12,
+    "unite": "%",
+    "annee": 2023,
+    "decimales": 1,
+    "source": "INSEE, Formations et emploi, édition 2025",
+    "url": "https://www.insee.fr/fr/statistiques/fichier/8305542/BFE2025-F22.pdf",
+    "provisoire": true,
     "note": "Donnée 2023 ; les estimations 2025 divergent selon les sources (12 % à 14,5 %)."
   },
   "taux_effort_logement": {
-    "nom": "Taux d'effort des locataires du parc privé", "nomCourt": "Poids du logement (locataires)", "valeur": 28, "unite": "% du revenu", "annee": 2017, "decimales": 0,
-    "source": "INSEE, enquête Logement (taux d'effort net moyen)", "url": "https://www.insee.fr/fr/statistiques?debut=0&theme=30", "provisoire": true,
+    "nom": "Taux d'effort des locataires du parc privé",
+    "nomCourt": "Poids du logement (locataires)",
+    "valeur": 28,
+    "unite": "% du revenu",
+    "annee": 2017,
+    "decimales": 0,
+    "source": "INSEE, enquête Logement (taux d'effort net moyen)",
+    "url": "https://www.insee.fr/fr/statistiques?debut=0&theme=30",
+    "provisoire": true,
     "note": "Donnée ancienne et ordre de grandeur non vérifié en ligne pendant la construction."
   },
   "ecart_salaire_hf": {
-    "nom": "Écart de salaire femmes-hommes à temps de travail égal", "nomCourt": "Écart de salaire F/H", "valeur": 14.0, "unite": "%", "annee": 2024, "decimales": 1,
-    "source": "INSEE Focus, février 2026 (secteur privé, équivalent temps plein)", "url": "https://insee.fr/fr/statistiques/8743657", "provisoire": false
+    "nom": "Écart de salaire femmes-hommes à temps de travail égal",
+    "nomCourt": "Écart de salaire F/H",
+    "valeur": 14.0,
+    "unite": "%",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "INSEE Focus, février 2026 (secteur privé, équivalent temps plein)",
+    "url": "https://insee.fr/fr/statistiques/8743657",
+    "provisoire": false
   },
   "fecondite": {
-    "nom": "Indice de fécondité", "valeur": 1.56, "unite": "enfants par femme", "annee": 2025, "decimales": 2,
-    "source": "INSEE, bilan démographique 2025 (Insee Première n° 2087)", "url": "https://www.insee.fr/fr/statistiques/8719824", "provisoire": false
+    "nom": "Indice de fécondité",
+    "valeur": 1.56,
+    "unite": "enfants par femme",
+    "annee": 2025,
+    "decimales": 2,
+    "source": "INSEE, bilan démographique 2025 (Insee Première n° 2087)",
+    "url": "https://www.insee.fr/fr/statistiques/8719824",
+    "provisoire": false
   },
   "solde_migratoire": {
-    "nom": "Solde migratoire", "valeur": 176, "unite": "milliers de personnes/an", "annee": 2025, "decimales": 0,
-    "source": "INSEE, bilan démographique 2025 (estimation conventionnelle, cité par le COR)", "url": "https://www.cor-retraites.fr/sites/default/files/2026-04/Doc_04_tendances_d%C3%A9mo_%C3%A9co.pdf", "provisoire": true,
+    "nom": "Solde migratoire",
+    "valeur": 176,
+    "unite": "milliers de personnes/an",
+    "annee": 2025,
+    "decimales": 0,
+    "source": "INSEE, bilan démographique 2025 (estimation conventionnelle, cité par le COR)",
+    "url": "https://www.cor-retraites.fr/sites/default/files/2026-04/Doc_04_tendances_d%C3%A9mo_%C3%A9co.pdf",
+    "provisoire": true,
     "note": "L'INSEE fixe provisoirement ce solde à la moyenne des trois derniers soldes connus (2020-2022)."
   },
   "ratio_cotisants_retraites": {
-    "nom": "Cotisants par retraité", "valeur": 1.8, "unite": "ratio", "annee": 2025, "decimales": 2,
-    "source": "Conseil d'orientation des retraites, rapport annuel 2026", "url": "https://www.cor-retraites.fr/sites/default/files/2026-07/RA_2026_def.pdf", "provisoire": false
+    "nom": "Cotisants par retraité",
+    "valeur": 1.8,
+    "unite": "ratio",
+    "annee": 2025,
+    "decimales": 2,
+    "source": "Conseil d'orientation des retraites, rapport annuel 2026",
+    "url": "https://www.cor-retraites.fr/sites/default/files/2026-07/RA_2026_def.pdf",
+    "provisoire": false
   },
   "age_median": {
-    "nom": "Âge médian de la population", "nomCourt": "Âge médian", "valeur": 42.5, "unite": "ans", "annee": 2026, "decimales": 1,
-    "source": "Worldometers (projection ONU) ; valeur INSEE non retrouvée", "url": "https://www.insee.fr/fr/statistiques/8719824", "provisoire": true,
+    "nom": "Âge médian de la population",
+    "nomCourt": "Âge médian",
+    "valeur": 42.5,
+    "unite": "ans",
+    "annee": 2026,
+    "decimales": 1,
+    "source": "Worldometers (projection ONU) ; valeur INSEE non retrouvée",
+    "url": "https://www.insee.fr/fr/statistiques/8719824",
+    "provisoire": true,
     "note": "Source non officielle à remplacer par la pyramide des âges INSEE."
   },
   "esperance_vie": {
-    "nom": "Espérance de vie à la naissance", "nomCourt": "Espérance de vie", "valeur": 83.1, "unite": "ans", "annee": 2025, "decimales": 1,
-    "source": "INSEE, bilan démographique 2025 (85,9 ans femmes, 80,3 ans hommes ; moyenne simple)", "url": "https://www.insee.fr/fr/statistiques/8719824", "provisoire": false
+    "nom": "Espérance de vie à la naissance",
+    "nomCourt": "Espérance de vie",
+    "valeur": 83.1,
+    "unite": "ans",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "INSEE, bilan démographique 2025 (85,9 ans femmes, 80,3 ans hommes ; moyenne simple)",
+    "url": "https://www.insee.fr/fr/statistiques/8719824",
+    "provisoire": false
   },
   "part_65_plus": {
-    "nom": "Part des 65 ans et plus", "valeur": 22.2, "unite": "% de la population", "annee": "1er janv. 2026", "decimales": 1,
-    "source": "INSEE, bilan démographique 2025", "url": "https://www.insee.fr/fr/statistiques/8721209", "provisoire": false
+    "nom": "Part des 65 ans et plus",
+    "valeur": 22.2,
+    "unite": "% de la population",
+    "annee": "1er janv. 2026",
+    "decimales": 1,
+    "source": "INSEE, bilan démographique 2025",
+    "url": "https://www.insee.fr/fr/statistiques/8721209",
+    "provisoire": false
   },
   "independance_energetique": {
-    "nom": "Taux d'indépendance énergétique", "nomCourt": "Indépendance énergétique", "valeur": 61.0, "unite": "%", "annee": 2024, "decimales": 1,
-    "source": "SDES, bilan énergétique de la France pour 2024 (données définitives)", "url": "https://www.statistiques.developpement-durable.gouv.fr/bilan-energetique-de-la-france-pour-2024", "provisoire": false
+    "nom": "Taux d'indépendance énergétique",
+    "nomCourt": "Indépendance énergétique",
+    "valeur": 61.0,
+    "unite": "%",
+    "annee": 2024,
+    "decimales": 1,
+    "source": "SDES, bilan énergétique de la France pour 2024 (données définitives)",
+    "url": "https://www.statistiques.developpement-durable.gouv.fr/bilan-energetique-de-la-france-pour-2024",
+    "provisoire": false
   },
   "autonomie_alimentaire": {
-    "nom": "Consommation couverte par des filières autosuffisantes", "nomCourt": "Autonomie alimentaire", "valeur": 76, "unite": "% (en volume)", "annee": 2024, "decimales": 0,
-    "source": "Rapport gouvernemental sur la souveraineté alimentaire (mars 2024), d'après Agreste", "url": "https://vie-publique.fr/files/medias/L_essentiel_Numero_8_La_souverainete_alimentaire.pdf", "provisoire": true,
+    "nom": "Consommation couverte par des filières autosuffisantes",
+    "nomCourt": "Autonomie alimentaire",
+    "valeur": 76,
+    "unite": "% (en volume)",
+    "annee": 2024,
+    "decimales": 0,
+    "source": "Rapport gouvernemental sur la souveraineté alimentaire (mars 2024), d'après Agreste",
+    "url": "https://vie-publique.fr/files/medias/L_essentiel_Numero_8_La_souverainete_alimentaire.pdf",
+    "provisoire": true,
     "note": "Indicateur composite (19 filières autosuffisantes = 76 % de la consommation) faute de taux d'auto-approvisionnement global."
   },
   "part_industrie_va": {
-    "nom": "Part de l'industrie manufacturière dans le PIB", "nomCourt": "Poids de l'industrie", "valeur": 10.0, "unite": "% du PIB", "annee": 2025, "decimales": 1,
-    "source": "Rexecode d'après INSEE ; 9,7 % en 2023 selon le baromètre industriel", "url": "https://www.insee.fr/fr/statistiques/2123180", "provisoire": true,
+    "nom": "Part de l'industrie manufacturière dans le PIB",
+    "nomCourt": "Poids de l'industrie",
+    "valeur": 10.0,
+    "unite": "% du PIB",
+    "annee": 2025,
+    "decimales": 1,
+    "source": "Rexecode d'après INSEE ; 9,7 % en 2023 selon le baromètre industriel",
+    "url": "https://www.insee.fr/fr/statistiques/2123180",
+    "provisoire": true,
     "note": "Pas de chiffre INSEE unique retrouvé pour 2024-2025."
   },
   "budget_defense": {
-    "nom": "Budget de la défense", "valeur": 2.05, "unite": "% du PIB", "annee": 2025, "decimales": 2,
-    "source": "OTAN, estimations des dépenses de défense 2025 (61,8 Md€)", "url": "https://www.nato.int/cps/en/natohq/topics_49198.htm", "provisoire": false
+    "nom": "Budget de la défense",
+    "valeur": 2.05,
+    "unite": "% du PIB",
+    "annee": 2025,
+    "decimales": 2,
+    "source": "OTAN, estimations des dépenses de défense 2025 (61,8 Md€)",
+    "url": "https://www.nato.int/cps/en/natohq/topics_49198.htm",
+    "provisoire": false
   },
   "dependance_numerique": {
-    "nom": "Part du cloud fourni par des acteurs non européens", "nomCourt": "Dépendance numérique", "valeur": 85, "unite": "% du marché", "annee": 2024, "decimales": 0,
-    "source": "Estimations de marché (Synergy Research) reprises par la Commission européenne", "url": "https://digital-strategy.ec.europa.eu/fr/policies/cloud-computing", "provisoire": true,
+    "nom": "Part du cloud fourni par des acteurs non européens",
+    "nomCourt": "Dépendance numérique",
+    "valeur": 85,
+    "unite": "% du marché",
+    "annee": 2024,
+    "decimales": 0,
+    "source": "Estimations de marché (Synergy Research) reprises par la Commission européenne",
+    "url": "https://digital-strategy.ec.europa.eu/fr/policies/cloud-computing",
+    "provisoire": true,
     "note": "Ordre de grandeur européen, non spécifique à la France."
   },
   "part_dette_non_residents": {
-    "nom": "Part de la dette négociable détenue par des non-résidents", "nomCourt": "Dette détenue à l'étranger", "valeur": 54, "unite": "%", "annee": 2025, "decimales": 0,
-    "source": "Agence France Trésor, détention de la dette négociable de l'État", "url": "https://www.aft.gouv.fr/fr/detention-dette", "provisoire": true,
+    "nom": "Part de la dette négociable détenue par des non-résidents",
+    "nomCourt": "Dette détenue à l'étranger",
+    "valeur": 54,
+    "unite": "%",
+    "annee": 2025,
+    "decimales": 0,
+    "source": "Agence France Trésor, détention de la dette négociable de l'État",
+    "url": "https://www.aft.gouv.fr/fr/detention-dette",
+    "provisoire": true,
     "note": "Ordre de grandeur non vérifié en ligne pendant la construction."
+  },
+  "popularite": {
+    "nom": "Popularité du président (opinions favorables)",
+    "nomCourt": "Popularité",
+    "valeur": 44,
+    "unite": "%",
+    "annee": 2027,
+    "decimales": 0,
+    "source": "Convention du jeu : ordre de grandeur des baromètres de popularité en début de mandat (Ifop, Elabe, Odoxa)",
+    "url": "https://www.ifop.com/",
+    "provisoire": true,
+    "note": "Valeur de jeu : la popularité de départ dépend des promesses faites pendant la campagne."
   }
 }

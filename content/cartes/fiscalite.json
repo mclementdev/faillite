@@ -1,7 +1,7 @@
 [
   {
     "id": "fiscalite-impot-revenu",
-    "theme": "fiscalite",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "L'impôt sur le revenu : on change le barème ?",
     "contexte": "Moins d'un foyer sur deux paie l'impôt sur le revenu. Il rapporte environ 90 Md€ par an.",
@@ -10,6 +10,7 @@
         "id": "baisse-classes-moyennes",
         "titre": "Baisse pour les classes moyennes",
         "explication": "Les tranches intermédiaires baissent : plus de pouvoir d'achat pour des millions de foyers, moins de recettes.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -35,6 +36,13 @@
             "valeur": 1.5,
             "type": "estompe",
             "hypothese": "Mesure visible et populaire."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -42,6 +50,7 @@
         "id": "tranche-haute",
         "titre": "Nouvelle tranche à 50 %",
         "explication": "Les revenus les plus élevés paient davantage : les recettes progressent, mais certains contribuables optimisent ou partent.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -74,6 +83,7 @@
         "id": "prelevement-unique",
         "titre": "Fusion avec la CSG",
         "explication": "Un seul impôt, prélevé dès le premier euro mais à taux faible : plus simple et plus lisible, des perdants parmi les ménages modestes.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "confiance_institutions",
@@ -100,15 +110,23 @@
             "valeur": 20,
             "type": "immediat",
             "hypothese": "Réforme d'ampleur qui inquiète l'année de sa mise en place."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Un impôt progressif redistribue davantage ; un impôt large à taux faible est plus simple et plus stable. Chaque barème fait des gagnants et des perdants."
+    "notePedagogique": "Un impôt progressif redistribue davantage ; un impôt large à taux faible est plus simple et plus stable. Chaque barème fait des gagnants et des perdants.",
+    "flash": "Rappel : à peine un foyer sur deux paie l'impôt sur le revenu. Les 10 % les plus aisés en acquittent environ 70 %."
   },
   {
     "id": "fiscalite-patrimoine",
-    "theme": "fiscalite",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "Faut-il taxer davantage le patrimoine ?",
     "contexte": "Les 10 % les plus aisés détiennent près de la moitié du patrimoine. Les héritages représentent une part croissante des fortunes.",
@@ -117,6 +135,7 @@
         "id": "impot-fortune",
         "titre": "Impôt sur les grandes fortunes",
         "explication": "Un impôt annuel sur les patrimoines de plus de 10 M€ : symbole fort, rendement incertain.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -142,6 +161,13 @@
             "type": "differe",
             "delai": 2,
             "hypothese": "Une partie du patrimoine taxé est investie dans des entreprises."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -149,6 +175,7 @@
         "id": "successions",
         "titre": "Hausse des droits de succession",
         "explication": "Les gros héritages sont plus taxés, les petits allégés : rapporte peu au début, réduit les inégalités sur une génération.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -169,6 +196,13 @@
             "valeur": -1,
             "type": "estompe",
             "hypothese": "Les droits de succession sont très impopulaires, même chez ceux qu'ils ne concernent pas."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -176,6 +210,7 @@
         "id": "baisse-capital",
         "titre": "Alléger la fiscalité du capital",
         "explication": "On baisse la taxe sur les dividendes pour attirer l'épargne vers les entreprises : plus d'investissement, inégalités en hausse.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "investissement_entreprises",
@@ -205,11 +240,12 @@
         ]
       }
     ],
-    "notePedagogique": "La taxation du patrimoine oppose deux objectifs : réduire les inégalités et encourager l'investissement. Son rendement dépend beaucoup des exonérations."
+    "notePedagogique": "La taxation du patrimoine oppose deux objectifs : réduire les inégalités et encourager l'investissement. Son rendement dépend beaucoup des exonérations.",
+    "flash": "Un classement révèle que les 500 plus grandes fortunes françaises pèsent plus de 1 100 milliards d'euros, plusieurs fois plus qu'il y a quinze ans."
   },
   {
     "id": "fiscalite-tva",
-    "theme": "fiscalite",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "TVA sociale : faire payer les importations ?",
     "contexte": "Une partie des cotisations sur les salaires pourrait être remplacée par de la TVA, qui touche aussi les produits importés.",
@@ -218,6 +254,7 @@
         "id": "tva-sociale",
         "titre": "Bascule cotisations → TVA",
         "explication": "Le travail coûte moins cher et les importations plus cher : bon pour l'emploi, mais les prix augmentent pour tous.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "chomage",
@@ -244,6 +281,13 @@
             "valeur": 0.2,
             "type": "durable",
             "hypothese": "La TVA pèse davantage sur les ménages modestes, qui consomment tout leur revenu."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -251,6 +295,7 @@
         "id": "tva-reduite",
         "titre": "TVA réduite sur l'alimentation",
         "explication": "On baisse la TVA sur les produits de base : soulagement immédiat au supermarché, perte de recettes.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -269,6 +314,13 @@
             "valeur": -0.2,
             "type": "durable",
             "hypothese": "L'alimentation pèse lourd dans le budget des ménages modestes."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -276,6 +328,7 @@
         "id": "tva-verte",
         "titre": "TVA modulée selon l'empreinte carbone",
         "explication": "Les produits peu émetteurs ont une TVA plus basse, les plus polluants une TVA plus haute : neutre pour le budget, complexe à gérer.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "emissions_ges",
@@ -295,15 +348,23 @@
             "valeur": -0.5,
             "type": "estompe",
             "hypothese": "Dispositif jugé compliqué."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "La TVA est l'impôt qui rapporte le plus. Elle frappe aussi les importations, mais pèse proportionnellement plus sur les ménages modestes."
+    "notePedagogique": "La TVA est l'impôt qui rapporte le plus. Elle frappe aussi les importations, mais pèse proportionnellement plus sur les ménages modestes.",
+    "flash": "Les distributeurs préviennent : toute hausse de TVA sera répercutée « intégralement et immédiatement » sur les prix en rayon."
   },
   {
     "id": "fiscalite-production",
-    "theme": "fiscalite",
+    "ministere": "economie_finances",
     "type": "unique",
     "titre": "Les impôts de production pèsent sur les usines",
     "contexte": "Ces impôts sont payés avant même que l'entreprise fasse du bénéfice. Ils sont plus élevés en France que chez ses voisins.",
@@ -312,6 +373,7 @@
         "id": "baisse-forte",
         "titre": "Baisse de 10 milliards",
         "explication": "Les usines respirent et investissent davantage, mais les collectivités perdent une ressource qu'il faut compenser.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -346,6 +408,7 @@
         "id": "baisse-ciblee",
         "titre": "Baisse ciblée sur l'industrie verte",
         "explication": "Seules les usines qui décarbonent en profitent : moins cher, effet concentré.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -373,6 +436,7 @@
         "id": "maintien-contreparties",
         "titre": "Maintien, avec contreparties",
         "explication": "Pas de baisse, mais les aides existantes sont conditionnées à l'emploi local : aucun coût, les entreprises protestent.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "investissement_entreprises",
@@ -391,15 +455,23 @@
             "valeur": -0.05,
             "type": "durable",
             "hypothese": "Quelques aides non versées faute de contreparties."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Les impôts de production frappent les entreprises indépendamment de leurs bénéfices, ce qui pèse sur l'industrie, mais ils financent largement les collectivités locales."
+    "notePedagogique": "Les impôts de production frappent les entreprises indépendamment de leurs bénéfices, ce qui pèse sur l'industrie, mais ils financent largement les collectivités locales.",
+    "flash": "Un géant de l'automobile hésite entre la France et l'Espagne pour sa nouvelle usine. Sa direction cite la fiscalité comme critère décisif."
   },
   {
     "id": "fiscalite-is",
-    "theme": "fiscalite",
+    "ministere": "economie_finances",
     "type": "curseur",
     "titre": "Quel taux pour l'impôt sur les sociétés ?",
     "titreCourt": "Impôt sur les sociétés",
@@ -416,6 +488,7 @@
         "valeur": 20,
         "titre": "20 %",
         "explication": "Les entreprises gardent plus de bénéfices pour investir ou distribuer ; l'État perd une dizaine de milliards.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -448,6 +521,13 @@
             "valeur": -0.5,
             "type": "estompe",
             "hypothese": "Mesure perçue comme favorable aux grandes entreprises."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -456,6 +536,7 @@
         "valeur": 25,
         "titre": "25 %",
         "explication": "On garde le taux actuel : ni cadeau ni hausse, la France reste dans la moyenne européenne.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "confiance_institutions",
@@ -470,6 +551,7 @@
         "valeur": 30,
         "titre": "30 %",
         "explication": "Les grandes entreprises paient davantage ; certaines investissent ou s'installent ailleurs.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -503,10 +585,18 @@
             "valeur": 0.8,
             "type": "estompe",
             "hypothese": "Mesure perçue comme juste par une partie de l'opinion."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "La France a baissé son taux d'impôt sur les sociétés de 33,3 % à 25 % entre 2017 et 2022. Les économistes débattent encore de l'effet réel sur l'investissement."
+    "notePedagogique": "La France a baissé son taux d'impôt sur les sociétés de 33,3 % à 25 % entre 2017 et 2022. Les économistes débattent encore de l'effet réel sur l'investissement.",
+    "flash": "Bruxelles rappelle l'accord mondial sur un impôt minimum de 15 % : une course au moins-disant fiscal a ses limites."
   }
 ]

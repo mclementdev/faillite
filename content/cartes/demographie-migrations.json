@@ -1,7 +1,7 @@
 [
   {
     "id": "demo-famille",
-    "theme": "demographie_migrations",
+    "ministere": "travail",
     "type": "unique",
     "titre": "Les naissances sont au plus bas depuis 1918",
     "contexte": "En 2025, la France a enregistré plus de décès que de naissances, une première depuis 1945. Fécondité : 1,56 enfant par femme.",
@@ -10,6 +10,7 @@
         "id": "allocations",
         "titre": "Allocations familiales renforcées",
         "explication": "Aides plus fortes dès le premier enfant : effet modeste sur les naissances selon les études, effet net sur la pauvreté des familles.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -37,6 +38,7 @@
         "id": "creches",
         "titre": "Une place en crèche garantie",
         "explication": "Un droit opposable à la garde d'enfant : les parents, surtout les mères, peuvent continuer à travailler.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -71,6 +73,7 @@
         "id": "conge-parental",
         "titre": "Congé parental court et bien payé",
         "explication": "Six mois par parent, payés à 70 % du salaire : les pères s'impliquent davantage, coût élevé.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -95,11 +98,12 @@
         ]
       }
     ],
-    "notePedagogique": "La natalité réagit lentement et faiblement aux politiques publiques ; ses effets sur les cotisants n'apparaissent que vingt ans plus tard."
+    "notePedagogique": "La natalité réagit lentement et faiblement aux politiques publiques ; ses effets sur les cotisants n'apparaissent que vingt ans plus tard.",
+    "flash": "L'INSEE annonce le plus faible nombre de naissances depuis la Seconde Guerre mondiale. Les jeunes couples citent le logement et l'avenir."
   },
   {
     "id": "demo-immigration-travail",
-    "theme": "demographie_migrations",
+    "ministere": "interieur",
     "type": "curseur",
     "titre": "Combien de visas de travail par an pour les métiers en tension ?",
     "titreCourt": "Visas de travail",
@@ -116,6 +120,7 @@
         "valeur": 0,
         "titre": "Aucun nouveau visa",
         "explication": "On mise uniquement sur les chômeurs et la formation : plus de pression pour recruter localement, des secteurs en pénurie.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "solde_migratoire",
@@ -157,6 +162,13 @@
             "valeur": 1,
             "type": "estompe",
             "hypothese": "Mesure approuvée par une partie de l'opinion."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -165,6 +177,7 @@
         "valeur": 50,
         "titre": "50 000 par an",
         "explication": "On reste au niveau actuel : statu quo sur l'immigration de travail.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "solde_migratoire",
@@ -185,6 +198,7 @@
         "valeur": 150,
         "titre": "150 000 par an",
         "explication": "On recrute massivement à l'étranger pour les métiers en tension : plus de cotisants, mais intégration et logement à organiser.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "solde_migratoire",
@@ -219,15 +233,23 @@
             "valeur": -1.5,
             "type": "estompe",
             "hypothese": "Sujet clivant : une partie de l'opinion désapprouve fortement."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "L'immigration de travail modifie la pyramide des âges et le marché du travail ; ses effets sur les finances publiques dépendent du taux d'emploi des arrivants."
+    "notePedagogique": "L'immigration de travail modifie la pyramide des âges et le marché du travail ; ses effets sur les finances publiques dépendent du taux d'emploi des arrivants.",
+    "flash": "Les hôpitaux et le bâtiment réclament des visas : dans ces métiers, les postes non pourvus se comptent par dizaines de milliers."
   },
   {
     "id": "demo-asile",
-    "theme": "demographie_migrations",
+    "ministere": "interieur",
     "type": "unique",
     "titre": "Demandes d'asile : comment les traiter ?",
     "contexte": "La France reçoit environ 150 000 demandes d'asile par an. Les délais d'examen dépassent souvent un an.",
@@ -236,6 +258,7 @@
         "id": "accelerer",
         "titre": "Décisions en 3 mois",
         "explication": "Plus d'agents pour décider vite : ceux qui sont acceptés s'intègrent plus tôt, ceux qui sont déboutés doivent partir plus vite.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -263,6 +286,7 @@
         "id": "travail-immediat",
         "titre": "Droit de travailler dès la demande",
         "explication": "Les demandeurs peuvent travailler pendant l'examen : moins d'aides versées, mais un signal d'attractivité discuté.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -289,6 +313,7 @@
         "id": "externaliser",
         "titre": "Examen hors d'Europe",
         "explication": "Les demandes sont examinées dans des pays partenaires : moins d'arrivées, des accords coûteux et des critiques sur les droits.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "solde_migratoire",
@@ -308,15 +333,23 @@
             "valeur": 1.25,
             "type": "estompe",
             "hypothese": "Mesure approuvée par une partie de l'opinion, contestée par une autre."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Le droit d'asile est encadré par des conventions internationales : les marges nationales portent surtout sur les délais et les conditions d'accueil."
+    "notePedagogique": "Le droit d'asile est encadré par des conventions internationales : les marges nationales portent surtout sur les délais et les conditions d'accueil.",
+    "flash": "Un rapport européen pointe la lenteur française : recours compris, une demande d'asile met souvent près d'un an à être tranchée."
   },
   {
     "id": "demo-regularisations",
-    "theme": "demographie_migrations",
+    "ministere": "interieur",
     "type": "unique",
     "titre": "Travailleurs sans papiers : régulariser ?",
     "contexte": "Plusieurs centaines de milliers de personnes travaillent sans titre de séjour, souvent dans le bâtiment, le nettoyage ou la restauration.",
@@ -325,6 +358,7 @@
         "id": "regulariser-travail",
         "titre": "Régulariser ceux qui travaillent",
         "explication": "Un titre de séjour pour ceux qui ont un emploi depuis un an : plus de cotisations, un signal politique contesté.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -351,6 +385,13 @@
             "valeur": -1,
             "type": "estompe",
             "hypothese": "Décision clivante."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -358,6 +399,7 @@
         "id": "cas-par-cas",
         "titre": "Au cas par cas, comme aujourd'hui",
         "explication": "Les préfets décident dossier par dossier : peu de changement, des situations très variables selon les départements.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "delai_jugement",
@@ -377,6 +419,7 @@
         "id": "controles",
         "titre": "Sanctionner les employeurs",
         "explication": "Contrôles renforcés et amendes lourdes pour l'emploi illégal : moins de travail au noir, des pénuries dans certains secteurs.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "solde_migratoire",
@@ -402,11 +445,12 @@
         ]
       }
     ],
-    "notePedagogique": "Les régularisations et les contrôles agissent sur la même réalité, le travail non déclaré, par deux bouts opposés."
+    "notePedagogique": "Les régularisations et les contrôles agissent sur la même réalité, le travail non déclaré, par deux bouts opposés.",
+    "flash": "Grève dans une entreprise de livraison : 200 travailleurs sans papiers réclament leur régularisation, soutenus par leur employeur."
   },
   {
     "id": "demo-jeunes-diplomes",
-    "theme": "demographie_migrations",
+    "ministere": "education",
     "type": "unique",
     "titre": "Les jeunes diplômés partent à l'étranger",
     "contexte": "De plus en plus d'ingénieurs, chercheurs et médecins formés en France partent travailler à Londres, en Suisse ou aux États-Unis.",
@@ -415,6 +459,7 @@
         "id": "salaires-recherche",
         "titre": "Doubler le salaire des jeunes chercheurs",
         "explication": "Les postes de recherche deviennent compétitifs : on garde les talents, effet visible sur l'innovation à long terme.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -441,6 +486,7 @@
         "id": "exoneration",
         "titre": "Moins d'impôts pour les jeunes actifs",
         "explication": "Impôt sur le revenu réduit les 5 premières années de carrière : attractif, mais injuste pour les autres contribuables.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -459,6 +505,13 @@
             "valeur": -0.5,
             "type": "estompe",
             "hypothese": "Inégalité de traitement entre générations."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -466,6 +519,7 @@
         "id": "engagement",
         "titre": "Contrepartie aux études gratuites",
         "explication": "Ceux qui partent dans les 5 ans remboursent une partie de leurs études : mesure de justice pour certains, repoussoir pour d'autres.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "solde_migratoire",
@@ -489,11 +543,12 @@
         ]
       }
     ],
-    "notePedagogique": "Former un ingénieur ou un médecin coûte cher à la collectivité : son départ est un investissement qui profite à un autre pays."
+    "notePedagogique": "Former un ingénieur ou un médecin coûte cher à la collectivité : son départ est un investissement qui profite à un autre pays.",
+    "flash": "De plus en plus de jeunes diplômés commencent leur carrière à l'étranger, attirés par des salaires parfois deux fois plus élevés."
   },
   {
     "id": "demo-grand-age",
-    "theme": "demographie_migrations",
+    "ministere": "sante",
     "type": "unique",
     "titre": "Grand âge : qui s'occupe de nos aînés ?",
     "contexte": "Le nombre de personnes de plus de 85 ans va doubler d'ici 2050. Les Ehpad manquent de personnel.",
@@ -502,6 +557,7 @@
         "id": "domicile",
         "titre": "Priorité au maintien à domicile",
         "explication": "Aides à domicile mieux payées et logements adaptés : ce que souhaitent la plupart des personnes âgées.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -529,6 +585,7 @@
         "id": "assurance",
         "titre": "Assurance dépendance obligatoire",
         "explication": "Une cotisation dès 40 ans finance la dépendance : recettes nouvelles, prélèvement supplémentaire.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -548,6 +605,13 @@
             "type": "differe",
             "delai": 2,
             "hypothese": "Restes à charge réduits pour les familles modestes."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -555,6 +619,7 @@
         "id": "ehpad",
         "titre": "Un soignant par résident en Ehpad",
         "explication": "Les Ehpad sont mieux dotés : qualité de vie en hausse, recrutement très difficile.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -578,6 +643,7 @@
         ]
       }
     ],
-    "notePedagogique": "Le vieillissement est la tendance la plus prévisible de toutes : les personnes qui auront 85 ans en 2050 sont déjà nées."
+    "notePedagogique": "Le vieillissement est la tendance la plus prévisible de toutes : les personnes qui auront 85 ans en 2050 sont déjà nées.",
+    "flash": "Le nombre de personnes de plus de 85 ans va doubler d'ici 2050. Les Ehpad affichent des listes d'attente de plusieurs mois."
   }
 ]

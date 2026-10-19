@@ -9,7 +9,7 @@ import jauges from "./config/jauges.json";
 import regles from "./config/regles.json";
 import evenements from "./evenements.json";
 import resonances from "./resonances.json";
-import imprevus from "./imprevus.json";
+import promesses from "./promesses.json";
 import retraites from "./cartes/retraites.json";
 import fiscalite from "./cartes/fiscalite.json";
 import detteDepenses from "./cartes/dette-depenses.json";
@@ -22,6 +22,10 @@ import logement from "./cartes/logement.json";
 import emploi from "./cartes/emploi.json";
 import demographieMigrations from "./cartes/demographie-migrations.json";
 import souverainete from "./cartes/souverainete.json";
+import culture from "./cartes/culture.json";
+import armees from "./cartes/armees.json";
+import agriculture from "./cartes/agriculture.json";
+import europe from "./cartes/europe.json";
 
 const FICHIERS_CARTES: [string, unknown][] = [
   ["content/cartes/retraites.json", retraites],
@@ -36,6 +40,10 @@ const FICHIERS_CARTES: [string, unknown][] = [
   ["content/cartes/emploi.json", emploi],
   ["content/cartes/demographie-migrations.json", demographieMigrations],
   ["content/cartes/souverainete.json", souverainete],
+  ["content/cartes/culture.json", culture],
+  ["content/cartes/armees.json", armees],
+  ["content/cartes/agriculture.json", agriculture],
+  ["content/cartes/europe.json", europe],
 ];
 
 /** Retire les clés de documentation (« _doc », etc.). */
@@ -53,7 +61,7 @@ export function contenuBrut(): ContenuBrut {
     cartes: FICHIERS_CARTES.map(([fichier, data]) => ({ fichier, data })),
     evenements: { fichier: "content/evenements.json", data: evenements },
     resonances: { fichier: "content/resonances.json", data: resonances },
-    imprevus: { fichier: "content/imprevus.json", data: imprevus },
+    promesses: { fichier: "content/promesses.json", data: promesses },
   };
 }
 

@@ -1,0 +1,213 @@
+[
+  {
+    "id": "armees-service",
+    "ministere": "armees",
+    "type": "unique",
+    "titre": "Faut-il rétablir un service militaire ?",
+    "contexte": "Le service national a été suspendu en 1997. Face aux tensions en Europe, l'idée revient : former des réservistes et recréer un lien entre la jeunesse et la nation.",
+    "options": [
+      {
+        "id": "obligatoire",
+        "titre": "Service obligatoire de 3 mois",
+        "explication": "Tous les jeunes de 18 ans passent trois mois sous les drapeaux. Un vivier de réservistes et un brassage social, mais un coût de plusieurs milliards et des casernes à rouvrir.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Environ 3 Md€ par an d'encadrement et d'infrastructures."
+          },
+          {
+            "cible": "budget_defense",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Dépense militaire supplémentaire."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Encadrement et orientation des jeunes sans formation."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Lien armée-nation renforcé."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      },
+      {
+        "id": "volontaire",
+        "titre": "Service volontaire et rémunéré",
+        "explication": "Un service de 10 mois payé, ouvert à tous les volontaires. Moins cher et mieux accepté, mais il touche surtout les jeunes déjà motivés.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Environ 1 Md€ par an."
+          },
+          {
+            "cible": "budget_defense",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Réserve opérationnelle renforcée."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Une partie des volontaires est sans formation."
+          }
+        ]
+      },
+      {
+        "id": "non",
+        "titre": "Pas de service, des moyens pour la réserve",
+        "explication": "On renforce la réserve opérationnelle existante plutôt que de créer un service. Peu coûteux, mais aucun effet sur l'ensemble de la jeunesse.",
+        "outil": "decision",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.005,
+            "type": "durable",
+            "hypothese": "Hausse modeste du budget de la réserve."
+          },
+          {
+            "cible": "budget_defense",
+            "valeur": 0.02,
+            "type": "durable",
+            "hypothese": "Réserve mieux équipée."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Plusieurs pays européens (Suède, Lituanie, Lettonie) ont rétabli une forme de service militaire depuis 2015. La France a lancé en 2019 un service national universel, resté marginal.",
+    "flash": "Le chef d'état-major alerte : la France compte environ 40 000 réservistes opérationnels, quand la Finlande, douze fois moins peuplée, peut en mobiliser près de 300 000."
+  },
+  {
+    "id": "armees-industrie",
+    "ministere": "armees",
+    "type": "unique",
+    "titre": "Économie de guerre : relancer la production d'armement ?",
+    "contexte": "Les stocks d'obus et de missiles ont fondu depuis la guerre en Ukraine. Les industriels français peuvent produire plus, à condition d'avoir des commandes sur plusieurs années.",
+    "options": [
+      {
+        "id": "francais",
+        "titre": "Commandes massives à l'industrie française",
+        "explication": "Des contrats sur dix ans pour les usines françaises : des milliers d'emplois et plus d'autonomie, mais des livraisons lentes et un budget lourd.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "Environ 6 Md€ par an de commandes."
+          },
+          {
+            "cible": "budget_defense",
+            "valeur": 0.2,
+            "type": "durable",
+            "hypothese": "Hausse de l'équipement."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Montée en cadence des usines d'armement."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.05,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Emplois industriels."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": 2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Exportations accrues."
+          }
+        ]
+      },
+      {
+        "id": "etranger",
+        "titre": "Acheter tout de suite à l'étranger",
+        "explication": "Matériel américain ou coréen disponible immédiatement. Les stocks sont reconstitués vite, mais l'argent part à l'étranger et la dépendance augmente.",
+        "outil": "decision",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.08,
+            "type": "durable",
+            "hypothese": "Achats sur étagère."
+          },
+          {
+            "cible": "budget_defense",
+            "valeur": 0.25,
+            "type": "immediat",
+            "hypothese": "Équipement disponible rapidement."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": -3,
+            "type": "durable",
+            "hypothese": "Importations d'armement."
+          },
+          {
+            "cible": "dependance_numerique",
+            "valeur": 1,
+            "type": "durable",
+            "hypothese": "Systèmes et logiciels étrangers."
+          }
+        ]
+      },
+      {
+        "id": "europe",
+        "titre": "Achats communs européens",
+        "explication": "Les pays européens commandent ensemble et partagent les usines. Moins cher et plus solidaire, mais chaque pays défend ses industriels et les négociations durent.",
+        "outil": "negociation",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.08,
+            "type": "durable",
+            "hypothese": "Coûts partagés entre pays."
+          },
+          {
+            "cible": "budget_defense",
+            "valeur": 0.12,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Livraisons communes."
+          },
+          {
+            "cible": "part_industrie_va",
+            "valeur": 0.15,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Part française des commandes européennes."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Depuis 2022, la France parle d'« économie de guerre » : produire plus vite des munitions et des équipements. Les usines d'obus ont doublé leurs cadences.",
+    "flash": "Un rapport révèle qu'un seul fabricant français produit certains composants de missiles : en cas de panne de son usine, la chaîne entière s'arrête."
+  }
+]

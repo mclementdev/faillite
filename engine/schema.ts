@@ -4,35 +4,33 @@
  */
 import { z } from "zod";
 
-export const JAUGES = [
-  "economie",
-  "finances",
-  "paix_sociale",
-  "ecologie",
-  "services_publics",
-  "cohesion",
-  "demographie",
-  "souverainete",
-] as const;
+/** Jauges du pays ; la popularité (dernière) est celle du président, à part dans l'affichage. */
+export const JAUGES = ["economie", "finances", "cohesion", "ecologie", "services_publics", "souverainete", "popularite"] as const;
 export const JaugeId = z.enum(JAUGES);
 export type JaugeId = z.infer<typeof JaugeId>;
 
-export const THEMES = [
-  "retraites",
-  "fiscalite",
-  "dette_depenses",
-  "transition_ecologique",
-  "energie",
+/** Ministères : chaque carte de décision en relève d'un. */
+export const MINISTERES = [
+  "economie_finances",
+  "travail",
+  "ecologie",
+  "agriculture",
   "sante",
   "education",
-  "securite_justice",
+  "armees",
+  "interieur",
+  "justice",
+  "culture",
   "logement",
-  "emploi_travail",
-  "demographie_migrations",
-  "souverainete",
+  "europe",
 ] as const;
-export const Theme = z.enum(THEMES);
-export type Theme = z.infer<typeof Theme>;
+export const Ministere = z.enum(MINISTERES);
+export type Ministere = z.infer<typeof Ministere>;
+
+/** Comment une option se met en œuvre (affiché sur la carte ; le référendum peut être rejeté). */
+export const OUTILS = ["decret", "loi", "budget", "referendum", "negociation", "decision"] as const;
+export const Outil = z.enum(OUTILS);
+export type Outil = z.infer<typeof Outil>;
 
 /* ------------------------------------------------------------------ */
 /* Indicateurs (données réelles de départ)                             */
@@ -109,23 +107,37 @@ export const Jauge = z.object({
   sensibilite: z.number().positive().default(1),
   indicateurs: z
     .array(z.object({ id: z.string(), poids: z.number().min(0), commentaire: z.string().optional() }))
-    .min(5),
+    .min(1),
 });
 export const Jauges = z.record(JaugeId, Jauge);
 export type Jauge = z.infer<typeof Jauge>;
 
 export const Regles = z.object({
   anneeDepart: z.number().int(),
-  toursPossibles: z.array(z.number().int().positive()),
+  /** durées de partie proposées, en années (5 = un quinquennat) */
+  dureesPossibles: z.array(z.number().int().positive()),
+  decisionsParAn: z.number().int().min(1).max(12),
   seuilAlerte: z.number(),
   dureeVoteSecondes: z.number().int().positive(),
+  /** secondes ajoutées au vote quand le flash info tombe */
+  bonusFlashSecondes: z.number().int().min(0),
+  dureeSecondTourSecondes: z.number().int().positive(),
   maxJoueurs: z.number().int().positive(),
-  probaEvenement: z.number().min(0).max(1),
   evenements: z.object({
+    maxParAn: z.number().int().min(0),
+    /** probabilité qu'un événement aléatoire tombe un mois donné */
+    probaParMois: z.number().min(0).max(1),
     delaiAvantRepetition: z.number().int().min(0),
     maxOccurrences: z.number().int().min(1),
     delaiEntreAlertesMemeJauge: z.number().int().min(0),
   }),
+  campagne: z.object({
+    /** promesses présentées pendant la campagne */
+    nbPromesses: z.number().int().min(1),
+    popularite: z.object({ depart: z.number(), max: z.number() }),
+  }),
+  /** PIB en Md€, pour traduire les effets sur le déficit (% du PIB) en euros */
+  pibMdEuros: z.number().positive(),
   impacts: z.object({
     /** horizon (années) sur lequel on mesure l'impact d'une option */
     horizon: z.number().int().min(1),
@@ -184,6 +196,7 @@ export const Option = z.object({
   id: z.string().min(1),
   titre: z.string().min(2).max(60),
   explication: z.string().min(10).max(220),
+  outil: Outil.default("loi"),
   /** "un_an" ou "plusieurs_annees" ; déduit des effets si absent */
   duree: z.enum(["un_an", "plusieurs_annees"]).optional(),
   /** valeur sur l'échelle (cartes curseur) */
@@ -197,7 +210,7 @@ export type Option = z.infer<typeof Option>;
 export const Carte = z
   .object({
     id: z.string().regex(/^[a-z0-9-]+$/, "id en minuscules, chiffres et tirets"),
-    theme: Theme,
+    ministere: Ministere,
     type: z.enum(["unique", "cumulable", "curseur"]),
     titre: z.string().min(5).max(90),
     /** nom court pour les récapitulatifs (ex. « Retraite : 64 ans ») */
@@ -210,6 +223,8 @@ export const Carte = z
       .optional(),
     options: z.array(Option).min(2).max(5),
     notePedagogique: z.string().min(10),
+    /** flash info qui tombe au milieu du vote pour relancer le débat */
+    flash: z.string().min(10).max(200).optional(),
     /** Phase 2 : positions des programmes des candidats (non affiché en V1) */
     positionsCandidats: z.record(z.string(), PositionCandidat).default({}),
   })
@@ -235,38 +250,80 @@ export const Carte = z
   });
 export type Carte = z.infer<typeof Carte>;
 
-export const Evenement = z.object({
-  id: z.string().regex(/^[a-z0-9-]+$/),
-  titre: z.string().min(5).max(90),
-  description: z.string().min(10).max(200),
-  nature: z.enum(["positif", "negatif"]),
-  poids: z.number().min(0).default(1),
-  conditions: z.array(Condition).default([]),
-  /** événement d'alerte : déclenché l'année suivant le passage de la jauge sous le seuil */
-  declencheur: z.object({ jauge: JaugeId }).optional(),
+/** Réponse possible à une crise (votée comme une option de carte). */
+export const Reponse = z.object({
+  id: z.string().min(1),
+  titre: z.string().min(2).max(60),
+  explication: z.string().min(10).max(220),
+  outil: Outil.default("decision"),
   effets: z.array(Effet).min(1),
-  notePedagogique: z.string().optional(),
 });
+export type Reponse = z.infer<typeof Reponse>;
+
+/** Une décision passée qui rend un événement possible dans les mois suivants (jamais certain). */
+export const Declencheur = z
+  .object({
+    carte: z.string(),
+    /** options concernées (toutes si absent ; pour un curseur : valeurs de l'échelle) */
+    options: z.array(z.string()).min(1).optional(),
+    /** probabilité que l'événement survienne à la suite de cette décision */
+    chance: z.number().min(0).max(1),
+    /** délai en mois [min, max] après la décision */
+    delai: z.tuple([z.number().int().min(1), z.number().int().min(1)]).default([2, 9]),
+  })
+  .strict();
+export type Declencheur = z.infer<typeof Declencheur>;
+
+export const Evenement = z
+  .object({
+    id: z.string().regex(/^[a-z0-9-]+$/),
+    titre: z.string().min(5).max(90),
+    description: z.string().min(10).max(260),
+    nature: z.enum(["positif", "negatif"]),
+    /** brève : s'applique d'elle-même ; crise : le groupe vote une réponse */
+    gravite: z.enum(["breve", "crise"]).default("breve"),
+    /** poids du tirage aléatoire (0 : jamais tiré au hasard, seulement déclenché) */
+    poids: z.number().min(0).default(1),
+    conditions: z.array(Condition).default([]),
+    /** événement d'alerte : tiré l'année suivant le passage de cette jauge sous le seuil */
+    alerte: JaugeId.optional(),
+    /** décisions qui peuvent provoquer l'événement */
+    declenchePar: z.array(Declencheur).default([]),
+    /** effets du choc lui-même (s'appliquent dans tous les cas) */
+    effets: z.array(Effet).default([]),
+    /** réponses proposées (crise) */
+    reponses: z.array(Reponse).default([]),
+    notePedagogique: z.string().optional(),
+  })
+  .superRefine((e, ctx) => {
+    if (e.gravite === "crise" && (e.reponses.length < 2 || e.reponses.length > 4))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "une crise propose 2 à 4 réponses", path: ["reponses"] });
+    if (e.gravite === "breve" && e.reponses.length)
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "une brève n'a pas de réponses (gravite « crise » ?)", path: ["reponses"] });
+    if (!e.effets.length && !e.reponses.length)
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "un événement doit avoir des effets ou des réponses", path: ["effets"] });
+  });
 export type Evenement = z.infer<typeof Evenement>;
 
-/**
- * Imprévu : conséquence inattendue d'une décision, cachée pendant le vote et révélée
- * avec le résultat. Tiré au sort (probabilité `proba`) quand la carte ou l'option liée
- * est retenue ; au plus un imprévu par décision, chacun au plus une fois par partie.
- */
-export const Imprevu = z.object({
+/** Promesse de campagne : votée au début, confrontée aux vrais chiffres au bilan. */
+export const Promesse = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
-  titre: z.string().min(5).max(90),
-  description: z.string().min(10).max(220),
-  nature: z.enum(["positif", "negatif"]),
-  proba: z.number().min(0).max(1),
-  si: z.union([
-    z.object({ carte: z.string(), options: z.array(z.string()).min(1).optional() }).strict(),
-    z.object({ theme: Theme }).strict(),
-  ]),
-  effets: z.array(Effet).min(1),
+  /** la promesse telle qu'un candidat la formulerait */
+  texte: z.string().min(10).max(140),
+  /** la réalité chiffrée, révélée au bilan */
+  realite: z.string().min(10).max(300),
+  source: z.string().min(2),
+  url: z.string().url(),
+  /** 0 = réaliste … 3 = très démagogique */
+  demago: z.number().int().min(0).max(3),
+  /** points de popularité gagnés en la promettant */
+  popularite: z.number().min(0),
+  /** la carte qui permettra de tenir (ou non) la promesse, et les options qui la tiennent */
+  carte: z.string(),
+  options: z.array(z.string()).min(1),
 });
-export type Imprevu = z.infer<typeof Imprevu>;
+export type Promesse = z.infer<typeof Promesse>;
+
 
 const ChoixRef = z.object({ carte: z.string(), options: z.array(z.string()).min(1) });
 

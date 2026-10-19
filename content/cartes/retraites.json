@@ -1,7 +1,7 @@
 [
   {
     "id": "retraites-age",
-    "theme": "retraites",
+    "ministere": "travail",
     "type": "curseur",
     "titre": "À quel âge part-on à la retraite ?",
     "titreCourt": "Retraite",
@@ -18,6 +18,7 @@
         "valeur": 62,
         "titre": "62 ans",
         "explication": "Plus de retraités à financer, moins de cotisants : la facture grimpe, la tension sociale baisse.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -50,6 +51,13 @@
             "valeur": 2,
             "type": "estompe",
             "hypothese": "Gain de confiance temporaire lié à une revendication satisfaite."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 3.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -58,6 +66,7 @@
         "valeur": 64,
         "titre": "64 ans",
         "explication": "Plus de cotisants et moins de pensions versées : les comptes s'améliorent, mais la mesure est mal vécue au début.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -85,6 +94,13 @@
             "valeur": 40,
             "type": "estompe",
             "hypothese": "Une réforme contestée entraîne des mouvements sociaux qui s'atténuent."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -93,6 +109,7 @@
         "valeur": 66,
         "titre": "66 ans",
         "explication": "Effet très fort sur les comptes, mais touche surtout les carrières longues et les métiers pénibles.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -135,15 +152,23 @@
             "type": "differe",
             "delai": 3,
             "hypothese": "Les seniors ni en emploi ni en retraite (chômage, invalidité) sont plus nombreux."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -10.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "L'âge de départ joue sur deux leviers à la fois : la durée de cotisation et la durée de versement des pensions. Les effets sur les comptes arrivent progressivement, génération après génération."
+    "notePedagogique": "L'âge de départ joue sur deux leviers à la fois : la durée de cotisation et la durée de versement des pensions. Les effets sur les comptes arrivent progressivement, génération après génération.",
+    "flash": "Sondage express : 7 Français sur 10 rejettent tout recul de l'âge de départ, mais 6 sur 10 doutent que le système tienne sans réforme."
   },
   {
     "id": "retraites-financement",
-    "theme": "retraites",
+    "ministere": "travail",
     "type": "unique",
     "titre": "Le régime des retraites reste dans le rouge : qui paie ?",
     "contexte": "Le COR prévoit un déficit durable du système de retraite. Il faut trouver l'équivalent de 0,5 % du PIB par an.",
@@ -152,6 +177,7 @@
         "id": "cotisations",
         "titre": "Hausse des cotisations",
         "explication": "Salariés et employeurs cotisent un peu plus : les pensions sont préservées, mais le travail coûte plus cher.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -177,6 +203,13 @@
             "valeur": -0.1,
             "type": "immediat",
             "hypothese": "Baisse du revenu disponible et des marges la première année."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -184,6 +217,7 @@
         "id": "sous-indexation",
         "titre": "Pensions moins revalorisées",
         "explication": "Les pensions augmentent moins vite que les prix pendant quelques années : économie rapide, pouvoir d'achat des retraités en baisse.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -209,6 +243,13 @@
             "valeur": -2,
             "type": "estompe",
             "hypothese": "Les retraités votent beaucoup et vivent mal la mesure."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -216,6 +257,7 @@
         "id": "capitalisation",
         "titre": "Une part de capitalisation",
         "explication": "Une petite partie des cotisations alimente un fonds placé en bourse : rendement espéré à long terme, mais il faut payer deux fois pendant la transition.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -257,15 +299,23 @@
             "valeur": -1,
             "type": "estompe",
             "hypothese": "Mesure perçue comme un pas vers la privatisation des retraites par une partie de l'opinion."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Pour équilibrer un régime par répartition, il n'existe que trois leviers : les recettes (cotisations), le niveau des pensions et l'âge de départ."
+    "notePedagogique": "Pour équilibrer un régime par répartition, il n'existe que trois leviers : les recettes (cotisations), le niveau des pensions et l'âge de départ.",
+    "flash": "Le Conseil d'orientation des retraites publie ses chiffres : le déficit du régime pourrait dépasser 15 milliards d'euros en 2035."
   },
   {
     "id": "retraites-penibilite",
-    "theme": "retraites",
+    "ministere": "travail",
     "type": "unique",
     "titre": "Métiers pénibles : faut-il partir plus tôt ?",
     "contexte": "Un ouvrier vit en moyenne plusieurs années de moins en bonne santé qu'un cadre. Les dispositifs de départ anticipé sont peu utilisés.",
@@ -274,6 +324,7 @@
         "id": "depart-anticipe",
         "titre": "Départ anticipé élargi",
         "explication": "Port de charges, nuit, gestes répétitifs : ces métiers ouvrent droit à partir deux ans plus tôt. Coûteux, mais très attendu.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -300,6 +351,13 @@
             "type": "differe",
             "delai": 1,
             "hypothese": "Sorties plus précoces de l'emploi."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -307,6 +365,7 @@
         "id": "reconversion",
         "titre": "Reconversion à mi-carrière",
         "explication": "Un compte formation renforcé pour changer de métier vers 45 ans : moins cher, effets lents.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -334,6 +393,7 @@
         "id": "prevention-entreprise",
         "titre": "Obligation de prévention",
         "explication": "Les entreprises doivent réduire l'exposition aux risques, sous peine de pénalités : rien ne coûte à l'État, mais les employeurs grincent.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "investissement_entreprises",
@@ -358,11 +418,12 @@
         ]
       }
     ],
-    "notePedagogique": "L'écart d'espérance de vie sans incapacité entre catégories sociales est un argument central des débats sur la pénibilité."
+    "notePedagogique": "L'écart d'espérance de vie sans incapacité entre catégories sociales est un argument central des débats sur la pénibilité.",
+    "flash": "Un couvreur de 61 ans témoigne au journal de 20 heures : « Mes genoux ne tiendront pas jusqu'à 64 ans. » La vidéo fait des millions de vues."
   },
   {
     "id": "retraites-retour",
-    "theme": "retraites",
+    "ministere": "travail",
     "type": "unique",
     "titre": "La réforme de l'âge fait toujours débat : on y revient ?",
     "contexte": "Quelques années après votre décision sur l'âge de départ, une pétition massive demande de rouvrir le dossier.",
@@ -371,7 +432,7 @@
         "carteJouee": "retraites-age"
       },
       {
-        "tourMin": 6
+        "tourMin": 4
       }
     ],
     "options": [
@@ -379,6 +440,7 @@
         "id": "annuler",
         "titre": "Annuler la réforme",
         "explication": "On revient sur la décision : l'apaisement est immédiat, mais les effets financiers de la réforme disparaissent.",
+        "outil": "loi",
         "annule": [
           "retraites-age"
         ],
@@ -394,6 +456,13 @@
             "valeur": 0.15,
             "type": "estompe",
             "hypothese": "Les marchés y voient un signal de moindre sérieux budgétaire."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -401,6 +470,7 @@
         "id": "maintenir",
         "titre": "Maintenir le cap",
         "explication": "On ne touche à rien : la stabilité rassure les créanciers, la frustration demeure.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "confiance_institutions",
@@ -419,6 +489,13 @@
             "valeur": -0.1,
             "type": "durable",
             "hypothese": "Les économies de la réforme sont confirmées et rassurent sur la trajectoire."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -426,6 +503,7 @@
         "id": "referendum",
         "titre": "Un référendum",
         "explication": "On demande aux Français de trancher : la participation grimpe, la campagne divise.",
+        "outil": "referendum",
         "effets": [
           {
             "cible": "participation_elections",
@@ -449,6 +527,7 @@
         ]
       }
     ],
-    "notePedagogique": "Une réforme annulée fait perdre ses effets futurs, mais pas ses coûts passés : c'est l'un des arbitrages entre stabilité des règles et écoute."
+    "notePedagogique": "Une réforme annulée fait perdre ses effets futurs, mais pas ses coûts passés : c'est l'un des arbitrages entre stabilité des règles et écoute.",
+    "flash": "Les syndicats annoncent une journée de mobilisation si rien ne bouge. Le patronat, lui, prévient : « Revenir en arrière serait un signal désastreux. »"
   }
 ]

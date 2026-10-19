@@ -1,7 +1,7 @@
 [
   {
     "id": "eco-taxe-carbone",
-    "theme": "transition_ecologique",
+    "ministere": "ecologie",
     "type": "curseur",
     "titre": "Quel prix pour une tonne de CO₂ ?",
     "titreCourt": "Taxe carbone",
@@ -18,6 +18,7 @@
         "valeur": 0,
         "titre": "0 €/t",
         "explication": "On supprime la taxe : le plein coûte moins cher, l'État perd des recettes et les émissions baissent moins vite.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -43,6 +44,13 @@
             "valeur": -0.2,
             "type": "immediat",
             "hypothese": "Baisse ponctuelle du prix des énergies fossiles."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -51,6 +59,7 @@
         "valeur": 75,
         "titre": "75 €/t",
         "explication": "Hausse progressive avec un chèque pour les ménages modestes : signal clair, coût maîtrisé.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "emissions_ges",
@@ -76,6 +85,13 @@
             "valeur": 20,
             "type": "estompe",
             "hypothese": "Contestation, atténuée par la redistribution."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -84,6 +100,7 @@
         "valeur": 150,
         "titre": "150 €/t",
         "explication": "Un prix au niveau des recommandations des économistes du climat : les émissions chutent, la colère gronde dans les zones rurales.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "emissions_ges",
@@ -124,15 +141,23 @@
             "type": "differe",
             "delai": 3,
             "hypothese": "Les alternatives renouvelables deviennent plus rentables."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -7.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Un prix du carbone oriente les choix sans les interdire. Son acceptabilité dépend de ce que l'État fait des recettes."
+    "notePedagogique": "Un prix du carbone oriente les choix sans les interdire. Son acceptabilité dépend de ce que l'État fait des recettes.",
+    "flash": "Le prix du gazole repasse au-dessus de 2 € le litre. Sur les réseaux, des appels à « bloquer les ronds-points » commencent à circuler."
   },
   {
     "id": "eco-renovation",
-    "theme": "transition_ecologique",
+    "ministere": "ecologie",
     "type": "unique",
     "titre": "5 millions de passoires thermiques : on rénove comment ?",
     "contexte": "Le bâtiment représente près d'un sixième des émissions. Les logements mal isolés coûtent cher à chauffer.",
@@ -141,6 +166,7 @@
         "id": "obligation",
         "titre": "Interdire la location des passoires",
         "explication": "Les propriétaires doivent rénover avant de louer : efficace, mais certains retirent leur logement du marché.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "emissions_ges",
@@ -170,6 +196,7 @@
         "id": "aides-massives",
         "titre": "Aides massives à la rénovation",
         "explication": "L'État paie jusqu'à 90 % des travaux pour les ménages modestes : rapide et populaire, très coûteux.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -205,6 +232,7 @@
         "id": "pret-taux-zero",
         "titre": "Prêt à taux zéro remboursé par les économies",
         "explication": "Pas de subvention : un prêt que les économies d'énergie remboursent. Peu coûteux, mais les ménages hésitent à s'endetter.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -229,11 +257,12 @@
         ]
       }
     ],
-    "notePedagogique": "La rénovation coûte cher au départ et rapporte pendant des décennies : c'est un cas typique d'effet différé."
+    "notePedagogique": "La rénovation coûte cher au départ et rapporte pendant des décennies : c'est un cas typique d'effet différé.",
+    "flash": "Les artisans du bâtiment préviennent : il manque 200 000 professionnels qualifiés pour rénover 5 millions de logements."
   },
   {
     "id": "eco-sols",
-    "theme": "transition_ecologique",
+    "ministere": "ecologie",
     "type": "unique",
     "titre": "Faut-il arrêter de bétonner les champs ?",
     "contexte": "Environ 20 000 hectares d'espaces naturels ou agricoles sont artificialisés chaque année, surtout pour le logement.",
@@ -242,6 +271,7 @@
         "id": "zan-strict",
         "titre": "Zéro artificialisation nette dès 2035",
         "explication": "Chaque hectare bétonné doit être compensé : la nature est protégée, mais construire devient plus difficile et plus cher.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "artificialisation",
@@ -283,6 +313,7 @@
         "id": "assouplir",
         "titre": "Assouplir pour construire",
         "explication": "On laisse les communes construire plus librement : des logements et des zones d'activité, au prix des terres agricoles.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "artificialisation",
@@ -323,6 +354,7 @@
         "id": "friches",
         "titre": "Priorité aux friches",
         "explication": "Un fonds pour dépolluer et reconstruire sur d'anciens sites industriels : coûteux, mais ni champs ni forêts sacrifiés.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -348,11 +380,12 @@
         ]
       }
     ],
-    "notePedagogique": "Les sols artificialisés ne redeviennent presque jamais naturels : c'est une décision quasi irréversible."
+    "notePedagogique": "Les sols artificialisés ne redeviennent presque jamais naturels : c'est une décision quasi irréversible.",
+    "flash": "Un maire rural s'insurge en direct : « On m'interdit de construire un lotissement, et mon école va fermer faute d'enfants. »"
   },
   {
     "id": "eco-agriculture",
-    "theme": "transition_ecologique",
+    "ministere": "agriculture",
     "type": "unique",
     "titre": "Pesticides : les agriculteurs entre deux feux",
     "contexte": "La France est l'un des premiers consommateurs de pesticides d'Europe. Les agriculteurs craignent une concurrence déloyale.",
@@ -361,6 +394,7 @@
         "id": "interdire",
         "titre": "Sortie progressive des pesticides",
         "explication": "Interdiction des plus dangereux d'ici 5 ans : la biodiversité respire, certains rendements baissent.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "biodiversite_oiseaux",
@@ -388,6 +422,13 @@
             "type": "differe",
             "delai": 8,
             "hypothese": "Moindre exposition des riverains et des agriculteurs."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -395,6 +436,7 @@
         "id": "accompagner",
         "titre": "Payer les agriculteurs pour changer",
         "explication": "Des aides pour chaque hectare converti : la transition se fait sans casse, mais elle coûte au budget.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -422,6 +464,7 @@
         "id": "clause-miroir",
         "titre": "Fermer la porte aux importations non conformes",
         "explication": "Les produits importés doivent respecter nos normes : nos agriculteurs sont protégés, nos partenaires commerciaux protestent.",
+        "outil": "negociation",
         "effets": [
           {
             "cible": "autonomie_alimentaire",
@@ -442,15 +485,23 @@
             "type": "differe",
             "delai": 2,
             "hypothese": "Mesures de rétorsion sur certaines exportations."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Protéger l'environnement chez soi peut déplacer la production ailleurs : c'est le débat sur les « clauses miroirs »."
+    "notePedagogique": "Protéger l'environnement chez soi peut déplacer la production ailleurs : c'est le débat sur les « clauses miroirs ».",
+    "flash": "Les tracteurs convergent vers la préfecture de Rennes. Dans le même temps, une étude relie certains pesticides à des cancers chez les agriculteurs."
   },
   {
     "id": "eco-transports",
-    "theme": "transition_ecologique",
+    "ministere": "ecologie",
     "type": "cumulable",
     "titre": "Plan transports : deux priorités pour la décennie",
     "contexte": "Les transports sont le premier secteur émetteur (un tiers des émissions). Choisissez deux chantiers.",
@@ -459,6 +510,7 @@
         "id": "rail",
         "titre": "Trains du quotidien",
         "explication": "Rouvrir des lignes et augmenter les fréquences : efficace en ville et en périurbain, très cher.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -487,6 +539,7 @@
         "id": "voiture-electrique",
         "titre": "Leasing de voitures électriques",
         "explication": "Une voiture électrique à 100 € par mois pour les ménages modestes : rapide, mais les voitures viennent souvent de l'étranger.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -522,6 +575,7 @@
         "id": "velo",
         "titre": "Vélo et covoiturage",
         "explication": "Pistes cyclables et voies réservées : bon marché et rapide, mais limité aux trajets courts.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -550,6 +604,7 @@
         "id": "autoroutes",
         "titre": "Désenclaver par la route",
         "explication": "Achever les routes promises aux territoires isolés : bon pour l'activité locale, mauvais pour le climat.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "croissance_pib",
@@ -577,15 +632,23 @@
             "valeur": 1,
             "type": "estompe",
             "hypothese": "Promesse tenue envers les territoires ruraux."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Les infrastructures de transport mettent des années à sortir de terre, mais structurent les déplacements pour des décennies."
+    "notePedagogique": "Les infrastructures de transport mettent des années à sortir de terre, mais structurent les déplacements pour des décennies.",
+    "flash": "Le TER Paris-Rouen est en retard un jour sur trois. Les usagers lancent une pétition qui dépasse les 100 000 signatures."
   },
   {
     "id": "eco-vitesse",
-    "theme": "transition_ecologique",
+    "ministere": "ecologie",
     "type": "curseur",
     "titre": "Quelle vitesse maximale sur autoroute ?",
     "titreCourt": "Vitesse sur autoroute",
@@ -602,6 +665,7 @@
         "valeur": 110,
         "titre": "110 km/h",
         "explication": "Moins de carburant brûlé et moins d'accidents graves, mais des trajets plus longs et beaucoup de mécontents.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "emissions_ges",
@@ -632,6 +696,13 @@
             "valeur": 20,
             "type": "estompe",
             "hypothese": "Manifestations d'automobilistes et de routiers."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -3.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -640,6 +711,7 @@
         "valeur": 120,
         "titre": "120 km/h",
         "explication": "Un compromis : une partie des gains écologiques, moins de colère.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "emissions_ges",
@@ -658,6 +730,13 @@
             "valeur": -0.8,
             "type": "estompe",
             "hypothese": "Mesure contestée mais moins symbolique."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1.0,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -666,6 +745,7 @@
         "valeur": 130,
         "titre": "130 km/h",
         "explication": "On ne change rien : liberté de rouler comme aujourd'hui, pas de gain sur les émissions.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "confiance_institutions",
@@ -676,6 +756,7 @@
         ]
       }
     ],
-    "notePedagogique": "La consommation d'une voiture augmente fortement avec la vitesse : à 110 km/h au lieu de 130, elle baisse d'environ 20 %. L'Espagne et plusieurs pays européens limitent déjà à 120 km/h."
+    "notePedagogique": "La consommation d'une voiture augmente fortement avec la vitesse : à 110 km/h au lieu de 130, elle baisse d'environ 20 %. L'Espagne et plusieurs pays européens limitent déjà à 120 km/h.",
+    "flash": "La Sécurité routière le rappelle : la vitesse excessive ou inadaptée est en cause dans près d'un accident mortel sur trois."
   }
 ]

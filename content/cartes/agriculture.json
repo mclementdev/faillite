@@ -1,0 +1,207 @@
+[
+  {
+    "id": "agri-eau",
+    "ministere": "agriculture",
+    "type": "unique",
+    "titre": "Sécheresses : faut-il construire des réserves d'eau géantes ?",
+    "contexte": "Les étés sans pluie se multiplient et les rendements chutent. Les agriculteurs réclament des réserves d'eau remplies l'hiver ; les écologistes y voient un accaparement d'une ressource commune.",
+    "options": [
+      {
+        "id": "bassines",
+        "titre": "Financer des réserves d'eau",
+        "explication": "Des centaines de réserves pour sécuriser les récoltes. Les agriculteurs respirent, mais les nappes souffrent et les opposants promettent des manifestations.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 1.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Récoltes sécurisées en été."
+          },
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": -0.8,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Prélèvements dans les nappes et les zones humides."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.02,
+            "type": "durable",
+            "hypothese": "Subventions publiques aux réserves."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 15,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Manifestations contre les réserves."
+          }
+        ]
+      },
+      {
+        "id": "sobriete",
+        "titre": "Partager l'eau et changer de cultures",
+        "explication": "Quotas d'irrigation et aides pour passer à des cultures moins gourmandes. Bon pour les rivières, mais des exploitations perdent de l'argent pendant la transition.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Baisse temporaire de certaines productions."
+          },
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Rivières et zones humides préservées."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Aides à la conversion des cultures."
+          }
+        ]
+      },
+      {
+        "id": "local",
+        "titre": "Laisser chaque bassin décider",
+        "explication": "Les acteurs locaux trouvent leurs propres compromis. Plus de dialogue, mais des règles différentes d'un département à l'autre et des conflits qui durent.",
+        "outil": "decision",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Solutions locales au cas par cas."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.3,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Décision proche du terrain."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le conflit des « méga-bassines » de Sainte-Soline (Deux-Sèvres) a donné lieu à de violents affrontements en 2023. L'agriculture représente environ 60 % de l'eau consommée en France chaque année.",
+    "flash": "Le département des Pyrénées-Orientales interdit tout arrosage pour la troisième année. Des arboriculteurs arrachent leurs vergers."
+  },
+  {
+    "id": "agri-elevage",
+    "ministere": "agriculture",
+    "type": "unique",
+    "titre": "Élevage : réduire le cheptel pour le climat ?",
+    "contexte": "L'élevage représente environ 12 % des émissions françaises. Mais il fait vivre des régions entières, et la viande importée émet souvent plus que la viande française.",
+    "options": [
+      {
+        "id": "reduire",
+        "titre": "Aider à réduire l'élevage de 20 %",
+        "explication": "Des primes pour réduire les troupeaux et se diversifier. Les émissions baissent nettement, mais des éleveurs se sentent sacrifiés et les importations augmentent.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "emissions_ges",
+            "valeur": -5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Moins de méthane issu des troupeaux."
+          },
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": -1.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Production de viande et de lait en baisse."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Primes de reconversion."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 20,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Colère des éleveurs."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      },
+      {
+        "id": "soutenir",
+        "titre": "Soutenir l'élevage français",
+        "explication": "Aides à l'installation et aux prix : l'élevage reste et remplace la viande importée. Bon pour les campagnes et l'autonomie, mais les émissions ne baissent pas.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Production nationale maintenue."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Troupeaux maintenus."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Aides à la filière."
+          }
+        ]
+      },
+      {
+        "id": "etiquetage",
+        "titre": "Étiqueter l'origine et l'impact carbone",
+        "explication": "Obligation d'afficher l'origine et l'empreinte de chaque viande, au restaurant comme en magasin. Peu coûteux, mais l'effet dépend des choix des consommateurs.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Préférence pour la viande française."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Consommation légèrement réorientée."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.1,
+            "type": "immediat",
+            "hypothese": "Coûts d'étiquetage répercutés."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La France compte environ 17 millions de bovins, le premier cheptel d'Europe. Le nombre d'éleveurs a été divisé par deux en trente ans.",
+    "flash": "Une étude montre que la moitié du poulet consommé en France est importée, souvent élevé dans des conditions interdites ici."
+  }
+]

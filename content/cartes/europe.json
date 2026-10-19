@@ -1,0 +1,120 @@
+[
+  {
+    "id": "europe-mercosur",
+    "ministere": "europe",
+    "type": "unique",
+    "titre": "Accord avec l'Amérique du Sud (Mercosur) : on signe ?",
+    "contexte": "L'accord ouvrirait l'Europe au bœuf, au sucre et au soja du Brésil et de l'Argentine, et ouvrirait ces pays aux voitures, aux machines et aux vins européens.",
+    "options": [
+      {
+        "id": "signer",
+        "titre": "Signer l'accord",
+        "explication": "Les exportateurs français gagnent un marché de 270 millions d'habitants. Mais les éleveurs subissent une concurrence aux normes moins strictes.",
+        "outil": "negociation",
+        "effets": [
+          {
+            "cible": "solde_commercial",
+            "valeur": 4,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Exportations industrielles et viticoles."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Gains d'échanges."
+          },
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": -1.5,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Concurrence sur la viande et le sucre."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": 1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Transport et déforestation importée."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 30,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Mobilisation agricole."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      },
+      {
+        "id": "bloquer",
+        "titre": "Bloquer l'accord",
+        "explication": "La France met son veto au nom des agriculteurs et du climat. Les campagnes applaudissent, mais l'Allemagne et l'Espagne sont furieuses et l'industrie perd une occasion.",
+        "outil": "decision",
+        "effets": [
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Filières agricoles protégées."
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Débouchés manqués."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Décision perçue comme protectrice."
+          }
+        ]
+      },
+      {
+        "id": "miroir",
+        "titre": "Signer avec des clauses miroirs",
+        "explication": "On exige que les produits importés respectent nos normes sanitaires et environnementales. Plus équilibré, mais deux ans de négociations et un résultat incertain.",
+        "outil": "negociation",
+        "effets": [
+          {
+            "cible": "solde_commercial",
+            "valeur": 2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Ouverture partielle."
+          },
+          {
+            "cible": "autonomie_alimentaire",
+            "valeur": -0.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Concurrence encadrée."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Déforestation mieux contrôlée."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Négocié depuis 1999, l'accord UE-Mercosur divise l'Europe. En France, agriculteurs et écologistes s'y opposent ; les exportateurs de vins, de voitures et de machines y sont favorables.",
+    "flash": "Des agriculteurs déversent du fumier devant la préfecture d'Agen. Au même moment, les viticulteurs signent une tribune en faveur de l'accord."
+  }
+]

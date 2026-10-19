@@ -1,16 +1,31 @@
 {
   "_doc": "Règles générales du jeu. Voir README, section « Règles ».",
   "anneeDepart": 2027,
-  "toursPossibles": [30, 20],
+  "dureesPossibles": [
+    5,
+    10
+  ],
+  "decisionsParAn": 3,
   "seuilAlerte": 35,
   "dureeVoteSecondes": 60,
+  "bonusFlashSecondes": 15,
+  "dureeSecondTourSecondes": 20,
   "maxJoueurs": 30,
-  "probaEvenement": 1,
   "evenements": {
-    "delaiAvantRepetition": 8,
-    "maxOccurrences": 2,
-    "delaiEntreAlertesMemeJauge": 3
+    "maxParAn": 2,
+    "probaParMois": 0.1,
+    "delaiAvantRepetition": 6,
+    "maxOccurrences": 1,
+    "delaiEntreAlertesMemeJauge": 2
   },
+  "campagne": {
+    "nbPromesses": 8,
+    "popularite": {
+      "depart": 44,
+      "max": 68
+    }
+  },
+  "pibMdEuros": 3050,
   "impacts": {
     "horizon": 6,
     "seuilNotable": 0.3,

@@ -1,0 +1,484 @@
+[
+  {
+    "id": "culture-pass",
+    "ministere": "culture",
+    "type": "unique",
+    "titre": "Le pass Culture des jeunes : on le garde ?",
+    "contexte": "Chaque jeune de 15 à 18 ans reçoit un crédit pour des livres, concerts ou cours. Le dispositif coûte environ 250 millions d'euros par an ; beaucoup l'utilisent surtout pour des mangas.",
+    "options": [
+      {
+        "id": "garder",
+        "titre": "Le garder pour tous",
+        "explication": "Tous les jeunes continuent d'en profiter. Simple et populaire, mais une partie de l'argent finance des achats qui auraient eu lieu de toute façon.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.01,
+            "type": "durable",
+            "hypothese": "Environ 250 M€ par an."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.02,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Accès élargi aux loisirs culturels."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      },
+      {
+        "id": "cibler",
+        "titre": "Le réserver aux jeunes modestes",
+        "explication": "Le crédit double pour les familles modestes et disparaît pour les autres. Plus juste et moins cher, mais les classes moyennes protestent.",
+        "outil": "decret",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.004,
+            "type": "durable",
+            "hypothese": "Économie de 100 M€ environ."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Activités culturelles et sportives pour les jeunes éloignés."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": -0.005,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Dépense mieux ciblée."
+          }
+        ]
+      },
+      {
+        "id": "sorties",
+        "titre": "Le transformer en sorties de classe",
+        "explication": "Plus d'argent individuel : les sommes financent théâtre, musées et concerts avec l'école. Tous les élèves y vont, mais le choix personnel disparaît.",
+        "outil": "decret",
+        "effets": [
+          {
+            "cible": "pisa_maths",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Effet modeste de l'éducation artistique sur les apprentissages."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.01,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Sorties partagées."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Le pass Culture a été généralisé en 2021. La Cour des comptes a relevé qu'il profitait surtout aux jeunes déjà familiers des pratiques culturelles.",
+    "flash": "Les éditeurs de mangas révèlent que leurs ventes ont doublé grâce au pass. Les libraires indépendants, eux, réclament son maintien à tout prix."
+  },
+  {
+    "id": "culture-audiovisuel",
+    "ministere": "culture",
+    "type": "unique",
+    "titre": "Télévision et radio publiques : réformer ou privatiser ?",
+    "contexte": "France Télévisions, Radio France, Arte, l'INA : l'audiovisuel public coûte près de 4 milliards d'euros par an, financés par l'État depuis la fin de la redevance en 2022.",
+    "options": [
+      {
+        "id": "fusionner",
+        "titre": "Tout fusionner en une seule société",
+        "explication": "Une holding unique pour mutualiser rédactions et moyens. Des économies à moyen terme, mais des grèves des salariés et la crainte d'une information moins plurielle.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.015,
+            "type": "durable",
+            "hypothese": "Économies de gestion progressives."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": 15,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Grèves dans l'audiovisuel public."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.3,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Inquiétudes sur l'indépendance."
+          }
+        ]
+      },
+      {
+        "id": "privatiser",
+        "titre": "Privatiser France 2",
+        "explication": "La vente rapporte quelques milliards et allège le budget. Mais une grande chaîne gratuite passe au privé, et l'opposition crie à l'atteinte au pluralisme.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "dette_publique",
+            "valeur": -0.1,
+            "type": "immediat",
+            "hypothese": "Produit de la cession."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.02,
+            "type": "durable",
+            "hypothese": "Moins de dépenses de fonctionnement."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Polémique sur le pluralisme."
+          },
+          {
+            "cible": "participation_elections",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Information publique moins présente."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      },
+      {
+        "id": "renforcer",
+        "titre": "Garantir son financement pour 5 ans",
+        "explication": "Un budget sanctuarisé pour l'indépendance et l'information locale. Rassurant pour la démocratie, mais aucune économie.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Environ 1 Md€ par an de financement garanti."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.5,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Information de référence renforcée."
+          },
+          {
+            "cible": "participation_elections",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Information locale renforcée."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La redevance audiovisuelle a été supprimée en 2022. Depuis, l'audiovisuel public est financé par une part de TVA, ce qui relance le débat sur son indépendance.",
+    "flash": "Un sondage montre que l'audiovisuel public reste la source d'information jugée la plus fiable par les Français, devant les chaînes privées et les réseaux sociaux."
+  },
+  {
+    "id": "culture-patrimoine",
+    "ministere": "culture",
+    "type": "unique",
+    "titre": "Églises, châteaux, cathédrales : qui paie l'entretien ?",
+    "contexte": "Des milliers de monuments ont besoin de travaux, dont 5 000 églises rurales menacées. Le Loto du patrimoine rapporte environ 30 millions d'euros par an : très loin des besoins.",
+    "options": [
+      {
+        "id": "payant",
+        "titre": "Entrée payante dans les cathédrales",
+        "explication": "5 € pour les touristes, gratuit pour les fidèles. Cela rapporterait des dizaines de millions, mais l'Église et une partie de l'opinion s'y opposent.",
+        "outil": "decret",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.003,
+            "type": "durable",
+            "hypothese": "Recettes de billetterie."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Polémique sur la gratuité des lieux de culte."
+          }
+        ]
+      },
+      {
+        "id": "plan",
+        "titre": "Grand plan de 1 milliard par an",
+        "explication": "Un chantier national de restauration : des milliers d'emplois d'artisans dans les campagnes, mais un milliard de plus par an pour le budget.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "1 Md€ par an."
+          },
+          {
+            "cible": "chomage",
+            "valeur": -0.01,
+            "type": "estompe",
+            "hypothese": "Emplois d'artisans d'art."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": 0.01,
+            "type": "durable",
+            "hypothese": "Attractivité touristique."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.01,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Fierté locale."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      },
+      {
+        "id": "mecenat",
+        "titre": "Miser sur le mécénat",
+        "explication": "Déductions fiscales renforcées pour les entreprises et les particuliers. Peu coûteux à court terme, mais les grands monuments attirent l'argent, pas les petites églises.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.005,
+            "type": "durable",
+            "hypothese": "Niches fiscales supplémentaires."
+          },
+          {
+            "cible": "rapport_interdecile",
+            "valeur": 0.005,
+            "type": "durable",
+            "hypothese": "Avantage fiscal surtout pour les plus aisés."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Après l'incendie de 2019, près de 850 millions d'euros de dons ont été réunis pour Notre-Dame de Paris. Les petites églises de campagne n'attirent presque aucun mécène.",
+    "flash": "Un clocher s'effondre dans un village de l'Indre. Le maire montre le devis : 2 millions d'euros, pour une commune de 300 habitants."
+  },
+  {
+    "id": "culture-sport",
+    "ministere": "culture",
+    "type": "unique",
+    "titre": "Après les Jeux de Paris : le sport pour tous ?",
+    "contexte": "Les Jeux de 2024 ont suscité un engouement record. Mais une majorité de Français ne bouge pas assez selon les recommandations de santé, et beaucoup de gymnases et piscines sont vétustes.",
+    "options": [
+      {
+        "id": "ecole",
+        "titre": "Deux heures de sport en plus au collège",
+        "explication": "Plus de sport pour tous les élèves dès la rentrée prochaine. Bon pour la santé et la cohésion, mais il faut recruter des professeurs et trouver des créneaux.",
+        "outil": "decret",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.02,
+            "type": "durable",
+            "hypothese": "Recrutement de professeurs d'éducation physique."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 5,
+            "hypothese": "Activité physique régulière dès l'adolescence."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.02,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Bien-être des élèves."
+          }
+        ]
+      },
+      {
+        "id": "equipements",
+        "titre": "5 000 équipements dans les quartiers",
+        "explication": "City-stades, piscines, gymnases rénovés : le sport près de chez soi. Coûteux pour l'État et les communes, mais concret et visible.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Plan d'équipement sur cinq ans."
+          },
+          {
+            "cible": "violences_physiques",
+            "valeur": -0.1,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Activités encadrées pour les jeunes."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Encadrement sportif et emplois d'animateurs."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      },
+      {
+        "id": "clubs",
+        "titre": "Laisser faire les clubs et les communes",
+        "explication": "Pas de plan national : chacun s'organise. Aucun coût pour l'État, mais l'élan des Jeux retombe et les inégalités entre territoires demeurent.",
+        "outil": "decision",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.005,
+            "type": "durable",
+            "hypothese": "Pas de dépense nouvelle."
+          },
+          {
+            "cible": "satisfaction_vie",
+            "valeur": -0.01,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Élan olympique qui retombe."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Une grande partie des piscines et gymnases français date des années 1960-1970. La sédentarité coûte chaque année des milliards d'euros à l'Assurance maladie.",
+    "flash": "Les clubs de natation refusent des enfants faute de bassins : un élève sur deux entre en sixième sans savoir nager correctement."
+  },
+  {
+    "id": "culture-ia",
+    "ministere": "culture",
+    "type": "unique",
+    "titre": "Intelligence artificielle : faut-il protéger les créateurs ?",
+    "contexte": "Les IA apprennent en avalant des millions de livres, de musiques et d'images, souvent sans payer les auteurs. Les artistes manifestent, les start-up demandent de la liberté.",
+    "options": [
+      {
+        "id": "remunerer",
+        "titre": "Obliger les IA à payer les œuvres",
+        "explication": "Toute IA utilisée en France doit rémunérer les créateurs dont elle utilise les œuvres. Les artistes sont protégés, mais certaines entreprises menacent de quitter le marché français.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "satisfaction_vie",
+            "valeur": 0.01,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Création mieux rémunérée."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": -0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Accès plus coûteux à certains outils d'IA."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Mesure perçue comme protectrice."
+          }
+        ]
+      },
+      {
+        "id": "liberte",
+        "titre": "Laisser faire pour attirer les start-up",
+        "explication": "Aucune contrainte nouvelle : la France devient un terrain d'accueil pour l'IA. Bon pour l'innovation, mais doublage, illustration et traduction perdent des emplois.",
+        "outil": "decision",
+        "effets": [
+          {
+            "cible": "productivite_horaire",
+            "valeur": 0.8,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Diffusion rapide des outils d'IA."
+          },
+          {
+            "cible": "chomage",
+            "valeur": 0.05,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Métiers créatifs fragilisés."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": 0.2,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Implantations de start-up."
+          }
+        ]
+      },
+      {
+        "id": "europe",
+        "titre": "Négocier une règle européenne",
+        "explication": "Une règle commune aux 27 pèse face aux géants américains, mais il faut deux à trois ans de négociations avant qu'elle s'applique.",
+        "outil": "negociation",
+        "effets": [
+          {
+            "cible": "dependance_numerique",
+            "valeur": -1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Règles européennes face aux géants étrangers."
+          },
+          {
+            "cible": "productivite_horaire",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Cadre stable pour les entreprises."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "L'Union européenne a adopté en 2024 un règlement sur l'IA (AI Act). La question de la rémunération des auteurs dont les œuvres entraînent les IA reste largement ouverte.",
+    "flash": "Une voix de comédien célèbre a été copiée par une IA pour une publicité, sans son accord. Les doubleurs français lancent une grève inédite."
+  }
+]

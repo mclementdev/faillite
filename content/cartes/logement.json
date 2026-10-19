@@ -1,7 +1,7 @@
 [
   {
     "id": "logement-construction",
-    "theme": "logement",
+    "ministere": "logement",
     "type": "unique",
     "titre": "On ne construit plus assez de logements",
     "contexte": "Les mises en chantier sont au plus bas depuis des décennies. Trouver un logement abordable devient difficile dans les grandes villes.",
@@ -10,6 +10,7 @@
         "id": "logement-social",
         "titre": "100 000 logements sociaux par an",
         "explication": "L'État finance massivement le logement social : les loyers modérés reviennent, mais il faut des terrains et de l'argent.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -45,6 +46,7 @@
         "id": "simplifier",
         "titre": "Simplifier les règles d'urbanisme",
         "explication": "Permis plus rapides, hauteurs relevées : les promoteurs construisent plus, les riverains râlent.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "taux_effort_logement",
@@ -65,6 +67,13 @@
             "valeur": -0.5,
             "type": "estompe",
             "hypothese": "Contentieux locaux et oppositions."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -72,6 +81,7 @@
         "id": "pret-primo",
         "titre": "Aides à l'achat pour les primo-accédants",
         "explication": "Un prêt aidé pour acheter son premier logement : de nouveaux propriétaires, mais l'aide pousse aussi les prix.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -96,11 +106,12 @@
         ]
       }
     ],
-    "notePedagogique": "Le logement est un marché lent : il faut 3 à 5 ans entre la décision et l'emménagement."
+    "notePedagogique": "Le logement est un marché lent : il faut 3 à 5 ans entre la décision et l'emménagement.",
+    "flash": "Le prix des logements neufs a doublé en vingt ans. Les promoteurs annoncent le plus bas nombre de mises en chantier depuis 1990."
   },
   {
     "id": "logement-loyers",
-    "theme": "logement",
+    "ministere": "logement",
     "type": "unique",
     "titre": "Faut-il encadrer les loyers partout ?",
     "contexte": "L'encadrement des loyers existe à Paris, Lyon ou Lille. Les propriétaires dénoncent une atteinte à leur rentabilité.",
@@ -109,6 +120,7 @@
         "id": "generaliser",
         "titre": "Encadrement dans toutes les zones tendues",
         "explication": "Les loyers ne peuvent plus dépasser un plafond : les locataires respirent, mais certains bailleurs vendent ou passent en location courte.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "taux_effort_logement",
@@ -137,6 +149,7 @@
         "id": "supprimer",
         "titre": "Supprimer l'encadrement",
         "explication": "Liberté des loyers pour relancer l'investissement : plus d'offre à terme, des loyers plus chers à court terme.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "taux_effort_logement",
@@ -165,6 +178,7 @@
         "id": "locations-courtes",
         "titre": "Limiter les locations touristiques",
         "explication": "Plafond de 90 nuits par an : des logements reviennent sur le marché, les villes touristiques perdent des revenus.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "taux_effort_logement",
@@ -182,11 +196,12 @@
         ]
       }
     ],
-    "notePedagogique": "Encadrer un prix protège ceux qui ont déjà un logement ; l'effet sur ceux qui en cherchent un dépend de l'offre."
+    "notePedagogique": "Encadrer un prix protège ceux qui ont déjà un logement ; l'effet sur ceux qui en cherchent un dépend de l'offre.",
+    "flash": "À Paris, un studio de 15 m² se loue 900 € par mois. Les propriétaires dénoncent, eux, des règles « décourageantes »."
   },
   {
     "id": "logement-vacants",
-    "theme": "logement",
+    "ministere": "logement",
     "type": "unique",
     "titre": "3 millions de logements vides",
     "contexte": "Les logements vacants sont surtout dans les petites villes et centres anciens, loin des zones où la demande est forte.",
@@ -195,6 +210,7 @@
         "id": "taxe",
         "titre": "Taxer fortement les logements vides",
         "explication": "Une taxe qui double chaque année : les propriétaires louent ou vendent, certains crient à la spoliation.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "taux_effort_logement",
@@ -215,6 +231,7 @@
         "id": "revitaliser",
         "titre": "Revitaliser les centres-villes",
         "explication": "Rénover les logements anciens et attirer commerces et services dans les villes moyennes.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -250,6 +267,7 @@
         "id": "requisition",
         "titre": "Réquisition des bureaux vides",
         "explication": "Les bureaux inoccupés depuis 2 ans sont transformés en logements : rapide, contesté juridiquement.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "taux_effort_logement",
@@ -274,11 +292,12 @@
         ]
       }
     ],
-    "notePedagogique": "Le problème du logement est d'abord géographique : il y a des logements vides là où on ne cherche pas à habiter."
+    "notePedagogique": "Le problème du logement est d'abord géographique : il y a des logements vides là où on ne cherche pas à habiter.",
+    "flash": "Un collectif occupe un immeuble de bureaux vide depuis huit ans en plein centre de Lyon pour y loger des familles."
   },
   {
     "id": "logement-hlm",
-    "theme": "logement",
+    "ministere": "logement",
     "type": "curseur",
     "titre": "Combien de logements sociaux financer chaque année ?",
     "titreCourt": "Logements sociaux",
@@ -295,6 +314,7 @@
         "valeur": 60,
         "titre": "60 000 par an",
         "explication": "On réduit l'effort : économies pour l'État, mais les files d'attente s'allongent.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -323,6 +343,7 @@
         "valeur": 120,
         "titre": "120 000 par an",
         "explication": "Rythme soutenu : les chantiers reprennent, la pression sur les loyers baisse lentement.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -356,6 +377,7 @@
         "valeur": 180,
         "titre": "180 000 par an",
         "explication": "Grand plan national : le bâtiment tourne à plein, mais il faut des terrains et des milliards.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -399,6 +421,7 @@
         ]
       }
     ],
-    "notePedagogique": "Un logement social coûte environ 150 000 € à construire, financé surtout par des prêts de la Caisse des dépôts. Il faut 3 à 5 ans entre la décision et l'emménagement."
+    "notePedagogique": "Un logement social coûte environ 150 000 € à construire, financé surtout par des prêts de la Caisse des dépôts. Il faut 3 à 5 ans entre la décision et l'emménagement.",
+    "flash": "Les organismes HLM préviennent : sans aides, la moitié des projets prévus cette année seront abandonnés."
   }
 ]

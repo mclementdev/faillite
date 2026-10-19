@@ -1,7 +1,7 @@
 [
   {
     "id": "secu-police",
-    "theme": "securite_justice",
+    "ministere": "interieur",
     "type": "unique",
     "titre": "Plus de policiers dans la rue ?",
     "contexte": "Le sentiment d'insécurité progresse depuis 2023. Les syndicats de police réclament des effectifs, les magistrats des moyens.",
@@ -10,6 +10,7 @@
         "id": "effectifs",
         "titre": "10 000 policiers et gendarmes de plus",
         "explication": "Plus de présence sur le terrain : le sentiment d'insécurité recule, mais les tribunaux reçoivent plus d'affaires.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -44,6 +45,7 @@
         "id": "proximite",
         "titre": "Police de proximité et médiateurs",
         "explication": "Des agents qui connaissent le quartier et des médiateurs : effet plus lent, relations apaisées.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "deficit_public",
@@ -53,17 +55,24 @@
           },
           {
             "cible": "sentiment_insecurite",
-            "valeur": -1,
+            "valeur": -0.7,
             "type": "differe",
             "delai": 3,
             "hypothese": "Effet progressif sur le climat local."
           },
           {
             "cible": "confiance_institutions",
-            "valeur": 1,
+            "valeur": 0.4,
             "type": "differe",
             "delai": 3,
             "hypothese": "Amélioration des relations police-population."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -71,6 +80,7 @@
         "id": "videosurveillance",
         "titre": "Vidéosurveillance généralisée",
         "explication": "Caméras intelligentes dans les espaces publics : rassurant pour beaucoup, efficacité discutée et libertés en question.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -98,15 +108,23 @@
             "valeur": -0.5,
             "type": "estompe",
             "hypothese": "Inquiétudes sur les libertés publiques."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       }
     ],
-    "notePedagogique": "Le sentiment d'insécurité et la délinquance mesurée n'évoluent pas toujours dans le même sens : on peut agir sur l'un sans l'autre."
+    "notePedagogique": "Le sentiment d'insécurité et la délinquance mesurée n'évoluent pas toujours dans le même sens : on peut agir sur l'un sans l'autre.",
+    "flash": "Une vidéo d'agression dans un train fait le tour des réseaux. Le même jour, un rapport pointe des commissariats sans voitures en état de rouler."
   },
   {
     "id": "secu-justice",
-    "theme": "securite_justice",
+    "ministere": "justice",
     "type": "unique",
     "titre": "Une justice trop lente",
     "contexte": "Il faut plus d'un an pour un jugement civil en appel. La France compte moins de juges par habitant que la moyenne européenne.",
@@ -115,6 +133,7 @@
         "id": "magistrats",
         "titre": "Recruter 1 500 magistrats",
         "explication": "Doubler les recrutements pendant cinq ans : les délais baissent, mais il faut trois ans pour former un juge.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -135,6 +154,13 @@
             "type": "differe",
             "delai": 3,
             "hypothese": "Une justice plus rapide inspire davantage confiance."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 0.5,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion, estimée par le jeu à partir des effets sur la confiance, les grèves, les impôts et le pouvoir d'achat."
           }
         ]
       },
@@ -142,6 +168,7 @@
         "id": "amiable",
         "titre": "Médiation obligatoire",
         "explication": "Avant d'aller au tribunal, il faut tenter un accord : désengorgement rapide, mais certains renoncent à faire valoir leurs droits.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "delai_jugement",
@@ -162,6 +189,7 @@
         "id": "numerique",
         "titre": "Justice numérique",
         "explication": "Procédures en ligne et outils d'aide à la décision : gains de temps, dépendance aux outils et risques d'erreurs.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "delai_jugement",
@@ -187,11 +215,12 @@
         ]
       }
     ],
-    "notePedagogique": "Les délais de justice dépendent surtout des moyens humains : un magistrat formé met plusieurs années à arriver en juridiction."
+    "notePedagogique": "Les délais de justice dépendent surtout des moyens humains : un magistrat formé met plusieurs années à arriver en juridiction.",
+    "flash": "Un procès pour violences conjugales est renvoyé pour la quatrième fois faute de magistrats. La victime témoigne de sa colère."
   },
   {
     "id": "secu-peines",
-    "theme": "securite_justice",
+    "ministere": "justice",
     "type": "unique",
     "titre": "Prisons pleines : construire ou punir autrement ?",
     "contexte": "Les prisons comptent plus de détenus que de places. Les peines de moins de six mois sont fréquentes.",
@@ -200,6 +229,7 @@
         "id": "construire",
         "titre": "Construire 15 000 places",
         "explication": "Fin de la surpopulation et exécution des peines : un chantier long et coûteux.",
+        "outil": "budget",
         "effets": [
           {
             "cible": "deficit_public",
@@ -228,6 +258,7 @@
         "id": "alternatives",
         "titre": "Peines alternatives",
         "explication": "Travail d'intérêt général, bracelet, sursis probatoire : moins cher et moins de récidive selon plusieurs études, perçu comme laxiste.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "violences_physiques",
@@ -254,6 +285,7 @@
         "id": "peines-planchers",
         "titre": "Peines minimales obligatoires",
         "explication": "Une peine plancher pour les récidivistes : message de fermeté, prisons encore plus pleines.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "sentiment_insecurite",
@@ -278,11 +310,12 @@
         ]
       }
     ],
-    "notePedagogique": "La fermeté et l'efficacité contre la récidive ne se mesurent pas de la même façon : l'une se voit vite, l'autre en années."
+    "notePedagogique": "La fermeté et l'efficacité contre la récidive ne se mesurent pas de la même façon : l'une se voit vite, l'autre en années.",
+    "flash": "La maison d'arrêt de Nîmes accueille deux détenus par place. Les surveillants bloquent l'entrée de l'établissement."
   },
   {
     "id": "secu-cannabis",
-    "theme": "securite_justice",
+    "ministere": "interieur",
     "type": "unique",
     "titre": "Cannabis : interdire, tolérer ou encadrer ?",
     "contexte": "La France compte parmi les plus gros consommateurs d'Europe malgré une loi très répressive. Les trafics alimentent des violences.",
@@ -291,6 +324,7 @@
         "id": "legaliser",
         "titre": "Vente encadrée par l'État",
         "explication": "Comme le tabac : des recettes fiscales et moins de trafic, mais un risque de banalisation chez les jeunes.",
+        "outil": "loi",
         "effets": [
           {
             "cible": "deficit_public",
@@ -326,6 +360,7 @@
         "id": "amende",
         "titre": "Amende forfaitaire renforcée",
         "explication": "Plus de contrôles et des amendes immédiates : simple à appliquer, sans toucher aux réseaux.",
+        "outil": "decret",
         "effets": [
           {
             "cible": "sentiment_insecurite",
@@ -346,6 +381,7 @@
         "id": "guerre-reseaux",
         "titre": "Offensive contre les réseaux",
         "explication": "Enquêteurs spécialisés et saisies des avoirs : coups durs aux trafiquants, effets lents et violences de représailles.",
+        "outil": "decision",
         "effets": [
           {
             "cible": "deficit_public",
@@ -370,6 +406,111 @@
         ]
       }
     ],
-    "notePedagogique": "Les pays qui ont légalisé observent des effets contrastés : moins de pénal, mais une consommation qui ne baisse pas toujours."
+    "notePedagogique": "Les pays qui ont légalisé observent des effets contrastés : moins de pénal, mais une consommation qui ne baisse pas toujours.",
+    "flash": "Le Canada fait le bilan de cinq ans de légalisation : consommation stable chez les adultes, marché noir en net recul."
+  },
+  {
+    "id": "justice-mineurs",
+    "ministere": "justice",
+    "type": "unique",
+    "titre": "Délinquance des mineurs : quelle réponse ?",
+    "contexte": "Les mineurs sont impliqués dans une part croissante des faits violents liés aux trafics. La justice des mineurs privilégie l'éducation ; certains réclament de juger les 16-18 ans comme des majeurs.",
+    "options": [
+      {
+        "id": "majeurs",
+        "titre": "Juger les 16-18 ans comme des majeurs",
+        "explication": "Les peines deviennent les mêmes que pour les adultes. Message de fermeté, mais les prisons déjà pleines débordent et la récidive pourrait augmenter.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Message de fermeté."
+          },
+          {
+            "cible": "violences_physiques",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Récidive accrue après la prison."
+          },
+          {
+            "cible": "delai_jugement",
+            "valeur": 0.3,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Procédures plus lourdes."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "duree": 3,
+            "hypothese": "Réaction de l'opinion à la mesure."
+          }
+        ]
+      },
+      {
+        "id": "educateurs",
+        "titre": "Plus d'éducateurs et de centres",
+        "explication": "Recrutement de 2 000 éducateurs et ouverture de centres fermés éducatifs. Efficace sur la récidive, mais lent et coûteux.",
+        "outil": "budget",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.03,
+            "type": "durable",
+            "hypothese": "Environ 1 Md€ par an."
+          },
+          {
+            "cible": "violences_physiques",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 3,
+            "hypothese": "Moins de récidive des mineurs suivis."
+          },
+          {
+            "cible": "neet",
+            "valeur": -0.2,
+            "type": "differe",
+            "delai": 2,
+            "hypothese": "Retour en formation des jeunes suivis."
+          }
+        ]
+      },
+      {
+        "id": "parents",
+        "titre": "Responsabiliser les parents",
+        "explication": "Amendes et suspension de certaines allocations pour les parents de mineurs délinquants. Populaire, mais accusé de punir les familles les plus pauvres.",
+        "outil": "loi",
+        "effets": [
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -0.5,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Mesure jugée ferme."
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": 0.1,
+            "type": "differe",
+            "delai": 1,
+            "hypothese": "Familles modestes pénalisées."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -0.3,
+            "type": "estompe",
+            "duree": 2,
+            "hypothese": "Contestation par les associations."
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La justice des mineurs repose sur la primauté de l'éducatif depuis l'ordonnance de 1945, remplacée en 2021 par un code de la justice pénale des mineurs aux procédures plus rapides.",
+    "flash": "Un adolescent de 15 ans est interpellé pour la troisième fois en un mois dans un point de deal. Les éducateurs dénoncent des services débordés."
   }
 ]

@@ -32,7 +32,11 @@ export interface ResultatSimulation {
   n: number;
   graine: number;
   mode: ModeSimulation;
-  nbTours: number;
+  nbAnnees: number;
+  /** événements par partie (moyenne), dont ceux provoqués par une décision */
+  evenementsParPartie: number;
+  provoquesParPartie: number;
+  crisesParPartie: number;
   dureeMs: number;
   date: string;
   jaugesFin: Record<JaugeId, StatJauge>;
@@ -56,7 +60,7 @@ const arrondi = (x: number, d = 1) => Math.round(x * 10 ** d) / 10 ** d;
 /** Nombre de votants simulés par partie (votes aléatoires). */
 const VOTANTS = 12;
 
-export function simulate(contenu: Contenu, n: number, graine: number, poids: Partial<Poids> | undefined, mode: ModeSimulation, nbTours = 30): ResultatSimulation {
+export function simulate(contenu: Contenu, n: number, graine: number, poids: Partial<Poids> | undefined, mode: ModeSimulation, nbAnnees = 5): ResultatSimulation {
   const debut = Date.now();
   const finales: Record<JaugeId, number[]> = Object.fromEntries(JAUGES.map((j) => [j, []])) as unknown as Record<JaugeId, number[]>;
   const alertesParJauge = Object.fromEntries(JAUGES.map((j) => [j, 0])) as Record<JaugeId, number>;
@@ -69,13 +73,20 @@ export function simulate(contenu: Contenu, n: number, graine: number, poids: Par
       opts.set(`${c.id}|${o.id}`, { carte: c.id, option: o.id, titre: o.titre, propositions: 0, retenue: 0, somme: Object.fromEntries(JAUGES.map((j) => [j, 0])) as Record<JaugeId, number> });
 
   const seuil = contenu.regles.seuilAlerte;
+  let nbEvenements = 0;
+  let nbProvoques = 0;
+  let nbCrises = 0;
   for (let i = 0; i < n; i++) {
     const g = hacher(`${graine}#${i}`);
+    // Campagne simulée : chaque promesse proposée est faite une fois sur deux.
+    const rngC = flux(g, "campagne", 0);
+    const proposees = [...contenu.promesses].sort(() => rngC() - 0.5).slice(0, contenu.regles.campagne.nbPromesses).map((p) => p.id);
+    const promesses = proposees.filter(() => rngC() < 0.5);
     const etat = jouerPartie(
       contenu,
-      { graine: g, nbTours, poids, sansIntervention: mode === "sans_intervention" },
-      (carte, e) => {
-        const rng = flux(g, "simulation", e.tour);
+      { graine: g, nbAnnees, poids, promesses, promessesProposees: proposees, sansIntervention: mode === "sans_intervention" },
+      (carte, _etat, etape) => {
+        const rng = flux(g, "simulation", etape.n);
         const votes: (string | number)[] = [];
         for (let v = 0; v < VOTANTS; v++) {
           if (carte.type === "curseur" && carte.curseur) {
@@ -86,7 +97,12 @@ export function simulate(contenu: Contenu, n: number, graine: number, poids: Par
         return votes;
       },
       (_etat, tour, res) => {
-        if (tour.evenement) evenements[tour.evenement.id] = (evenements[tour.evenement.id] ?? 0) + 1;
+        if (tour.evenement) {
+          evenements[tour.evenement.id] = (evenements[tour.evenement.id] ?? 0) + 1;
+          nbEvenements++;
+          if (tour.evenement.cause) nbProvoques++;
+          if (contenu.evenements.find((x) => x.id === tour.evenement!.id)?.gravite === "crise") nbCrises++;
+        }
         if (!tour.carte) return;
         cartes[tour.carte] = (cartes[tour.carte] ?? 0) + 1;
         const carte = contenu.cartes.find((c) => c.id === tour.carte)!;
@@ -155,7 +171,10 @@ export function simulate(contenu: Contenu, n: number, graine: number, poids: Par
     n,
     graine,
     mode,
-    nbTours,
+    nbAnnees,
+    evenementsParPartie: arrondi(n ? nbEvenements / n : 0, 2),
+    provoquesParPartie: arrondi(n ? nbProvoques / n : 0, 2),
+    crisesParPartie: arrondi(n ? nbCrises / n : 0, 2),
     dureeMs: Date.now() - debut,
     date: new Date().toISOString(),
     jaugesFin,
@@ -182,7 +201,7 @@ function synthese(contenu: Contenu, r: ResultatSimulation): string {
   const perdantes = r.options.filter((o) => o.statut === "perdante").length;
   const jamais = Object.entries(r.cartes).filter(([, v]) => v === 0).length;
   const morceaux = [
-    `Sur ${r.n} parties de ${r.nbTours} tours (${r.mode === "aleatoire" ? "choix aléatoires" : "sans intervention"}), ${nom(plusFaible)} finit en moyenne le plus bas (${r.jaugesFin[plusFaible].moyenne}) et ${nom(plusForte)} le plus haut (${r.jaugesFin[plusForte].moyenne}).`,
+    `Sur ${r.n} parties de ${r.nbAnnees} ans (${r.mode === "aleatoire" ? "choix aléatoires" : "sans intervention"}), ${nom(plusFaible)} finit en moyenne le plus bas (${r.jaugesFin[plusFaible].moyenne}) et ${nom(plusForte)} le plus haut (${r.jaugesFin[plusForte].moyenne}).`,
     `${Math.round(r.alertes.auMoinsUne * 100)} % des parties voient au moins une jauge passer sous le seuil, le plus souvent ${nom(alerteMax)} (${Math.round(r.alertes.parJauge[alerteMax] * 100)} %).`,
   ];
   if (r.mode === "aleatoire")
