@@ -135,6 +135,8 @@ export const Regles = z.object({
     /** promesses présentées pendant la campagne */
     nbPromesses: z.number().int().min(1),
     popularite: z.object({ depart: z.number(), max: z.number() }),
+    /** second tour : intentions de vote de départ, perte par promesse refusée, aléa du soir du vote (± points) */
+    election: z.object({ depart: z.number(), perteRefus: z.number().min(0), alea: z.number().min(0) }),
   }),
   /** PIB en Md€, pour traduire les effets sur le déficit (% du PIB) en euros */
   pibMdEuros: z.number().positive(),
@@ -147,6 +149,9 @@ export const Regles = z.object({
     seuilFort: z.number().positive(),
   }),
   estompeDureeParDefaut: z.number().int().min(1),
+  /** multiplie le poids des décisions et des réponses aux crises sur le pays (hors popularité) :
+   * les effets qui font du bien (gains) et ceux qui font du mal (pertes) au pays */
+  amplificationDecisions: z.object({ gains: z.number().positive(), pertes: z.number().positive() }).default({ gains: 1, pertes: 1 }),
 });
 export type Regles = z.infer<typeof Regles>;
 

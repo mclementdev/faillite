@@ -14,6 +14,7 @@ import {
   IconeCoche,
   IconeElysee,
   IconeHorloge,
+  JaugeIntentions,
   JaugePopularite,
   libelleType,
   Logo,
@@ -247,7 +248,7 @@ function CampagneMobile({ code, jeton, vue, vote, enregistrer }: { code: string;
         )
       )}
       <div style={{ marginTop: "auto" }}>
-        <JaugePopularite j={{ id: "popularite", nom: "Popularité", valeur: c.popularite, tendance: "0", alerte: false }} seuil={vue.seuil} taille={0.7} />
+        <JaugeIntentions valeur={c.intentions} taille={0.7} />
       </div>
     </>
   );
@@ -255,10 +256,21 @@ function CampagneMobile({ code, jeton, vue, vote, enregistrer }: { code: string;
 
 function InvestitureMobile({ vue }: { vue: VuePublique }) {
   const c = vue.campagne!;
+  const e = c.election;
+  if (e && !e.elu)
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, animation: "apparition .5s ease" }}>
+        <IconeElysee taille={56} couleur="#1d2445" />
+        <span className="titre" style={{ fontSize: 36, fontWeight: 800, lineHeight: 1 }}>Battus.</span>
+        <span className="titre tabnum" style={{ fontSize: 24, fontWeight: 800, color: "var(--n2-texte)" }}>{e.score.toLocaleString("fr-FR")} % des voix</span>
+        <span style={{ fontSize: 16, color: "var(--texte-2)" }}>L&apos;adversaire l&apos;emporte. Nouvelle campagne, nouvelles promesses : regardez le grand écran.</span>
+      </div>
+    );
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 14, animation: "apparition .5s ease" }}>
       <IconeElysee taille={56} couleur="#1d2445" />
       <span className="titre" style={{ fontSize: 36, fontWeight: 800, lineHeight: 1 }}>Vous êtes élus !</span>
+      {e && <span className="titre tabnum" style={{ fontSize: 22, fontWeight: 800, color: "var(--p2-texte)" }}>{e.score.toLocaleString("fr-FR")} % des voix</span>}
       <span style={{ fontSize: 16, color: "var(--texte-2)" }}>Votre programme : {c.faites.length} promesse{c.faites.length > 1 ? "s" : ""}.</span>
       {c.faites.map((p) => (
         <div key={p.id} style={{ display: "flex", gap: 10, fontSize: 15, lineHeight: 1.35 }}>

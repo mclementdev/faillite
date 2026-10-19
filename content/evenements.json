@@ -4915,5 +4915,1374 @@
         "hypothese": "Le paiement de la rançon est reproché au gouvernement."
       }
     ]
+  },
+  {
+    "id": "crise-dette-marches",
+    "titre": "Les marchés lâchent la dette française",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 0,
+    "description": "Le taux d'emprunt à 10 ans bondit de plus d'un point en quelques semaines. Les investisseurs doutent des comptes publics. Chaque mois d'attente alourdit la facture des intérêts.",
+    "declenchePar": [
+      {
+        "carte": "dette-note",
+        "options": [
+          "ignorer"
+        ],
+        "chance": 0.6,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "dette-regle-or",
+        "options": [
+          "pas-de-regle"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "dette-effort",
+        "options": [
+          "0"
+        ],
+        "chance": 0.35,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "fiscalite-impot-revenu",
+        "options": [
+          "baisse-classes-moyennes"
+        ],
+        "chance": 0.2,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "energie-prix",
+        "options": [
+          "bouclier"
+        ],
+        "chance": 0.25,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "retraites-age",
+        "options": [
+          "62"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_10_ans",
+        "valeur": 1,
+        "type": "estompe",
+        "hypothese": "Défiance des marchés envers la dette française.",
+        "duree": 3
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Crédit plus cher pour les ménages et les entreprises."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "hypothese": "Inquiétude sur la solidité de l'État.",
+        "duree": 2
+      }
+    ],
+    "reponses": [
+      {
+        "id": "plan-urgence",
+        "titre": "Plan d'économies d'urgence",
+        "outil": "budget",
+        "explication": "Gel des dépenses et 25 milliards de coupes. Les marchés se calment vite, mais la croissance ralentit et les services publics trinquent.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": -0.8,
+            "type": "durable",
+            "hypothese": "Environ 25 Md€ d'économies par an."
+          },
+          {
+            "cible": "taux_10_ans",
+            "valeur": -0.7,
+            "type": "immediat",
+            "hypothese": "Retour de la confiance des marchés."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.4,
+            "type": "estompe",
+            "hypothese": "Coup de frein sur la demande.",
+            "duree": 2
+          },
+          {
+            "cible": "popularite",
+            "valeur": -5,
+            "type": "estompe",
+            "hypothese": "Rigueur mal vécue.",
+            "duree": 3
+          }
+        ]
+      },
+      {
+        "id": "europe",
+        "titre": "Demander l'appui de l'Europe",
+        "outil": "negociation",
+        "explication": "La Banque centrale européenne peut soutenir un pays attaqué, mais exige un plan crédible. Moins brutal, mais la France perd une partie de la main sur son budget.",
+        "effets": [
+          {
+            "cible": "taux_10_ans",
+            "valeur": -0.5,
+            "type": "immediat",
+            "hypothese": "Filet de sécurité européen."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.3,
+            "type": "durable",
+            "hypothese": "Engagements de réduction du déficit."
+          },
+          {
+            "cible": "part_dette_non_residents",
+            "valeur": 2,
+            "type": "durable",
+            "hypothese": "Dette plus détenue par l'étranger."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "hypothese": "Image d'un pays sous tutelle.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "rassurer",
+        "titre": "Ne rien changer et rassurer",
+        "outil": "decision",
+        "explication": "Le gouvernement promet que tout va bien. Si les marchés n'y croient pas, les taux restent hauts et la facture d'intérêts grimpe année après année.",
+        "effets": [
+          {
+            "cible": "taux_10_ans",
+            "valeur": 0.5,
+            "type": "estompe",
+            "hypothese": "Les investisseurs restent méfiants.",
+            "duree": 3
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.2,
+            "type": "estompe",
+            "hypothese": "Crédit cher plus longtemps.",
+            "duree": 2
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Pas de rigueur immédiate.",
+            "duree": 1
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "En 2011, l'Italie et l'Espagne ont vu leurs taux d'emprunt dépasser 6 %. Fin 2024, sur fond de crise politique, la France a un temps emprunté plus cher que la Grèce."
+  },
+  {
+    "id": "crise-urgences",
+    "titre": "Les urgences ferment les unes après les autres",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 0,
+    "description": "Faute de soignants, des dizaines de services d'urgences ferment la nuit. Des patients attendent des heures sur des brancards, et les infirmières menacent de démissionner en masse.",
+    "declenchePar": [
+      {
+        "carte": "sante-ondam",
+        "options": [
+          "1.5",
+          "2"
+        ],
+        "chance": 0.45,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "sante-hopital",
+        "options": [
+          "prive"
+        ],
+        "chance": 0.35,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "dette-economies",
+        "options": [
+          "rabot"
+        ],
+        "chance": 0.25,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "dette-effort",
+        "options": [
+          "40"
+        ],
+        "chance": 0.25,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "desert_medical",
+        "valeur": 2,
+        "type": "estompe",
+        "hypothese": "Moins de soins accessibles.",
+        "duree": 3
+      },
+      {
+        "cible": "esperance_vie_bonne_sante",
+        "valeur": -0.1,
+        "type": "immediat",
+        "hypothese": "Retards de prise en charge."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "hypothese": "Sentiment d'abandon.",
+        "duree": 2
+      }
+    ],
+    "reponses": [
+      {
+        "id": "rallonge",
+        "titre": "Rallonge budgétaire immédiate",
+        "outil": "budget",
+        "explication": "3 milliards d'euros débloqués pour rouvrir des lits et payer les heures de nuit. Les urgences tiennent l'été, mais le budget dérape.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Environ 3 Md€ par an."
+          },
+          {
+            "cible": "desert_medical",
+            "valeur": -2,
+            "type": "immediat",
+            "hypothese": "Réouvertures de services."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 3,
+            "type": "estompe",
+            "hypothese": "Soulagement des soignants et des patients.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "regulation",
+        "titre": "Réguler l'accès : appeler le 15 d'abord",
+        "outil": "decret",
+        "explication": "On ne vient plus aux urgences sans avoir appelé le 15. Les services respirent, mais certains patients renoncent à se soigner.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": -1,
+            "type": "immediat",
+            "hypothese": "Afflux mieux trié."
+          },
+          {
+            "cible": "esperance_vie_bonne_sante",
+            "valeur": -0.1,
+            "type": "durable",
+            "hypothese": "Renoncements aux soins."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "hypothese": "Mesure perçue comme un tri.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "armee",
+        "titre": "Envoyer les médecins militaires",
+        "outil": "decision",
+        "explication": "Le service de santé des armées renforce quelques hôpitaux. Le geste est fort, mais il ne couvre que quelques villes, et l'armée se dégarnit.",
+        "effets": [
+          {
+            "cible": "desert_medical",
+            "valeur": -0.5,
+            "type": "immediat",
+            "hypothese": "Renfort local et temporaire."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Geste d'urgence apprécié.",
+            "duree": 1
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Pendant l'été 2022, plus de 120 services d'urgences ont dû fermer ou limiter leur accueil faute de personnel."
+  },
+  {
+    "id": "crise-colere-agricole",
+    "titre": "Les tracteurs bloquent Paris",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 0,
+    "description": "Des milliers d'agriculteurs encerclent la capitale et bloquent les autoroutes. Ils dénoncent la concurrence étrangère, les normes et des revenus en chute. Le marché de Rungis est menacé.",
+    "declenchePar": [
+      {
+        "carte": "europe-mercosur",
+        "options": [
+          "signer"
+        ],
+        "chance": 0.5,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "eco-agriculture",
+        "options": [
+          "interdire"
+        ],
+        "chance": 0.4,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "agri-elevage",
+        "options": [
+          "reduire"
+        ],
+        "chance": 0.35,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "eco-taxe-carbone",
+        "options": [
+          "125",
+          "150"
+        ],
+        "chance": 0.2,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "souv-alimentation",
+        "options": [
+          "agrandissement"
+        ],
+        "chance": 0.2,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 40,
+        "type": "immediat",
+        "hypothese": "Blocages et manifestations."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.1,
+        "type": "immediat",
+        "hypothese": "Transports perturbés."
+      },
+      {
+        "cible": "autonomie_alimentaire",
+        "valeur": -1,
+        "type": "estompe",
+        "hypothese": "Exploitations fragilisées.",
+        "duree": 2
+      }
+    ],
+    "reponses": [
+      {
+        "id": "aides",
+        "titre": "Aides d'urgence et prix garantis",
+        "outil": "budget",
+        "explication": "2 milliards d'euros d'aides et un prix minimum sur certains produits. Les tracteurs rentrent, mais la facture est lourde et les prix montent un peu.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.07,
+            "type": "durable",
+            "hypothese": "Environ 2 Md€ par an."
+          },
+          {
+            "cible": "jours_greve",
+            "valeur": -40,
+            "type": "immediat",
+            "hypothese": "Fin des blocages."
+          },
+          {
+            "cible": "inflation",
+            "valeur": 0.2,
+            "type": "immediat",
+            "hypothese": "Prix alimentaires légèrement plus hauts."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 3,
+            "type": "estompe",
+            "hypothese": "Soutien populaire aux agriculteurs.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "normes",
+        "titre": "Suspendre des normes écologiques",
+        "outil": "decret",
+        "explication": "Une pause sur plusieurs règles environnementales calme la colère. Mais les pesticides et l'arrosage repartent, et les associations attaquent en justice.",
+        "effets": [
+          {
+            "cible": "jours_greve",
+            "valeur": -30,
+            "type": "immediat",
+            "hypothese": "Apaisement rapide."
+          },
+          {
+            "cible": "biodiversite_oiseaux",
+            "valeur": -1,
+            "type": "durable",
+            "hypothese": "Pression accrue sur la nature."
+          },
+          {
+            "cible": "emissions_ges",
+            "valeur": 1,
+            "type": "durable",
+            "hypothese": "Pratiques plus émettrices."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2,
+            "type": "estompe",
+            "hypothese": "Victoire visible des agriculteurs.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "fermete",
+        "titre": "Faire lever les blocages",
+        "outil": "decision",
+        "explication": "Les forces de l'ordre dégagent les routes. Le pays roule de nouveau, mais la colère du monde rural couve et pourrait revenir plus forte.",
+        "effets": [
+          {
+            "cible": "jours_greve",
+            "valeur": -20,
+            "type": "immediat",
+            "hypothese": "Routes dégagées."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -2,
+            "type": "estompe",
+            "hypothese": "Rupture avec le monde rural.",
+            "duree": 3
+          },
+          {
+            "cible": "popularite",
+            "valeur": -4,
+            "type": "estompe",
+            "hypothese": "Images choquantes de tracteurs évacués.",
+            "duree": 3
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Début 2024, les agriculteurs ont bloqué autoroutes et périphériques en France comme dans plusieurs pays européens. Le gouvernement avait cédé sur le gazole non routier et des normes."
+  },
+  {
+    "id": "crise-electricite",
+    "titre": "Hiver glacial : risque de coupures d'électricité",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 0,
+    "description": "Une vague de froid fait exploser la demande. La production ne suit plus et le gestionnaire du réseau alerte : des coupures tournantes sont possibles dans les prochains jours.",
+    "declenchePar": [
+      {
+        "carte": "energie-nucleaire",
+        "options": [
+          "zero"
+        ],
+        "chance": 0.5,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "energie-renouvelables",
+        "options": [
+          "partage-local"
+        ],
+        "chance": 0.15,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "eco-transports",
+        "options": [
+          "voiture-electrique"
+        ],
+        "chance": 0.15,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.15,
+        "type": "immediat",
+        "hypothese": "Usines ralenties pour économiser le courant."
+      },
+      {
+        "cible": "inflation",
+        "valeur": 0.3,
+        "type": "immediat",
+        "hypothese": "Prix de l'électricité en flèche sur les marchés."
+      },
+      {
+        "cible": "independance_energetique",
+        "valeur": -2,
+        "type": "estompe",
+        "hypothese": "Recours massif aux importations.",
+        "duree": 2
+      }
+    ],
+    "reponses": [
+      {
+        "id": "importer",
+        "titre": "Importer à tout prix",
+        "outil": "budget",
+        "explication": "On achète l'électricité des voisins, même très cher. Pas de coupure, mais la facture se chiffre en milliards et la dépendance augmente.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "estompe",
+            "hypothese": "Surcoût des importations.",
+            "duree": 2
+          },
+          {
+            "cible": "solde_commercial",
+            "valeur": -8,
+            "type": "estompe",
+            "hypothese": "Importations d'énergie.",
+            "duree": 2
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Pas de coupures.",
+            "duree": 1
+          }
+        ]
+      },
+      {
+        "id": "delestage",
+        "titre": "Coupures tournantes de deux heures",
+        "outil": "decision",
+        "explication": "Chaque quartier est coupé deux heures, à tour de rôle. Le réseau tient, mais écoles et commerces ferment, et l'image du pays en prend un coup.",
+        "effets": [
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.2,
+            "type": "immediat",
+            "hypothese": "Activité interrompue."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -3,
+            "type": "estompe",
+            "hypothese": "Un pays développé privé de courant.",
+            "duree": 2
+          },
+          {
+            "cible": "popularite",
+            "valeur": -5,
+            "type": "estompe",
+            "hypothese": "Colère contre le gouvernement.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "sobriete",
+        "titre": "Sobriété obligatoire",
+        "outil": "decret",
+        "explication": "Chauffage public limité à 17 °C, vitrines éteintes, industries payées pour s'effacer. Ça passe, au prix d'un hiver frileux.",
+        "effets": [
+          {
+            "cible": "conso_energie_finale",
+            "valeur": -10,
+            "type": "estompe",
+            "hypothese": "Baisse forcée de la consommation.",
+            "duree": 2
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.1,
+            "type": "immediat",
+            "hypothese": "Production industrielle réduite."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "hypothese": "Hiver de privations.",
+            "duree": 2
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "À l'hiver 2022-2023, la moitié des réacteurs nucléaires était à l'arrêt : le gestionnaire du réseau avait préparé des coupures tournantes, finalement évitées par la sobriété."
+  },
+  {
+    "id": "crise-prisons",
+    "titre": "Mutineries dans des prisons surpeuplées",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 0,
+    "description": "Dans trois maisons d'arrêt à 200 % de leur capacité, des détenus prennent le contrôle d'étages entiers. Des surveillants sont blessés et la profession bloque les prisons.",
+    "declenchePar": [
+      {
+        "carte": "secu-peines",
+        "options": [
+          "peines-planchers"
+        ],
+        "chance": 0.45,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "justice-mineurs",
+        "options": [
+          "majeurs"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "secu-cannabis",
+        "options": [
+          "guerre-reseaux"
+        ],
+        "chance": 0.25,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "secu-police",
+        "options": [
+          "effectifs"
+        ],
+        "chance": 0.15,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "sentiment_insecurite",
+        "valeur": 2,
+        "type": "estompe",
+        "hypothese": "Images de violences en prison.",
+        "duree": 2
+      },
+      {
+        "cible": "jours_greve",
+        "valeur": 15,
+        "type": "immediat",
+        "hypothese": "Blocage des prisons par les surveillants."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "hypothese": "L'État débordé.",
+        "duree": 2
+      }
+    ],
+    "reponses": [
+      {
+        "id": "places",
+        "titre": "Plan d'urgence de 15 000 places",
+        "outil": "budget",
+        "explication": "Des prisons modulaires montées en quelques mois et des surveillants recrutés. Le calme revient, pour environ 3 milliards d'euros.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Construction et personnel."
+          },
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -1,
+            "type": "immediat",
+            "hypothese": "Retour au calme."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2,
+            "type": "estompe",
+            "hypothese": "Fermeté rassurante.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "liberations",
+        "titre": "Aménager les fins de peine",
+        "outil": "decret",
+        "explication": "Les détenus en fin de peine sortent sous bracelet électronique. Les prisons respirent aussitôt, mais l'opposition crie au laxisme.",
+        "effets": [
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Sorties anticipées mal comprises.",
+            "duree": 2
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.02,
+            "type": "durable",
+            "hypothese": "Le bracelet coûte moins que la cellule."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -4,
+            "type": "estompe",
+            "hypothese": "Accusation de laxisme.",
+            "duree": 3
+          }
+        ]
+      },
+      {
+        "id": "ordre",
+        "titre": "Envoyer les forces d'intervention",
+        "outil": "decision",
+        "explication": "Les équipes d'élite reprennent les étages un par un. L'ordre revient vite, mais rien n'est réglé : la surpopulation reste la même.",
+        "effets": [
+          {
+            "cible": "sentiment_insecurite",
+            "valeur": -0.5,
+            "type": "immediat",
+            "hypothese": "Reprise en main rapide."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Problème de fond non traité.",
+            "duree": 2
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Au 1er janvier 2025, la France comptait plus de 80 000 détenus pour environ 62 000 places. Plusieurs maisons d'arrêt dépassent 200 % d'occupation."
+  },
+  {
+    "id": "crise-greve-generale",
+    "titre": "Grève générale : le pays à l'arrêt",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 0,
+    "description": "Trains, écoles, ports et raffineries : tous les syndicats appellent à la grève reconductible. Des millions de personnes défilent. Le mouvement réclame le retrait de vos réformes.",
+    "declenchePar": [
+      {
+        "carte": "retraites-age",
+        "options": [
+          "65",
+          "66"
+        ],
+        "chance": 0.4,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "emploi-assurance-chomage",
+        "options": [
+          "durcir"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "retraites-financement",
+        "options": [
+          "sous-indexation"
+        ],
+        "chance": 0.35,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "dette-economies",
+        "options": [
+          "point-indice"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "fiscalite-tva",
+        "options": [
+          "tva-sociale"
+        ],
+        "chance": 0.25,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "emploi-duree-legale",
+        "options": [
+          "38"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "jours_greve",
+        "valeur": 120,
+        "type": "immediat",
+        "hypothese": "Grève interprofessionnelle reconductible."
+      },
+      {
+        "cible": "croissance_pib",
+        "valeur": -0.3,
+        "type": "immediat",
+        "hypothese": "Production et transports à l'arrêt."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "hypothese": "Fracture entre le pouvoir et la rue.",
+        "duree": 2
+      }
+    ],
+    "reponses": [
+      {
+        "id": "retirer",
+        "titre": "Retirer la dernière réforme",
+        "outil": "decision",
+        "explication": "Le gouvernement recule. La grève s'arrête dans la semaine, mais les économies prévues disparaissent et l'autorité du président en sort affaiblie.",
+        "effets": [
+          {
+            "cible": "jours_greve",
+            "valeur": -100,
+            "type": "immediat",
+            "hypothese": "Fin rapide du mouvement."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.15,
+            "type": "durable",
+            "hypothese": "Économies abandonnées."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2,
+            "type": "estompe",
+            "hypothese": "Victoire de la rue, soulagement.",
+            "duree": 2
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Image d'un pouvoir qui cède.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "conference",
+        "titre": "Ouvrir une grande conférence sociale",
+        "outil": "negociation",
+        "explication": "Syndicats et patronat autour de la table pendant trois mois. Le conflit s'éteint peu à peu, contre quelques concessions sur les salaires.",
+        "effets": [
+          {
+            "cible": "jours_greve",
+            "valeur": -60,
+            "type": "immediat",
+            "hypothese": "Retour progressif au travail."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "durable",
+            "hypothese": "Concessions salariales."
+          },
+          {
+            "cible": "confiance_institutions",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Retour du dialogue.",
+            "duree": 2
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Apaisement.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "tenir",
+        "titre": "Tenir bon, coûte que coûte",
+        "outil": "decision",
+        "explication": "Pas un pas en arrière. Le mouvement finit par s'essouffler après des semaines de blocage, mais l'économie et la popularité paient la note.",
+        "effets": [
+          {
+            "cible": "jours_greve",
+            "valeur": 60,
+            "type": "immediat",
+            "hypothese": "Conflit qui s'enlise."
+          },
+          {
+            "cible": "croissance_pib",
+            "valeur": -0.3,
+            "type": "immediat",
+            "hypothese": "Semaines de blocage."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -6,
+            "type": "estompe",
+            "hypothese": "Président jugé sourd.",
+            "duree": 3
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "En 1995, trois semaines de grève ont fait reculer le gouvernement Juppé sur les régimes spéciaux de retraite. En 2023, la réforme a été maintenue malgré 14 journées de mobilisation."
+  },
+  {
+    "id": "crise-rentree-sans-profs",
+    "titre": "Rentrée catastrophe : des milliers de classes sans professeur",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 0,
+    "description": "En septembre, plusieurs milliers de classes n'ont pas d'enseignant. Les parents occupent les écoles, les remplaçants manquent et certains lycées renvoient les élèves chez eux.",
+    "declenchePar": [
+      {
+        "carte": "educ-professeurs",
+        "options": [
+          "contractuels"
+        ],
+        "chance": 0.4,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "educ-classes",
+        "options": [
+          "supprimer-postes"
+        ],
+        "chance": 0.45,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "educ-budget",
+        "options": [
+          "0"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "dette-economies",
+        "options": [
+          "point-indice"
+        ],
+        "chance": 0.2,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "pisa_maths",
+        "valeur": -1,
+        "type": "estompe",
+        "hypothese": "Heures de cours perdues.",
+        "duree": 3
+      },
+      {
+        "cible": "jours_greve",
+        "valeur": 15,
+        "type": "immediat",
+        "hypothese": "Grèves et occupations d'écoles."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -1,
+        "type": "estompe",
+        "hypothese": "L'école ne remplit plus sa mission.",
+        "duree": 2
+      }
+    ],
+    "reponses": [
+      {
+        "id": "primes",
+        "titre": "Primes massives aux enseignants",
+        "outil": "budget",
+        "explication": "Une prime de 300 euros par mois pour les débutants et les remplaçants. Les recrutements repartent l'an prochain, pour 2 milliards d'euros par an.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.07,
+            "type": "durable",
+            "hypothese": "Environ 2 Md€ par an."
+          },
+          {
+            "cible": "eleves_par_classe",
+            "valeur": -0.3,
+            "type": "differe",
+            "hypothese": "Plus de candidats aux concours.",
+            "delai": 1
+          },
+          {
+            "cible": "popularite",
+            "valeur": 2,
+            "type": "estompe",
+            "hypothese": "Geste fort pour l'école.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "contractuels",
+        "titre": "Recruter en urgence sur entretien",
+        "outil": "decision",
+        "explication": "Des contractuels embauchés en trente minutes d'entretien. Chaque classe a un adulte devant elle, mais pas toujours un vrai professeur.",
+        "effets": [
+          {
+            "cible": "pisa_maths",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Enseignants peu formés.",
+            "duree": 3
+          },
+          {
+            "cible": "popularite",
+            "valeur": -1,
+            "type": "estompe",
+            "hypothese": "Solution de fortune.",
+            "duree": 1
+          }
+        ]
+      },
+      {
+        "id": "regrouper",
+        "titre": "Regrouper les classes",
+        "outil": "decret",
+        "explication": "On fusionne des classes pour couvrir les trous. Plus de cours annulés, mais des classes de 35 élèves en collège et des parents furieux.",
+        "effets": [
+          {
+            "cible": "eleves_par_classe",
+            "valeur": 1,
+            "type": "durable",
+            "hypothese": "Classes regroupées."
+          },
+          {
+            "cible": "deficit_public",
+            "valeur": -0.02,
+            "type": "durable",
+            "hypothese": "Moins de postes à pourvoir."
+          },
+          {
+            "cible": "popularite",
+            "valeur": -3,
+            "type": "estompe",
+            "hypothese": "Colère des parents.",
+            "duree": 2
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "Chaque année, plusieurs milliers de postes restent non pourvus aux concours enseignants. Le recours aux contractuels a fortement augmenté depuis 2015."
+  },
+  {
+    "id": "crise-sans-abri",
+    "titre": "Hiver : des familles entières à la rue",
+    "nature": "negatif",
+    "gravite": "crise",
+    "poids": 0,
+    "description": "Les centres d'hébergement sont pleins. Des enfants dorment dans des voitures et des gares. Les associations dénombrent plusieurs morts de froid et accusent le gouvernement.",
+    "declenchePar": [
+      {
+        "carte": "logement-hlm",
+        "options": [
+          "60"
+        ],
+        "chance": 0.4,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "logement-loyers",
+        "options": [
+          "supprimer"
+        ],
+        "chance": 0.3,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "logement-construction",
+        "options": [
+          "simplifier"
+        ],
+        "chance": 0.15,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "logement-vacants",
+        "options": [
+          "taxe"
+        ],
+        "chance": 0.1,
+        "delai": [
+          3,
+          9
+        ]
+      },
+      {
+        "carte": "dette-collectivites",
+        "options": [
+          "baisse-dotations"
+        ],
+        "chance": 0.25,
+        "delai": [
+          3,
+          9
+        ]
+      }
+    ],
+    "effets": [
+      {
+        "cible": "taux_pauvrete",
+        "valeur": 0.2,
+        "type": "immediat",
+        "hypothese": "Familles en grande précarité."
+      },
+      {
+        "cible": "confiance_institutions",
+        "valeur": -2,
+        "type": "estompe",
+        "hypothese": "Indignation générale.",
+        "duree": 2
+      },
+      {
+        "cible": "satisfaction_vie",
+        "valeur": -0.05,
+        "type": "estompe",
+        "hypothese": "Choc moral dans le pays.",
+        "duree": 2
+      }
+    ],
+    "reponses": [
+      {
+        "id": "requisition",
+        "titre": "Réquisitionner les bureaux vides",
+        "outil": "decret",
+        "explication": "L'État réquisitionne des immeubles de bureaux vacants pour loger les familles. Efficace et rapide, mais les propriétaires attaquent en justice.",
+        "effets": [
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.2,
+            "type": "immediat",
+            "hypothese": "Familles mises à l'abri."
+          },
+          {
+            "cible": "investissement_entreprises",
+            "valeur": -0.2,
+            "type": "estompe",
+            "hypothese": "Inquiétude des investisseurs.",
+            "duree": 2
+          },
+          {
+            "cible": "popularite",
+            "valeur": 3,
+            "type": "estompe",
+            "hypothese": "Mesure humaine et visible.",
+            "duree": 2
+          }
+        ]
+      },
+      {
+        "id": "hotels",
+        "titre": "Payer des nuits d'hôtel",
+        "outil": "budget",
+        "explication": "100 000 places d'urgence à l'hôtel. Personne ne dort dehors cet hiver, mais c'est cher, provisoire, et rien n'est réglé pour l'an prochain.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.05,
+            "type": "estompe",
+            "hypothese": "Hébergement d'urgence.",
+            "duree": 2
+          },
+          {
+            "cible": "taux_pauvrete",
+            "valeur": -0.1,
+            "type": "immediat",
+            "hypothese": "Mise à l'abri temporaire."
+          },
+          {
+            "cible": "popularite",
+            "valeur": 1,
+            "type": "estompe",
+            "hypothese": "Urgence traitée.",
+            "duree": 1
+          }
+        ]
+      },
+      {
+        "id": "plan-logement",
+        "titre": "Lancer un plan logement d'urgence",
+        "outil": "loi",
+        "explication": "Construction accélérée de logements très sociaux et aides aux mairies. Rien ne change cet hiver, mais dans deux ans la situation s'améliore vraiment.",
+        "effets": [
+          {
+            "cible": "deficit_public",
+            "valeur": 0.1,
+            "type": "durable",
+            "hypothese": "Environ 3 Md€ par an."
+          },
+          {
+            "cible": "taux_effort_logement",
+            "valeur": -0.6,
+            "type": "differe",
+            "hypothese": "Offre de logements accrue.",
+            "delai": 2
+          },
+          {
+            "cible": "popularite",
+            "valeur": -2,
+            "type": "estompe",
+            "hypothese": "Rien de visible cet hiver.",
+            "duree": 1
+          }
+        ]
+      }
+    ],
+    "notePedagogique": "La Fondation pour le logement des défavorisés estime à environ 350 000 le nombre de personnes sans domicile en France. Plus de 2 000 enfants dorment à la rue certains soirs."
   }
 ]

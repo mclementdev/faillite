@@ -6,7 +6,9 @@ import {
   carteDeLEtape,
   creerPartie,
   effectifs,
+  effetsJoues,
   effetsVersModificateurs,
+  intentionsDeVote,
   ErreurContenu,
   etapeAVoter,
   flux,
@@ -560,5 +562,33 @@ describe("phase 2 : programmes des candidats", () => {
     const p = Programme.parse(exemple);
     const c = chargerContenu();
     for (const id of Object.keys(p.positions)) expect(c.cartes.some((x) => x.id === id)).toBe(true);
+  });
+
+  it("les effets néfastes d'une décision pèsent plus que ses bienfaits", () => {
+    const c = chargerContenu();
+    const { gains, pertes } = c.regles.amplificationDecisions;
+    expect(pertes).toBeGreaterThan(gains);
+    const [chomageEnPlus, chomageEnMoins, pop] = effetsJoues(c, [
+      { cible: "chomage", valeur: 1, type: "immediat", hypothese: "" },
+      { cible: "chomage", valeur: -1, type: "immediat", hypothese: "" },
+      { cible: "popularite", valeur: 3, type: "immediat", hypothese: "" },
+    ]);
+    expect(chomageEnPlus.valeur).toBe(pertes);
+    expect(chomageEnMoins.valeur).toBe(-gains);
+    expect(pop.valeur).toBe(3);
+  });
+
+  it("élection : promettre fait gagner des voix, refuser en fait perdre", () => {
+    const c = chargerContenu();
+    const ids = c.promesses.slice(0, 12).map((p) => p.id);
+    expect(intentionsDeVote(c, [], 12)).toBeLessThan(50);
+    expect(intentionsDeVote(c, ids, 0)).toBeGreaterThan(50);
+    expect(intentionsDeVote(c, ids.slice(0, 6), 6)).toBeGreaterThan(intentionsDeVote(c, ids.slice(0, 5), 7));
+  });
+
+  it("des crises naissent des décisions passées", () => {
+    const c = chargerContenu();
+    const crisesProvoquees = c.evenements.filter((e) => e.gravite === "crise" && e.declenchePar.length > 0 && e.poids === 0);
+    expect(crisesProvoquees.length).toBeGreaterThanOrEqual(8);
   });
 });

@@ -272,6 +272,25 @@ export function JaugePopularite({ j, seuil, taille = 1 }: { j: VueJauge; seuil: 
   );
 }
 
+/** Intentions de vote au second tour : il faut franchir les 50 %. */
+export function JaugeIntentions({ valeur, taille = 1 }: { valeur: number; taille?: number }) {
+  const elu = valeur >= 50;
+  const couleur = elu ? "var(--p2-texte)" : "var(--n2-texte)";
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 * taille, background: "#fff8e1", border: "2px solid var(--soleil)", borderRadius: 18, padding: `${12 * taille}px ${16 * taille}px` }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <span style={{ fontSize: 23 * taille, fontWeight: 800, flex: 1 }}>Sondage du second tour</span>
+        <span className="titre tabnum" style={{ fontSize: 40 * taille, fontWeight: 800, color: couleur }}>{valeur.toLocaleString("fr-FR")} %</span>
+      </div>
+      <div style={{ position: "relative", height: 14 * taille, background: "rgba(29,36,69,.1)", borderRadius: 99 }}>
+        <div style={{ width: `${Math.min(100, valeur)}%`, height: "100%", background: couleur, borderRadius: 99, transition: "width .8s ease" }} />
+        <div style={{ position: "absolute", left: "50%", top: -4, width: 3, height: 14 * taille + 8, background: "var(--texte-1)" }} />
+      </div>
+      <span style={{ fontSize: 17 * taille, color: "var(--texte-3)" }}>{elu ? "Vous seriez élus… si le sondage dit vrai." : "Sous 50 %, l'adversaire l'emporte."}</span>
+    </div>
+  );
+}
+
 /** Anneau du minuteur (orange et battement sous 10 s). */
 export function Anneau({ restant, total, taille = 80 }: { restant: number; total: number; taille?: number }) {
   const ratio = total > 0 ? Math.max(0, Math.min(1, restant / total)) : 0;

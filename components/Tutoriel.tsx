@@ -44,7 +44,7 @@ function etapes(nbAnnees: number, anneeDepart: number, seuil: number): Etape[] {
       visuel: (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0,1fr))", gap: 18 }}>
           {[
-            ["1", "La campagne", "Promettre ou pas ? Chaque promesse vous rend populaire… jusqu'au jour où il faut la tenir."],
+            ["1", "La campagne", "Promettre ou pas ? Il faut plus de 50 % pour être élus… mais chaque promesse devra être tenue."],
             ["2", "Le mandat", "Les mois défilent : des décisions à prendre, des crises à gérer."],
             ["3", "Le bilan", "Votre France, comparée à celle qu'on aurait eue sans rien faire."],
           ].map(([n, t, d]) => (

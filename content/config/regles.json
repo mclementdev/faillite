@@ -19,10 +19,15 @@
     "delaiEntreAlertesMemeJauge": 2
   },
   "campagne": {
-    "nbPromesses": 8,
+    "nbPromesses": 12,
     "popularite": {
       "depart": 44,
       "max": 68
+    },
+    "election": {
+      "depart": 40,
+      "perteRefus": 1.5,
+      "alea": 3
     }
   },
   "pibMdEuros": 3050,
@@ -31,5 +36,9 @@
     "seuilNotable": 0.3,
     "seuilFort": 2
   },
-  "estompeDureeParDefaut": 4
+  "estompeDureeParDefaut": 4,
+  "amplificationDecisions": {
+    "gains": 2,
+    "pertes": 3
+  }
 }

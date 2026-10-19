@@ -22,7 +22,7 @@ export function contenuTest(over: { cartes?: unknown[]; evenements?: unknown[]; 
     dureeSecondTourSecondes: 20,
     maxJoueurs: 30,
     evenements: { maxParAn: 2, probaParMois: 0, delaiAvantRepetition: 0, maxOccurrences: 99, delaiEntreAlertesMemeJauge: 0 },
-    campagne: { nbPromesses: 4, popularite: { depart: 44, max: 70 } },
+    campagne: { nbPromesses: 4, popularite: { depart: 44, max: 70 }, election: { depart: 40, perteRefus: 1.5, alea: 3 } },
     pibMdEuros: 3000,
     impacts: { horizon: 4, seuilNotable: 0.5, seuilFort: 3 },
     estompeDureeParDefaut: 4,

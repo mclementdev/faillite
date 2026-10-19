@@ -187,5 +187,187 @@
       "32",
       "33"
     ]
+  },
+  {
+    "id": "service-militaire",
+    "texte": "Je rétablirai un service militaire obligatoire pour tous les jeunes.",
+    "realite": "Encadrer environ 800 000 jeunes par an coûterait plusieurs milliards d'euros chaque année. Depuis sa suspension en 1997, l'armée n'a plus les casernes ni les instructeurs pour les accueillir.",
+    "source": "Sénat, rapports sur le service national",
+    "url": "https://www.senat.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "armees-service",
+    "options": [
+      "obligatoire"
+    ]
+  },
+  {
+    "id": "soignants-salaires",
+    "texte": "J'augmenterai fortement les salaires des soignants à l'hôpital.",
+    "realite": "Le Ségur de la santé de 2020 coûte déjà environ 10 milliards d'euros par an. Les départs continuent, aussi pour des raisons d'horaires et de conditions de travail.",
+    "source": "DREES, ministère de la Santé",
+    "url": "https://drees.solidarites-sante.gouv.fr/",
+    "demago": 1,
+    "popularite": 4,
+    "carte": "sante-hopital",
+    "options": [
+      "salaires"
+    ]
+  },
+  {
+    "id": "professeurs-20",
+    "texte": "J'augmenterai le salaire de tous les professeurs de 20 %.",
+    "realite": "Pour plus de 800 000 enseignants, une hausse de 20 % coûterait de l'ordre de 8 à 10 milliards d'euros par an, sans garantie de résoudre la crise des vocations.",
+    "source": "Ministère de l'Éducation nationale",
+    "url": "https://www.education.gouv.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "educ-professeurs",
+    "options": [
+      "salaires"
+    ]
+  },
+  {
+    "id": "loyers-encadres",
+    "texte": "J'encadrerai les loyers dans toutes les grandes villes.",
+    "realite": "L'encadrement freine la hausse des loyers là où il s'applique, mais il ne crée aucun logement et certains propriétaires retirent leur bien de la location longue durée.",
+    "source": "Agence nationale pour l'information sur le logement",
+    "url": "https://www.anil.org/",
+    "demago": 1,
+    "popularite": 3,
+    "carte": "logement-loyers",
+    "options": [
+      "generaliser"
+    ]
+  },
+  {
+    "id": "creche-pour-tous",
+    "texte": "Une place en crèche pour chaque enfant.",
+    "realite": "Il manque environ 200 000 places d'accueil. Surtout, faute de personnel, des crèches déjà construites n'arrivent pas à ouvrir toutes leurs places.",
+    "source": "Caisse nationale des allocations familiales",
+    "url": "https://www.caf.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "demo-famille",
+    "options": [
+      "creches"
+    ]
+  },
+  {
+    "id": "nucleaire-14",
+    "texte": "Je lancerai 14 nouveaux réacteurs nucléaires.",
+    "realite": "Les 6 premiers EPR2 sont estimés entre 67 et 80 milliards d'euros. Le premier n'entrerait pas en service avant 2035 au mieux : aucun effet pendant le mandat.",
+    "source": "Cour des comptes, EDF",
+    "url": "https://www.ccomptes.fr/",
+    "demago": 1,
+    "popularite": 2,
+    "carte": "energie-nucleaire",
+    "options": [
+      "quatorze"
+    ]
+  },
+  {
+    "id": "mercosur-non",
+    "texte": "Je bloquerai l'accord avec le Mercosur pour protéger nos agriculteurs.",
+    "realite": "Le commerce extérieur relève de l'Union européenne. La France seule ne peut pas bloquer un accord : il lui faut rallier assez d'États pour former une minorité de blocage.",
+    "source": "Commission européenne, Vie publique",
+    "url": "https://www.vie-publique.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "europe-mercosur",
+    "options": [
+      "bloquer"
+    ]
+  },
+  {
+    "id": "vieillir-chez-soi",
+    "texte": "Chaque personne âgée pourra vieillir chez elle.",
+    "realite": "On manque déjà de dizaines de milliers d'aides à domicile, et le nombre de personnes de plus de 85 ans devrait doubler d'ici 2050.",
+    "source": "Insee, projections de population",
+    "url": "https://www.insee.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "demo-grand-age",
+    "options": [
+      "domicile"
+    ]
+  },
+  {
+    "id": "cannabis-legal",
+    "texte": "Je légaliserai le cannabis et taxerai sa vente.",
+    "realite": "Une légalisation encadrée pourrait rapporter de l'ordre de 2 milliards d'euros par an, mais le marché noir ne disparaît pas : au Canada, une part des achats reste illégale.",
+    "source": "Conseil d'analyse économique",
+    "url": "https://www.cae-eco.fr/",
+    "demago": 1,
+    "popularite": 2,
+    "carte": "secu-cannabis",
+    "options": [
+      "legaliser"
+    ]
+  },
+  {
+    "id": "peines-planchers",
+    "texte": "Je rétablirai les peines planchers pour les récidivistes.",
+    "realite": "Appliquées de 2007 à 2014, elles ont allongé les peines sans effet démontré sur la récidive. Et les prisons comptent déjà bien plus de détenus que de places.",
+    "source": "Ministère de la Justice",
+    "url": "https://www.justice.gouv.fr/",
+    "demago": 2,
+    "popularite": 3,
+    "carte": "secu-peines",
+    "options": [
+      "peines-planchers"
+    ]
+  },
+  {
+    "id": "chomage-durcir",
+    "texte": "Je durcirai les règles du chômage pour remettre les gens au travail.",
+    "realite": "Les réformes de 2019 à 2023 ont déjà réduit les droits. Leurs effets sur le retour à l'emploi existent, mais les évaluations les jugent modestes.",
+    "source": "Dares, Unédic",
+    "url": "https://dares.travail-emploi.gouv.fr/",
+    "demago": 1,
+    "popularite": 2,
+    "carte": "emploi-assurance-chomage",
+    "options": [
+      "durcir"
+    ]
+  },
+  {
+    "id": "impots-production",
+    "texte": "Je supprimerai les impôts de production pour réindustrialiser.",
+    "realite": "Ils rapportent plusieurs dizaines de milliards d'euros par an, en grande partie aux communes et aux régions : les supprimer oblige à trouver d'autres recettes.",
+    "source": "Conseil d'analyse économique",
+    "url": "https://www.cae-eco.fr/",
+    "demago": 2,
+    "popularite": 2,
+    "carte": "fiscalite-production",
+    "options": [
+      "baisse-forte"
+    ]
+  },
+  {
+    "id": "reserves-eau",
+    "texte": "Je construirai des réserves d'eau pour sauver nos récoltes.",
+    "realite": "Les retenues aident les irrigants, mais elles prélèvent dans les nappes en hiver. Leur intérêt dépend des pluies, et elles sont contestées localement.",
+    "source": "BRGM, service géologique national",
+    "url": "https://www.brgm.fr/",
+    "demago": 1,
+    "popularite": 2,
+    "carte": "agri-eau",
+    "options": [
+      "bassines"
+    ]
+  },
+  {
+    "id": "tva-essentiels",
+    "texte": "Je baisserai la TVA sur les produits de première nécessité.",
+    "realite": "L'alimentation est déjà taxée à 5,5 %. Une baisse de TVA n'est souvent répercutée qu'en partie sur les prix et coûte plusieurs milliards d'euros par an.",
+    "source": "Conseil des prélèvements obligatoires",
+    "url": "https://www.ccomptes.fr/",
+    "demago": 2,
+    "popularite": 4,
+    "carte": "fiscalite-tva",
+    "options": [
+      "tva-reduite"
+    ]
   }
 ]

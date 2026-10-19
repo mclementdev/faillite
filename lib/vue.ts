@@ -10,6 +10,7 @@ import {
   niveauImpact,
   normaliser,
   optionsRetenues,
+  intentionsDeVote,
   populariteDepart,
   valeursCurseur,
   valeursEffectives,
@@ -239,6 +240,9 @@ function vueCampagne(contenu: Contenu, salle: Salle): VueCampagne {
     dernier: c.dernier,
     faites: c.faites.map((id) => ({ id, texte: promesse(id).texte })),
     popularite: Math.round(populariteDepart(contenu, c.faites)),
+    intentions: Math.round(intentionsDeVote(contenu, c.faites, c.index + (c.etat === "resultat" ? 1 : 0) - c.faites.length) * 10) / 10,
+    tentative: c.tentative ?? 0,
+    election: salle.phase === "investiture" ? c.election : undefined,
   };
 }
 

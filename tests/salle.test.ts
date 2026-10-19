@@ -162,10 +162,19 @@ describe("salle de jeu", () => {
     await faireCampagne(s.code, s.hote, a.jeton);
     await actionHote(s.code, s.hote, { action: "suivant" });
     let salle = (await lireSalle(s.code))!;
-    for (let i = 0; i < 10 && salle.partie!.etape?.type !== "decision"; i++) {
+    // On avance jusqu'à une décision dont la carte porte un flash info.
+    const aFlash = (x: Salle) => x.phase === "annonce" && x.partie!.etape?.type === "decision" && !!chargerContenu().cartes.find((c) => c.id === x.partie!.etape!.carte)?.flash;
+    for (let i = 0; i < 200 && !aFlash(salle); i++) {
+      if (salle.phase === "annonce" && construireVue(salle, [], 0).etape?.carte) {
+        await actionHote(s.code, s.hote, { action: "ouvrirVote" });
+        await actionHote(s.code, s.hote, { action: "clore" });
+        salle = (await lireSalle(s.code))!;
+        if (salle.phase === "secondTour") await actionHote(s.code, s.hote, { action: "clore" });
+      }
       await actionHote(s.code, s.hote, { action: "suivant" });
       salle = (await lireSalle(s.code))!;
     }
+    expect(aFlash(salle)).toBe(true);
     await actionHote(s.code, s.hote, { action: "ouvrirVote" });
     salle = (await lireSalle(s.code))!;
     expect(salle.flashA).toBeDefined();
@@ -176,6 +185,34 @@ describe("salle de jeu", () => {
     vi.useRealTimers();
     expect(apres.flash).toBeTruthy();
     expect(apres.echeance! - avant).toBe(15000);
+  });
+
+  it("élection : battus sans promesse, on repart en campagne avec d'autres promesses", async () => {
+    const s = await creerSalle();
+    const a = await rejoindre(s.code, "Ana");
+    await actionHote(s.code, s.hote, { action: "demarrer" });
+    let salle = (await lireSalle(s.code))!;
+    const premieres = [...salle.campagne!.promesses];
+    while (salle.phase === "campagne") {
+      await voter(s.code, a.jeton, "refuser");
+      await actionHote(s.code, s.hote, { action: "clore" });
+      await actionHote(s.code, s.hote, { action: "suivant" });
+      salle = (await lireSalle(s.code))!;
+    }
+    expect(salle.phase).toBe("investiture");
+    expect(salle.campagne!.election!.elu).toBe(false);
+    expect(construireVue(salle, [], 0).campagne!.election!.score).toBeLessThan(50);
+    await actionHote(s.code, s.hote, { action: "suivant" });
+    salle = (await lireSalle(s.code))!;
+    expect(salle.phase).toBe("campagne");
+    expect(salle.campagne!.tentative).toBe(1);
+    expect(salle.campagne!.promesses.some((id) => premieres.includes(id))).toBe(false);
+    // Les votes de la première campagne ne comptent pas pour la nouvelle.
+    expect(await nbVotes(salle)).toBe(0);
+    salle = await faireCampagne(s.code, s.hote, a.jeton);
+    expect(salle.campagne!.election!.elu).toBe(true);
+    await actionHote(s.code, s.hote, { action: "suivant" });
+    expect((await lireSalle(s.code))!.partie).toBeDefined();
   });
 
   it("une salle fige les poids au moment de sa création", async () => {

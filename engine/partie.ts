@@ -170,6 +170,20 @@ export function populariteDepart(contenu: Contenu, promesses: string[]): number 
   return Math.min(c.max, c.depart + bonus);
 }
 
+/** Intentions de vote au second tour : chaque promesse en gagne, chaque refus en laisse à l'adversaire. */
+export function intentionsDeVote(contenu: Contenu, faites: string[], refusees: number): number {
+  const e = contenu.regles.campagne.election;
+  const gain = faites.reduce((s, id) => s + (contenu.promesses.find((p) => p.id === id)?.popularite ?? 0), 0);
+  return Math.max(5, Math.min(95, e.depart + gain - e.perteRefus * refusees));
+}
+
+/** Résultat du soir de l'élection : les sondages ne sont jamais tout à fait exacts. */
+export function resultatElection(contenu: Contenu, faites: string[], refusees: number, rng: () => number): { score: number; elu: boolean } {
+  const alea = contenu.regles.campagne.election.alea;
+  const score = Math.round((intentionsDeVote(contenu, faites, refusees) + (rng() * 2 - 1) * alea) * 10) / 10;
+  return { score, elu: score >= 50 };
+}
+
 export function creerPartie(contenu: Contenu, opts: OptionsPartie): EtatPartie {
   const defaut = poidsParDefaut(contenu);
   const poids: Poids = {
@@ -420,15 +434,29 @@ export function carteDeLEtape(contenu: Contenu, etape: Etape): Carte | undefined
 }
 
 /** Impacts estimés de chaque option d'une carte dans l'état actuel. */
+/** Effets d'une option tels qu'ils pèsent dans la partie (amplifiés, hors popularité). */
+export function effetsJoues(contenu: Contenu, effets: Effet[]): Effet[] {
+  const { gains, pertes } = contenu.regles.amplificationDecisions;
+  if (gains === 1 && pertes === 1) return effets;
+  return effets.map((e) => {
+    const n = contenu.modele[e.cible]?.normalisation;
+    if (e.cible === "popularite" || !n) return e;
+    // Sens de l'indicateur : monter est-il bon pour le pays ? (indicateurs « à viser » : traités comme des gains)
+    const sens = n.type === "lineaire" ? Math.sign(n.cent - n.zero) : 1;
+    const bon = sens * e.valeur >= 0;
+    return { ...e, valeur: e.valeur * (bon ? gains : pertes) };
+  });
+}
+
 export function impactsCarte(contenu: Contenu, etat: EtatPartie, carte: Carte): Record<string, Impacts> {
   const proj = { base: etat.base, mods: etat.mods, annee: etat.annee };
-  const effetsCarte = carte.options.flatMap((o) => o.effets);
+  const effetsCarte = effetsJoues(contenu, carte.options.flatMap((o) => o.effets));
   const reference = projeter(contenu, etat.base, etat.mods, etat.annee, horizonEffets(contenu, effetsCarte));
   const res: Record<string, Impacts> = {};
   if (carte.type === "curseur") {
-    for (const v of valeursCurseur(carte)) res[String(v)] = impactsEffets(contenu, proj, optionsRetenues(carte, [], v)[0].effets, reference);
+    for (const v of valeursCurseur(carte)) res[String(v)] = impactsEffets(contenu, proj, effetsJoues(contenu, optionsRetenues(carte, [], v)[0].effets), reference);
   } else {
-    for (const o of carte.options) res[o.id] = impactsEffets(contenu, proj, o.effets, reference);
+    for (const o of carte.options) res[o.id] = impactsEffets(contenu, proj, effetsJoues(contenu, o.effets), reference);
   }
   return res;
 }
@@ -491,7 +519,7 @@ export function appliquerChoix(contenu: Contenu, etat: EtatPartie, choix: { opti
 
   let effets: Effet[] = rejete
     ? [{ cible: "popularite", valeur: -5, type: "estompe", duree: 3, hypothese: "Un référendum perdu affaiblit le président." }]
-    : options.flatMap((o) => o.effets);
+    : options.flatMap((o) => effetsJoues(contenu, o.effets));
   if (!("popularite" in effAvant)) effets = effets.filter((e) => e.cible !== "popularite");
   const impacts = impactsEffets(contenu, proj, effets);
 
@@ -501,7 +529,7 @@ export function appliquerChoix(contenu: Contenu, etat: EtatPartie, choix: { opti
   }
   const nouveaux: Modificateur[] = rejete
     ? effetsVersModificateurs(effets, etat.annee, { type: "carte", id: carte.id }, contenu.regles.estompeDureeParDefaut)
-    : options.flatMap((o) => effetsVersModificateurs(o.effets, etat.annee, { type: "carte", id: carte.id, option: o.id }, contenu.regles.estompeDureeParDefaut));
+    : options.flatMap((o) => effetsVersModificateurs(effetsJoues(contenu, o.effets), etat.annee, { type: "carte", id: carte.id, option: o.id }, contenu.regles.estompeDureeParDefaut));
   etat.mods.push(...nouveaux.filter((m) => m.cible in effAvant));
 
   // Promesse de campagne : tenue ou trahie.

@@ -2,7 +2,7 @@
  * Salles de jeu : état stocké dans Redis (source de vérité), transitions décidées côté serveur.
  * Chaque écriture de l'état passe par une écriture conditionnelle sur le numéro de version.
  *
- * Déroulé : accueil → campagne (une promesse après l'autre) → investiture → mandat
+ * Déroulé : accueil → campagne (une promesse après l'autre) → soir de l'élection (perdue : nouvelle campagne) → mandat
  * (annonce → vote → [second tour] → résultat, mois après mois) → bilan de l'année → … → fin.
  */
 import { randomBytes, randomInt } from "node:crypto";
@@ -17,6 +17,7 @@ import {
   flux,
   prochaineEtape,
   resoudreSecondTour,
+  resultatElection,
   resoudreVote,
   terminerAnnee,
   valeursCurseur,
@@ -47,6 +48,10 @@ export interface Campagne {
   faites: string[];
   /** décompte de la dernière promesse */
   dernier?: { promettre: number; refuser: number; faite: boolean; hasard: boolean };
+  /** numéro de la campagne (une élection perdue en relance une) */
+  tentative?: number;
+  /** soir du second tour */
+  election?: { score: number; elu: boolean };
 }
 
 export interface Salle {
@@ -93,7 +98,7 @@ const cleVotes = (code: string, scrutin: string) => `salle:${code}:votes:${scrut
 
 /** Identifiant du scrutin en cours (promesse, étape, second tour). */
 export function scrutin(s: Salle): string | undefined {
-  if (s.phase === "campagne" && s.campagne) return `c${s.campagne.index}`;
+  if (s.phase === "campagne" && s.campagne) return `c${s.campagne.tentative ?? 0}-${s.campagne.index}`;
   const n = s.partie?.etape?.n;
   if (n === undefined) return undefined;
   if (s.phase === "secondTour") return `e${n}b`;
@@ -302,6 +307,21 @@ function avancer(s: Salle) {
   s.phase = etape ? "annonce" : "bilanAnnee";
 }
 
+/** Tire les promesses d'une campagne ; une nouvelle campagne évite celles de la précédente. */
+function lancerCampagne(s: Salle, tentative: number) {
+  const contenu = chargerContenu();
+  const nb = Math.min(contenu.regles.campagne.nbPromesses, contenu.promesses.length);
+  const rng = flux(s.graine, "campagne", tentative);
+  const deja = new Set(s.campagne?.promesses ?? []);
+  const neuves = contenu.promesses.map((p) => p.id).filter((id) => !deja.has(id));
+  const pool = neuves.length >= nb ? neuves : contenu.promesses.map((p) => p.id);
+  const promesses: string[] = [];
+  while (promesses.length < nb) promesses.push(pool.splice(entierAleatoire(rng, pool.length), 1)[0]);
+  s.campagne = { promesses, index: 0, etat: "vote", faites: [], tentative };
+  s.phase = "campagne";
+  ouvrirVotePromesse(s);
+}
+
 function ouvrirVotePromesse(s: Salle) {
   s.campagne!.etat = "vote";
   s.echeance = Date.now() + DUREE_VOTE_PROMESSE_S * 1000;
@@ -346,15 +366,7 @@ export async function actionHote(code: string, hote: string, a: ActionHote): Pro
             if (!contenu.regles.dureesPossibles.includes(a.nbAnnees)) throw new ErreurSalle("Durée de partie non prévue.");
             s.nbAnnees = a.nbAnnees;
           }
-          // Campagne : promesses tirées au sort dans le catalogue.
-          const rng = flux(s.graine, "campagne", 0);
-          const pool = contenu.promesses.map((p) => p.id);
-          const promesses: string[] = [];
-          while (promesses.length < Math.min(contenu.regles.campagne.nbPromesses, contenu.promesses.length))
-            promesses.push(pool.splice(entierAleatoire(rng, pool.length), 1)[0]);
-          s.campagne = { promesses, index: 0, etat: "vote", faites: [] };
-          s.phase = "campagne";
-          ouvrirVotePromesse(s);
+          lancerCampagne(s, 0);
           return;
         }
         case "ouvrirVote": {
@@ -381,7 +393,16 @@ export async function actionHote(code: string, hote: string, a: ActionHote): Pro
               s.campagne.index++;
               s.campagne.dernier = undefined;
               ouvrirVotePromesse(s);
-            } else s.phase = "investiture";
+            } else {
+              // Soir du second tour : élus ou battus.
+              const c = s.campagne;
+              c.election = resultatElection(contenu, c.faites, c.promesses.length - c.faites.length, flux(s.graine, "election", c.tentative ?? 0));
+              s.phase = "investiture";
+            }
+            return;
+          }
+          if (s.phase === "investiture" && s.campagne?.election && !s.campagne.election.elu) {
+            lancerCampagne(s, (s.campagne.tentative ?? 0) + 1);
             return;
           }
           if (s.phase === "investiture") {

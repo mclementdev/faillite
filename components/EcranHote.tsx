@@ -23,6 +23,7 @@ import {
   IconeHorloge,
   IconeJauge,
   JaugeLigne,
+  JaugeIntentions,
   JaugePopularite,
   LIBELLE_NIVEAU,
   libelleType,
@@ -369,7 +370,7 @@ function Campagne(props: PropsEcran) {
 
       <main style={{ display: "flex", flexDirection: "column", gap: 30, minHeight: 0, justifyContent: "center", paddingBottom: 40 }}>
         <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: 2, color: "var(--accent-texte)" }}>
-          CAMPAGNE PRÉSIDENTIELLE · PROMESSE {c.index + 1} SUR {c.total}
+          {c.tentative ? "NOUVELLE CAMPAGNE" : "CAMPAGNE PRÉSIDENTIELLE"} · PROMESSE {c.index + 1} SUR {c.total}
         </span>
         <div key={c.index} style={{ ...CARTE, position: "relative", padding: "56px 64px", borderRadius: 36, animation: "apparition .5s ease" }}>
           <span aria-hidden="true" className="titre" style={{ position: "absolute", top: -30, left: 40, fontSize: 160, lineHeight: 1, color: "var(--soleil)", fontWeight: 800 }}>“</span>
@@ -404,8 +405,8 @@ function Campagne(props: PropsEcran) {
       </main>
 
       <aside style={{ display: "flex", flexDirection: "column", gap: 18, minHeight: 0 }}>
-        <Info bloc texte="Chaque promesse faite vous rend plus populaire au départ. Mais une promesse trahie pendant le mandat coûte cher en popularité.">
-          <JaugePopularite j={{ id: "popularite", nom: "Popularité", valeur: c.popularite, tendance: "0", alerte: false }} seuil={vue.seuil} />
+        <Info bloc texte="Chaque promesse vous fait gagner des voix, chaque refus en laisse à l'adversaire. Il faut plus de 50 % au second tour pour être élus. Mais une promesse trahie pendant le mandat coûtera cher en popularité.">
+          <JaugeIntentions valeur={c.intentions} />
         </Info>
         <div style={{ ...CARTE, padding: "22px 26px", display: "flex", flexDirection: "column", gap: 12, flex: 1, minHeight: 0, overflow: "hidden" }}>
           <h2 style={{ margin: 0, fontSize: 26 }}>Votre programme</h2>
@@ -422,8 +423,10 @@ function Campagne(props: PropsEcran) {
   );
 }
 
-function Investiture({ vue, agir, occupe, controle, ouvrirMenu }: PropsEcran) {
+function Investiture(props: PropsEcran) {
+  const { vue, agir, occupe, controle, ouvrirMenu } = props;
   const c = vue.campagne!;
+  if (c.election && !c.election.elu) return <Defaite {...props} />;
   return (
     <div style={{ ...CADRE, padding: "34px 56px", display: "flex", flexDirection: "column", gap: 30 }}>
       <EnTete ouvrirMenu={ouvrirMenu} />
@@ -433,6 +436,11 @@ function Investiture({ vue, agir, occupe, controle, ouvrirMenu }: PropsEcran) {
             <IconeElysee taille={36} /> MAI {vue.anneeDepart} · SOIR DU SECOND TOUR
           </span>
           <h1 className="titre" style={{ margin: 0, fontSize: 140, fontWeight: 800, lineHeight: 0.95, letterSpacing: -4 }}>Vous êtes élus !</h1>
+          {c.election && (
+            <span className="titre tabnum" style={{ fontSize: 46, fontWeight: 800, color: "var(--p2-texte)" }}>
+              {c.election.score.toLocaleString("fr-FR")} % des voix{c.election.score < 51 ? " : sur le fil !" : ""}
+            </span>
+          )}
           <p style={{ margin: 0, fontSize: 32, lineHeight: 1.35, color: "var(--texte-2)" }}>
             Pendant {vue.nbAnnees === 5 ? "cinq ans" : "dix ans"}, vous gouvernez ensemble : {vue.nbDecisions} décisions, des crises imprévues, et un pays qui évolue mois après mois.
           </p>
@@ -452,6 +460,51 @@ function Investiture({ vue, agir, occupe, controle, ouvrirMenu }: PropsEcran) {
           {c.faites.map((p, i) => (
             <div key={p.id} style={{ display: "flex", gap: 16, alignItems: "flex-start", fontSize: 25, lineHeight: 1.3, padding: "10px 0", borderTop: i ? "1px solid var(--trait)" : undefined }}>
               <span className="titre" style={{ fontWeight: 800, color: "var(--accent-texte)", fontSize: 28 }}>{i + 1}</span>
+              <span>{p.texte}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Soir du second tour perdu : on repart en campagne avec d'autres promesses. */
+function Defaite({ vue, agir, occupe, controle, ouvrirMenu }: PropsEcran) {
+  const c = vue.campagne!;
+  const e = c.election!;
+  return (
+    <div style={{ ...CADRE, padding: "34px 56px", display: "flex", flexDirection: "column", gap: 30 }}>
+      <EnTete ouvrirMenu={ouvrirMenu} />
+      <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 56, flex: 1, minHeight: 0, alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 26, animation: "apparition .6s ease" }}>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 14, fontSize: 26, fontWeight: 800, letterSpacing: 2, color: "var(--texte-2)" }}>
+            <IconeElysee taille={36} /> MAI {vue.anneeDepart} · SOIR DU SECOND TOUR
+          </span>
+          <h1 className="titre" style={{ margin: 0, fontSize: 140, fontWeight: 800, lineHeight: 0.95, letterSpacing: -4 }}>Battus.</h1>
+          <span className="titre tabnum" style={{ fontSize: 46, fontWeight: 800, color: "var(--n2-texte)" }}>
+            {e.score.toLocaleString("fr-FR")} % des voix{e.score > 49 ? " : à un cheveu !" : ""}
+          </span>
+          <p style={{ margin: 0, fontSize: 30, lineHeight: 1.35, color: "var(--texte-2)" }}>
+            {c.faites.length <= c.total / 3
+              ? "Une campagne honnête… mais trop timide : l'adversaire a promis ce que vous avez refusé."
+              : "Le pays n'a pas été convaincu. Les sondages se trompent parfois, le soir du vote aussi."}{" "}
+            Vous repartez en campagne avec de nouvelles promesses.
+          </p>
+          {controle && (
+            <button type="button" className="btn-principal" disabled={occupe} onClick={() => agir({ action: "suivant" })} style={{ alignSelf: "flex-start", fontSize: 38, padding: "24px 40px", borderRadius: 24, marginTop: 10 }}>
+              Repartir en campagne <IconeFleche taille={36} />
+            </button>
+          )}
+        </div>
+        <div style={{ ...CARTE, padding: "34px 38px", display: "flex", flexDirection: "column", gap: 16, maxHeight: "100%", overflow: "hidden" }}>
+          <h2 className="titre" style={{ margin: 0, fontSize: 40, fontWeight: 800 }}>Votre programme</h2>
+          <p style={{ margin: 0, fontSize: 23, color: "var(--texte-3)" }}>
+            {c.faites.length} promesse{c.faites.length > 1 ? "s" : ""} sur {c.total}. Chaque refus a laissé des voix à l&apos;adversaire.
+          </p>
+          {c.faites.map((p, i) => (
+            <div key={p.id} style={{ display: "flex", gap: 16, alignItems: "flex-start", fontSize: 24, lineHeight: 1.3, padding: "8px 0", borderTop: i ? "1px solid var(--trait)" : undefined }}>
+              <span className="titre" style={{ fontWeight: 800, color: "var(--texte-3)", fontSize: 26 }}>{i + 1}</span>
               <span>{p.texte}</span>
             </div>
           ))}
@@ -590,7 +643,7 @@ function useDefilement(vue: VuePublique): { affiche: number; enCours: boolean } 
       m++;
       setEtat({ cle, affiche: m });
       if (m >= cible) clearInterval(t);
-    }, 260);
+    }, 700);
     return () => clearInterval(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cle]);

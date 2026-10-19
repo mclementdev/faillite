@@ -161,7 +161,9 @@ seul permet de piloter la partie ; tout autre navigateur ouvrant `/salle/CODE` e
 - `poids` : tirage au hasard (0 = jamais tiré au hasard) ; `alerte: "finances"` : tiré l'année suivant le
   passage de cette jauge sous le seuil ;
 - `declenchePar` : décisions qui **peuvent** provoquer l'événement quelques mois plus tard. Jamais certain,
-  jamais annoncé pendant le vote ; quand il survient, l'écran indique la décision en cause.
+  jamais annoncé pendant le vote ; quand il survient, l'écran indique la décision en cause. 8 crises n'arrivent
+  que de cette façon (`poids` 0) : marchés qui lâchent la dette, urgences qui ferment, tracteurs sur Paris,
+  coupures d'électricité, mutineries, grève générale, rentrée sans professeurs, familles à la rue.
 
 ```json
 "declenchePar": [
@@ -218,7 +220,9 @@ effet moyen de chaque option avec repérage des options **dominantes** (bien mei
 coût notable) ou **toujours perdantes**, et une phrase de synthèse.
 
 En mode `aleatoire`, chaque partie simule une campagne (chaque promesse faite une fois sur deux) puis
-12 votants qui votent au hasard.
+12 votants qui votent au hasard. Les modes `meilleur` et `pire` choisissent à chaque fois l'option qui fait
+le plus de bien (en évitant les pertes) ou le plus de mal aux jauges, `sans_intervention` ne décide rien :
+de quoi vérifier qu'un mandat joué au hasard finit nettement plus mal qu'un mandat réfléchi.
 
 ## Le modèle : indicateurs, jauges, effets
 
@@ -242,6 +246,9 @@ En mode `aleatoire`, chaque partie simule une campagne (chaque promesse faite un
   l'écart à la situation de départ : `jauge = départ + sensibilité × (moyenne − départ)`.
 - **Règles** (`content/config/regles.json`) : seuil d'alerte (35), minuteur, nombre de joueurs, répétition
   des événements, seuils d'affichage des impacts (`seuilNotable` 0,3 et `seuilFort` 2 points de jauge).
+- **Poids des décisions** (`amplificationDecisions`) : les effets des options et des réponses aux crises sont
+  multipliés dans la partie (hors popularité), plus fort quand ils font du mal au pays (`pertes` ×3) que du
+  bien (`gains` ×2). Voter au hasard coûte donc cher. Les coûts en Md€ affichés restent les montants réels.
 - **Impact affiché d'une option** : on projette l'état actuel sans aléa avec et sans l'option, sur 6 ans (ou
   plus si l'effet est très différé), et on garde l'écart le plus fort sur chaque jauge.
 
@@ -258,10 +265,14 @@ mandat : 37 %. Un vrai groupe vote moins au hasard : attendez-vous à des écart
 
 - **Tutoriel** : 6 écrans avant la campagne (une fois par salle, on peut le passer ; « Comment jouer » le
   rouvre depuis le salon). Les téléphones affichent un résumé en 3 points en attendant.
-- **Campagne** : 8 promesses tirées au sort parmi 14, présentées une à une (20 s de vote : « On le promet ! »
-  ou « Trop risqué » ; égalité tranchée au sort). Chaque promesse faite ajoute de la popularité de départ
-  (44 % sans promesse, 68 % au maximum). Aucun chiffre n'est montré avant le bilan.
-- **Investiture** : le programme s'affiche ; le groupe joue ensemble un seul président.
+- **Campagne** : 12 promesses tirées au sort parmi 28, présentées une à une (20 s de vote : « On le promet ! »
+  ou « Trop risqué » ; égalité tranchée au sort). Un sondage du second tour part de 40 % : chaque promesse
+  faite ajoute sa `popularite` en points, chaque refus en laisse 1,5 à l'adversaire. Chaque promesse faite
+  ajoute aussi de la popularité de départ (44 % sans promesse, 68 % au maximum). Aucun chiffre n'est montré
+  avant le bilan.
+- **Soir de l'élection** : score = sondage ± 3 points d'aléa. À 50 % ou plus, le groupe est élu et entre à
+  l'Élysée. En dessous, il est **battu** et repart en campagne avec 12 nouvelles promesses (votes et
+  programme remis à zéro). Promettre la moitié environ donne une chance sur deux d'être élu.
 - **Le mandat, mois par mois** : une frise de janvier à décembre défile jusqu'au prochain arrêt.
   - 3 décisions par an, à des mois tirés au sort (au moins deux mois d'écart) ;
   - au plus 2 événements par an : alertes d'abord, puis événements provoqués par une décision, puis tirage

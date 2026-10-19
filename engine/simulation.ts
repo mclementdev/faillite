@@ -3,10 +3,10 @@
  */
 import type { Contenu } from "./contenu";
 import { flux, hacher } from "./rng";
-import { jouerPartie, type Poids } from "./partie";
+import { jouerPartie, type Impacts, type Poids } from "./partie";
 import { JAUGES, type JaugeId } from "./schema";
 
-export type ModeSimulation = "aleatoire" | "sans_intervention";
+export type ModeSimulation = "aleatoire" | "sans_intervention" | "meilleur" | "pire";
 
 export interface StatJauge {
   moyenne: number;
@@ -87,6 +87,14 @@ export function simulate(contenu: Contenu, n: number, graine: number, poids: Par
       { graine: g, nbAnnees, poids, promesses, promessesProposees: proposees, sansIntervention: mode === "sans_intervention" },
       (carte, _etat, etape) => {
         const rng = flux(g, "simulation", etape.n);
+        // Joueurs « parfaits » ou « catastrophiques » : l'option qui fait le plus monter (ou baisser) les jauges.
+        if (mode === "meilleur" || mode === "pire") {
+          const score = (imp: Impacts) => JAUGES.reduce((t, j) => t + imp[j] + 2 * Math.min(0, imp[j]), 0);
+          const cles = Object.keys(etape.impactsOptions);
+          const tri = cles.sort((a, b) => score(etape.impactsOptions[b]) - score(etape.impactsOptions[a]));
+          const cle = mode === "meilleur" ? tri[0] : tri[tri.length - 1];
+          return [carte.type === "curseur" ? Number(cle) : cle];
+        }
         const votes: (string | number)[] = [];
         for (let v = 0; v < VOTANTS; v++) {
           if (carte.type === "curseur" && carte.curseur) {

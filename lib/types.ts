@@ -123,6 +123,12 @@ export interface VueCampagne {
   faites: { id: string; texte: string }[];
   /** popularité de départ si le mandat commençait maintenant */
   popularite: number;
+  /** intentions de vote au second tour (sondage) */
+  intentions: number;
+  /** numéro de la campagne (0 = la première) */
+  tentative: number;
+  /** soir du second tour */
+  election?: { score: number; elu: boolean };
 }
 
 export interface VueBilanAnnee {
